@@ -4,22 +4,41 @@ Has attributes:
  - nombre : String
  - hp : int
  - xp : int
- - basicAttack()
+ - basicAttack() : void
 
-### Player's class
+## Player's class (extends Character)
 Has attributes:
  - items : Inventory
-#### Meelee
-When created, it has 
+
+### Melee (extends Player)
+ - Has stronger attacks
  - 
 
-#### Mage
-- Can debuff enemies
-- Can hit many enemies at a time
+When created, it has:
+ - sword : Sword (Stored inside items)
+ - 
 
-### NPCs class
-#### Shopkeeper
+### Mage (extends Player)
+ - Can debuff enemies
+ - Can hit many enemies at a time
+ - Limited by mana
 
-#### Enemies
+When created, it has:
+ - book : MagicBook (Stored inside items)
 
-#### Boss
+## NPC's class (extends Character)
+### Shopkeeper (extends NPC)
+
+### Enemies (extends NPC)
+
+### Boss (extends NPC)
+
+
+## Ability's class
+Each character will have three abilities
+
+### Melee's abilities
+ - 
+
+### Mage's abilities
+ - 
