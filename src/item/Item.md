@@ -1,22 +1,21 @@
 # Items folder
-## Inventory
-### Player's inventory
+## Inventory's class
 
-### Chest's inventory
 
-## Weapons
-### Sword
+## Item's class
+### Weapon (extends Item)
+#### Sword (extends Weapon)
 
-### Bow
+#### Bow (extends Weapon)
 
-### Magic staff
+#### Magic book (extends Weapon)
 
-### Magic book
+#### Magic staff (extends Weapon)
 
-## Potions
-### Health potions
+### Potion (extends Item)
+#### Health potions (extends Potion)
 
-### Mana potions
+#### Mana potions (extends Potion)
 Only affects mages
 
-### Shield potions
+#### Shield potions (extends Potion)

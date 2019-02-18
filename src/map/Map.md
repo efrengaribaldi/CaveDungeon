@@ -14,19 +14,21 @@ Dungeons are generated over several phases:
 ## Room class
 ### Room types
 #### Initial
-State = 1
+state = 1
+
+Player is spawned in this room.
 
 #### Easy
-State = 2
+state = 2
 
 #### Hard
-State = 3
+state = 3
 
 #### Treasure
-State = 4
+state = 4
 
 #### Boss Fight
-State = 5
+state = 5
 
 ### Room generation algorithm
 TO DO
@@ -35,3 +37,5 @@ TO DO
 ### Types
 1. Floor
 2. Wall
+3. Door
+4. Chesta
