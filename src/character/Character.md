@@ -1,14 +1,25 @@
 # Characters folder
-## Player's class
-### Meelee 
+## Character's class
+Has attributes:
+ - nombre : String
+ - hp : int
+ - xp : int
+ - basicAttack()
 
-### Mage
+### Player's class
+Has attributes:
+ - items : Inventory
+#### Meelee
+When created, it has 
+ - 
+
+#### Mage
 - Can debuff enemies
 - Can hit many enemies at a time
 
-## NPCs class
-### Shopkeeper
+### NPCs class
+#### Shopkeeper
 
-### Enemies
+#### Enemies
 
-### Boss
+#### Boss
