@@ -30,6 +30,9 @@ state = 4
 #### Boss Fight
 state = 5
 
+#### Store
+state = 6
+
 ### Room generation algorithm
 TO DO
 

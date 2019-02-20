@@ -18,8 +18,14 @@ public class Map {
         minNumRooms = 10;
         sizeX = 9;
         sizeY = 13;
+        // Generate map leayout
         generateMap();
-        // TO DO: generate every room
+        // Generate every room
+        for (Room[] roomArr : rooms)
+            for (Room r : roomArr)
+                if (r != null)
+                    r.generateRoom();
+        System.out.println(rooms[4][6].roomToString());
     }
 
     private void generateMap() {
@@ -35,29 +41,33 @@ public class Map {
             // Set center room as initial positions
             int startX = (int) Math.floor((sizeX - 1) / 2.0);
             int startY = (int) Math.floor((sizeY - 1) / 2.0);
-            generateRoom(startX, startY, 1, roomsToCreate);
+            declareRoom(startX, startY, 1, roomsToCreate);
             // Initialize counter of rooms created
             roomCount = 1;
             // Generate rooms with random probabilities
             int i = 0;
-            for (; i < roomsToCreate.size() - 1; i++) {
-                generateRoom(roomsToCreate.get(i).x, roomsToCreate.get(i).y, 0, roomsToCreate);
+            for (; i < roomsToCreate.size() - 2; i++) {
+                declareRoom(roomsToCreate.get(i).x, roomsToCreate.get(i).y, 0, roomsToCreate);
                 roomCount++;
             }
-            // Generate boss room
-            if (roomsToCreate.size() > 1)
-                generateRoom(roomsToCreate.get(i).x, roomsToCreate.get(i).y, 5, roomsToCreate);
+            if (roomsToCreate.size() > 2) {
+                // Generate boss room
+                declareRoom(roomsToCreate.get(i).x, roomsToCreate.get(i).y, 5, roomsToCreate);
+                i++;
+                // Generate store
+                declareRoom(roomsToCreate.get(i).x, roomsToCreate.get(i).y, 6, roomsToCreate);
+            }
             closeUnusedDoors();
             hasBossRoom = deleteUnconnectedRooms();
         } while (roomCount < minNumRooms || !hasBossRoom);
     }
 
-    private void generateRoom(int x, int y, int state, ArrayList<Vector2D> roomsToCreate) {
+    private void declareRoom(int x, int y, int state, ArrayList<Vector2D> roomsToCreate) {
         // Protect room array against overwrites
         if (rooms[x][y] != null) {
-            // Only overwrite if it's a boss room
-            if (state == 5)
-                rooms[x][y].setState(5);
+            // Only overwrite if it already has a state
+            if (state != 0)
+                rooms[x][y].setState(state);
             else
                 return;
         }
