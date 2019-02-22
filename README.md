@@ -1,8 +1,10 @@
 # OOP_Project
-As the final project in Orient Objected Programming, we will create a videogame
+As the final project in Orient Objected Programming, we will create an RPG that takes place inside a cave.
 
 ## Run
-Use `javac **/*.java` or `javac **/*.java **/**/*.java` at the root of the project to compile very java file, and `java src.game.Main` to run the game.
+In the root of the repository, you can either:
+ - Use `javac **/*.java` or `javac **/*.java **/**/*.java` to compile every java file, and run `java src.game.Main` to execute the game.
+ - Install Apache Ant, and run `ant`.
 
 ## Assets
 We used two asset packs:

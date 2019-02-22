@@ -1,0 +1,29 @@
+<?xml version = "1.0"?>
+
+<project name="CaveDungeon" default="run" basedir=".">
+
+    <description>
+        As the final project in Orient Objected Programming, we will create an RPG that takes place inside a cave.
+    </description>
+
+    <property name="src" location="src"/>
+    <property name="build" location="build"/>
+
+    <target name="init">
+        <tstamp/>
+        <mkdir dir="${build}"/>
+    </target>
+
+    <target name="compile" depends="init" description="Compiles all source code.">
+        <javac srcdir="${src}" destdir="${build}"/>
+    </target>
+
+    <target name="clean" description="Removes all generated files.">
+        <delete dir="${build}"/>
+    </target>
+
+    <target name="run" depends="compile" description="Executes the program.">
+        <java classname="src.game.Main" dir="${build}" fork="true" jvm="java"/>
+    </target>
+
+</project>
