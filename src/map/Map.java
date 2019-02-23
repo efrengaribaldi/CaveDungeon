@@ -25,7 +25,7 @@ public class Map {
             for (Room r : roomArr)
                 if (r != null)
                     r.generateRoom();
-        System.out.println(rooms[4][6].roomToString());
+        // System.out.println(rooms[4][6].roomToString());
     }
 
     private void generateMap() {

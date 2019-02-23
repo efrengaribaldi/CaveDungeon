@@ -12,10 +12,9 @@ public class Game {
         System.out.println("Seed: " + gameSeed);
         levels = new Map[1];
         for (int i = 0; i < levels.length; ++i)
-            levels[i] = new Map(gameSeed);
-    }
-
-    public String levelToString(int index) {
-        return levels[index].mapToString();
+            levels[i] = new Map(gameSeed + i);
+        // For testing purposes
+        for (int i = 0; i < levels.length; ++i)
+            System.out.println(levels[i].mapToString());
     }
 }
