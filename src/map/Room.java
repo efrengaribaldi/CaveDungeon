@@ -11,7 +11,7 @@ public class Room {
     // 0 top, 1 right, 2 bottom, 3 left
     private boolean doors[];
     private Tile[][] tiles;
-    private final int sizeX = 7, sizeY = 21;
+    static final int sizeX = 7, sizeY = 21;
     private final int centerX = (int) Math.floor((sizeX - 1) / 2.0);
     private final int centerY = (int) Math.floor((sizeY - 1) / 2.0);
 

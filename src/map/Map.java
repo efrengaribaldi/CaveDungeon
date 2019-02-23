@@ -152,7 +152,7 @@ public class Map {
     }
 
     public String mapToString() {
-        String res = "", whitespace = "                      ";
+        String res = "", whitespace = "";
         String[] roomSplit, row;
         // Find rooms to be trimmed from the left
         int minRooms = sizeY;
@@ -161,23 +161,26 @@ public class Map {
             while (rooms[x][currentRooms] == null && currentRooms < sizeY - 1)
                 currentRooms++;
             if (currentRooms < minRooms)
-                minRooms = --currentRooms;
+                minRooms = currentRooms;
         }
-        int leadingWhitespace = minRooms * 22;
+        // Generate a placeholder for null rooms
+        for (int i = 0; i <= Room.sizeY; i++)
+            whitespace += " ";
+        int leadingWhitespace = --minRooms * whitespace.length();
         // Generate the string
         for (int x = 1; x < sizeX - 1; x++) {
-            row = new String[7];
-            for (int i = 0; i < 7; i++)
+            row = new String[Room.sizeX];
+            for (int i = 0; i < row.length; i++)
                 row[i] = "";
             for (int y = 1; y < sizeY - 1; y++) {
                 if (rooms[x][y] != null) {
                     roomSplit = rooms[x][y].roomToString().split("\n");
                     // Show the state in the map
                     roomSplit[0] = "--" + rooms[x][y].getState() + roomSplit[0].substring(3);
-                    for (int i = 0; i < 7; i++)
+                    for (int i = 0; i < Room.sizeX; i++)
                         row[i] += roomSplit[i] + " ";
                 } else
-                    for (int i = 0; i < 7; i++)
+                    for (int i = 0; i < Room.sizeX; i++)
                         row[i] += whitespace;
             }
             for (int i = 0; i < 7; i++)
