@@ -152,24 +152,37 @@ public class Map {
     }
 
     public String mapToString() {
-        String res = "", r1, r2, r3;
-        for (Room[] roomArr : rooms) {
-            r1 = "";
-            r2 = "";
-            r3 = "";
-            for (Room room : roomArr) {
-                if (room != null) {
-                    r1 += " " + (room.getDoor(0) ? "|" : " ") + "  ";
-                    r2 += (room.getDoor(3) ? "-" : " ") + room.getState() + (room.getDoor(1) ? "-" : " ") + " ";
-                    r3 += " " + (room.getDoor(2) ? "|" : " ") + "  ";
-                } else {
-                    r1 += "    ";
-                    r2 += " *  ";
-                    r3 += "    ";
-                }
-            }
-            res += r1 + "\n" + r2 + "\n" + r3 + "\n";
+        String res = "", whitespace = "                      ";
+        String[] roomSplit, row;
+        // Find rooms to be trimmed from the left
+        int minRooms = sizeY;
+        for (int x = 1; x < sizeX - 1; x++) {
+            int currentRooms = 0;
+            while (rooms[x][currentRooms] == null && currentRooms < sizeY - 1)
+                currentRooms++;
+            if (currentRooms < minRooms)
+                minRooms = --currentRooms;
         }
-        return res;
+        int leadingWhitespace = minRooms * 22;
+        // Generate the string
+        for (int x = 1; x < sizeX - 1; x++) {
+            row = new String[7];
+            for (int i = 0; i < 7; i++)
+                row[i] = "";
+            for (int y = 1; y < sizeY - 1; y++) {
+                if (rooms[x][y] != null) {
+                    roomSplit = rooms[x][y].roomToString().split("\n");
+                    // Show the state in the map
+                    roomSplit[0] = "--" + rooms[x][y].getState() + roomSplit[0].substring(3);
+                    for (int i = 0; i < 7; i++)
+                        row[i] += roomSplit[i] + " ";
+                } else
+                    for (int i = 0; i < 7; i++)
+                        row[i] += whitespace;
+            }
+            for (int i = 0; i < 7; i++)
+                res += row[i].substring(leadingWhitespace).replaceFirst("\\s++$", "") + "\n";
+        }
+        return res.replaceAll("\n\\s*\n", "\n");
     }
 }

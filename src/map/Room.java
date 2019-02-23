@@ -60,14 +60,14 @@ public class Room {
     }
 
     private void createDoors() {
-        if (doors[0])
-            tiles[centerX][0] = new Door(0);
-        if (doors[1])
-            tiles[sizeX - 1][centerY] = new Door(1);
-        if (doors[2])
-            tiles[centerX][sizeY - 1] = new Door(0);
-        if (doors[3])
-            tiles[0][centerY] = new Door(2);
+        if (doors[0]) // top
+            tiles[0][centerY] = new Door(0);
+        if (doors[1]) // right
+            tiles[centerX][sizeY - 1] = new Door(1);
+        if (doors[2]) // bottom
+            tiles[sizeX - 1][centerY] = new Door(0);
+        if (doors[3]) // left
+            tiles[centerX][0] = new Door(2);
     }
 
     private void createWalls() {
@@ -101,7 +101,7 @@ public class Room {
         if (state == 2)
             numEnemies = 3 + (int) (Math.random() * 3);
         else // state == 3
-            numEnemies = 6 + (int) (Math.random() * 3);
+            numEnemies = 5 + (int) (Math.random() * 3);
         // Choose numEnemies random tiles from possibleTiles
         ArrayList<Vector2D> chosenTiles = new ArrayList<>();
         for (int i = 0; i < numEnemies; i++) {
@@ -130,21 +130,21 @@ public class Room {
 
     public String roomToString() {
         String res = "";
-        for (Tile[] tileArr : tiles) {
-            for (Tile t : tileArr) {
-                if (t instanceof Wall) {
-                    if (t.getSide() == 0)
+        for (int x = 0; x < sizeX; x++) {
+            for (int y = 0; y < sizeY; y++) {
+                if (tiles[x][y] instanceof Wall) {
+                    if (tiles[x][y].getSide() == 0)
                         res += "-";
                     else
                         res += "|";
-                } else if (t instanceof Door)
+                } else if (tiles[x][y] instanceof Door)
                     res += "d";
-                else if (t instanceof Floor) {
-                    if (t.hasEnemy())
+                else if (tiles[x][y] instanceof Floor) {
+                    if (tiles[x][y].hasEnemy())
                         res += "e";
-                    else if (t.hasChest())
+                    else if (tiles[x][y].hasChest())
                         res += "c";
-                    else if (t.hasSkull())
+                    else if (tiles[x][y].hasSkull())
                         res += "s";
                     else
                         res += " ";
