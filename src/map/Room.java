@@ -15,33 +15,33 @@ public class Room {
     private final int centerX = (int) Math.floor((sizeX - 1) / 2.0);
     private final int centerY = (int) Math.floor((sizeY - 1) / 2.0);
 
-    public Room(int state, boolean[] doors) {
+    Room(int state, boolean[] doors) {
         this.state = state;
         this.doors = doors;
         tiles = new Tile[sizeX][sizeY];
     }
 
-    public void setState(int state) {
+    void setState(int state) {
         this.state = state;
     }
 
-    public int getState() {
+    int getState() {
         return state;
     }
 
-    public void setDoor(int place, boolean door) {
+    void setDoor(int place, boolean door) {
         doors[place] = door;
     }
 
-    public boolean getDoor(int place) {
+    boolean getDoor(int place) {
         return doors[place];
     }
 
-    public boolean isNotConnected() {
+    boolean isNotConnected() {
         return !doors[0] && !doors[1] && !doors[2] && !doors[3];
     }
 
-    public void generateRoom() {
+    void generateRoom() {
         // state = 5; // <-- to test different room layouts
         createDoors();
         createWalls();
@@ -99,9 +99,9 @@ public class Room {
             }
         int numEnemies;
         if (state == 2)
-            numEnemies = 3 + (int) (Math.random() * 3);
+            numEnemies = 3 + (int) (Math.random() * 2);
         else // state == 3
-            numEnemies = 5 + (int) (Math.random() * 3);
+            numEnemies = 4 + (int) (Math.random() * 3);
         // Choose numEnemies random tiles from possibleTiles
         ArrayList<Vector2D> chosenTiles = new ArrayList<>();
         for (int i = 0; i < numEnemies; i++) {
@@ -128,7 +128,7 @@ public class Room {
         } while (!randomTileIsEmpty);
     }
 
-    public String roomToString() {
+    String roomToString() {
         String res = "";
         for (int x = 0; x < sizeX; x++) {
             for (int y = 0; y < sizeY; y++) {

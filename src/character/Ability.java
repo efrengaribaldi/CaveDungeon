@@ -1,6 +1,6 @@
 package src.character;
 
 public class Ability {
-  private String nombre;
-  
+    private String nombre;
+
 }

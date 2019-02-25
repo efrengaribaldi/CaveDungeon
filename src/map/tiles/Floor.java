@@ -17,8 +17,10 @@ public class Floor extends src.map.Tile {
 
     @Override
     public void addEnemy() {
+        String nombre = "";
+        int healthPoints = 0, experience = 0;
         // Set random propierties when generating the enemy
-        enemy = new Enemy();
+        enemy = new Enemy(nombre, healthPoints, experience);
     }
 
     @Override
@@ -28,8 +30,10 @@ public class Floor extends src.map.Tile {
 
     @Override
     public void addBoss() {
+        String nombre = "";
+        int healthPoints = 0, experience = 0;
         // Set random propierties when generating the boss
-        boss = new Boss();
+        boss = new Boss(nombre, healthPoints, experience);
     }
 
     @Override

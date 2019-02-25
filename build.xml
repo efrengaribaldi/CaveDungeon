@@ -1,4 +1,4 @@
-<?xml version = "1.0" encoding="utf-8"?>
+<?xml version = "1.0" encoding="UTF-8"?>
 
 <project name="CaveDungeon" default="run" basedir=".">
 
@@ -15,7 +15,7 @@
     </target>
 
     <target name="compile" depends="init" description="Compiles all source code.">
-        <javac srcdir="${src}" destdir="${build}"/>
+        <javac srcdir="${src}" destdir="${build}" includeantruntime="false"/>
     </target>
 
     <target name="clean" description="Removes all generated files.">

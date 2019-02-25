@@ -7,7 +7,7 @@ public class Game {
 
     public Game() {
         long gameSeed = System.currentTimeMillis();
-        // long gameSeed = 1550934137338L;
+        // long gameSeed = 1550961460665L;
         // For testing purposes
         System.out.println("Seed: " + gameSeed);
         levels = new Map[1];
