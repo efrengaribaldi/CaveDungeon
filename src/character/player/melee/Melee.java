@@ -4,7 +4,7 @@ import src.character.player.Player;
 import src.item.Inventory;
 
 public class Melee extends Player {
-    public Melee(String nombre, int healthPoints, String sex, int experience, Inventory inventory) {
+    public Melee(String nombre, int healthPoints, int sex, int experience, Inventory inventory) {
         super(nombre, healthPoints, sex, experience, inventory);
     }
 }
