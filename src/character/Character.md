@@ -12,16 +12,28 @@ Has attributes:
 
 ### Melee (extends Player)
  - Has stronger attacks
- - 
+
+ - Ability  
+  - Can hit with %15 extra damage
+  - Can hit a critical attack (with probability)
+  - Can use counter (return the attack)
+
+- Weapon
+ - sword
+ - bow
 
 When created, it has:
  - sword : Sword (Stored inside items)
- - 
 
 ### Mage (extends Player)
- - Can debuff enemies
- - Can hit many enemies at a time
- - Limited by mana
+ - Ability
+  - Can debuff enemies
+  - Can hit many enemies at a time
+  -
+
+ - Weapon
+  - book
+  - staff
 
 When created, it has:
  - book : MagicBook (Stored inside items)
@@ -38,7 +50,7 @@ When created, it has:
 Each character will have three abilities
 
 ### Melee's abilities
- - 
+ -
 
 ### Mage's abilities
- - 
+ -
