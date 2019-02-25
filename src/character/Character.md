@@ -29,7 +29,7 @@ When created, it has:
  - Ability
   - Can debuff enemies
   - Can hit many enemies at a time
-  -
+  - Can create a magic shield
 
  - Weapon
   - book
