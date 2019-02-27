@@ -4,4 +4,8 @@ import src.item.Item;
 
 public abstract class Weapon extends Item {
   private int baseDamage;
+
+  public Weapon(String name) {
+    super(name);
+  }
 }
