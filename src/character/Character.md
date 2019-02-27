@@ -1,18 +1,30 @@
 # Characters folder
-## Character's class
+## Character's class abstract
 Has attributes:
- - nombre : String
- - hp : int
- - xp : int
- - basicAttack() : void
+ - name : String
+ - healthPoints : int
 
-## Player's class (extends Character)
+### Player's class abstract (extends Character)
 Has attributes:
  - items : Inventory
+ - experience : int
+ - sex : int
+ - abilities : Ability[]
 
-### Melee (extends Player)
- - Has stronger attacks
+Has methods:
+ Methods in map:
+  - openInventory() : Inventory
+  - closeInventory() : void
+  - startBattle() : void
 
+ Methods in battle:
+  Non abstract methods:
+   - useItem() : void
+  Abstract methods:
+   - useAbility() : void
+   - attack(enemy : NPC) : void
+
+#### Melee (extends Player)
  - Ability  
   - Can hit with %15 extra damage
   - Can hit a critical attack (with probability)
@@ -25,7 +37,7 @@ Has attributes:
 When created, it has:
  - sword : Sword (Stored inside items)
 
-### Mage (extends Player)
+#### Mage (extends Player)
  - Ability
   - Can debuff enemies
   - Can hit many enemies at a time
@@ -38,13 +50,35 @@ When created, it has:
 When created, it has:
  - book : MagicBook (Stored inside items)
 
-## NPC's class (extends Character)
-### Shopkeeper (extends NPC)
+### NPC's class abstract (extends Character)
+Has attributes:
+ - ability : Ability
 
-### Enemies (extends NPC)
+Has methods:
+  Methods in battle:
+   Non abstract methods:
+    - basicAttack(enemy : Player) : void
+   Abstract methods:
+    - useAbility() : void
 
-### Boss (extends NPC)
+#### Shopkeeper (extends NPC)
 
+Has methods:
+  Methods in battle:
+   - useAbilityShopkeeper() : void
+
+#### Enemies (extends NPC)
+
+Has methods:
+  Methods in battle:
+   - useAbilityEnemies() : void
+
+#### Boss (extends NPC)
+
+Has methods:
+  Methods in battle:
+   - useAbilityBoss() : void
+   - specialAttackBoss(enemy : Player) : void
 
 ## Ability's class
 Each character will have three abilities

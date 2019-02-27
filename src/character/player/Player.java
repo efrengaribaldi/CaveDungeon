@@ -4,11 +4,12 @@ import src.character.Character;
 import src.character.Ability;
 import src.item.Inventory;
 
-public class Player extends Character {
-    private Ability[] abilities = new Ability[3];
-    private Inventory inventory;
-    private int sex;
+public abstract class Player extends Character {
+    public Inventory inventory;
     private int experience;
+    private int sex;
+    private Ability[] abilities = new Ability[3];
+
 
     public Player(String nombre, int healthPoints, int sex, int experience, Inventory inventory) {
         super(nombre, healthPoints);
@@ -16,4 +17,17 @@ public class Player extends Character {
         this.inventory = inventory;
         this.experience = experience;
     }
+
+    /*
+    public abstract void useAbility();
+    public abstract void attackNPC(enemy : NPC);
+
+    public void startBattle() {
+
+    }
+
+    public void useItem() {
+
+    }
+    */
 }

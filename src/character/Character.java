@@ -1,6 +1,6 @@
 package src.character;
 
-public class Character {
+public abstract class Character {
     private String nombre;
     private int healthPoints;
 
