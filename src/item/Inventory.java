@@ -7,7 +7,7 @@ import src.item.potion.*;
 import src.item.weapon.*;
 
 public class Inventory {
-    public Item[][] items = new Item[5][];
+    public Item[][] items;
 
     public Inventory() {
       items = new Item[5][]; // Five classes for Items
@@ -53,6 +53,17 @@ public class Inventory {
             inventoryText += "\n";
         }
         //System.out.println(items[4][0].getBaseDamage());
+        return inventoryText;
+    }
+
+    public String inventoryToString() {
+        String inventoryText = "";
+        for(int i = 0; i < items.length; ++i) {
+            for(int j = 0; j < items[i].length; ++j) {
+                inventoryText += "Item: " + items[i][j] + " ";
+            }
+            inventoryText += "\n";
+        }
         return inventoryText;
     }
 }
