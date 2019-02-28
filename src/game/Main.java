@@ -10,13 +10,8 @@ import src.item.weapon.Weapon;
 import src.item.weapon.sword.Sword;
 import src.item.weapon.bow.Bow;
 
-
 public class Main {
-    public static void main(String[] args) {
-        Game newGame = new Game();
-
-
-        //Inventory Tests
+    void inventoryTests() {
         Inventory newInventory = new Inventory();
         Weapon elvenSword = new Sword();
         Weapon bow = new Bow();
@@ -25,6 +20,10 @@ public class Main {
         newInventory.addItemToInventory(bow, 4, 1);
         //newInventory.addItemToInventory(healthPotion, 4, 1);
         System.out.println(newInventory.inventoryToString());
+    }
 
+    public static void main(String[] args) {
+        Game newGame = new Game();
+        inventoryTests();
     }
 }

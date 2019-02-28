@@ -4,8 +4,7 @@ import src.item.Inventory;
 import src.item.Item;
 
 public class Chest extends Item {
-
-  public Chest() {
-    super("Chest");
-  }
+    public Chest() {
+        super("Chest");
+    }
 }

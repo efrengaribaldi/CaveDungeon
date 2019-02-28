@@ -4,14 +4,13 @@ import src.character.Character;
 import src.character.Ability;
 import src.item.Inventory;
 
-public abstract class Player extends Character {
+public abstract class Player extends Character implements IPlayer {
     public Inventory inventory;
     private int experience;
-    private int sex;
+    private char sex;
     private Ability[] abilities = new Ability[3];
 
-
-    public Player(String nombre, int healthPoints, int sex, int experience, Inventory inventory) {
+    public Player(String nombre, int healthPoints, char sex, int experience, Inventory inventory) {
         super(nombre, healthPoints);
         this.sex = sex;
         this.inventory = inventory;
