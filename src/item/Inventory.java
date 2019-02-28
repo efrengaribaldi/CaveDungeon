@@ -7,7 +7,7 @@ import src.item.potion.*;
 import src.item.weapon.*;
 
 public class Inventory {
-    public Item[][] items;
+    public Item[][] items = new Item[5][];
 
     public Inventory() {
       items = new Item[5][]; // Five classes for Items
@@ -16,7 +16,6 @@ public class Inventory {
       items[2] = new Key[2];
       items[3] = new Potion[4];
       items[4] = new Weapon[2];
-
     }
 
     public void addItemToInventory(Item item, int index1, int index2) {
@@ -26,6 +25,21 @@ public class Inventory {
     public void removeItemFromInventory(int index1, int index2) {
       items[index1][index2] = null;
     }
+
+    /*public void equipWeapon(int index) {
+      switch(index) {
+        case 0:
+          items[4][0].setWeaponState(true);
+          items[4][1].setWeaponState(false);
+          break;
+        case 1:
+          items[4][0].setWeaponState(false);
+          items[4][1].setWeaponState(true);
+          break;
+        default:
+          break;
+      }
+    }*/
 
     public String inventoryToString() {
         String inventoryText = "";
@@ -38,6 +52,7 @@ public class Inventory {
             }
             inventoryText += "\n";
         }
+        //System.out.println(items[4][0].getBaseDamage());
         return inventoryText;
     }
 }

@@ -14,6 +14,7 @@ Has attributes:
 ### Weapon (extends Item)
 Has attributes:
  - baseDamage : int
+ - equipWeapon : boolean
 
 #### Sword (extends Weapon)
 Attacks:

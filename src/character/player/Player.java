@@ -22,10 +22,6 @@ public abstract class Player extends Character {
     public abstract void useAbility();
     public abstract void attackNPC(enemy : NPC);
 
-    public void startBattle() {
-
-    }
-
     public void useItem() {
 
     }

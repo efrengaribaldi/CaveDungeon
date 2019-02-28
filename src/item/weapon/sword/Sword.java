@@ -7,6 +7,6 @@ public class Sword extends Weapon{
   private int stormOfSword;
 
   public Sword() {
-    super("Elven Sword");
+    super("Elven Sword", false);
   }
 }
