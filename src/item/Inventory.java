@@ -55,15 +55,4 @@ public class Inventory {
         //System.out.println(items[4][0].getBaseDamage());
         return inventoryText;
     }
-
-    public String inventoryToString() {
-        String inventoryText = "";
-        for(int i = 0; i < items.length; ++i) {
-            for(int j = 0; j < items[i].length; ++j) {
-                inventoryText += "Item: " + items[i][j] + " ";
-            }
-            inventoryText += "\n";
-        }
-        return inventoryText;
-    }
 }
