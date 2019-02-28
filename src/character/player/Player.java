@@ -18,11 +18,11 @@ public abstract class Player extends Character implements IPlayer {
     }
 
     /*
-    public abstract void useAbility();
-    public abstract void attackNPC(enemy : NPC);
-
-    public void useItem() {
-
-    }
-    */
+     * public abstract void useAbility(); public abstract void attackNPC(enemy :
+     * NPC);
+     * 
+     * public void useItem() {
+     * 
+     * }
+     */
 }

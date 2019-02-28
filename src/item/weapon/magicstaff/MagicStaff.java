@@ -6,7 +6,7 @@ public class MagicStaff extends Weapon {
     private int baneOfDarkness;
     private int baneOfLight;
 
-    public MagicStaff(){
+    public MagicStaff() {
         super("Olorin Magic Staff", false);
     }
 }

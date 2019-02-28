@@ -11,14 +11,14 @@ import src.item.weapon.sword.Sword;
 import src.item.weapon.bow.Bow;
 
 public class Main {
-    void inventoryTests() {
+    private static void inventoryTests() {
         Inventory newInventory = new Inventory();
         Weapon elvenSword = new Sword();
         Weapon bow = new Bow();
-        //Potion healthPotion = new HealthPotion();
+        // Potion healthPotion = new HealthPotion();
         newInventory.addItemToInventory(elvenSword, 4, 0);
         newInventory.addItemToInventory(bow, 4, 1);
-        //newInventory.addItemToInventory(healthPotion, 4, 1);
+        // newInventory.addItemToInventory(healthPotion, 4, 1);
         System.out.println(newInventory.inventoryToString());
     }
 
