@@ -1,5 +1,6 @@
 package src.game;
 
+import java.util.Scanner;
 import src.item.*;
 import src.item.armor.Armor;
 import src.item.chest.Chest;
@@ -15,14 +16,13 @@ public class Main {
         Inventory newInventory = new Inventory();
         Weapon elvenSword = new Sword();
         Weapon bow = new Bow();
-        // Potion healthPotion = new HealthPotion();
-        newInventory.addItemToInventory(elvenSword, 4, 0);
-        newInventory.addItemToInventory(bow, 4, 1);
-        // newInventory.addItemToInventory(healthPotion, 4, 1);
+        newInventory.addItemToInventory(elvenSword, 3, 0);
+        newInventory.addItemToInventory(bow, 3, 1);
         System.out.println(newInventory.inventoryToString());
     }
 
     public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
         Game newGame = new Game();
         inventoryTests();
     }

@@ -10,11 +10,11 @@ public class Inventory {
     public Item[][] items;
 
     public Inventory() {
-        // 0 armor, 1 keys, 2 potions, 3 weapons
-        int[] itemSizes = { 4, 2, 4, 2 };
-        items = new Item[5][];
-        for (int i = 0; i < itemSizes.length; i++)
-            items[i] = new Item[itemSizes[i]];
+        items = new Item[4][];
+        items[0] = new Armor[4];
+        items[1] = new Key[2];
+        items[2] = new Potion[4];
+        items[3] = new Weapon[2];
     }
 
     public void addItemToInventory(Item item, int index1, int index2) {
@@ -26,18 +26,8 @@ public class Inventory {
     }
 
     // public void equipWeapon(int index) {
-    // switch(index) {
-    // case 0:
-    // items[4][0].setWeaponState(true);
-    // items[4][1].setWeaponState(false);
-    // break;
-    // case 1:
-    // items[4][0].setWeaponState(false);
-    // items[4][1].setWeaponState(true);
-    // break;
-    // default:
-    // break;
-    // }
+        // items[3][0].setWeaponState((index == 0));
+        // items[3][1].setWeaponState((index == 1));
     // }
 
     public String inventoryToString() {
