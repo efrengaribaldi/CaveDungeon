@@ -11,6 +11,7 @@ import src.item.*;
 public class Game {
     Scanner scanner = new Scanner(System.in);
     private Map[] levels;
+    public Player newPlayer;
 
     void mapTests() {
         for (int i = 0; i < levels.length; ++i)
@@ -31,14 +32,21 @@ public class Game {
     void createPlayer() {
         String name;
         char gender;
-        int playerSelector;
-        System.out.print("Select your player mage(1) or melee(2): ");
-        playerSelector = scanner.nextInt();
         System.out.print("Write your name: ");
         name = scanner.nextLine();
         System.out.print("Select your gender (M or F): ");
         gender = scanner.next().charAt(0);
-        Player newPlayer = (playerSelector == 1) ? new Melee(name, 30, gender, 0, new Inventory()) : new Mage(name, 30, gender, 0, new Inventory());
+        System.out.print("Select your player Melee(1) or Mage(2): ");
+        switch(scanner.nextInt()) {
+            case 1:
+                newPlayer = new Melee(name, 30, gender, 0, new Inventory());
+                break;
+            case 2:
+                newPlayer = new Mage(name, 30, gender, 0, new Inventory());
+                break;
+            default:
+                newPlayer = null;
+                System.out.println("Personaje no encontrado!");
+        }
     }
-
 }
