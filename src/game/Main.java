@@ -16,14 +16,21 @@ public class Main {
         Inventory newInventory = new Inventory();
         Weapon elvenSword = new Sword();
         Weapon bow = new Bow();
-        newInventory.addItemToInventory(elvenSword, 3, 0);
-        newInventory.addItemToInventory(bow, 3, 1);
+        Potion healthPotion = new HealthPotion();
+        newInventory.addItemToInventory(elvenSword, 0);
+        newInventory.addItemToInventory(bow, 1);
+        newInventory.addItemToInventory(healthPotion, 2);
         System.out.println(newInventory.inventoryToString());
+        System.out.println("Which weapon do you want to equip?");
+        System.out.println(newInventory.printWeapons());
+        newInventory.equipWeapon(1);
+        System.out.println(newInventory.printWeapons());
+
     }
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Game newGame = new Game();
-        inventoryTests();
+        // inventoryTests();
     }
 }

@@ -15,6 +15,9 @@ public abstract class Weapon extends Item {
         this.weaponState = weaponState;
     }
 
+    public boolean getWeaponState() {
+        return weaponState;
+    }
     public int getBaseDamage() {
         return baseDamage;
     }

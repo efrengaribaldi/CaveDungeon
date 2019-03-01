@@ -7,39 +7,80 @@ import src.item.potion.*;
 import src.item.weapon.*;
 
 public class Inventory {
-    public Item[][] items;
+    public Armor[] armor;
+    public Key[] keys;
+    public Potion[] potions;
+    public Weapon[] weapons;
 
     public Inventory() {
-        items = new Item[4][];
-        items[0] = new Armor[4];
-        items[1] = new Key[2];
-        items[2] = new Potion[4];
-        items[3] = new Weapon[2];
+        armor = new Armor[4];
+        keys = new Key[2];
+        potions = new Potion[4];
+        weapons = new Weapon[2];
     }
 
-    public void addItemToInventory(Item item, int index1, int index2) {
-        this.items[index1][index2] = item;
+    public void addItemToInventory(Armor armor, int index) {
+        this.armor[index] = armor;
     }
 
-    public void removeItemFromInventory(int index1, int index2) {
-        items[index1][index2] = null;
+    public void addItemToInventory(Key key, int index) {
+        this.keys[index] = key;
     }
 
-    // public void equipWeapon(int index) {
-        // items[3][0].setWeaponState((index == 0));
-        // items[3][1].setWeaponState((index == 1));
-    // }
+    public void addItemToInventory(Potion potion, int index) {
+        this.potions[index] = potion;
+    }
+
+    public void addItemToInventory(Weapon weapon, int index) {
+        this.weapons[index] = weapon;
+    }
+
+    public void equipWeapon(int index) {
+        weapons[0].setWeaponState((index == 0));
+        weapons[1].setWeaponState((index == 1));
+    }
 
     public String inventoryToString() {
         String res = "";
-        for (int i = 0; i < items.length; ++i) {
-            for (int j = 0; j < items[i].length; ++j) {
-                res += "i[" + i + ", " + j + "]: ";
-                res += (items[i][j] != null) ? items[i][j].getName() : "null";
+        int i;
+        for (i = 0; i < armor.length; ++i) {
+                res += "i[" + i + "]: ";
+                res += (armor[i] != null) ? armor[i].getName() : "null";
                 res += "\n";
-            }
-            res += "\n";
         }
+        res += "\n";
+
+        for (i = 0; i < keys.length; ++i) {
+                res += "i[" + i + "]: ";
+                res += (keys[i] != null) ? keys[i].getName() : "null";
+                res += "\n";
+        }
+        res += "\n";
+
+        for (i = 0; i < potions.length; ++i) {
+                res += "i[" + i + "]: ";
+                res += (potions[i] != null) ? potions[i].getName() : "null";
+                res += "\n";
+        }
+        res += "\n";
+
+        for (i = 0; i < weapons.length; ++i) {
+                res += "i[" + i + "]: ";
+                res += (weapons[i] != null) ? weapons[i].getName() : "null";
+                res += "\n";
+        }
+        res += "\n";
+        return res;
+    }
+
+    public String printWeapons() {
+        String res = "";
+        for (int i = 0; i < weapons.length; ++i) {
+                res += "i[" + i + "]: ";
+                res += (weapons[i] != null) ? weapons[i].getName() + " | EQUIP: " + weapons[i].getWeaponState() : "null";
+                res += "\n";
+        }
+        res += "\n";
         return res;
     }
 }

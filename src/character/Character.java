@@ -13,4 +13,12 @@ public abstract class Character {
         // Set random name, hp and experience
         // For boss and enemy npc
     }
+
+    public void setHealthPoints(int healthPoints) {
+        this.healthPoints = healthPoints;
+    }
+
+    public int getHealthPoints() {
+        return healthPoints;
+    }
 }
