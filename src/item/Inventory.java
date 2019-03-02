@@ -40,6 +40,25 @@ public class Inventory {
         weapons[1].setWeaponState((index == 1));
     }
 
+    public String showEquippedWeapon() {
+        return (weapons[0].getWeaponState()) ? weapons[0].getName() : weapons[1].getName();
+    }
+
+    public Weapon getEquippedWeapon() {
+        return (weapons[0].getWeaponState()) ? weapons[0] : weapons[1];
+    }
+
+    public String printWeapons() {
+        String res = "";
+        for (int i = 0; i < weapons.length; ++i) {
+                res += "i[" + i + "]: ";
+                res += (weapons[i] != null) ? weapons[i].getName() + " | EQUIP: " + weapons[i].getWeaponState() : "null";
+                res += "\n";
+        }
+        res += "\n";
+        return res;
+    }
+
     public String inventoryToString() {
         String res = "";
         int i;
@@ -67,17 +86,6 @@ public class Inventory {
         for (i = 0; i < weapons.length; ++i) {
                 res += "i[" + i + "]: ";
                 res += (weapons[i] != null) ? weapons[i].getName() : "null";
-                res += "\n";
-        }
-        res += "\n";
-        return res;
-    }
-
-    public String printWeapons() {
-        String res = "";
-        for (int i = 0; i < weapons.length; ++i) {
-                res += "i[" + i + "]: ";
-                res += (weapons[i] != null) ? weapons[i].getName() + " | EQUIP: " + weapons[i].getWeaponState() : "null";
                 res += "\n";
         }
         res += "\n";

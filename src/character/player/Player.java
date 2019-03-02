@@ -17,12 +17,19 @@ public abstract class Player extends Character implements IPlayer {
         this.experience = experience;
     }
 
+    public Inventory getInventory() {
+        return inventory;
+    }
+
+    public void setInventory(Inventory inventory) {
+        this.inventory = inventory;
+    }
     /*
      * public abstract void useAbility(); public abstract void attackNPC(enemy :
      * NPC);
-     * 
+     *
      * public void useItem() {
-     * 
+     *
      * }
      */
 }

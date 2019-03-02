@@ -1,12 +1,15 @@
 package src.item.weapon.sword;
 
 import src.item.weapon.Weapon;
+import src.character.Ability;
 
 public class Sword extends Weapon {
-    private int dashAttack;
-    private int stormOfSword;
-
     public Sword() {
-        super("Elven Sword", false);
+        super("Elven Sword");
+        Ability[] abilities = new Ability[3];
+        abilities[0] = new Ability("Stinger", 15);
+        abilities[1] = new Ability("Sword Storm", 30);
+        abilities[2] = new Ability("Lightning Blade", 50);
+        super.setAbilities(abilities);
     }
 }

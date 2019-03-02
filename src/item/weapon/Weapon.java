@@ -1,24 +1,53 @@
 package src.item.weapon;
 
 import src.item.Item;
+import src.character.Ability;
 
 public abstract class Weapon extends Item {
-    private int baseDamage;
     public boolean weaponState;
+    private Ability[] abilities;
 
-    public Weapon(String name, boolean weaponState) {
+    public Weapon(String name) {
         super(name);
-        weaponState = false;
+        this.weaponState = false;
+    }
+
+    public boolean getWeaponState() {
+        return weaponState;
     }
 
     public void setWeaponState(boolean weaponState) {
         this.weaponState = weaponState;
     }
 
-    public boolean getWeaponState() {
-        return weaponState;
+    public Ability[] getAbilities() {
+        return abilities;
     }
-    public int getBaseDamage() {
-        return baseDamage;
+
+    public void setAbilities(Ability[] abilities) {
+        this.abilities = abilities;
+    }
+
+    public void addAbilityToWeapon(Ability ability, int index) {
+        abilities[index] = ability;
+    }
+
+    public void removeAbilityFromWeapon(int index) {
+        abilities[index] = null;
+    }
+
+    public Ability getAbility(int index) {
+        return abilities[index];
+    }
+
+    public String printAbilities() {
+        String res = "";
+        for (int i = 0; i < abilities.length; ++i) {
+                res += "Ability[" + i + "] ";
+                res += (abilities[i] != null) ? "Name: " + abilities[i].getName() + " | HP Cost: " + abilities[i].getBaseDamage() : "null";
+                res += "\n";
+        }
+        res += "\n";
+        return res;
     }
 }
