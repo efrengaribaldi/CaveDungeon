@@ -4,12 +4,21 @@ import java.util.Scanner;
 import src.map.*;
 import src.character.*;
 import src.character.player.*;
+import src.character.npc.*;
 import src.character.player.mage.Mage;
 import src.character.player.melee.Melee;
+import src.character.npc.enemy.Enemy;
+import src.character.npc.enemy.necromancer.Necromancer;
 import src.item.*;
+import src.item.weapon.Weapon;
+import src.item.potion.Potion;
+import src.item.potion.healthpotion.HealthPotion;
+import src.item.weapon.sword.Sword;
+import src.item.weapon.bow.Bow;
+
+
 
 public class Game {
-    Scanner scanner = new Scanner(System.in);
     private Map[] levels;
     public Player newPlayer;
 
@@ -26,10 +35,33 @@ public class Game {
         for (int i = 0; i < levels.length; ++i)
             levels[i] = new Map(gameSeed + i);
         mapTests();
+        System.out.println("Input the values for create player (!)");
         createPlayer();
+        playerTests();
+        battleTests();
     }
 
+    void playerTests() {
+        Weapon elvenSword = new Sword();
+        Weapon bow = new Bow();
+        Potion healthPotion = new HealthPotion();
+        newPlayer.getInventory().addItemToInventory(elvenSword, 0);
+        newPlayer.getInventory().addItemToInventory(bow, 1);
+        newPlayer.getInventory().addItemToInventory(healthPotion, 2);
+        System.out.println("Which weapon do you want to equip?");
+        System.out.println(newPlayer.getInventory().printWeapons());
+        newPlayer.getInventory().equipWeapon(0);
+
+        System.out.println(newPlayer.playerToString());
+    }
+
+    void battleTests() {
+        System.out.println("______________START BATTLE________________");
+        Enemy necromancer = new Necromancer();
+        Battle.startBattle(newPlayer, necromancer);
+    }
     void createPlayer() {
+        Scanner scanner = new Scanner(System.in);
         String name;
         char gender;
         System.out.print("Write your name: ");
@@ -46,7 +78,7 @@ public class Game {
                 break;
             default:
                 newPlayer = null;
-                System.out.println("Personaje no encontrado!");
+                System.out.println("Player not found!");
         }
     }
 }

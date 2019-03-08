@@ -29,4 +29,19 @@ public abstract class Player extends Character implements IPlayer {
     public void attack(NPC Npc, int index) {
         Npc.setHealthPoints(Npc.getHealthPoints() - getInventory().getEquippedWeapon().getAbility(index).getBaseDamage());
     }
+
+    public String printPlayerAbilities() {
+         return inventory.getEquippedWeapon().printAbilities();
+    }
+
+    public String playerToString() {
+        String res = "";
+        res += "| Player Name: " + getName() + " | \n";
+        res += "| Health Points: " + getHealthPoints() + " | \n";
+        res += "| Inventory: | \n" + inventory.inventoryToString();
+        res += "| Experience: " + experience + " | \n";
+        res += "| Gender: " + gender + " | \n";
+        res += printPlayerAbilities();
+        return res;
+    }
 }
