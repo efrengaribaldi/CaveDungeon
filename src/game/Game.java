@@ -16,8 +16,6 @@ import src.item.potion.healthpotion.HealthPotion;
 import src.item.weapon.sword.Sword;
 import src.item.weapon.bow.Bow;
 
-
-
 public class Game {
     private Map[] levels;
     public Player newPlayer;
@@ -60,25 +58,26 @@ public class Game {
         Enemy necromancer = new Necromancer();
         Battle.startBattle(newPlayer, necromancer);
     }
+
     void createPlayer() {
         Scanner scanner = new Scanner(System.in);
         String name;
         char gender;
-        System.out.print("Write your name: ");
+        System.out.println("Write your name: ");
         name = scanner.nextLine();
-        System.out.print("Select your gender (M or F): ");
+        System.out.println("Select your gender (M or F): ");
         gender = scanner.next().charAt(0);
-        System.out.print("Select your player Melee(1) or Mage(2): ");
-        switch(scanner.nextInt()) {
-            case 1:
-                newPlayer = new Melee(name, 30, gender, 0, new Inventory());
-                break;
-            case 2:
-                newPlayer = new Mage(name, 30, gender, 0, new Inventory());
-                break;
-            default:
-                newPlayer = null;
-                System.out.println("Player not found!");
+        System.out.println("Select your player Melee(1) or Mage(2): ");
+        switch (scanner.nextInt()) {
+        case 1:
+            newPlayer = new Melee(name, 30, gender, 0, new Inventory());
+            break;
+        case 2:
+            newPlayer = new Mage(name, 30, gender, 0, new Inventory());
+            break;
+        default:
+            newPlayer = null;
+            System.out.println("Player not found!");
         }
     }
 }
