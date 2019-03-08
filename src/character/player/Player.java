@@ -1,18 +1,19 @@
 package src.character.player;
 
 import src.character.Character;
+import src.character.npc.NPC;
 import src.character.Ability;
 import src.item.Inventory;
 
 public abstract class Player extends Character implements IPlayer {
     public Inventory inventory;
     private int experience;
-    private char sex;
+    private char gender;
     private Ability[] abilities = new Ability[3];
 
-    public Player(String nombre, int healthPoints, char sex, int experience, Inventory inventory) {
-        super(nombre, healthPoints);
-        this.sex = sex;
+    public Player(String name, int healthPoints, char gender, int experience, Inventory inventory) {
+        super(name, healthPoints);
+        this.gender = gender;
         this.inventory = inventory;
         this.experience = experience;
     }
@@ -24,12 +25,8 @@ public abstract class Player extends Character implements IPlayer {
     public void setInventory(Inventory inventory) {
         this.inventory = inventory;
     }
-    /*
-     * public abstract void useAbility(); public abstract void attackNPC(enemy :
-     * NPC);
-     *
-     * public void useItem() {
-     *
-     * }
-     */
+
+    public void attack(NPC Npc, int index) {
+        Npc.setHealthPoints(Npc.getHealthPoints() - getInventory().getEquippedWeapon().getAbility(index).getBaseDamage());
+    }
 }

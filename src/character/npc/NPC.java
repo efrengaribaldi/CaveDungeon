@@ -2,8 +2,8 @@ package src.character.npc;
 
 import src.character.Character;
 
-public class NPC extends Character {
-    public NPC() {
-        super();
+public abstract class NPC extends Character {
+    public NPC(String nombre, int healthPoints) {
+        super(nombre, healthPoints);
     }
 }

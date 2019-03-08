@@ -18,7 +18,8 @@ public class Floor extends src.map.Tile {
     @Override
     public void addEnemy() {
         // Set random propierties when generating the enemy
-        enemy = new Enemy();
+        // Enemy need to be specified
+        // enemy = new Enemy(); 
     }
 
     @Override
