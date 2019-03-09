@@ -1,7 +1,6 @@
 package src.item;
 
 import src.item.armor.*;
-import src.item.chest.*;
 import src.item.key.*;
 import src.item.potion.*;
 import src.item.weapon.*;

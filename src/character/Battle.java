@@ -9,14 +9,13 @@ import src.item.*;
 import src.item.weapon.Weapon;
 
 public class Battle {
-
     public static void startBattle(Player player, NPC Npc) {
         Scanner scanner = new Scanner(System.in);
         int indexAttack;
         System.out.println("Your weapon equipped is: ");
         System.out.println(player.getInventory().showEquippedWeapon());
 
-        while(player.getHealthPoints() > 0 && Npc.getHealthPoints() > 0) {
+        while (player.getHealthPoints() > 0 && Npc.getHealthPoints() > 0) {
             System.out.println("Select your ability to attack: ");
             System.out.println(player.printPlayerAbilities());
             indexAttack = scanner.nextInt();
@@ -31,5 +30,6 @@ public class Battle {
             System.out.println("You won!");
         else
             System.out.println("GAME OVER");
+        scanner.close();
     }
 }
