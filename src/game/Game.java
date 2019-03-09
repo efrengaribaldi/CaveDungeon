@@ -20,11 +20,6 @@ public class Game {
     private Map[] levels;
     public Player newPlayer;
 
-    void mapTests() {
-        for (int i = 0; i < levels.length; ++i)
-            System.out.println(levels[i].mapToString());
-    }
-
     public Game() {
         long gameSeed = System.currentTimeMillis();
         // long gameSeed = 1550961460665L;
@@ -39,24 +34,9 @@ public class Game {
         battleTests();
     }
 
-    void playerTests() {
-        Weapon elvenSword = new Sword();
-        Weapon bow = new Bow();
-        Potion healthPotion = new HealthPotion();
-        newPlayer.getInventory().addItemToInventory(elvenSword, 0);
-        newPlayer.getInventory().addItemToInventory(bow, 1);
-        newPlayer.getInventory().addItemToInventory(healthPotion, 2);
-        System.out.println("Which weapon do you want to equip?");
-        System.out.println(newPlayer.getInventory().printWeapons());
-        newPlayer.getInventory().equipWeapon(0);
-
-        System.out.println(newPlayer.playerToString());
-    }
-
-    void battleTests() {
-        System.out.println("______________START BATTLE________________");
-        Enemy necromancer = new Necromancer();
-        Battle.startBattle(newPlayer, necromancer);
+    void mapTests() {
+        for (int i = 0; i < levels.length; ++i)
+            System.out.println(levels[i].mapToString());
     }
 
     void createPlayer() {
@@ -80,4 +60,25 @@ public class Game {
             System.out.println("Player not found!");
         }
     }
+
+    void playerTests() {
+        Weapon elvenSword = new Sword();
+        Weapon bow = new Bow();
+        Potion healthPotion = new HealthPotion();
+        newPlayer.getInventory().addItemToInventory(elvenSword, 0);
+        newPlayer.getInventory().addItemToInventory(bow, 1);
+        newPlayer.getInventory().addItemToInventory(healthPotion, 0);
+        System.out.println("Which weapon do you want to equip?");
+        System.out.println(newPlayer.getInventory().printWeapons());
+        newPlayer.getInventory().equipWeapon(0);
+
+        System.out.println(newPlayer.playerToString());
+    }
+
+    void battleTests() {
+        System.out.println("______________START BATTLE________________");
+        Enemy necromancer = new Necromancer();
+        Battle.startBattle(newPlayer, necromancer);
+    }
+
 }

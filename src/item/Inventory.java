@@ -51,9 +51,9 @@ public class Inventory {
     public String printWeapons() {
         String res = "";
         for (int i = 0; i < weapons.length; ++i) {
-                res += "i[" + i + "]: ";
-                res += (weapons[i] != null) ? weapons[i].getName() + " | EQUIP: " + weapons[i].getWeaponState() : "null";
-                res += "\n";
+            res += "i[" + i + "]: ";
+            res += (weapons[i] != null) ? weapons[i].getName() + " | EQUIP: " + weapons[i].getWeaponState() : "null";
+            res += "\n";
         }
         res += "\n";
         return res;
@@ -61,32 +61,33 @@ public class Inventory {
 
     public String inventoryToString() {
         String res = "";
+        res += "Armor:\n";
         int i;
         for (i = 0; i < armor.length; ++i) {
-                res += "i[" + i + "]: ";
-                res += (armor[i] != null) ? armor[i].getName() : "null";
-                res += "\n";
+            res += "i[" + i + "]: ";
+            res += (armor[i] != null) ? armor[i].getName() : "null";
+            res += "\n";
         }
         res += "\n";
-
+        res += "Keys:\n";
         for (i = 0; i < keys.length; ++i) {
-                res += "i[" + i + "]: ";
-                res += (keys[i] != null) ? keys[i].getName() : "null";
-                res += "\n";
+            res += "i[" + i + "]: ";
+            res += (keys[i] != null) ? keys[i].getName() : "null";
+            res += "\n";
         }
         res += "\n";
-
+        res += "Potions:\n";
         for (i = 0; i < potions.length; ++i) {
-                res += "i[" + i + "]: ";
-                res += (potions[i] != null) ? potions[i].getName() : "null";
-                res += "\n";
+            res += "i[" + i + "]: ";
+            res += (potions[i] != null) ? potions[i].getName() : "null";
+            res += "\n";
         }
         res += "\n";
-
+        res += "Weapons:\n";
         for (i = 0; i < weapons.length; ++i) {
-                res += "i[" + i + "]: ";
-                res += (weapons[i] != null) ? weapons[i].getName() : "null";
-                res += "\n";
+            res += "i[" + i + "]: ";
+            res += (weapons[i] != null) ? weapons[i].getName() : "null";
+            res += "\n";
         }
         res += "\n";
         return res;
