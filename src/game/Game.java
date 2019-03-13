@@ -59,19 +59,21 @@ public class Game {
             newPlayer = null;
             System.out.println("Player not found!");
         }
-     
     }
 
     void playerTests() {
         Weapon elvenSword = new Sword();
         Weapon bow = new Bow();
         Potion healthPotion = new HealthPotion();
+        Scanner scanner = new Scanner(System.in);
+        int selectedWeapon;
         newPlayer.getInventory().addItemToInventory(elvenSword, 0);
         newPlayer.getInventory().addItemToInventory(bow, 1);
         newPlayer.getInventory().addItemToInventory(healthPotion, 0);
         System.out.println("Which weapon do you want to equip?");
         System.out.println(newPlayer.getInventory().printWeapons());
-        newPlayer.getInventory().equipWeapon(0);
+        selectedWeapon = scanner.nextInt();
+        newPlayer.getInventory().equipWeapon(selectedWeapon);
 
         System.out.println(newPlayer.playerToString());
     }
