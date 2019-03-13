@@ -48,7 +48,7 @@ public class Inventory {
     }
 
     public String printWeapons() {
-        String res = "";
+        String res = "Weapons:\n";
         for (int i = 0; i < weapons.length; ++i) {
             res += "i[" + i + "]: ";
             res += (weapons[i] != null) ? weapons[i].getName() + " | EQUIP: " + weapons[i].getWeaponState() : "null";

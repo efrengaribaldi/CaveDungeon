@@ -59,7 +59,7 @@ public class Game {
             newPlayer = null;
             System.out.println("Player not found!");
         }
-        scanner.close();
+     
     }
 
     void playerTests() {
