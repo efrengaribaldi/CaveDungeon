@@ -16,8 +16,6 @@ import src.item.weapon.Weapon;
 
 
 public class Battle {
-    private int randomExp;
-    int random = (int)(Math.random() * 50 + 1);
     // Battle system between player and normal enemy
     public static void startBattle(Player player, Enemy enemy) {
         Scanner scanner = new Scanner(System.in);

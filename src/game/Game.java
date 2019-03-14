@@ -88,7 +88,7 @@ public class Game {
         char startBattle;
         Enemy newEnemie;
         do {
-            System.out.println("Select your enemie: (1) Zombie, (2) Skeleton, (3) Chort, (4) Swampy, (5) Necromancer");
+            System.out.println("Select your enemy: (1) Zombie, (2) Skeleton, (3) Chort, (4) Swampy, (5) Necromancer");
             switch (scanner.nextInt()) {
                 case 1:
                     newEnemie = new Zombie();
