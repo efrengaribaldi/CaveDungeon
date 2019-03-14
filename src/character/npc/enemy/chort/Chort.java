@@ -4,6 +4,6 @@ import src.character.npc.enemy.Enemy;
 
 public class Chort extends Enemy {
     public Chort() {
-        super("Chort", 100, 20);
+        super("Chort", 50, 15);
     }
 }

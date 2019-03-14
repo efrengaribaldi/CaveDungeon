@@ -4,6 +4,6 @@ import src.character.npc.enemy.Enemy;
 
 public class Necromancer extends Enemy {
     public Necromancer() {
-        super("Necromancer", 100, 20);
+        super("Necromancer", 200, 55);
     }
 }

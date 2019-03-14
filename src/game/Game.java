@@ -8,7 +8,11 @@ import src.character.npc.*;
 import src.character.player.mage.Mage;
 import src.character.player.melee.Melee;
 import src.character.npc.enemy.Enemy;
+import src.character.npc.enemy.zombie.Zombie;
 import src.character.npc.enemy.necromancer.Necromancer;
+import src.character.npc.enemy.swampy.Swampy;
+import src.character.npc.enemy.skeleton.Skeleton;
+import src.character.npc.enemy.chort.Chort;
 import src.item.*;
 import src.item.weapon.Weapon;
 import src.item.potion.Potion;
@@ -17,6 +21,8 @@ import src.item.weapon.sword.Sword;
 import src.item.weapon.bow.Bow;
 
 public class Game {
+    Scanner scanner = new Scanner(System.in);
+
     private Map[] levels;
     public Player newPlayer;
 
@@ -40,7 +46,6 @@ public class Game {
     }
 
     void createPlayer() {
-        Scanner scanner = new Scanner(System.in);
         String name;
         char gender;
         System.out.println("Write your name: ");
@@ -50,10 +55,10 @@ public class Game {
         System.out.println("Select your player Melee(1) or Mage(2): ");
         switch (scanner.nextInt()) {
         case 1:
-            newPlayer = new Melee(name, 30, gender, 0, new Inventory());
+            newPlayer = new Melee(name, 25, gender, new Inventory());
             break;
         case 2:
-            newPlayer = new Mage(name, 30, gender, 0, new Inventory());
+            newPlayer = new Mage(name, 25, gender, new Inventory());
             break;
         default:
             newPlayer = null;
@@ -74,14 +79,42 @@ public class Game {
         System.out.println(newPlayer.getInventory().printWeapons());
         selectedWeapon = scanner.nextInt();
         newPlayer.getInventory().equipWeapon(selectedWeapon);
+        System.out.println(newPlayer.getInventory().printWeapons());
 
         System.out.println(newPlayer.playerToString());
     }
 
     void battleTests() {
-        System.out.println("______________START BATTLE________________");
-        Enemy necromancer = new Necromancer();
-        Battle.startBattle(newPlayer, necromancer);
+        char startBattle;
+        Enemy newEnemie;
+        do {
+            System.out.println("Select your enemie: (1) Zombie, (2) Skeleton, (3) Chort, (4) Swampy, (5) Necromancer");
+            switch (scanner.nextInt()) {
+                case 1:
+                    newEnemie = new Zombie();
+                    break;
+                case 2:
+                    newEnemie = new Skeleton();
+                    break;
+                case 3:
+                    newEnemie = new Chort();
+                    break;
+                case 4:
+                    newEnemie = new Swampy();
+                    break;
+                case 5:
+                    newEnemie = new Necromancer();
+                    break;
+                default:
+                    newEnemie = null;
+                    break;
+            }
+            System.out.println("______________START BATTLE________________");
+            Battle.startBattle(newPlayer, newEnemie);
+            System.out.println("\nStart new battle? (Y or N)");
+            startBattle = scanner.next().charAt(0);
+        } while(startBattle == 'Y');
+
     }
 
 }

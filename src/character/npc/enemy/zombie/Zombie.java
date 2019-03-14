@@ -4,6 +4,6 @@ import src.character.npc.enemy.Enemy;
 
 public class Zombie extends Enemy {
     public Zombie() {
-        super("Zombie", 100, 20);
+        super("Zombie", 20, 5);
     }
 }

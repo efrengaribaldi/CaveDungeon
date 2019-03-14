@@ -1,5 +1,8 @@
 package src.character.npc.enemy;
 
+
+import java.util.concurrent.ThreadLocalRandom;
+
 import src.character.npc.NPC;
 import src.character.player.*;
 
@@ -12,6 +15,6 @@ public abstract class Enemy extends NPC {
     }
 
     public void attack(Player player) {
-        player.setHealthPoints(player.getHealthPoints() - this.attackBaseDamage);
+        player.setHealthPoints(player.getHealthPoints() - ThreadLocalRandom.current().nextInt((int)(this.attackBaseDamage*0.7), this.attackBaseDamage + 1)); //70% baseAttackDamage
     }
 }
