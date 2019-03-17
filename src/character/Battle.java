@@ -1,18 +1,10 @@
 package src.character;
 
+import src.character.npc.*;
+import src.character.npc.enemy.*;
+
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
-
-import src.character.player.*;
-import src.character.npc.*;
-import src.character.npc.enemy.Enemy;
-import src.character.npc.enemy.chort.Chort;
-import src.character.npc.enemy.necromancer.Necromancer;
-import src.character.npc.enemy.skeleton.Skeleton;
-import src.character.npc.enemy.swampy.Swampy;
-import src.character.npc.enemy.zombie.Zombie;
-import src.item.*;
-import src.item.weapon.Weapon;
 
 public class Battle {
     // Battle system between player and normal enemy

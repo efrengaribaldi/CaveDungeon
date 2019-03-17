@@ -1,14 +1,11 @@
 package src.map.tiles;
 
 import src.map.Tile;
-import src.character.npc.boss.Boss;
-import src.character.npc.enemy.Enemy;
-import src.character.npc.enemy.chort.Chort;
-import src.character.npc.enemy.necromancer.Necromancer;
-import src.character.npc.enemy.skeleton.Skeleton;
-import src.character.npc.enemy.swampy.Swampy;
-import src.character.npc.enemy.zombie.Zombie;
-import src.item.chest.Chest;
+import src.character.npc.Enemy;
+import src.character.npc.enemy.*;
+import src.character.npc.Boss;
+import src.character.npc.boss.*;
+import src.item.misc.Chest;
 
 public class Floor extends Tile {
     private Enemy enemy;
@@ -23,8 +20,6 @@ public class Floor extends Tile {
     }
 
     public void addEnemy() {
-        // Set random propierties when generating the enemy
-        // Enemy need to be specified
         int randomEnemy = (int) (Math.random() * 5);
         switch (randomEnemy) {
         case 0:
@@ -50,8 +45,22 @@ public class Floor extends Tile {
     }
 
     public void addBoss() {
-        // Set random propierties when generating the boss
-        boss = new Boss();
+        skull = false;
+        int randomBoss = (int) (Math.random() * 4);
+        switch (randomBoss) {
+        case 0:
+            boss = new BigDemon();
+            break;
+        case 1:
+            boss = new BigZombie();
+            break;
+        case 2:
+            boss = new Ogre();
+            break;
+        case 3:
+            boss = new Wizzard();
+            break;
+        }
     }
 
     public void addChest() {

@@ -4,21 +4,13 @@ import java.util.Scanner;
 import src.map.*;
 import src.character.*;
 import src.character.player.*;
-import src.character.npc.*;
-import src.character.player.mage.Mage;
-import src.character.player.melee.Melee;
-import src.character.npc.enemy.Enemy;
-import src.character.npc.enemy.zombie.Zombie;
-import src.character.npc.enemy.necromancer.Necromancer;
-import src.character.npc.enemy.swampy.Swampy;
-import src.character.npc.enemy.skeleton.Skeleton;
-import src.character.npc.enemy.chort.Chort;
+import src.character.npc.Enemy;
+import src.character.npc.enemy.*;
 import src.item.*;
-import src.item.weapon.Weapon;
-import src.item.potion.Potion;
-import src.item.potion.healthpotion.HealthPotion;
-import src.item.weapon.sword.Sword;
-import src.item.weapon.bow.Bow;
+import src.item.Weapon;
+import src.item.Potion;
+import src.item.potion.HealthPotion;
+import src.item.weapon.*;
 
 public class Game {
     Scanner scanner = new Scanner(System.in);

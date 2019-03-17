@@ -1,9 +1,7 @@
 package src.item;
 
-import src.item.armor.*;
-import src.item.key.*;
-import src.item.potion.*;
-import src.item.weapon.*;
+import src.item.*;
+import src.item.misc.*;
 
 public class Inventory {
     public Armor[] armor;
