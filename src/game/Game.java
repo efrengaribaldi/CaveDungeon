@@ -90,30 +90,30 @@ public class Game {
         do {
             System.out.println("Select your enemy: (1) Zombie, (2) Skeleton, (3) Chort, (4) Swampy, (5) Necromancer");
             switch (scanner.nextInt()) {
-                case 1:
-                    newEnemie = new Zombie();
-                    break;
-                case 2:
-                    newEnemie = new Skeleton();
-                    break;
-                case 3:
-                    newEnemie = new Chort();
-                    break;
-                case 4:
-                    newEnemie = new Swampy();
-                    break;
-                case 5:
-                    newEnemie = new Necromancer();
-                    break;
-                default:
-                    newEnemie = null;
-                    break;
+            case 1:
+                newEnemie = new Zombie();
+                break;
+            case 2:
+                newEnemie = new Skeleton();
+                break;
+            case 3:
+                newEnemie = new Chort();
+                break;
+            case 4:
+                newEnemie = new Swampy();
+                break;
+            case 5:
+                newEnemie = new Necromancer();
+                break;
+            default:
+                newEnemie = null;
+                break;
             }
             System.out.println("______________START BATTLE________________");
             Battle.startBattle(newPlayer, newEnemie);
             System.out.println("\nStart new battle? (Y or N)");
             startBattle = scanner.next().charAt(0);
-        } while(startBattle == 'Y');
+        } while (startBattle == 'Y');
 
     }
 

@@ -1,6 +1,8 @@
 package src.map.tiles;
 
-public class Wall extends src.map.Tile {
+import src.map.Tile;
+
+public class Wall extends Tile {
     // 0 top/bottom, 1 right, 2 left
     private int side;
 

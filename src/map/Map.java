@@ -16,7 +16,7 @@ public class Map {
     public Map(long seed) {
         random.setSeed(seed);
         minNumRooms = 10;
-        sizeX = 9;
+        sizeX = 7;
         sizeY = 9;
         // Generate map layout
         generateMap();
@@ -188,7 +188,7 @@ public class Map {
                         row[i] += whitespace;
             }
             // Remove leading and trailing whitespace
-            for (int i = 0; i < 7; i++)
+            for (int i = 0; i < Room.sizeX; i++)
                 res += row[i].substring(leadingWhitespace).replaceFirst("\\s++$", "") + "\n";
         }
         // Remove empty lines

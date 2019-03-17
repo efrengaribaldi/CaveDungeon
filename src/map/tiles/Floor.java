@@ -1,56 +1,69 @@
 package src.map.tiles;
 
+import src.map.Tile;
 import src.character.npc.boss.Boss;
 import src.character.npc.enemy.Enemy;
+import src.character.npc.enemy.chort.Chort;
+import src.character.npc.enemy.necromancer.Necromancer;
+import src.character.npc.enemy.skeleton.Skeleton;
+import src.character.npc.enemy.swampy.Swampy;
+import src.character.npc.enemy.zombie.Zombie;
 import src.item.chest.Chest;
-import src.utils.Vector2D;
 
-public class Floor extends src.map.Tile {
+public class Floor extends Tile {
     private Enemy enemy;
     private Boss boss;
     private Chest chest;
-    private Vector2D skullPos;
+    private boolean skull;
 
     public Floor() {
         super();
+        // 4 in a 1000 chance it as a skull
+        skull = (Math.random() < 0.004);
     }
 
-    @Override
     public void addEnemy() {
         // Set random propierties when generating the enemy
         // Enemy need to be specified
-        // enemy = new Enemy(); 
+        int randomEnemy = (int) (Math.random() * 5);
+        switch (randomEnemy) {
+        case 0:
+            enemy = new Chort();
+            break;
+        case 1:
+            enemy = new Necromancer();
+            break;
+        case 2:
+            enemy = new Skeleton();
+            break;
+        case 3:
+            enemy = new Swampy();
+            break;
+        case 4:
+            enemy = new Zombie();
+            break;
+        }
     }
 
-    @Override
     public boolean hasEnemy() {
         return enemy != null || boss != null;
     }
 
-    @Override
     public void addBoss() {
         // Set random propierties when generating the boss
         boss = new Boss();
     }
 
-    @Override
     public void addChest() {
         // Add random items when generating the chest
         chest = new Chest();
     }
 
-    @Override
     public boolean hasChest() {
         return chest != null;
     }
 
-    @Override
-    public void addSkull(Vector2D pos) {
-        skullPos = pos;
-    }
-
-    @Override
     public boolean hasSkull() {
-        return skullPos != null;
+        return skull;
     }
 }

@@ -10,15 +10,15 @@ public class Room {
     private int state;
     // 0 top, 1 right, 2 bottom, 3 left
     private boolean doors[];
-    private Tile[][] tiles;
-    static final int sizeX = 7, sizeY = 21;
+    private Floor[][] floorTiles;
+    static final int sizeX = 9, sizeY = 15;
     private final int centerX = (int) Math.floor((sizeX - 1) / 2.0);
     private final int centerY = (int) Math.floor((sizeY - 1) / 2.0);
 
-    Room(int state, boolean[] doors) {
+    protected Room(int state, boolean[] doors) {
         this.state = state;
         this.doors = doors;
-        tiles = new Tile[sizeX][sizeY];
+        floorTiles = new Floor[sizeX - 2][sizeY - 2];
     }
 
     void setState(int state) {
@@ -43,65 +43,24 @@ public class Room {
 
     void generateRoom() {
         // state = 5; // <-- to test different room layouts
-        createDoors();
-        createWalls();
-        // Fill with floor
-        for (int x = 0; x < sizeX; x++)
-            for (int y = 0; y < sizeY; y++)
-                if (tiles[x][y] == null)
-                    tiles[x][y] = new Floor();
+        for (int x = 0; x < sizeX - 2; x++)
+            for (int y = 0; y < sizeY - 2; y++)
+                floorTiles[x][y] = new Floor();
         if (state == 2 || state == 3)
             spawnEnemies();
         if (state == 4)
-            tiles[centerX][centerY].addChest();
+            floorTiles[centerX - 1][centerY - 1].addChest();
         if (state == 5)
-            tiles[centerX][centerY].addBoss();
-        generateDecoration();
-    }
-
-    private void createDoors() {
-        if (doors[0]) // top
-            tiles[0][centerY] = new Door(0);
-        if (doors[1]) // right
-            tiles[centerX][sizeY - 1] = new Door(1);
-        if (doors[2]) // bottom
-            tiles[sizeX - 1][centerY] = new Door(0);
-        if (doors[3]) // left
-            tiles[centerX][0] = new Door(2);
-    }
-
-    private void createWalls() {
-        for (int i = 0; i < sizeY; i++) {
-            if (tiles[0][i] == null) // top
-                tiles[0][i] = new Wall(0);
-            if (tiles[sizeX - 1][i] == null) // bottom
-                tiles[sizeX - 1][i] = new Wall(0);
-        }
-        for (int i = 0; i < sizeX; i++) {
-            if (tiles[i][0] == null) // right
-                tiles[i][0] = new Wall(1);
-            if (tiles[i][sizeY - 1] == null) // left
-                tiles[i][sizeY - 1] = new Wall(1);
-        }
+            floorTiles[centerX - 1][centerY - 1].addBoss();
     }
 
     private void spawnEnemies() {
         ArrayList<Vector2D> possibleTiles = new ArrayList<>();
-        // For loops aren't from 0 to size because we exclude doors and walls
-        for (int x = 1; x < sizeX - 1; x++)
-            for (int y = 1; y < sizeY - 1; y++) {
-                // These ifs are to leave empty the center column and row
-                if (x == centerX)
-                    x++;
-                if (y == centerY)
-                    y++;
-                possibleTiles.add(new Vector2D(x, y));
-            }
-        int numEnemies;
-        if (state == 2)
-            numEnemies = 3 + (int) (Math.random() * 2);
-        else // state == 3
-            numEnemies = 4 + (int) (Math.random() * 3);
+        for (int x = 0; x < sizeX - 2; x++)
+            for (int y = 0; y < sizeY - 2; y++)
+                if (!floorTiles[x][y].hasSkull())
+                    possibleTiles.add(new Vector2D(x, y));
+        int numEnemies = state + (int) (Math.random() * 3);
         // Choose numEnemies random tiles from possibleTiles
         ArrayList<Vector2D> chosenTiles = new ArrayList<>();
         for (int i = 0; i < numEnemies; i++) {
@@ -110,48 +69,39 @@ public class Room {
         }
         // Add enemies for every chosen tile
         for (int i = 0; i < numEnemies; i++)
-            tiles[chosenTiles.get(i).x][chosenTiles.get(i).y].addEnemy();
-    }
-
-    private void generateDecoration() {
-        int rX, rY;
-        boolean randomTileIsEmpty = false;
-        do {
-            rX = (int) (Math.random() * sizeX);
-            rY = (int) (Math.random() * sizeY);
-            if (tiles[rX][rY] instanceof Floor)
-                if (!tiles[rX][rY].hasEnemy() && !tiles[rX][rY].hasChest()) {
-                    Vector2D v = new Vector2D(rX, rY);
-                    tiles[rX][rY].addSkull(v);
-                    randomTileIsEmpty = true;
-                }
-        } while (!randomTileIsEmpty);
+            floorTiles[chosenTiles.get(i).x][chosenTiles.get(i).y].addEnemy();
     }
 
     String roomToString() {
         String res = "";
         for (int x = 0; x < sizeX; x++) {
-            for (int y = 0; y < sizeY; y++) {
-                if (tiles[x][y] instanceof Wall) {
-                    if (tiles[x][y].getSide() == 0)
-                        res += "-";
-                    else
-                        res += "|";
-                } else if (tiles[x][y] instanceof Door)
-                    res += "d";
-                else if (tiles[x][y] instanceof Floor) {
-                    if (tiles[x][y].hasEnemy())
+            switch (x) {
+            case 0:
+                for (int y = 0; y < sizeY; y++)
+                    res += (doors[0] && y == centerY) ? "d" : "-";
+                res += "\n";
+                break;
+            case sizeX - 1:
+                for (int y = 0; y < sizeY; y++)
+                    res += (doors[2] && y == centerY) ? "d" : "-";
+                res += "\n";
+                break;
+            default:
+                res += (doors[3] && x == centerX) ? "d" : "|";
+                for (int y = 0; y < sizeY - 2; y++) {
+                    if (floorTiles[x - 1][y].hasEnemy())
                         res += "e";
-                    else if (tiles[x][y].hasChest())
+                    else if (floorTiles[x - 1][y].hasChest())
                         res += "c";
-                    else if (tiles[x][y].hasSkull())
+                    else if (floorTiles[x - 1][y].hasSkull())
                         res += "s";
                     else
                         res += " ";
-                } else
-                    res += "#";
+                }
+                res += (doors[1] && x == centerX) ? "d" : "|";
+                res += "\n";
+                break;
             }
-            res += "\n";
         }
         return res;
     }

@@ -14,7 +14,6 @@ import src.character.npc.enemy.zombie.Zombie;
 import src.item.*;
 import src.item.weapon.Weapon;
 
-
 public class Battle {
     // Battle system between player and normal enemy
     public static void startBattle(Player player, Enemy enemy) {
@@ -40,43 +39,37 @@ public class Battle {
                 System.out.println("Enemy attack: " + (previousHealth - player.getHealthPoints()));
             }
             System.out.println();
-        } while(player.getHealthPoints() > 0 && enemy.getHealthPoints() > 0);
+        } while (player.getHealthPoints() > 0 && enemy.getHealthPoints() > 0);
         if (player.getHealthPoints() > 0) {
             // Add drop items
             if (enemy instanceof Zombie) {
                 player.setExperience(player.getExperience() + ThreadLocalRandom.current().nextInt(4, 5 + 1));
-            }
-            else if(enemy instanceof Skeleton) {
+            } else if (enemy instanceof Skeleton) {
                 player.setExperience(player.getExperience() + ThreadLocalRandom.current().nextInt(8, 10 + 1));
-            }
-            else if(enemy instanceof Chort) {
+            } else if (enemy instanceof Chort) {
                 player.setExperience(player.getExperience() + ThreadLocalRandom.current().nextInt(20, 25 + 1));
-            }
-            else if(enemy instanceof Swampy) {
+            } else if (enemy instanceof Swampy) {
                 player.setExperience(player.getExperience() + ThreadLocalRandom.current().nextInt(40, 50 + 1));
-            }
-            else if(enemy instanceof Necromancer) {
+            } else if (enemy instanceof Necromancer) {
                 player.setExperience(player.getExperience() + ThreadLocalRandom.current().nextInt(60, 75 + 1));
             }
             System.out.println("You won!");
             System.out.println("Previous EXP: " + previousExperience + " | New EXP: " + player.getExperience());
-            if(player.getExperience() >= 50 && player.getLevel() < 2) {
+            if (player.getExperience() >= 50 && player.getLevel() < 2) {
                 player.setLevel(2);
                 player.setHealthPoints(35);
                 player.setLimitHp(35);
                 System.out.println("Congratulations! You are now level 2");
                 System.out.println("Your attack damage has increased by 25%");
                 System.out.println("Your limit HP has increased to: 35 HP");
-            }
-            else if(player.getExperience() >= 150 && player.getLevel() < 3) {
+            } else if (player.getExperience() >= 150 && player.getLevel() < 3) {
                 player.setLevel(3);
                 player.setHealthPoints(70);
                 player.setLimitHp(70);
                 System.out.println("Congratulations! You are now level 3");
                 System.out.println("Your attack damage has increased by 75%");
                 System.out.println("Your limit HP has increased to: 70 HP");
-            }
-            else if(player.getExperience() >= 300 && player.getLevel() < 4) {
+            } else if (player.getExperience() >= 300 && player.getLevel() < 4) {
                 player.setLevel(4);
                 player.setHealthPoints(100);
                 player.setLimitHp(100);
@@ -84,13 +77,12 @@ public class Battle {
                 System.out.println("Your attack damage has increased by 150%");
                 System.out.println("Your limit HP has increased to: 100 HP");
             }
-        }
-        else {
+        } else {
             System.out.println("GAME OVER");
             System.exit(0);
         }
     }
 
-    //Battle system between player and boss
+    // Battle system between player and boss
 
 }
