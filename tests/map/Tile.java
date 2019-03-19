@@ -1,6 +1,6 @@
 package tests.map;
 
-public class Tile extends Object {
+public class Tile {
     public Tile() {
 
     }
