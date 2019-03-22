@@ -8,13 +8,10 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.layout.AnchorPane;
 
-public class CreatePlayer extends Application {
-    public static void main(String[] args) {
-        Application.launch(args);
-    }
+public class CreatePlayer extends Scene {
+    private Game game;
 
-    @Override
-    public void start(Stage stage) throws IOException {
+    public CreatePlayer(Game game) {
         //Create the FXMLLoader
         FXMLLoader loader = new FXMLLoader();
         //Path to the FXML File
@@ -25,13 +22,11 @@ public class CreatePlayer extends Application {
         AnchorPane root = (AnchorPane) loader.load(fxmlStream);
 
         //Create the Scene
-        Scene scene = new Scene(root);
-        //Set the scene to the stage
-        stage.setScene(scene);
-        //Set the title to the stage
-        stage.setTitle("Create Player");
-        //Display the stage
-        stage.show();
+        this.add(root);
+
+        this.game = game;
     }
+
+
 
 }

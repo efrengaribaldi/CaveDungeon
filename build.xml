@@ -14,6 +14,12 @@
 		<mkdir dir="${build}" />
 	</target>
 
+	<target name="runtest">
+		<mkdir dir="buildtest"/>
+		<javac srcdir="tests" destdir="buildtest" includeantruntime="false" debug="on" />
+		<java classname="tests.game.Game" dir="buildtest" fork="true" jvm="java" />
+	</target>
+
 	<target name="compile" depends="init" description="Compiles all source code.">
 		<javac srcdir="${src}" destdir="${build}" includeantruntime="false" debug="on" />
 	</target>

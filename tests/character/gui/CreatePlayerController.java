@@ -11,11 +11,13 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.ChoiceBox;
 
 public class CreatePlayerController {
+
     public CreatePlayerController() {
+
     }
 
     private int playerSelected;
-    public Player newPlayer;
+    private Player newPlayer;
 
     @FXML
     private TextField name;
@@ -58,4 +60,5 @@ public class CreatePlayerController {
     private char genderSelected() {
         return (genderBox.getValue().toString() == "Male") ? 'M' : 'F';
     }
+
 }

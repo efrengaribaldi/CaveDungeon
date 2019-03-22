@@ -1,22 +1,39 @@
 package tests.game;
 
-import java.util.Scanner;
 import tests.map.*;
 import tests.character.*;
 import tests.character.player.*;
 import tests.character.npc.Enemy;
 import tests.character.npc.enemy.*;
 import tests.item.*;
-import tests.item.Weapon;
-import tests.item.Potion;
-import tests.item.potion.HealthPotion;
 import tests.item.weapon.*;
+import tests.character.gui.*;
 
-public class Game {
+import java.util.Scanner;
+import javafx.application.Application;
+import javafx.scene.layout.VBox;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
+
+
+public class Game extends Application {
     Scanner scanner = new Scanner(System.in);
 
     private Map[] levels;
     public Player newPlayer;
+
+    public static void main(String[] args) {
+        Application.launch(args);
+    }
+
+    public void start(Stage stage) {
+        Scene createPlayer = new CreatePlayer(this);
+        stage.setScene(createPlayer);
+        stage.setTitle("CaveDungeon 0.19.03.22 OMEGA");
+        stage.show();
+    }
 
     public Game() {
         long gameSeed = System.currentTimeMillis();
@@ -108,5 +125,14 @@ public class Game {
         } while (startBattle == 'Y');
 
     }
+
+    public void launchCreatePlayer() {
+        Application.launch(CreatePlayer.class, this);
+    }
+
+    public void setNewPlayer(Player newPlayer) {
+        this.newPlayer = newPlayer;
+    }
+
 
 }
