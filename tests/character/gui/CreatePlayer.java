@@ -1,6 +1,7 @@
 package tests.character.gui;
 
 import tests.game.Game;
+import tests.character.Player;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -13,10 +14,12 @@ import javafx.scene.layout.HBox;
 
 public class CreatePlayer extends Scene {
     private Game game;
+    private Player playerTest;
 
     public CreatePlayer(Game game) throws Exception {
         super(new HBox());
         // Create the FXMLLoader
+        this.game = game;
         FXMLLoader loader = new FXMLLoader();
         // Path to the FXML File
         // String fxmlDocPath = "createPlayer.fxml";
@@ -28,9 +31,13 @@ public class CreatePlayer extends Scene {
 
         // Create the Pane and all Details
         AnchorPane root = (AnchorPane) loader.load(fxmlStream);
-
+        // Reference to CreatePlayerController
+        CreatePlayerController playerController = loader.<CreatePlayerController>getController();
+        //Pass the current game to CreatePlayerController
+        playerController.setGame(game);
+        //System.out.println(playerTest.getName());
         this.setRoot(root);
-        this.game = game;
+        game.setNewPlayer(playerTest);
     }
 
 }

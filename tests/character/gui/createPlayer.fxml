@@ -15,7 +15,7 @@
       <AnchorPane layoutX="24.0" layoutY="24.0" prefHeight="93.0" prefWidth="652.0" style="-fx-background-color: #9C2B27;">
          <children>
             <TextField fx:id="name" layoutX="55.0" layoutY="55.0" prefHeight="25.0" prefWidth="209.0" promptText="Name" styleClass="text-name" />
-            <ChoiceBox fx:id="genderbox" layoutX="426.0" layoutY="55.0" prefWidth="150.0" value="ok">
+            <ChoiceBox fx:id="genderBox" layoutX="426.0" layoutY="55.0" prefWidth="150.0" value="ok">
                 <items>
                     <FXCollections fx:factory="observableArrayList">
                         <String fx:value="Male" />

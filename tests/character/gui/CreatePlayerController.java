@@ -3,6 +3,7 @@ package tests.character.gui;
 import tests.character.Player;
 import tests.character.player.*;
 import tests.item.Inventory;
+import tests.game.Game;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -12,13 +13,13 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.ChoiceBox;
 
 public class CreatePlayerController {
+    private int playerSelected;
+    private Player newPlayer;
+    private Game game;
 
     public CreatePlayerController() {
 
     }
-
-    private int playerSelected;
-    private Player newPlayer;
 
     @FXML
     private TextField name;
@@ -39,6 +40,7 @@ public class CreatePlayerController {
     private void selectMage(ActionEvent event) {
         playerSelected = 2;
         System.out.println("Player selected: Mage");
+        System.out.println(" ok" + genderSelected());
     }
 
     @FXML
@@ -54,10 +56,20 @@ public class CreatePlayerController {
             newPlayer = null;
             System.out.println("Player not found!");
         }
+        //Set the newPlayer to game 
+        game.setNewPlayer(newPlayer);
     }
 
     private char genderSelected() {
-        return (genderBox.getValue().toString() == "Male") ? 'M' : 'F';
+        return (genderBox.getValue().toString().equals("Male")) ? 'M' : 'F';
+    }
+
+    public Player getPlayerCreated() {
+      return newPlayer;
+    }
+
+    public void setGame(Game game) {
+      this.game = game;
     }
 
 }

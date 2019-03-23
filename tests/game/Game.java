@@ -14,6 +14,7 @@ import java.util.Scanner;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.scene.layout.VBox;
 
 public class Game extends Application {
     Scanner scanner = new Scanner(System.in);
@@ -21,8 +22,11 @@ public class Game extends Application {
     private Map[] levels;
     public Player newPlayer;
 
+
     public static void main(String[] args) {
         Application.launch(args);
+        // Print the name without errors
+        //System.out.println(newPlayer.getName());
     }
 
     public void start(Stage stage) throws Exception {
@@ -30,6 +34,8 @@ public class Game extends Application {
         stage.setScene(createPlayer);
         stage.setTitle("CaveDungeon 0.19.03.22 OMEGA");
         stage.show();
+        // ERROR
+        //System.out.println(newPlayer.getName());
     }
 
     public Game() {
@@ -129,6 +135,10 @@ public class Game extends Application {
 
     public void setNewPlayer(Player newPlayer) {
         this.newPlayer = newPlayer;
+    }
+
+    public Player getNewPlayer() {
+      return newPlayer;
     }
 
 }
