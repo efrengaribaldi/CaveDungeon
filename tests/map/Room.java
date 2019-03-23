@@ -75,7 +75,7 @@ public class Room {
 
     String roomToString() {
         String res = "";
-        for (int y = 0; y < sizeY; y++)
+        for (int y = -1; y < sizeY + 1; y++)
             res += (doors[0] && y == centerY) ? "d" : "-";
         res += "\n";
         for (int x = 0; x < sizeX; x++) {
@@ -93,7 +93,7 @@ public class Room {
             res += (doors[1] && x == centerX) ? "d" : "|";
             res += "\n";
         }
-        for (int y = 0; y < sizeY; y++)
+        for (int y = -1; y < sizeY + 1; y++)
             res += (doors[2] && y == centerY) ? "d" : "-";
         res += "\n";
         return res;

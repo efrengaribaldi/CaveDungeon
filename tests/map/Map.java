@@ -156,6 +156,7 @@ public class Map {
     }
 
     public String mapToString() {
+        System.out.println(rooms[3][4].roomToString());
         String res = "", whitespace = "";
         String[] roomSplit, row;
         // Find rooms to be trimmed from the left
@@ -168,12 +169,12 @@ public class Map {
                 minRooms = currentRooms;
         }
         // Generate a placeholder for null rooms
-        for (int i = 0; i <= Room.sizeY; i++)
+        for (int i = 0; i <= Room.sizeY + 2; i++)
             whitespace += " ";
         int leadingWhitespace = --minRooms * whitespace.length();
         // Generate the string
         for (int x = 1; x < sizeX - 1; x++) {
-            row = new String[Room.sizeX];
+            row = new String[Room.sizeX + 2];
             for (int i = 0; i < row.length; i++)
                 row[i] = "";
             for (int y = 1; y < sizeY - 1; y++) {
@@ -181,14 +182,14 @@ public class Map {
                     roomSplit = rooms[x][y].roomToString().split("\n");
                     // Show the state in the map
                     roomSplit[0] = "--" + rooms[x][y].getState() + roomSplit[0].substring(3);
-                    for (int i = 0; i < Room.sizeX; i++)
+                    for (int i = 0; i < row.length; i++)
                         row[i] += roomSplit[i] + " ";
                 } else
-                    for (int i = 0; i < Room.sizeX; i++)
+                    for (int i = 0; i < row.length; i++)
                         row[i] += whitespace;
             }
             // Remove leading and trailing whitespace
-            for (int i = 0; i < Room.sizeX; i++)
+            for (int i = 0; i < row.length; i++)
                 res += row[i].substring(leadingWhitespace).replaceFirst("\\s++$", "") + "\n";
         }
         // Remove empty lines
