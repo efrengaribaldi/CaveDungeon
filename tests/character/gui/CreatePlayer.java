@@ -14,7 +14,6 @@ import javafx.scene.layout.HBox;
 
 public class CreatePlayer extends Scene {
     private Game game;
-    private Player playerTest;
 
     public CreatePlayer(Game game) throws Exception {
         super(new HBox());
@@ -37,7 +36,6 @@ public class CreatePlayer extends Scene {
         playerController.setGame(game);
         //System.out.println(playerTest.getName());
         this.setRoot(root);
-        game.setNewPlayer(playerTest);
     }
 
 }

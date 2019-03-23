@@ -11,6 +11,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.event.ActionEvent;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.Scene;
+import javafx.scene.layout.HBox;
+import javafx.scene.control.Label;
 
 public class CreatePlayerController {
     private int playerSelected;
@@ -56,8 +59,13 @@ public class CreatePlayerController {
             newPlayer = null;
             System.out.println("Player not found!");
         }
-        //Set the newPlayer to game 
+        //Set the newPlayer to game
         game.setNewPlayer(newPlayer);
+        //game.getGameStage().setTitle("Test");
+        //game.getGameStage().setScene(new Scene(new HBox(new Label("ok"))));
+        //game.getGameStage().show();
+        game.playerTests();
+        game.battleTests();
     }
 
     private char genderSelected() {

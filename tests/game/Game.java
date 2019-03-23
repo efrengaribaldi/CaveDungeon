@@ -21,6 +21,7 @@ public class Game extends Application {
 
     private Map[] levels;
     public Player newPlayer;
+    public static Stage gameStage;
 
 
     public static void main(String[] args) {
@@ -29,11 +30,13 @@ public class Game extends Application {
         //System.out.println(newPlayer.getName());
     }
 
+    @Override
     public void start(Stage stage) throws Exception {
+        gameStage = stage;
         Scene createPlayer = new CreatePlayer(this);
-        stage.setScene(createPlayer);
-        stage.setTitle("CaveDungeon 0.19.03.22 OMEGA");
-        stage.show();
+        gameStage.setScene(createPlayer);
+        gameStage.setTitle("CaveDungeon 0.19.03.22 OMEGA");
+        gameStage.show();
         // ERROR
         //System.out.println(newPlayer.getName());
     }
@@ -78,7 +81,7 @@ public class Game extends Application {
         }
     }
 
-    void playerTests() {
+    public void playerTests() {
         Weapon elvenSword = new Sword();
         Weapon bow = new Bow();
         Potion healthPotion = new HealthPotion();
@@ -96,7 +99,7 @@ public class Game extends Application {
         System.out.println(newPlayer.playerToString());
     }
 
-    void battleTests() {
+    public void battleTests() {
         char startBattle;
         Enemy newEnemie;
         do {
@@ -139,6 +142,10 @@ public class Game extends Application {
 
     public Player getNewPlayer() {
       return newPlayer;
+    }
+
+    public static Stage getGameStage() {
+      return gameStage;
     }
 
 }
