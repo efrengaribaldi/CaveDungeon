@@ -8,15 +8,12 @@ import tests.character.npc.enemy.*;
 import tests.item.*;
 import tests.item.weapon.*;
 import tests.character.gui.*;
+import tests.item.potion.HealthPotion;
 
 import java.util.Scanner;
 import javafx.application.Application;
-import javafx.scene.layout.VBox;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
-
 
 public class Game extends Application {
     Scanner scanner = new Scanner(System.in);
@@ -28,7 +25,7 @@ public class Game extends Application {
         Application.launch(args);
     }
 
-    public void start(Stage stage) {
+    public void start(Stage stage) throws Exception {
         Scene createPlayer = new CreatePlayer(this);
         stage.setScene(createPlayer);
         stage.setTitle("CaveDungeon 0.19.03.22 OMEGA");
@@ -43,10 +40,9 @@ public class Game extends Application {
         for (int i = 0; i < levels.length; ++i)
             levels[i] = new Map(gameSeed + i);
         mapTests();
-        System.out.println("Input the values for create player (!)");
-        createPlayer();
-        playerTests();
-        battleTests();
+        // createPlayer();
+        // playerTests();
+        // battleTests();
     }
 
     void mapTests() {
@@ -55,6 +51,7 @@ public class Game extends Application {
     }
 
     void createPlayer() {
+        System.out.println("Input the values for create player (!)");
         String name;
         char gender;
         System.out.println("Write your name: ");
@@ -126,13 +123,12 @@ public class Game extends Application {
 
     }
 
-    public void launchCreatePlayer() {
-        Application.launch(CreatePlayer.class, this);
-    }
+    // public void launchCreatePlayer() {
+    // launch(CreatePlayer.class, this);
+    // }
 
     public void setNewPlayer(Player newPlayer) {
         this.newPlayer = newPlayer;
     }
-
 
 }

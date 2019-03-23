@@ -10,11 +10,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="mainscreen" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: #20120F;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CreatePlayerController">
+<AnchorPane fx:id="mainscreen" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: #20120F;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tests.character.gui.CreatePlayerController">
    <children>
       <AnchorPane layoutX="24.0" layoutY="24.0" prefHeight="93.0" prefWidth="652.0" style="-fx-background-color: #9C2B27;">
          <children>
-            <TextField fx:id="name" layoutX="55.0" layoutY="55.0" prefHeight="25.0" prefWidth="209.0" promptText="Name" styleClass="text-name" stylesheets="@../TestsCreatePlaer/createplayer/createplayerstyle.css" />
+            <TextField fx:id="name" layoutX="55.0" layoutY="55.0" prefHeight="25.0" prefWidth="209.0" promptText="Name" styleClass="text-name" />
             <ChoiceBox fx:id="genderbox" layoutX="426.0" layoutY="55.0" prefWidth="150.0" value="ok">
                 <items>
                     <FXCollections fx:factory="observableArrayList">
@@ -24,9 +24,7 @@
                 </items>
             </ChoiceBox>
             <Label layoutX="247.0" layoutY="14.0" text="Create new player" textFill="#ebe4e4">
-               <font>
-                  <Font size="20.0" />
-               </font>
+               <font><Font size="20.0" /></font>
             </Label>
          </children>
       </AnchorPane>

@@ -8,28 +8,29 @@
 	</description>
 
 	<property name="src" location="src" />
+	<property name="tests" location="tests" />
 	<property name="build" location="build" />
 
 	<target name="init">
 		<mkdir dir="${build}" />
 	</target>
 
-	<target name="runtest">
-		<mkdir dir="buildtest"/>
-		<javac srcdir="tests" destdir="buildtest" includeantruntime="false" debug="on" />
-		<java classname="tests.game.Game" dir="buildtest" fork="true" jvm="java" />
-	</target>
-
 	<target name="compile" depends="init" description="Compiles all source code.">
 		<javac srcdir="${src}" destdir="${build}" includeantruntime="false" debug="on" />
 	</target>
 
-	<target name="clean" description="Removes all generated files.">
-		<delete dir="${build}" />
-	</target>
-
 	<target name="run" depends="compile" description="Executes the program.">
 		<java classname="src.game.Main" dir="${build}" fork="true" jvm="java" />
+	</target>
+
+	<target name="runtest" description="Compiles and runs tests environment.">
+		<mkdir dir="${build}" />
+		<javac srcdir="${tests}" destdir="${build}" includeantruntime="false" debug="on" />
+		<java classname="tests.game.Game" dir="${build}" fork="true" jvm="java" />
+	</target>
+
+	<target name="clean" description="Removes all generated files.">
+		<delete dir="${build}" />
 	</target>
 
 </project>
