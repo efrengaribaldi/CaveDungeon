@@ -73,6 +73,7 @@ public class CreatePlayerController {
         game.setNewPlayer(newPlayer);
         game.playerTests();
         game.battleTests();
+        game.setRoomScene();
     }
 
     private char genderSelected() {

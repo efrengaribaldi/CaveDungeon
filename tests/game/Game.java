@@ -13,7 +13,9 @@ import tests.item.potion.*;
 import java.util.Scanner;
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.scene.layout.Pane;
 
 public class Game extends Application {
     Scanner scanner = new Scanner(System.in);
@@ -119,4 +121,10 @@ public class Game extends Application {
         return gameStage;
     }
 
+    public void setRoomScene() {
+        Pane p = levels[0].getRoom(levels[0].startX, levels[0].startY).render();
+        Scene scene = new Scene(p);
+        scene.setFill(Color.web("#1C1117"));
+        gameStage.setScene(scene);
+    }
 }

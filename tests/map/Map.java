@@ -9,6 +9,7 @@ public class Map {
     private static Random random = new Random();
     private Room rooms[][];
     private int minNumRooms, sizeX, sizeY;
+    public int startX, startY;
     // 0 to be defined, 1 initial, 2 easy, 3 hard, 4 treasure, 5 boss, 6 store
     private final int[] probabilities = { 0, 0, 70, 90, 100, 100, 100 };
     private final int doorChance = 30;
@@ -39,8 +40,8 @@ public class Map {
             // Declare an arraylist to store coordinates of rooms to create
             ArrayList<Vector2D> roomsToCreate = new ArrayList<Vector2D>();
             // Set center room as initial positions
-            int startX = (int) Math.floor((sizeX - 1) / 2.0);
-            int startY = (int) Math.floor((sizeY - 1) / 2.0);
+            startX = (int) Math.floor((sizeX - 1) / 2.0);
+            startY = (int) Math.floor((sizeY - 1) / 2.0);
             declareRoom(startX, startY, 1, roomsToCreate);
             // Initialize counter of rooms created
             roomCount = 1;
@@ -153,6 +154,10 @@ public class Map {
 
     public Room[][] getRooms() {
         return rooms;
+    }
+
+    public Room getRoom(int x, int y) {
+        return rooms[x][y];
     }
 
     public String mapToString() {

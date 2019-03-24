@@ -12,12 +12,9 @@ public class Tile {
     private Enemy enemy;
     private Boss boss;
     private Chest chest;
-    private boolean skull;
 
     public Tile() {
         super();
-        // 4 in a 1000 chance it as a skull
-        skull = (Math.random() < 0.004);
         int rand = (int) (Math.random() * 20) - 13;
         spriteNum = (rand < 1) ? 1 : rand;
     }
@@ -48,7 +45,6 @@ public class Tile {
     }
 
     public void addBoss() {
-        skull = false;
         int randomBoss = (int) (Math.random() * 4);
         switch (randomBoss) {
         case 0:
@@ -75,11 +71,7 @@ public class Tile {
         return chest != null;
     }
 
-    public boolean hasSkull() {
-        return skull;
-    }
-
     public String getSpritePath() {
-        return "./tiles/imgFloor/" + spriteNum + ".png";
+        return "./../map/img/floor/" + spriteNum + ".png";
     }
 }

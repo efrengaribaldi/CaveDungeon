@@ -27,6 +27,7 @@
 		<mkdir dir="${build}" />
 		<javac srcdir="${tests}" destdir="${build}" includeantruntime="false" debug="on" />
 		<copy file="${tests}/character/gui/createPlayer.fxml" tofile="${build}/tests/character/gui/createPlayer.fxml" overwrite="true" />
+		<copy todir="${build}/tests/map/img"><fileset dir="${tests}/map/img" /></copy>
 		<java classname="tests.game.Game" dir="${build}" fork="true" jvm="java" />
 	</target>
 

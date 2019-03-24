@@ -3,6 +3,8 @@ package tests.map;
 import tests.utils.Vector2D;
 
 import java.util.ArrayList;
+
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.image.ImageView;
 
@@ -12,7 +14,7 @@ public class Room {
     // 0 top, 1 right, 2 bottom, 3 left
     private boolean doors[];
     private Tile tiles[][];
-    static final int sizeX = 7, sizeY = 13;
+    static final int sizeX = 7, sizeY = 11;
     private final int centerX = (int) Math.floor((sizeX - 1) / 2.0);
     private final int centerY = (int) Math.floor((sizeY - 1) / 2.0);
 
@@ -59,8 +61,7 @@ public class Room {
         ArrayList<Vector2D> possibleTiles = new ArrayList<>();
         for (int x = 0; x < sizeX - 2; x++)
             for (int y = 0; y < sizeY - 2; y++)
-                if (!tiles[x][y].hasSkull())
-                    possibleTiles.add(new Vector2D(x, y));
+                possibleTiles.add(new Vector2D(x, y));
         int numEnemies = state + (int) (Math.random() * 3);
         // Choose numEnemies random tiles from possibleTiles
         ArrayList<Vector2D> chosenTiles = new ArrayList<>();
@@ -85,8 +86,6 @@ public class Room {
                     res += "e";
                 else if (tiles[x][y].hasChest())
                     res += "c";
-                else if (tiles[x][y].hasSkull())
-                    res += "s";
                 else
                     res += " ";
             }
@@ -99,29 +98,25 @@ public class Room {
         return res;
     }
 
-    public GridPane render() {
-        GridPane res = new GridPane();
-        for (int i = -1; i < sizeX + 1; i++) {
-            for (int j = -1; j < sizeY + 1; j++) {
-                ImageView iv;
-                if (j == -1)
-                    iv = new ImageView(getClass().getResource("./tiles/imgWall/side_mid_left.png").toString());
-                else if (j == sizeY)
-                    iv = new ImageView(getClass().getResource("./tiles/imgWall/side_mid_right.png").toString());
-                else if (i == -1)
-                    iv = new ImageView(getClass().getResource("./tiles/imgWall/top_mid.png").toString());
-                else if (i == sizeX)
-                    iv = new ImageView(getClass().getResource("./tiles/imgWall/mid.png").toString());
-                else
-                    iv = new ImageView(getClass().getResource(tiles[i][j].getSpritePath()).toString());
-
+    public BorderPane render() {
+        GridPane gridPane = new GridPane();
+        for (int i = 0; i < sizeX; i++) {
+            for (int j = 0; j < sizeY; j++) {
+                ImageView iv = new ImageView(getClass().getResource(tiles[i][j].getSpritePath()).toString());
                 iv.setSmooth(false);
                 iv.setFitWidth(80);
                 iv.setFitHeight(80);
                 iv.setPreserveRatio(true);
-                res.add(iv, j + 1, i + 1);
+                gridPane.add(iv, j + 1, i + 1);
             }
         }
-        return res;
+
+        ImageView[] walls = new ImageView[4];
+        for (int i = 0; i < 4; i++) {
+            String p1 = "./img/wall/" + i + "-" + (doors[i] ? "cl" : "no") + ".png";
+            walls[i] = new ImageView(getClass().getResource(p1).toString());
+        }
+
+        return new BorderPane(gridPane, walls[0], walls[1], walls[2], walls[3]);
     }
 }
