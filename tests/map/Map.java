@@ -156,7 +156,6 @@ public class Map {
     }
 
     public String mapToString() {
-        System.out.println(rooms[3][4].roomToString());
         String res = "", whitespace = "";
         String[] roomSplit, row;
         // Find rooms to be trimmed from the left
