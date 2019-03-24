@@ -50,10 +50,10 @@ public class CreatePlayerController {
     private void createPlayer(ActionEvent event) {
         switch (playerSelected) {
         case 1:
-            newPlayer = new Melee(name.getText(), 30, genderSelected(), new Inventory());
+            newPlayer = new Melee(name.getText(), 25, genderSelected(), new Inventory());
             break;
         case 2:
-            newPlayer = new Mage(name.getText(), 30, genderSelected(), new Inventory());
+            newPlayer = new Mage(name.getText(), 25, genderSelected(), new Inventory());
             break;
         default:
             newPlayer = null;

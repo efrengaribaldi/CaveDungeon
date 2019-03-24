@@ -45,11 +45,34 @@ public class Inventory {
         return (weapons[0].getWeaponState()) ? weapons[0] : weapons[1];
     }
 
+    public Potion getPotionIndex(int index) {
+        return potions[index];
+    }
+
+    public void setPotionIndex(Potion potion, int index) {
+        potions[index] = potion;
+    }
+
+    public void removePotionIndex(int index) {
+        potions[index] = null;
+    }
+
     public String printWeapons() {
         String res = "Weapons:\n";
         for (int i = 0; i < weapons.length; ++i) {
             res += "i[" + i + "]: ";
             res += (weapons[i] != null) ? weapons[i].getName() + " | EQUIP: " + weapons[i].getWeaponState() : "null";
+            res += "\n";
+        }
+        res += "\n";
+        return res;
+    }
+
+    public String printPotions() {
+        String res = "Potions:\n";
+        for (int i = 0; i < potions.length; ++i) {
+            res += "i[" + i + "]: ";
+            res += (potions[i] != null) ? potions[i].getName() + " | Recovery points: " + potions[i].getRecoveryPoints() : "null";
             res += "\n";
         }
         res += "\n";
