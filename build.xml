@@ -26,7 +26,7 @@
 	<target name="runtest" description="Compiles and runs tests environment.">
 		<mkdir dir="${build}" />
 		<javac srcdir="${tests}" destdir="${build}" includeantruntime="false" debug="on" />
-		<copy file="${tests}/character/gui/createPlayer.fxml" tofile="${build}/tests/character/gui/createPlayer.fxml" />
+		<copy file="${tests}/character/gui/createPlayer.fxml" tofile="${build}/tests/character/gui/createPlayer.fxml" overwrite="true" />
 		<java classname="tests.game.Game" dir="${build}" fork="true" jvm="java" />
 	</target>
 

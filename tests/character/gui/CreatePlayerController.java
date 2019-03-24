@@ -11,9 +11,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.event.ActionEvent;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.Scene;
-import javafx.scene.layout.HBox;
-import javafx.scene.control.Label;
 
 public class CreatePlayerController {
     private int playerSelected;
@@ -21,13 +18,16 @@ public class CreatePlayerController {
     private Game game;
 
     public CreatePlayerController() {
+    }
 
+    @FXML
+    public void initialize() {
     }
 
     @FXML
     private TextField name;
     @FXML
-    private ChoiceBox genderBox;
+    private ChoiceBox gender;
     @FXML
     private URL location;
     @FXML
@@ -43,11 +43,21 @@ public class CreatePlayerController {
     private void selectMage(ActionEvent event) {
         playerSelected = 2;
         System.out.println("Player selected: Mage");
-        System.out.println(" ok" + genderSelected());
     }
 
     @FXML
     private void createPlayer(ActionEvent event) {
+        if (name.getText().equals("")) {
+            System.out.println("Enter a name");
+            return;
+        } else if (gender.getSelectionModel().isEmpty()) {
+            System.out.println("Choose a gender");
+            return;
+        } else if (playerSelected != 1 && playerSelected != 2) {
+            System.out.println("Choose a type of player");
+            return;
+        }
+        System.out.println(gender.getValue().toString());
         switch (playerSelected) {
         case 1:
             newPlayer = new Melee(name.getText(), 25, genderSelected(), new Inventory());
@@ -59,25 +69,21 @@ public class CreatePlayerController {
             newPlayer = null;
             System.out.println("Player not found!");
         }
-        //Set the newPlayer to game
+        // Set the newPlayer to game
         game.setNewPlayer(newPlayer);
-        //game.getGameStage().setTitle("Test");
-        //game.getGameStage().setScene(new Scene(new HBox(new Label("ok"))));
-        //game.getGameStage().show();
         game.playerTests();
         game.battleTests();
     }
 
     private char genderSelected() {
-        return (genderBox.getValue().toString().equals("Male")) ? 'M' : 'F';
+        return (((String) (gender.getValue())).equals("Male")) ? 'M' : 'F';
     }
 
     public Player getPlayerCreated() {
-      return newPlayer;
+        return newPlayer;
     }
 
     public void setGame(Game game) {
-      this.game = game;
+        this.game = game;
     }
-
 }

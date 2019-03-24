@@ -14,7 +14,6 @@ import java.util.Scanner;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.scene.layout.VBox;
 
 public class Game extends Application {
     Scanner scanner = new Scanner(System.in);
@@ -23,11 +22,10 @@ public class Game extends Application {
     public Player newPlayer;
     public static Stage gameStage;
 
-
     public static void main(String[] args) {
         Application.launch(args);
         // Print the name without errors
-        //System.out.println(newPlayer.getName());
+        // System.out.println(newPlayer.getName());
     }
 
     @Override
@@ -35,10 +33,10 @@ public class Game extends Application {
         gameStage = stage;
         Scene createPlayer = new CreatePlayer(this);
         gameStage.setScene(createPlayer);
-        gameStage.setTitle("CaveDungeon 0.19.03.22 OMEGA");
+        gameStage.setTitle("CaveDungeon 0.1.190324 OMEGA");
         gameStage.show();
         // ERROR
-        //System.out.println(newPlayer.getName());
+        // System.out.println(newPlayer.getName());
     }
 
     public Game() {
@@ -49,36 +47,11 @@ public class Game extends Application {
         for (int i = 0; i < levels.length; ++i)
             levels[i] = new Map(gameSeed + i);
         mapTests();
-        // createPlayer();
-        // playerTests();
-        // battleTests();
     }
 
     void mapTests() {
         for (int i = 0; i < levels.length; ++i)
             System.out.println(levels[i].mapToString());
-    }
-
-    void createPlayer() {
-        System.out.println("Input the values for create player (!)");
-        String name;
-        char gender;
-        System.out.println("Write your name: ");
-        name = scanner.nextLine();
-        System.out.println("Select your gender (M or F): ");
-        gender = scanner.next().charAt(0);
-        System.out.println("Select your player Melee(1) or Mage(2): ");
-        switch (scanner.nextInt()) {
-        case 1:
-            newPlayer = new Melee(name, 25, gender, new Inventory());
-            break;
-        case 2:
-            newPlayer = new Mage(name, 25, gender, new Inventory());
-            break;
-        default:
-            newPlayer = null;
-            System.out.println("Player not found!");
-        }
     }
 
     public void playerTests() {
@@ -134,20 +107,16 @@ public class Game extends Application {
 
     }
 
-    // public void launchCreatePlayer() {
-    // launch(CreatePlayer.class, this);
-    // }
-
     public void setNewPlayer(Player newPlayer) {
         this.newPlayer = newPlayer;
     }
 
     public Player getNewPlayer() {
-      return newPlayer;
+        return newPlayer;
     }
 
     public static Stage getGameStage() {
-      return gameStage;
+        return gameStage;
     }
 
 }
