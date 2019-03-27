@@ -17,21 +17,17 @@ public class CreatePlayerController {
     private Player newPlayer;
     private Game game;
 
-    public CreatePlayerController() {
-    }
-
-    @FXML
-    public void initialize() {
-    }
-
     @FXML
     private TextField name;
     @FXML
-    private ChoiceBox gender;
+    private ChoiceBox<String> gender;
     @FXML
     private URL location;
     @FXML
     private ResourceBundle resources;
+
+    public CreatePlayerController() {
+    }
 
     @FXML
     private void selectMelee(ActionEvent event) {

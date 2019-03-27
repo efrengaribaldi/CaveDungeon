@@ -117,6 +117,8 @@ public class Room {
             walls[i] = new ImageView(getClass().getResource(p1).toString());
         }
 
-        return new BorderPane(gridPane, walls[0], walls[1], walls[2], walls[3]);
+        BorderPane root = new BorderPane(gridPane, walls[0], walls[1], walls[2], walls[3]);
+        root.setStyle("-fx-background-color: #1C1117;");
+        return root;
     }
 }

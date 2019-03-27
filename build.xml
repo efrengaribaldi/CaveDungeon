@@ -28,6 +28,8 @@
 		<javac srcdir="${tests}" destdir="${build}" includeantruntime="false" debug="on" />
 		<copy file="${tests}/character/gui/createPlayer.fxml" tofile="${build}/tests/character/gui/createPlayer.fxml" overwrite="true" />
 		<copy todir="${build}/tests/map/img"><fileset dir="${tests}/map/img" /></copy>
+		<copy file="${tests}/character/gui/mage.png" tofile="${build}/tests/character/gui/mage.png" />
+		<copy file="${tests}/character/gui/melee.png" tofile="${build}/tests/character/gui/melee.png" />
 		<java classname="tests.game.Game" dir="${build}" fork="true" jvm="java" />
 	</target>
 
