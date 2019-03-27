@@ -1,22 +1,44 @@
 package src.game;
 
-import java.util.Scanner;
 import src.map.*;
 import src.character.*;
 import src.character.player.*;
 import src.character.npc.Enemy;
 import src.character.npc.enemy.*;
 import src.item.*;
-import src.item.Weapon;
-import src.item.Potion;
-import src.item.potion.HealthPotion;
 import src.item.weapon.*;
+import src.character.gui.*;
+import src.item.potion.*;
 
-public class Game {
+import java.util.Scanner;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import javafx.scene.layout.Pane;
+
+public class Game extends Application {
     Scanner scanner = new Scanner(System.in);
 
     private Map[] levels;
     public Player newPlayer;
+    public static Stage gameStage;
+
+    public static void main(String[] args) {
+        Application.launch(args);
+        // Print the name without errors
+        // System.out.println(newPlayer.getName());
+    }
+
+    @Override
+    public void start(Stage stage) throws Exception {
+        gameStage = stage;
+        Scene createPlayer = new CreatePlayer(this);
+        gameStage.setScene(createPlayer);
+        gameStage.setTitle("CaveDungeon 0.1.190324 OMEGA");
+        gameStage.show();
+        // ERROR
+        // System.out.println(newPlayer.getName());
+    }
 
     public Game() {
         long gameSeed = System.currentTimeMillis();
@@ -25,48 +47,25 @@ public class Game {
         levels = new Map[1];
         for (int i = 0; i < levels.length; ++i)
             levels[i] = new Map(gameSeed + i);
-        mapTests();
-        System.out.println("Input the values for create player (!)");
-        createPlayer();
-        playerTests();
-        battleTests();
+        mapsrc();
     }
 
-    void mapTests() {
+    void mapsrc() {
         for (int i = 0; i < levels.length; ++i)
             System.out.println(levels[i].mapToString());
     }
 
-    void createPlayer() {
-        String name;
-        char gender;
-        System.out.println("Write your name: ");
-        name = scanner.nextLine();
-        System.out.println("Select your gender (M or F): ");
-        gender = scanner.next().charAt(0);
-        System.out.println("Select your player Melee(1) or Mage(2): ");
-        switch (scanner.nextInt()) {
-        case 1:
-            newPlayer = new Melee(name, 25, gender, new Inventory());
-            break;
-        case 2:
-            newPlayer = new Mage(name, 25, gender, new Inventory());
-            break;
-        default:
-            newPlayer = null;
-            System.out.println("Player not found!");
-        }
-    }
-
-    void playerTests() {
+    public void playersrc() {
         Weapon elvenSword = new Sword();
         Weapon bow = new Bow();
-        Potion healthPotion = new HealthPotion();
+        Potion healthPotion = new HealthPotion(15);
+        Potion staminaPotion = new StaminaPotion(10);
         Scanner scanner = new Scanner(System.in);
         int selectedWeapon;
         newPlayer.getInventory().addItemToInventory(elvenSword, 0);
         newPlayer.getInventory().addItemToInventory(bow, 1);
         newPlayer.getInventory().addItemToInventory(healthPotion, 0);
+        newPlayer.getInventory().addItemToInventory(staminaPotion, 1);
         System.out.println("Which weapon do you want to equip?");
         System.out.println(newPlayer.getInventory().printWeapons());
         selectedWeapon = scanner.nextInt();
@@ -76,7 +75,7 @@ public class Game {
         System.out.println(newPlayer.playerToString());
     }
 
-    void battleTests() {
+    public void battlesrc() {
         char startBattle;
         Enemy newEnemie;
         do {
@@ -109,4 +108,21 @@ public class Game {
 
     }
 
+    public void setNewPlayer(Player newPlayer) {
+        this.newPlayer = newPlayer;
+    }
+
+    public Player getNewPlayer() {
+        return newPlayer;
+    }
+
+    public static Stage getGameStage() {
+        return gameStage;
+    }
+
+    public void setRoomScene() {
+        Pane p = levels[0].getRoom(levels[0].startX, levels[0].startY).render();
+        Scene scene = new Scene(p);
+        gameStage.setScene(scene);
+    }
 }

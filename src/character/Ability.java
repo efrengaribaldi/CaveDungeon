@@ -3,10 +3,12 @@ package src.character;
 public class Ability {
     private String name;
     private int baseDamage;
+    private int staminaCost;
 
-    public Ability(String name, int baseDamage) {
+    public Ability(String name, int baseDamage, int staminaCost) {
         this.name = name;
         this.baseDamage = baseDamage;
+        this.staminaCost = staminaCost;
     }
 
     public String getName() {
@@ -23,5 +25,9 @@ public class Ability {
 
     public void setBaseDamage(int baseDamage) {
         this.baseDamage = baseDamage;
+    }
+
+    public int getStaminaCost() {
+        return staminaCost;
     }
 }

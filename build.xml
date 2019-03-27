@@ -8,6 +8,7 @@
 	</description>
 
 	<property name="src" location="src" />
+	<property name="old" location="old" />
 	<property name="tests" location="tests" />
 	<property name="build" location="build" />
 
@@ -15,22 +16,32 @@
 		<mkdir dir="${build}" />
 	</target>
 
+	<target name="copyAssets" depends="init" description="Copies assets from source code to build folder.">
+		<copy file="${src}/character/gui/createPlayer.fxml" tofile="${build}/src/character/gui/createPlayer.fxml" overwrite="true" />
+		<copy file="${src}/character/gui/mage.png" tofile="${build}/src/character/gui/mage.png" />
+		<copy file="${src}/character/gui/melee.png" tofile="${build}/src/character/gui/melee.png" />
+		<copy todir="${build}/src/character/npc/boss/img"><fileset dir="${src}/character/npc/boss/img" /></copy>
+		<copy todir="${build}/src/character/npc/enemy/img"><fileset dir="${src}/character/npc/enemy/img" /></copy>
+		<copy todir="${build}/src/character/player/img"><fileset dir="${src}/character/player/img" /></copy>
+		<copy todir="${build}/src/game/gui/img"><fileset dir="${src}/game/gui/img" /></copy>
+		<copy todir="${build}/src/item/armor/img"><fileset dir="${src}/item/armor/img" /></copy>
+		<copy todir="${build}/src/item/misc/img"><fileset dir="${src}/item/misc/img" /></copy>
+		<copy todir="${build}/src/item/potion/img"><fileset dir="${src}/item/potion/img" /></copy>
+		<copy todir="${build}/src/item/weapon/img"><fileset dir="${src}/item/weapon/img" /></copy>
+		<copy todir="${build}/src/map/img"><fileset dir="${src}/map/img" /></copy>
+	</target>
+
 	<target name="compile" depends="init" description="Compiles all source code.">
 		<javac srcdir="${src}" destdir="${build}" includeantruntime="false" debug="on" />
 	</target>
 
-	<target name="run" depends="compile" description="Executes the program.">
-		<java classname="src.game.Main" dir="${build}" fork="true" jvm="java" />
+	<target name="run" depends="compile,copyAssets" description="Executes the program.">
+		<java classname="src.game.Game" dir="${build}" fork="true" jvm="java" />
 	</target>
 
-	<target name="runtest" description="Compiles and runs tests environment.">
-		<mkdir dir="${build}" />
-		<javac srcdir="${tests}" destdir="${build}" includeantruntime="false" debug="on" />
-		<copy file="${tests}/character/gui/createPlayer.fxml" tofile="${build}/tests/character/gui/createPlayer.fxml" overwrite="true" />
-		<copy todir="${build}/tests/map/img"><fileset dir="${tests}/map/img" /></copy>
-		<copy file="${tests}/character/gui/mage.png" tofile="${build}/tests/character/gui/mage.png" />
-		<copy file="${tests}/character/gui/melee.png" tofile="${build}/tests/character/gui/melee.png" />
-		<java classname="tests.game.Game" dir="${build}" fork="true" jvm="java" />
+	<target name="runold" depends="init" description="Compiles and runs old dev environment.">
+		<javac srcdir="${old}" destdir="${build}" includeantruntime="false" debug="on" />
+		<java classname="old.game.Main" dir="${build}" fork="true" jvm="java" />
 	</target>
 
 	<target name="clean" description="Removes all generated files.">

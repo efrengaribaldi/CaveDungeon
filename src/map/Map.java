@@ -9,6 +9,7 @@ public class Map {
     private static Random random = new Random();
     private Room rooms[][];
     private int minNumRooms, sizeX, sizeY;
+    public int startX, startY;
     // 0 to be defined, 1 initial, 2 easy, 3 hard, 4 treasure, 5 boss, 6 store
     private final int[] probabilities = { 0, 0, 70, 90, 100, 100, 100 };
     private final int doorChance = 30;
@@ -39,8 +40,8 @@ public class Map {
             // Declare an arraylist to store coordinates of rooms to create
             ArrayList<Vector2D> roomsToCreate = new ArrayList<Vector2D>();
             // Set center room as initial positions
-            int startX = (int) Math.floor((sizeX - 1) / 2.0);
-            int startY = (int) Math.floor((sizeY - 1) / 2.0);
+            startX = (int) Math.floor((sizeX - 1) / 2.0);
+            startY = (int) Math.floor((sizeY - 1) / 2.0);
             declareRoom(startX, startY, 1, roomsToCreate);
             // Initialize counter of rooms created
             roomCount = 1;
@@ -155,6 +156,10 @@ public class Map {
         return rooms;
     }
 
+    public Room getRoom(int x, int y) {
+        return rooms[x][y];
+    }
+
     public String mapToString() {
         String res = "", whitespace = "";
         String[] roomSplit, row;
@@ -168,12 +173,12 @@ public class Map {
                 minRooms = currentRooms;
         }
         // Generate a placeholder for null rooms
-        for (int i = 0; i <= Room.sizeY; i++)
+        for (int i = 0; i <= Room.sizeY + 2; i++)
             whitespace += " ";
         int leadingWhitespace = --minRooms * whitespace.length();
         // Generate the string
         for (int x = 1; x < sizeX - 1; x++) {
-            row = new String[Room.sizeX];
+            row = new String[Room.sizeX + 2];
             for (int i = 0; i < row.length; i++)
                 row[i] = "";
             for (int y = 1; y < sizeY - 1; y++) {
@@ -181,14 +186,14 @@ public class Map {
                     roomSplit = rooms[x][y].roomToString().split("\n");
                     // Show the state in the map
                     roomSplit[0] = "--" + rooms[x][y].getState() + roomSplit[0].substring(3);
-                    for (int i = 0; i < Room.sizeX; i++)
+                    for (int i = 0; i < row.length; i++)
                         row[i] += roomSplit[i] + " ";
                 } else
-                    for (int i = 0; i < Room.sizeX; i++)
+                    for (int i = 0; i < row.length; i++)
                         row[i] += whitespace;
             }
             // Remove leading and trailing whitespace
-            for (int i = 0; i < Room.sizeX; i++)
+            for (int i = 0; i < row.length; i++)
                 res += row[i].substring(leadingWhitespace).replaceFirst("\\s++$", "") + "\n";
         }
         // Remove empty lines

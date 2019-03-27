@@ -10,16 +10,20 @@ public abstract class Player extends Character {
     private int experience;
     private int level;
     private char gender;
+    private int stamina;
     private int limitHp;
+    private int limitStamina;
     private Ability[] abilities = new Ability[3];
 
     public Player(String name, int healthPoints, char gender, Inventory inventory) {
         super(name, healthPoints);
         this.gender = gender;
         this.inventory = inventory;
-        this.experience = 1;
+        this.experience = 0;
         this.level = 1;
+        this.stamina = 10;
         this.limitHp = 25;
+        this.limitStamina = 10;
     }
 
     public Inventory getInventory() {
@@ -54,6 +58,22 @@ public abstract class Player extends Character {
         this.limitHp = limitHp;
     }
 
+    public int getStamina() {
+        return stamina;
+    }
+
+    public void setStamina(int stamina) {
+        this.stamina = stamina;
+    }
+
+    public int getLimitStamina() {
+        return limitStamina;
+    }
+
+    public void setLimitStamina(int limitStamina) {
+        this.limitStamina = limitStamina;
+    }
+
     public void attack(NPC Npc, int index) {
         switch (level) {
         case 1:
@@ -75,7 +95,7 @@ public abstract class Player extends Character {
         default:
             break;
         }
-
+        stamina = stamina - getInventory().getEquippedWeapon().getAbility(index).getStaminaCost();
     }
 
     public String printPlayerAbilities() {
