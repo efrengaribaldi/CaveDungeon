@@ -11,6 +11,7 @@ public abstract class Enemy extends NPC {
     public Enemy(String name, int healthPoints, int attackBaseDamage) {
         super(name, healthPoints);
         this.attackBaseDamage = attackBaseDamage;
+
     }
 
     public void attack(Player player) {
@@ -18,4 +19,7 @@ public abstract class Enemy extends NPC {
         player.setHealthPoints(player.getHealthPoints()
                 - ThreadLocalRandom.current().nextInt((int) (this.attackBaseDamage * 0.7), this.attackBaseDamage + 1));
     }
+
+    public abstract int getExperience();
+
 }

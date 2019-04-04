@@ -4,6 +4,9 @@ import src.character.Character;
 import src.character.NPC;
 import src.character.Ability;
 import src.item.Inventory;
+import src.util.Vector2D;
+
+import java.util.math;
 
 public abstract class Player extends Character {
     public Inventory inventory;
@@ -111,5 +114,21 @@ public abstract class Player extends Character {
         res += "| Gender: " + gender + " | \n";
         res += printPlayerAbilities();
         return res;
+    }
+
+    public void checkLevelUp() {
+        if (this.experience <= 20 * (Math.pow(1.1, this.level))) {
+            setLevel(this.level + 1);
+
+            setLimitHp((int) Math.round(getLimitHp() + 2 * (Math.pow(1.1, this.level))));
+            setHealthPoints(getLimitHp());
+            setLimitStamina((int) Math.round(getLimitStamina() + 4 * (Math.pow(1.1, this.level))));
+            setStamina(getLimitStamina());
+
+            System.out.println("Congratulations! You are now level " + this.getLevel());
+            System.out.println("Your attack damage has increased 25%");
+            System.out.println("Your HP limit has increased to: " + this.getHealthPoints());
+            System.out.println("Your Stamina limit has increased to: " + this.getStamina());
+        }
     }
 }

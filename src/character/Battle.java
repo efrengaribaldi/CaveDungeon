@@ -29,8 +29,9 @@ public class Battle {
             System.out.println("Player HP: " + player.getHealthPoints() + " | Player Stamina: " + player.getStamina());
             System.out.println("Enemy HP: " + enemy.getHealthPoints());
             selectionSystem(player, enemy);
-            upgradeStamina(player);
+
         } while (player.getHealthPoints() > 0 && enemy.getHealthPoints() > 0);
+
         if (player.getHealthPoints() > 0) {
             // Add drop items
             upgradeStats(player, enemy);
@@ -47,12 +48,15 @@ public class Battle {
         switch (selection) {
         case 1:
             attackSystem(player, enemy);
+            upgradeStamina(player);
             break;
         case 2:
             potionSystem(player, enemy);
+            upgradeStamina(player);
             break;
         case 3:
             enemyAttack(player, enemy);
+            upgradeStamina(player);
             break;
         default:
             break;
@@ -64,12 +68,18 @@ public class Battle {
         System.out.println("Select your ability to attack: ");
         System.out.println(player.printPlayerAbilities());
         indexAttack = scanner.nextInt();
-        if (player.getStamina() < player.getInventory().getEquippedWeapon().getAbility(indexAttack).getStaminaCost()) {
-            System.out.println("You don't have enough stamina to use this ability");
+        try {
+            if (player.getStamina() < player.getInventory().getEquippedWeapon().getAbility(indexAttack)
+                    .getStaminaCost()) {
+                System.out.println("You don't have enough stamina to use this ability");
+                selectionSystem(player, enemy);
+            } else {
+                player.attack(enemy, indexAttack);
+                enemyAttack(player, enemy);
+            }
+        } catch (ArrayIndexOutOfBoundsException exception) {
+            System.out.println("Ability not found");
             selectionSystem(player, enemy);
-        } else {
-            player.attack(enemy, indexAttack);
-            enemyAttack(player, enemy);
         }
     }
 
@@ -119,19 +129,12 @@ public class Battle {
     }
 
     static void upgradeStats(Player player, Enemy enemy) {
-        if (enemy instanceof Zombie) {
-            player.setExperience(player.getExperience() + ThreadLocalRandom.current().nextInt(4, 5 + 1));
-        } else if (enemy instanceof Skeleton) {
-            player.setExperience(player.getExperience() + ThreadLocalRandom.current().nextInt(8, 10 + 1));
-        } else if (enemy instanceof Chort) {
-            player.setExperience(player.getExperience() + ThreadLocalRandom.current().nextInt(20, 25 + 1));
-        } else if (enemy instanceof Swampy) {
-            player.setExperience(player.getExperience() + ThreadLocalRandom.current().nextInt(40, 50 + 1));
-        } else if (enemy instanceof Necromancer) {
-            player.setExperience(player.getExperience() + ThreadLocalRandom.current().nextInt(60, 75 + 1));
-        }
+
+        player.setExperience(player.getExperience() + enemy.getExperience());
         System.out.println("You won!");
         System.out.println("Previous EXP: " + previousExperience + " | New EXP: " + player.getExperience());
+        player.checkLevelUp();
+
         if (player.getExperience() >= 50 && player.getLevel() < 2) {
             player.setLevel(2);
             player.setLimitHp(35);

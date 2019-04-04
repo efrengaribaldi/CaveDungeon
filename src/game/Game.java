@@ -17,7 +17,7 @@ import javafx.stage.Stage;
 import javafx.scene.layout.Pane;
 
 public class Game extends Application {
-    Scanner scanner = new Scanner(System.in);
+    Scanner sc = new Scanner(System.in);
 
     private Map[] levels;
     public Player newPlayer;
@@ -60,7 +60,7 @@ public class Game extends Application {
         Weapon bow = new Bow();
         Potion healthPotion = new HealthPotion(15);
         Potion staminaPotion = new StaminaPotion(10);
-        Scanner scanner = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
         int selectedWeapon;
         newPlayer.getInventory().addItemToInventory(elvenSword, 0);
         newPlayer.getInventory().addItemToInventory(bow, 1);
@@ -68,7 +68,7 @@ public class Game extends Application {
         newPlayer.getInventory().addItemToInventory(staminaPotion, 1);
         System.out.println("Which weapon do you want to equip?");
         System.out.println(newPlayer.getInventory().printWeapons());
-        selectedWeapon = scanner.nextInt();
+        selectedWeapon = sc.nextInt();
         newPlayer.getInventory().equipWeapon(selectedWeapon);
         System.out.println(newPlayer.getInventory().printWeapons());
 
@@ -80,7 +80,7 @@ public class Game extends Application {
         Enemy newEnemie;
         do {
             System.out.println("Select your enemy: (1) Zombie, (2) Skeleton, (3) Chort, (4) Swampy, (5) Necromancer");
-            switch (scanner.nextInt()) {
+            switch (sc.nextInt()) {
             case 1:
                 newEnemie = new Zombie();
                 break;
@@ -103,7 +103,7 @@ public class Game extends Application {
             System.out.println("______________START BATTLE________________");
             Battle.startBattle(newPlayer, newEnemie);
             System.out.println("\nStart new battle? (Y or N)");
-            startBattle = scanner.next().charAt(0);
+            startBattle = sc.next().charAt(0);
         } while (startBattle == 'Y');
 
     }
