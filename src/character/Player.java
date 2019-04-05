@@ -10,22 +10,24 @@ public abstract class Player extends Character {
     private int experience;
     private int level;
     private char gender;
-    private int stamina;
+    private int healthPoints;
     private int limitHp;
+    private int stamina;
     private int limitStamina;
     private double attack;
     private Ability[] abilities = new Ability[3];
 
     public Player(String name, int healthPoints, char gender, Inventory inventory, double attack) {
         super(name, healthPoints);
-        this.gender = gender;
         this.inventory = inventory;
         this.experience = 0;
         this.level = 1;
+        this.gender = gender;
+        this.healthPoints = 25;
+        this.limitHp = healthPoints;
         this.stamina = 10;
-        this.limitHp = 25;
-        this.limitStamina = 10;
-        this.attack = 1;
+        this.limitStamina = stamina;
+        this.attack = attack;
     }
 
     public Inventory getInventory() {
@@ -107,23 +109,28 @@ public abstract class Player extends Character {
         return res;
     }
 
-    public void checkLevelUp() {
-        if (this.experience >= 15 * (Math.pow(1.1, this.level))) {
-            setLevel(this.level + 1);
-
-            setLimitHp((int) Math.round(getLimitHp() + 2 * (Math.pow(1.1, this.level))));
-            setHealthPoints(getLimitHp());
-            setLimitStamina((int) Math.round(getLimitStamina() + 4 * (Math.pow(1.1, this.level))));
-            setStamina(getLimitStamina());
-            setAttack(getAttack() + 0.10);
-            setExperience(0);
-
-            System.out.println("<*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*>");
-            System.out.println("Congratulations!!! You are now level " + this.getLevel());
+    public void checkLevelUp(int newExp) {
+        int expRequiredForNextLevel = (int) (15 * Math.pow(1.07, level));
+        System.out.println("<*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*>");
+        System.out.println("You got " + newExp + " new experience.");
+        this.experience += newExp;
+        if (experience >= expRequiredForNextLevel) {
+            // Advance level
+            setLevel(level + 1);
+            setLimitHp((int) (3 * Math.pow(1.07, level)));
+            setHealthPoints(limitHp);
+            setLimitStamina((int) (4 * Math.pow(1.07, level)));
+            setStamina(limitStamina);
+            setAttack(attack * 1.07);
+            setExperience(experience - expRequiredForNextLevel);
+            System.out.println("Congratulations!!! You are now level " + level);
             System.out.println("Your attack damage has increased 10%!");
-            System.out.println("Your HP limit has increased to: " + this.getHealthPoints());
-            System.out.println("Your Stamina limit has increased to: " + this.getStamina());
-            System.out.println("<*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*>");
+            System.out.println("Your HP limit has increased to: " + healthPoints);
+            System.out.println("Your Stamina limit has increased to: " + stamina);
+        } else {
+            int expNeeded = expRequiredForNextLevel - experience;
+            System.out.println("You need " + expNeeded + " experience to advance to next level.");
         }
+        System.out.println("<*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*>");
     }
 }

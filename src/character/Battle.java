@@ -138,11 +138,8 @@ public class Battle {
     }
 
     static void upgradeStats(Player player, Enemy enemy) {
-        player.setExperience(player.getExperience() + enemy.getExperience());
         System.out.println("<*><*><*>-You won!-<*><*><*>");
-        System.out.println("Your EXP: " + player.getExperience() + "| Your Level:" + player.getLevel());
-        player.checkLevelUp();
-
+        player.checkLevelUp(enemy.getExperience());
     }
     // Battle system between player and boss
 
