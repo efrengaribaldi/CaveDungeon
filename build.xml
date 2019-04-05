@@ -39,11 +39,6 @@
 		<java classname="src.game.Game" dir="${build}" fork="true" jvm="java" />
 	</target>
 
-	<target name="runold" depends="init" description="Compiles and runs old dev environment.">
-		<javac srcdir="${old}" destdir="${build}" includeantruntime="false" debug="on" />
-		<java classname="old.game.Main" dir="${build}" fork="true" jvm="java" />
-	</target>
-
 	<target name="clean" description="Removes all generated files.">
 		<delete dir="${build}" />
 	</target>

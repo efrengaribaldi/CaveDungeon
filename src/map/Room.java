@@ -104,8 +104,8 @@ public class Room {
             for (int j = 0; j < sizeY; j++) {
                 ImageView iv = new ImageView(getClass().getResource(tiles[i][j].getSpritePath()).toString());
                 iv.setSmooth(false);
-                iv.setFitWidth(80);
-                iv.setFitHeight(80);
+                iv.setFitWidth(64);
+                iv.setFitHeight(64);
                 iv.setPreserveRatio(true);
                 gridPane.add(iv, j + 1, i + 1);
             }
@@ -113,7 +113,7 @@ public class Room {
 
         ImageView[] walls = new ImageView[4];
         for (int i = 0; i < 4; i++) {
-            String p1 = "./img/wall/" + i + "-" + (doors[i] ? "cl" : "no") + ".png";
+            String p1 = "./img/wall/" + i + "_" + (doors[i] ? "cl" : "no") + ".png";
             walls[i] = new ImageView(getClass().getResource(p1).toString());
         }
 
