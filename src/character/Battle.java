@@ -18,16 +18,22 @@ public class Battle {
 
     public static void startBattle(Player player, Enemy enemy) {
         Scanner scanner = new Scanner(System.in);
-
+        System.out.println("-=x=-=x=-=x=-=x=-=x=-=x=-=x=-=BATTLE START=-=x=-=x=-=x=-=x=-=x=-=x=-=x=-");
         previousExperience = player.getExperience();
         System.out.println("Your weapon equipped is: ");
         System.out.println(player.getInventory().showEquippedWeapon());
+        System.out.println();
 
         do {
+
+            System.out.println("v^v^v^v^v^v^v^v^-YOUR TURN-v^v^v^v^v^v^v^v^");
+            System.out.println();
             previousHealth = player.getHealthPoints();
-            System.out.println("_______STATS_________");
+            System.out.println("--STATS--");
             System.out.println("Player HP: " + player.getHealthPoints() + " | Player Stamina: " + player.getStamina());
-            System.out.println("Enemy HP: " + enemy.getHealthPoints());
+            System.out.println();
+            System.out.println("Enemy  HP: " + enemy.getHealthPoints());
+            System.out.println("----------");
             selectionSystem(player, enemy);
 
         } while (player.getHealthPoints() > 0 && enemy.getHealthPoints() > 0);
@@ -43,6 +49,7 @@ public class Battle {
 
     static void selectionSystem(Player player, Enemy enemy) {
         Scanner scanner = new Scanner(System.in);
+
         System.out.println("\nWhat do you want to do?\nAttack(1) | Use potion(2) | Pass turn(3)");
         selection = scanner.nextInt();
         switch (selection) {
@@ -85,9 +92,11 @@ public class Battle {
 
     static void enemyAttack(Player player, Enemy enemy) {
         if (enemy.getHealthPoints() > 0) {
-            System.out.println("______ENEMY TURN______");
+            System.out.println("v^v^v^v^v^v^v^v^-ENEMY TURN-v^v^v^v^v^v^v^v^");
+            System.out.println();
             enemy.attack(player);
-            System.out.println("Enemy attack: " + (previousHealth - player.getHealthPoints()));
+            System.out.println("The " + enemy.getName() + " attacks you and does "
+                    + (previousHealth - player.getHealthPoints()) + " damage!");
         }
     }
 
@@ -129,43 +138,11 @@ public class Battle {
     }
 
     static void upgradeStats(Player player, Enemy enemy) {
-
         player.setExperience(player.getExperience() + enemy.getExperience());
-        System.out.println("You won!");
-        System.out.println("Previous EXP: " + previousExperience + " | New EXP: " + player.getExperience());
+        System.out.println("<*><*><*>-You won!-<*><*><*>");
+        System.out.println("Your EXP: " + player.getExperience() + "| Your Level:" + player.getLevel());
         player.checkLevelUp();
 
-        if (player.getExperience() >= 50 && player.getLevel() < 2) {
-            player.setLevel(2);
-            player.setLimitHp(35);
-            player.setHealthPoints(35);
-            player.setLimitStamina(15);
-            player.setStamina(15);
-            System.out.println("Congratulations! You are now level 2");
-            System.out.println("Your attack damage has increased by 25%");
-            System.out.println("Your HP limit has increased to: 35 HP");
-            System.out.println("Your Stamina limit has increased to: 15");
-        } else if (player.getExperience() >= 150 && player.getLevel() < 3) {
-            player.setLevel(3);
-            player.setLimitHp(70);
-            player.setHealthPoints(70);
-            player.setLimitStamina(30);
-            player.setStamina(30);
-            System.out.println("Congratulations! You are now level 3");
-            System.out.println("Your attack damage has increased by 75%");
-            System.out.println("Your HP limit has increased to: 70 HP");
-            System.out.println("Your Stamina limit has increased to: 30");
-        } else if (player.getExperience() >= 300 && player.getLevel() < 4) {
-            player.setLevel(4);
-            player.setLimitHp(100);
-            player.setHealthPoints(100);
-            player.setLimitStamina(50);
-            player.setStamina(50);
-            System.out.println("Congratulations! You are now level 4");
-            System.out.println("Your attack damage has increased by 150%");
-            System.out.println("Your HP limit has increased to: 100 HP");
-            System.out.println("Your Stamina limit has increased to: 50");
-        }
     }
     // Battle system between player and boss
 

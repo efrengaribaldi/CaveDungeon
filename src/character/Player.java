@@ -4,9 +4,6 @@ import src.character.Character;
 import src.character.NPC;
 import src.character.Ability;
 import src.item.Inventory;
-import src.util.Vector2D;
-
-import java.util.math;
 
 public abstract class Player extends Character {
     public Inventory inventory;
@@ -16,6 +13,7 @@ public abstract class Player extends Character {
     private int stamina;
     private int limitHp;
     private int limitStamina;
+    private double attack;
     private Ability[] abilities = new Ability[3];
 
     public Player(String name, int healthPoints, char gender, Inventory inventory) {
@@ -27,6 +25,7 @@ public abstract class Player extends Character {
         this.stamina = 10;
         this.limitHp = 25;
         this.limitStamina = 10;
+        this.attack = 1;
     }
 
     public Inventory getInventory() {
@@ -35,6 +34,14 @@ public abstract class Player extends Character {
 
     public void setInventory(Inventory inventory) {
         this.inventory = inventory;
+    }
+
+    public double getAttack() {
+        return attack;
+    }
+
+    public void setAttack(double attack) {
+        this.attack = attack;
     }
 
     public int getExperience() {
@@ -78,26 +85,10 @@ public abstract class Player extends Character {
     }
 
     public void attack(NPC Npc, int index) {
-        switch (level) {
-        case 1:
-            Npc.setHealthPoints(
-                    Npc.getHealthPoints() - getInventory().getEquippedWeapon().getAbility(index).getBaseDamage());
-            break;
-        case 2:
-            Npc.setHealthPoints(Npc.getHealthPoints()
-                    - (int) (getInventory().getEquippedWeapon().getAbility(index).getBaseDamage() * 1.25));
-            break;
-        case 3:
-            Npc.setHealthPoints(Npc.getHealthPoints()
-                    - (int) (getInventory().getEquippedWeapon().getAbility(index).getBaseDamage() * 1.75));
-            break;
-        case 4:
-            Npc.setHealthPoints(Npc.getHealthPoints()
-                    - (int) (getInventory().getEquippedWeapon().getAbility(index).getBaseDamage() * 2.50));
-            break;
-        default:
-            break;
-        }
+
+        Npc.setHealthPoints((int) (Npc.getHealthPoints()
+                - (getInventory().getEquippedWeapon().getAbility(index).getBaseDamage() * getAttack())));
+
         stamina = stamina - getInventory().getEquippedWeapon().getAbility(index).getStaminaCost();
     }
 
@@ -117,18 +108,22 @@ public abstract class Player extends Character {
     }
 
     public void checkLevelUp() {
-        if (this.experience <= 20 * (Math.pow(1.1, this.level))) {
+        if (this.experience >= 15 * (Math.pow(1.1, this.level))) {
             setLevel(this.level + 1);
 
             setLimitHp((int) Math.round(getLimitHp() + 2 * (Math.pow(1.1, this.level))));
             setHealthPoints(getLimitHp());
             setLimitStamina((int) Math.round(getLimitStamina() + 4 * (Math.pow(1.1, this.level))));
             setStamina(getLimitStamina());
+            setAttack(getAttack() + 0.10);
+            setExperience(0);
 
-            System.out.println("Congratulations! You are now level " + this.getLevel());
-            System.out.println("Your attack damage has increased 25%");
+            System.out.println("<*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*>");
+            System.out.println("Congratulations!!! You are now level " + this.getLevel());
+            System.out.println("Your attack damage has increased 10%!");
             System.out.println("Your HP limit has increased to: " + this.getHealthPoints());
             System.out.println("Your Stamina limit has increased to: " + this.getStamina());
+            System.out.println("<*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*>");
         }
     }
 }

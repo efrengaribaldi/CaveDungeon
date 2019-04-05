@@ -79,7 +79,9 @@ public class Game extends Application {
         char startBattle;
         Enemy newEnemie;
         do {
+            System.out.println("-----------");
             System.out.println("Select your enemy: (1) Zombie, (2) Skeleton, (3) Chort, (4) Swampy, (5) Necromancer");
+            System.out.println("-----------");
             switch (sc.nextInt()) {
             case 1:
                 newEnemie = new Zombie();
@@ -100,11 +102,11 @@ public class Game extends Application {
                 newEnemie = null;
                 break;
             }
-            System.out.println("______________START BATTLE________________");
+
             Battle.startBattle(newPlayer, newEnemie);
             System.out.println("\nStart new battle? (Y or N)");
             startBattle = sc.next().charAt(0);
-        } while (startBattle == 'Y');
+        } while (startBattle == 'Y' || startBattle == 'y');
 
     }
 

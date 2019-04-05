@@ -2,6 +2,8 @@ package src.character.npc.enemy;
 
 import src.character.npc.Enemy;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 public class Necromancer extends Enemy {
     public Necromancer() {
         super("Necromancer", 200, 55);
