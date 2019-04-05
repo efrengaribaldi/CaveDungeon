@@ -17,7 +17,7 @@ public abstract class Enemy extends NPC {
     public void attack(Player player) {
         // 70% baseAttackDamage
         player.setHealthPoints(player.getHealthPoints()
-                - ThreadLocalRandom.current().nextInt((int) (this.attackBaseDamage * 0.7), this.attackBaseDamage + 1));
+                - ThreadLocalRandom.current().nextInt((int) (this.attackBaseDamage * 0.6), this.attackBaseDamage + 1));
     }
 
     public abstract int getExperience();

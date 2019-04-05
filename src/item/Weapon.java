@@ -1,7 +1,7 @@
 package src.item;
 
 import src.item.Item;
-import src.character.Ability;
+import src.item.weapon.Ability;
 
 public abstract class Weapon extends Item {
     public boolean weaponState;

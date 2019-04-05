@@ -2,7 +2,6 @@ package src.character;
 
 import src.character.Character;
 import src.character.NPC;
-import src.character.Ability;
 import src.item.Inventory;
 
 public abstract class Player extends Character {
@@ -15,7 +14,6 @@ public abstract class Player extends Character {
     private int stamina;
     private int limitStamina;
     private double attack;
-    private Ability[] abilities = new Ability[3];
 
     public Player(String name, int healthPoints, char gender, Inventory inventory, double attack) {
         super(name, healthPoints);
@@ -111,18 +109,19 @@ public abstract class Player extends Character {
 
     public void checkLevelUp(int newExp) {
         int expRequiredForNextLevel = (int) (15 * Math.pow(1.07, level));
-        System.out.println("<*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*>");
+
         System.out.println("You got " + newExp + " new experience.");
         this.experience += newExp;
         if (experience >= expRequiredForNextLevel) {
             // Advance level
             setLevel(level + 1);
-            setLimitHp((int) (3 * Math.pow(1.07, level)));
+            setLimitHp(limitHp + (int) (3 * Math.pow(1.07, level)));
             setHealthPoints(limitHp);
-            setLimitStamina((int) (4 * Math.pow(1.07, level)));
+            setLimitStamina(limitStamina + (int) (4 * Math.pow(1.07, level)));
             setStamina(limitStamina);
             setAttack(attack * 1.07);
             setExperience(experience - expRequiredForNextLevel);
+            System.out.println("<*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*>");
             System.out.println("Congratulations!!! You are now level " + level);
             System.out.println("Your attack damage has increased 10%!");
             System.out.println("Your HP limit has increased to: " + healthPoints);

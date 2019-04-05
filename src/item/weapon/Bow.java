@@ -1,7 +1,7 @@
 package src.item.weapon;
 
 import src.item.Weapon;
-import src.character.Ability;
+import src.item.weapon.Ability;
 
 public class Bow extends Weapon {
     public Bow() {

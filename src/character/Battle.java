@@ -1,12 +1,8 @@
 package src.character;
 
 import src.character.npc.*;
-import src.character.npc.enemy.*;
-import src.item.Potion;
 import src.item.potion.*;
-
 import java.util.Scanner;
-import java.util.concurrent.ThreadLocalRandom;
 
 public class Battle {
     // Battle system between player and normal enemy

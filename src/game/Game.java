@@ -2,13 +2,9 @@ package src.game;
 
 import src.map.*;
 import src.character.*;
-import src.character.player.*;
 import src.character.npc.Enemy;
 import src.character.npc.enemy.*;
-import src.item.*;
-import src.item.weapon.*;
 import src.character.gui.*;
-import src.item.potion.*;
 
 import java.util.Scanner;
 import javafx.application.Application;
@@ -56,17 +52,10 @@ public class Game extends Application {
     }
 
     public void playersrc() {
-        Weapon elvenSword = new Sword();
-        Weapon bow = new Bow();
-        Potion healthPotion = new HealthPotion(15);
-        Potion staminaPotion = new StaminaPotion(10);
+
         Scanner sc = new Scanner(System.in);
         int selectedWeapon;
 
-        newPlayer.getInventory().addItemToInventory(elvenSword, 0);
-        newPlayer.getInventory().addItemToInventory(bow, 1);
-        newPlayer.getInventory().addItemToInventory(healthPotion, 0);
-        newPlayer.getInventory().addItemToInventory(staminaPotion, 1);
         System.out.println("Which weapon do you want to equip?");
         System.out.println(newPlayer.getInventory().printWeapons());
         selectedWeapon = sc.nextInt();

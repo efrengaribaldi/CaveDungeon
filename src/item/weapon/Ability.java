@@ -1,4 +1,4 @@
-package src.character;
+package src.item.weapon;
 
 public class Ability {
     private String name;
