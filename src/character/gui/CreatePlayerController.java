@@ -53,13 +53,13 @@ public class CreatePlayerController {
             System.out.println("Choose a type of player");
             return;
         }
-        System.out.println(gender.getValue().toString());
+
         switch (playerSelected) {
         case 1:
-            newPlayer = new Melee(name.getText(), 25, genderSelected(), new Inventory());
+            newPlayer = new Melee(name.getText(), 20, genderSelected(), new Inventory(), 1.50);
             break;
         case 2:
-            newPlayer = new Mage(name.getText(), 25, genderSelected(), new Inventory());
+            newPlayer = new Mage(name.getText(), 25, genderSelected(), new Inventory(), 1);
             break;
         default:
             newPlayer = null;

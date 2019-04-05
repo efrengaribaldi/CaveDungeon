@@ -62,6 +62,7 @@ public class Game extends Application {
         Potion staminaPotion = new StaminaPotion(10);
         Scanner sc = new Scanner(System.in);
         int selectedWeapon;
+
         newPlayer.getInventory().addItemToInventory(elvenSword, 0);
         newPlayer.getInventory().addItemToInventory(bow, 1);
         newPlayer.getInventory().addItemToInventory(healthPotion, 0);

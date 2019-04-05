@@ -16,7 +16,7 @@ public abstract class Player extends Character {
     private double attack;
     private Ability[] abilities = new Ability[3];
 
-    public Player(String name, int healthPoints, char gender, Inventory inventory) {
+    public Player(String name, int healthPoints, char gender, Inventory inventory, double attack) {
         super(name, healthPoints);
         this.gender = gender;
         this.inventory = inventory;
