@@ -3,29 +3,33 @@ package src.character;
 import src.character.Character;
 import src.character.NPC;
 import src.item.Inventory;
+import src.item.Weapon;
+
+import java.util.Scanner;
 
 public abstract class Player extends Character {
+    Scanner sc = new Scanner(System.in);
     public Inventory inventory;
     private int experience;
     private int level;
     private char gender;
-    private int healthPoints;
     private int limitHp;
     private int stamina;
     private int limitStamina;
     private double attack;
+    private double defense;
 
-    public Player(String name, int healthPoints, char gender, Inventory inventory, double attack) {
+    public Player(String name, int healthPoints, char gender, Inventory inventory, double attack, double defense) {
         super(name, healthPoints);
         this.inventory = inventory;
         this.experience = 0;
         this.level = 1;
         this.gender = gender;
-        this.healthPoints = 25;
         this.limitHp = healthPoints;
         this.stamina = 10;
         this.limitStamina = stamina;
         this.attack = attack;
+        this.defense = defense;
     }
 
     public Inventory getInventory() {
@@ -42,6 +46,14 @@ public abstract class Player extends Character {
 
     public void setAttack(double attack) {
         this.attack = attack;
+    }
+
+    public double getDefense() {
+        return defense;
+    }
+
+    public void setDefense(double defense) {
+        this.defense = defense;
     }
 
     public int getExperience() {
@@ -87,7 +99,7 @@ public abstract class Player extends Character {
     public void attack(NPC Npc, int index) {
 
         Npc.setHealthPoints((int) (Npc.getHealthPoints()
-                - (getInventory().getEquippedWeapon().getAbility(index).getBaseDamage() * getAttack())));
+                - (getInventory().getEquippedWeapon().getAbility(index).getBaseDamage() * attack)));
 
         stamina = stamina - getInventory().getEquippedWeapon().getAbility(index).getStaminaCost();
     }
@@ -111,25 +123,46 @@ public abstract class Player extends Character {
         int expRequiredForNextLevel = (int) (15 * Math.pow(1.07, level));
 
         System.out.println("You got " + newExp + " new experience.");
-        this.experience += newExp;
+        experience += newExp;
         if (experience >= expRequiredForNextLevel) {
             // Advance level
-            setLevel(level + 1);
-            setLimitHp(limitHp + (int) (3 * Math.pow(1.07, level)));
+            setLevel(++level);
+            setLimitHp(limitHp + (int) (4 * Math.pow(1.07, level)));
             setHealthPoints(limitHp);
-            setLimitStamina(limitStamina + (int) (4 * Math.pow(1.07, level)));
+            setLimitStamina(limitStamina + (int) (3 * Math.pow(1.07, level)));
             setStamina(limitStamina);
             setAttack(attack * 1.07);
+            setDefense(defense * 1.03);
             setExperience(experience - expRequiredForNextLevel);
             System.out.println("<*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*>");
             System.out.println("Congratulations!!! You are now level " + level);
-            System.out.println("Your attack damage has increased 10%!");
-            System.out.println("Your HP limit has increased to: " + healthPoints);
+            System.out.println("Your attack damage has increased to: " + attack);
+            System.out.println("Your defense has increased to: " + defense);
+            System.out.println("Your HP limit has increased to: " + getHealthPoints());
             System.out.println("Your Stamina limit has increased to: " + stamina);
         } else {
             int expNeeded = expRequiredForNextLevel - experience;
             System.out.println("You need " + expNeeded + " experience to advance to next level.");
         }
         System.out.println("<*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*>");
+    }
+
+    public void getNewWeapon(Weapon newWeapon, int index) {
+        try {
+            if (inventory.getWeaponByIndex(index) != null) {
+                inventory.setWeaponByIndex(newWeapon, index);
+            }
+            else {
+                System.out.println("You already have a weapon in this position. Do you want to remove it (Y / N)?");
+                if (sc.next().charAt(0) == 'Y') {
+                    inventory.removeWeapon(index);
+                    inventory.setWeaponByIndex(newWeapon, index);
+                    inventory.equipWeapon(index);
+                }
+            }
+        } catch (ArrayIndexOutOfBoundsException exception) {
+            System.out.println("Index weapon not found!");
+        }
+
     }
 }

@@ -39,6 +39,18 @@ public class Inventory {
         return (weapons[0].getWeaponState()) ? weapons[0] : weapons[1];
     }
 
+    public Weapon getWeaponByIndex(int index) {
+        return weapons[index];
+    }
+
+    public void setWeaponByIndex(Weapon weapon, int index) {
+        weapons[index] = weapon;
+    }
+
+    public void removeWeapon(int index) {
+        weapons[index] = null;
+    }
+
     public Potion getPotionIndex(int index) {
         return potions[index];
     }

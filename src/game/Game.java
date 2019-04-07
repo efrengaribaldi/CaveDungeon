@@ -52,16 +52,6 @@ public class Game extends Application {
     }
 
     public void playersrc() {
-
-        Scanner sc = new Scanner(System.in);
-        int selectedWeapon;
-
-        System.out.println("Which weapon do you want to equip?");
-        System.out.println(newPlayer.getInventory().printWeapons());
-        selectedWeapon = sc.nextInt();
-        newPlayer.getInventory().equipWeapon(selectedWeapon);
-        System.out.println(newPlayer.getInventory().printWeapons());
-
         System.out.println(newPlayer.playerToString());
     }
 

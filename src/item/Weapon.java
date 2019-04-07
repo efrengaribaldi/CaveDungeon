@@ -7,8 +7,9 @@ public abstract class Weapon extends Item {
     public boolean weaponState;
     private Ability[] abilities;
 
-    public Weapon(String name) {
+    public Weapon(String name, Ability[] abilities) {
         super(name);
+        this.abilities = abilities;
         this.weaponState = false;
     }
 

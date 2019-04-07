@@ -2,6 +2,7 @@ package src.character.npc;
 
 import src.character.NPC;
 import src.character.Player;
+import src.item.Weapon;
 
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -17,9 +18,10 @@ public abstract class Enemy extends NPC {
     public void attack(Player player) {
         // 70% baseAttackDamage
         player.setHealthPoints(player.getHealthPoints()
-                - ThreadLocalRandom.current().nextInt((int) (this.attackBaseDamage * 0.6), this.attackBaseDamage + 1));
+                - (int) (ThreadLocalRandom.current().nextDouble((attackBaseDamage * 0.6), attackBaseDamage + 1) * (2.0 - player.getDefense())));
     }
 
     public abstract int getExperience();
-
+    public abstract Weapon dropWeapon(Player player);
+    //public abstract Potion dropPotion(Player player);
 }

@@ -2,7 +2,10 @@ package src.character;
 
 import src.character.npc.*;
 import src.item.potion.*;
+import src.item.Weapon;
+
 import java.util.Scanner;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Battle {
     // Battle system between player and normal enemy
@@ -13,13 +16,12 @@ public class Battle {
     static int previousExperience;
 
     public static void startBattle(Player player, Enemy enemy) {
-        Scanner scanner = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
         System.out.println("-=x=-=x=-=x=-=x=-=x=-=x=-=x=-=BATTLE START=-=x=-=x=-=x=-=x=-=x=-=x=-=x=-");
         previousExperience = player.getExperience();
-        System.out.println("Your weapon equipped is: ");
-        System.out.println(player.getInventory().showEquippedWeapon());
-        System.out.println();
-
+        System.out.println("Which weapon do you want to equip?");
+        System.out.println(player.getInventory().printWeapons());
+        player.getInventory().equipWeapon(sc.nextInt());
         do {
 
             System.out.println("v^v^v^v^v^v^v^v^-YOUR TURN-v^v^v^v^v^v^v^v^");
@@ -37,6 +39,7 @@ public class Battle {
         if (player.getHealthPoints() > 0) {
             // Add drop items
             upgradeStats(player, enemy);
+            dropItemsSystem(player, enemy);
         } else {
             System.out.println("GAME OVER");
             System.exit(0);
@@ -44,10 +47,10 @@ public class Battle {
     }
 
     static void selectionSystem(Player player, Enemy enemy) {
-        Scanner scanner = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
 
         System.out.println("\nWhat do you want to do?\nAttack(1) | Use potion(2) | Pass turn(3)");
-        selection = scanner.nextInt();
+        selection = sc.nextInt();
         switch (selection) {
         case 1:
             attackSystem(player, enemy);
@@ -66,11 +69,29 @@ public class Battle {
         }
     }
 
+    static void dropItemsSystem(Player player, Enemy enemy) {
+        Scanner sc = new Scanner(System.in);
+        Weapon weaponDropped;
+        int index;
+        //Drop item ? (50%)
+        if (ThreadLocalRandom.current().nextInt(1, 3) == 1) {
+            weaponDropped = enemy.dropWeapon(player);
+            System.out.println("\n| Enemy has dropped a weapon (!) |");
+            System.out.println("Weapon Name: " + weaponDropped.getName() + "\n" + weaponDropped.printAbilities());
+            System.out.println("Do you want to get this weapon (Y / N)?");
+            if(sc.next().charAt(0) == 'Y') {
+                System.out.println("Which position do you want to save (0 or 1)?");
+                index = sc.nextInt();
+                player.getNewWeapon(weaponDropped, index);
+            }
+        }
+    }
+
     static void attackSystem(Player player, Enemy enemy) {
-        Scanner scanner = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
         System.out.println("Select your ability to attack: ");
         System.out.println(player.printPlayerAbilities());
-        indexAttack = scanner.nextInt();
+        indexAttack = sc.nextInt();
         try {
             if (player.getStamina() < player.getInventory().getEquippedWeapon().getAbility(indexAttack)
                     .getStaminaCost()) {
@@ -97,10 +118,10 @@ public class Battle {
     }
 
     static void potionSystem(Player player, Enemy enemy) {
-        Scanner scanner = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
         System.out.println(player.getInventory().printPotions());
         System.out.println("Which potion do you want to use?");
-        indexPotion = scanner.nextInt();
+        indexPotion = sc.nextInt();
         if (player.getInventory().getPotionIndex(indexPotion) != null) {
             if (player.getInventory().getPotionIndex(indexPotion) instanceof HealthPotion) {
                 if (player.getHealthPoints()

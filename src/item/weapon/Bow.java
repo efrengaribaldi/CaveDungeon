@@ -4,12 +4,8 @@ import src.item.Weapon;
 import src.item.weapon.Ability;
 
 public class Bow extends Weapon {
-    public Bow() {
-        super("Knight's Bow");
-        Ability[] abilities = new Ability[3];
-        abilities[0] = new Ability("Single Shot", 15, 5);
-        abilities[1] = new Ability("Triple Shot", 30, 10);
-        abilities[2] = new Ability("Critical Shot", 50, 25);
-        super.setAbilities(abilities);
+    public Bow(int baseAttack, int baseStamina) {
+        super("Knight's Bow", new Ability[] {new Ability("Single Shot", baseAttack, baseStamina),
+            new Ability("Triple Shot", 2 * baseAttack, 2 * baseStamina), new Ability("Critical Shot", (int) (3.5 * baseAttack), (int) (3.5 * baseStamina))});
     }
 }

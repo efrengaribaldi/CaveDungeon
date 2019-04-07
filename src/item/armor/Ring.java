@@ -3,7 +3,7 @@ package src.item.armor;
 import src.item.Armor;
 
 public class Ring extends Armor {
-    public Ring() {
-        super("Ring");
+    public Ring(int baseDefense) {
+        super("Ring", baseDefense);
     }
 }

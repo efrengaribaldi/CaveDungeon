@@ -4,13 +4,8 @@ import src.item.Weapon;
 import src.item.weapon.Ability;
 
 public class MagicBook extends Weapon {
-    public MagicBook() {
-        super("Lycka Himlen");
-        Ability[] abilities = new Ability[3];
-        abilities[0] = new Ability("Thunder", 15, 5);
-        abilities[1] = new Ability("Dark Bane", 30, 10);
-        abilities[2] = new Ability("Apocalypse", 50, 25);
-        super.setAbilities(abilities);
+    public MagicBook(int baseAttack, int baseStamina) {
+        super("Lycka Himlen", new Ability[] {new Ability("Thunder", baseAttack, baseStamina),
+            new Ability("Dark Bane", 2 * baseAttack, 2 * baseStamina), new Ability("Apocalypse", (int) (3.5 * baseAttack), (int) (3.5 * baseStamina))});
     }
-
 }

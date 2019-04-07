@@ -4,12 +4,8 @@ import src.item.Weapon;
 import src.item.weapon.Ability;
 
 public class Sword extends Weapon {
-    public Sword() {
-        super("Elven Sword");
-        Ability[] abilities = new Ability[3];
-        abilities[0] = new Ability("Stinger", 15, 5);
-        abilities[1] = new Ability("Sword Storm", 30, 10);
-        abilities[2] = new Ability("Lightning Blade", 50, 25);
-        super.setAbilities(abilities);
+    public Sword(int baseAttack, int baseStamina) {
+        super("Elven Sword", new Ability[] {new Ability("Stinger", baseAttack, baseStamina),
+            new Ability("Sword Storm", 2 * baseAttack, 2 * baseStamina), new Ability("Lightning Blade", (int) (3.5 * baseAttack), (int)(3.5 * baseStamina))});
     }
 }
