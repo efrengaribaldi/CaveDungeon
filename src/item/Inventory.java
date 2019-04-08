@@ -1,8 +1,5 @@
 package src.item;
 
-import src.item.*;
-import src.item.misc.*;
-
 public class Inventory {
     public Armor[] armor;
     public Potion[] potions;
