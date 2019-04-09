@@ -40,10 +40,6 @@ public class Inventory {
         return weapons[index];
     }
 
-    public void setWeaponByIndex(Weapon weapon, int index) {
-        weapons[index] = weapon;
-    }
-
     public void removeWeapon(int index) {
         weapons[index] = null;
     }

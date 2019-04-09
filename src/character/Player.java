@@ -149,14 +149,14 @@ public abstract class Player extends Character {
 
     public void getNewWeapon(Weapon newWeapon, int index) {
         try {
-            if (inventory.getWeaponByIndex(index) != null) {
-                inventory.setWeaponByIndex(newWeapon, index);
+            if (inventory.getWeaponByIndex(index) == null) {
+                inventory.addItemToInventory(newWeapon, index);
             }
             else {
                 System.out.println("You already have a weapon in this position. Do you want to remove it (Y / N)?");
                 if (sc.next().charAt(0) == 'Y') {
                     inventory.removeWeapon(index);
-                    inventory.setWeaponByIndex(newWeapon, index);
+                    inventory.addItemToInventory(newWeapon, index);
                     inventory.equipWeapon(index);
                 }
             }

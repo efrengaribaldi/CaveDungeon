@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="src.item.gui.InventoryController">
+   <children>
+      <Pane prefHeight="136.1" prefWidth="725.3" style="-fx-background-color: brown;">
+         <children>
+            <ProgressBar fx:id="healthBar" layoutX="43.0" layoutY="30.0" prefHeight="32.0" prefWidth="500.0" progress="0.0" />
+            <ProgressBar fx:id="staminaBar" layoutX="43.0" layoutY="80.0" prefHeight="32.0" prefWidth="500.0" progress="0.0" />
+            <Text fill="WHITE" layoutX="562.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Health [100]" wrappingWidth="139.380859375">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="560.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Stamina [100]" wrappingWidth="156.03778076171875">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
+      <Pane layoutY="136.0" prefHeight="631.9" prefWidth="725.3" style="-fx-background-color: #1C1117;">
+         <children>
+            <Text fill="WHITE" layoutX="39.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Inventory" wrappingWidth="225.9830722808838">
+               <font>
+                  <Font size="40.0" />
+               </font></Text>
+            <VBox layoutY="55.0" prefHeight="576.0" prefWidth="725.0">
+               <children>
+                  <HBox prefHeight="192.0" prefWidth="850.0">
+                     <children>
+                        <Pane prefHeight="192.0" prefWidth="500.0">
+                           <children>
+                              <TextField prefHeight="25.0" prefWidth="200.0" text="Weapons" />
+                              <Pane layoutX="61.0" layoutY="33.0" prefHeight="144.0" prefWidth="128.0">
+                                 <children>
+                                    <ImageView fx:id="imgWeaponOne" fitHeight="112.0" fitWidth="112.0" layoutX="8.0" pickOnBounds="true" preserveRatio="true" />
+                                    <Button fx:id="equipWeaponOne" layoutX="8.0" layoutY="118.0" mnemonicParsing="false" prefWidth="50.0" text="Equip" />
+                                    <Button fx:id="dropWeaponOne" layoutX="71.0" layoutY="118.0" mnemonicParsing="false" prefWidth="50.0" text="Drop" />
+                                 </children>
+                              </Pane>
+                              <Pane layoutX="250.0" layoutY="37.0" prefHeight="144.0" prefWidth="128.0">
+                                 <children>
+                                    <ImageView fx:id="imgWeaponTwo" fitHeight="112.0" fitWidth="112.0" layoutX="8.0" pickOnBounds="true" preserveRatio="true" />
+                                    <Button fx:id="equipWeaponTwo" layoutX="8.0" layoutY="118.0" mnemonicParsing="false" prefWidth="50.0" text="Equip" />
+                                    <Button fx:id="dropWeaponTwo" layoutX="71.0" layoutY="118.0" mnemonicParsing="false" prefWidth="50.0" text="Drop" />
+                                 </children>
+                              </Pane>
+                           </children>
+                        </Pane>
+                        <Pane prefHeight="192.0" prefWidth="232.0">
+                           <children>
+                              <TextField fx:id="abilitiesWeapon" prefHeight="25.0" prefWidth="200.0" text="Abilities [Name]" />
+                              <TextArea fx:id="abilitiesText" layoutY="52.0" prefHeight="131.0" prefWidth="200.0" />
+                           </children>
+                        </Pane>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="192.0" prefWidth="850.0">
+                     <children>
+                        <Pane prefHeight="174.54" prefWidth="868.0">
+                           <children>
+                              <TextField prefHeight="25.0" prefWidth="200.0" text="Armor" />
+                              <Pane layoutX="73.2" layoutY="37.0" prefHeight="144.0" prefWidth="128.0">
+                                 <children>
+                                    <ImageView fx:id="imgArmorOne" fitHeight="112.0" fitWidth="112.0" layoutX="8.0" pickOnBounds="true" preserveRatio="true" />
+                                    <Button fx:id="equipArmorOne" layoutX="8.0" layoutY="118.0" mnemonicParsing="false" prefWidth="50.0" text="Equip" />
+                                    <Button fx:id="dropArmorOne" layoutX="71.0" layoutY="118.0" mnemonicParsing="false" prefWidth="50.0" text="Drop" />
+                                 </children>
+                              </Pane>
+                              <Pane layoutX="294.4" layoutY="37.0" prefHeight="144.0" prefWidth="128.0">
+                                 <children>
+                                    <ImageView fx:id="imgArmorTwo" fitHeight="112.0" fitWidth="112.0" layoutX="8.0" pickOnBounds="true" preserveRatio="true" />
+                                    <Button fx:id="equipArmorTwo" layoutX="8.0" layoutY="118.0" mnemonicParsing="false" prefWidth="50.0" text="Equip" />
+                                    <Button fx:id="dropArmorTwo" layoutX="71.0" layoutY="118.0" mnemonicParsing="false" prefWidth="50.0" text="Drop" />
+                                 </children>
+                              </Pane>
+                              <Pane layoutX="515.7" layoutY="37.0" prefHeight="144.0" prefWidth="128.0">
+                                 <children>
+                                    <ImageView fx:id="imgArmorThree" fitHeight="112.0" fitWidth="112.0" layoutX="8.0" pickOnBounds="true" preserveRatio="true" />
+                                    <Button fx:id="equipArmorThree" layoutX="8.0" layoutY="118.0" mnemonicParsing="false" prefWidth="50.0" text="Equip" />
+                                    <Button fx:id="dropArmorThree" layoutX="71.0" layoutY="118.0" mnemonicParsing="false" prefWidth="50.0" text="Drop" />
+                                 </children>
+                              </Pane>
+                           </children>
+                        </Pane>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="192.0" prefWidth="850.0">
+                     <children>
+                        <Pane prefHeight="174.54" prefWidth="425.0">
+                           <children>
+                              <TextField prefHeight="25.0" prefWidth="200.0" text="Health Potions" />
+                              <Pane layoutX="27.0" layoutY="37.0" prefHeight="144.0" prefWidth="128.0">
+                                 <children>
+                                    <ImageView fx:id="imgHPotionOne" fitHeight="112.0" fitWidth="112.0" layoutX="8.0" pickOnBounds="true" preserveRatio="true" />
+                                    <Button fx:id="useHPotionOne" layoutX="8.0" layoutY="118.0" mnemonicParsing="false" prefWidth="50.0" text="Use" />
+                                    <Button fx:id="dropHPotionOne" layoutX="71.0" layoutY="118.0" mnemonicParsing="false" prefWidth="50.0" text="Drop" />
+                                 </children>
+                              </Pane>
+                              <Pane layoutX="208.0" layoutY="37.0" prefHeight="144.0" prefWidth="128.0">
+                                 <children>
+                                    <ImageView fx:id="imgHPotionTwo" fitHeight="112.0" fitWidth="112.0" layoutX="8.0" pickOnBounds="true" preserveRatio="true" />
+                                    <Button fx:id="useHPotionTwo" layoutX="8.0" layoutY="118.0" mnemonicParsing="false" prefWidth="50.0" text="Use" />
+                                    <Button fx:id="dropHPotionTwo" layoutX="71.0" layoutY="118.0" mnemonicParsing="false" prefWidth="50.0" text="Drop" />
+                                 </children>
+                              </Pane>
+                           </children>
+                        </Pane>
+                        <Pane prefHeight="174.54" prefWidth="425.0">
+                           <children>
+                              <TextField prefHeight="25.0" prefWidth="200.0" text="Stamina Potions" />
+                              <Pane layoutX="27.0" layoutY="37.0" prefHeight="144.0" prefWidth="128.0">
+                                 <children>
+                                    <ImageView fx:id="imgSPotionOne" fitHeight="112.0" fitWidth="112.0" layoutX="8.0" pickOnBounds="true" preserveRatio="true" />
+                                    <Button fx:id="useSPotionOne" layoutX="8.0" layoutY="118.0" mnemonicParsing="false" prefWidth="50.0" text="Use" />
+                                    <Button fx:id="dropSPotionOne" layoutX="71.0" layoutY="118.0" mnemonicParsing="false" prefWidth="50.0" text="Drop" />
+                                 </children>
+                              </Pane>
+                              <Pane layoutX="208.0" layoutY="37.0" prefHeight="144.0" prefWidth="128.0">
+                                 <children>
+                                    <ImageView fx:id="imgSPotionTwo" fitHeight="112.0" fitWidth="112.0" layoutX="8.0" pickOnBounds="true" preserveRatio="true" />
+                                    <Button fx:id="useSPotionTwo" layoutX="8.0" layoutY="118.0" mnemonicParsing="false" prefWidth="50.0" text="Use" />
+                                    <Button fx:id="dropSPotionTwo" layoutX="71.0" layoutY="118.0" mnemonicParsing="false" prefWidth="50.0" text="Drop" />
+                                 </children>
+                              </Pane>
+                           </children>
+                        </Pane>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children></Pane>
+      <Pane layoutX="725.3" prefHeight="90.0" prefWidth="298.7" style="-fx-background-color: #1C1117;">
+         <children>
+            <TextField fx:id="playerName" layoutX="75.0" layoutY="33.0" style="-fx-background-color: brown;" />
+         </children>
+      </Pane>
+      <Pane layoutX="725.0" layoutY="89.0" prefHeight="679.0" prefWidth="299.0" style="-fx-background-color: #1C1117;">
+         <children>
+            <Text fx:id="expText" fill="WHITE" layoutX="50.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="EXP:">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <ProgressBar fx:id="expBar" layoutX="50.0" layoutY="89.0" prefHeight="25.0" prefWidth="200.0" progress="0.0" />
+            <Text fx:id="currentLevel" fill="WHITE" layoutX="50.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <Text fx:id="nextLevel" fill="WHITE" layoutX="241.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <Text fx:id="playerLevel" fill="WHITE" layoutX="50.0" layoutY="220.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Level: ">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <Text fx:id="playerType" fill="WHITE" layoutX="50.0" layoutY="300.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type:">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <Text fx:id="playerGender" fill="WHITE" layoutX="50.0" layoutY="380.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gender:">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <Button fx:id="exitButton" layoutX="179.0" layoutY="639.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="120.0" text="EXIT" />
+         </children>
+      </Pane>
+   </children>
+</Pane>
