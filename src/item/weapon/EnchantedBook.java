@@ -11,7 +11,7 @@ public class EnchantedBook extends Weapon {
         super("",
                 new Ability[] { new Ability("Thunder", baseAttack, baseStamina),
                         new Ability("Dark Bane", 2 * baseAttack, 2 * baseStamina),
-                        new Ability("Apocalypse", (int) (3.5 * baseAttack), (int) (3.5 * baseStamina)) });
+                        new Ability("Life Drain", (int) (3.5 * baseAttack), (int) (3.5 * baseStamina)) });
         setName(names[(int) (Math.random() * names.length)]);
     }
 }

@@ -18,23 +18,27 @@ Has attributes:
 
 #### Sword (extends Weapon)
 Attacks:
- - dashAttack : int
- - stormOfSword : int
+ - Stinger : Ability
+ - Sword Storm : Ability
+ - Lightning Blade : Ability
 
 #### Bow (extends Weapon)
 Attacks:
- - shot : int
- - tripleShot : int
+ - Single Shot : Ability
+ - Triple Shot : Ability
+ - Critical Shot : Ability
 
-#### Magic book (extends Weapon)
+#### Enchanted book (extends Weapon)
 Attacks:
- - wishOfMoon : int
- - lyckaHimlen : int
+ - Thunder : Ability
+ - Dark Bane : Ability
+ - Life Drain : Ability
 
-#### Magic staff (extends Weapon)
+#### Wand (extends Weapon)
 Attacks:
- - baneOfDarkness : int
- - baneOfLight : int
+ - Fire Attack : Ability
+ - Shattering Strike : Ability
+ - Apocalypse : Ability
 
 ### Potion (extends Item)
 Has attributes:
@@ -48,7 +52,14 @@ Small Health potions
 Great Health potions
  Recover 50 points of health
 
-#### Mana potions (extends Potion)
-Only affects mages
+#### Stamina potions (extends Potion)
 
-#### Shield potions (extends Potion)
+### Armor (extends Item)
+ - baseDefense : int
+
+#### Necklace (extends Armor)
+
+#### Shield (extends Armor)
+
+#### Ring (extends Armor)
+

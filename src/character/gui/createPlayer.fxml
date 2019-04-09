@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="mainscreen" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: #1C1117;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="src.character.gui.CreatePlayerController">
+<AnchorPane fx:id="mainscreen" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: #1C1117;" xmlns="http://javafx.com/javafx/8.0.202-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="src.character.gui.CreatePlayerController">
    <children>
       <AnchorPane layoutX="50.0" layoutY="50.0" prefHeight="200.7" prefWidth="938.6" style="-fx-background-color: brown;">
          <children>
