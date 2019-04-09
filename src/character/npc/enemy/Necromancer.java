@@ -21,12 +21,12 @@ public class Necromancer extends Enemy {
     @Override
     public Weapon dropWeapon(Player player) {
         switch (ThreadLocalRandom.current().nextInt(1, 2)) {
-            case 1:
-                return (player instanceof Melee) ? new Sword(39, 10) : new MagicBook(39, 10);
-            case 2:
-                return (player instanceof Melee) ? new Bow(39, 10) : new MagicStaff(39, 10);
-            default:
-                return null;
+        case 1:
+            return (player instanceof Melee) ? new Sword(39, 10) : new EnchantedBook(39, 10);
+        case 2:
+            return (player instanceof Melee) ? new Bow(39, 10) : new Wand(39, 10);
+        default:
+            return null;
         }
     }
 }

@@ -23,7 +23,6 @@ public class Battle {
         System.out.println(player.getInventory().printWeapons());
         player.getInventory().equipWeapon(sc.nextInt());
         do {
-
             System.out.println("v^v^v^v^v^v^v^v^-YOUR TURN-v^v^v^v^v^v^v^v^");
             System.out.println();
             previousHealth = player.getHealthPoints();
@@ -33,7 +32,6 @@ public class Battle {
             System.out.println("Enemy  HP: " + enemy.getHealthPoints());
             System.out.println("----------");
             selectionSystem(player, enemy);
-
         } while (player.getHealthPoints() > 0 && enemy.getHealthPoints() > 0);
 
         if (player.getHealthPoints() > 0) {
@@ -73,13 +71,13 @@ public class Battle {
         Scanner sc = new Scanner(System.in);
         Weapon weaponDropped;
         int index;
-        //Drop item ? (50%)
+        // Drop item ? (50%)
         if (ThreadLocalRandom.current().nextInt(1, 3) == 1) {
             weaponDropped = enemy.dropWeapon(player);
             System.out.println("\n| Enemy has dropped a weapon (!) |");
             System.out.println("Weapon Name: " + weaponDropped.getName() + "\n" + weaponDropped.printAbilities());
             System.out.println("Do you want to get this weapon (Y / N)?");
-            if(sc.next().charAt(0) == 'Y') {
+            if (sc.next().charAt(0) == 'Y') {
                 System.out.println("Which position do you want to save (0 or 1)?");
                 index = sc.nextInt();
                 player.getNewWeapon(weaponDropped, index);
@@ -143,7 +141,6 @@ public class Battle {
             System.out.println("You don't have anything in this position");
             selectionSystem(player, enemy);
         }
-
     }
 
     static void upgradeStamina(Player player) {

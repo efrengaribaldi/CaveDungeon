@@ -21,12 +21,14 @@ public class Zombie extends Enemy {
     @Override
     public Weapon dropWeapon(Player player) {
         switch (ThreadLocalRandom.current().nextInt(1, 2)) {
-            case 1:
-                return (player instanceof Melee) ? new Sword(ThreadLocalRandom.current().nextInt(12, 18), 5) : new MagicBook(ThreadLocalRandom.current().nextInt(12, 18), 5);
-            case 2:
-                return (player instanceof Melee) ? new Bow(ThreadLocalRandom.current().nextInt(12, 18), 5) : new MagicStaff(ThreadLocalRandom.current().nextInt(12, 18), 5);
-            default:
-                return null;
+        case 1:
+            return (player instanceof Melee) ? new Sword(ThreadLocalRandom.current().nextInt(12, 18), 5)
+                    : new EnchantedBook(ThreadLocalRandom.current().nextInt(12, 18), 5);
+        case 2:
+            return (player instanceof Melee) ? new Bow(ThreadLocalRandom.current().nextInt(12, 18), 5)
+                    : new Wand(ThreadLocalRandom.current().nextInt(12, 18), 5);
+        default:
+            return null;
         }
     }
 }

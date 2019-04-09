@@ -21,12 +21,12 @@ public class Swampy extends Enemy {
     @Override
     public Weapon dropWeapon(Player player) {
         switch (ThreadLocalRandom.current().nextInt(1, 2)) {
-            case 1:
-                return (player instanceof Melee) ? new Sword(28, 9) : new MagicBook(28, 9);
-            case 2:
-                return (player instanceof Melee) ? new Bow(28, 9) : new MagicStaff(28, 9);
-            default:
-                return null;
+        case 1:
+            return (player instanceof Melee) ? new Sword(28, 9) : new EnchantedBook(28, 9);
+        case 2:
+            return (player instanceof Melee) ? new Bow(28, 9) : new Wand(28, 9);
+        default:
+            return null;
         }
     }
 }

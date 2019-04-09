@@ -21,12 +21,12 @@ public class Chort extends Enemy {
     @Override
     public Weapon dropWeapon(Player player) {
         switch (ThreadLocalRandom.current().nextInt(1, 2)) {
-            case 1:
-                return (player instanceof Melee) ? new Sword(21, 8) : new MagicBook(21, 8);
-            case 2:
-                return (player instanceof Melee) ? new Bow(21, 8) : new MagicStaff(21, 8);
-            default:
-                return null;
+        case 1:
+            return (player instanceof Melee) ? new Sword(21, 8) : new EnchantedBook(21, 8);
+        case 2:
+            return (player instanceof Melee) ? new Bow(21, 8) : new Wand(21, 8);
+        default:
+            return null;
         }
     }
 }

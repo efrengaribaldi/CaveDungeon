@@ -3,7 +3,12 @@ package src.item.armor;
 import src.item.Armor;
 
 public class Necklace extends Armor {
+    // Names from https://torchlight.fandom.com/wiki/Necklaces_(T2)
+    private final String[] names = { "The Amulet of Ledo", "The Guardian's Gaze", "Coldheart", "The Emerald Eye",
+            "The Glimmer of Hope", "Stormcore", "Amulet of the Old Ones" };
+
     public Necklace(int baseDefense) {
-        super("Necklace", baseDefense);
+        super("", baseDefense);
+        setName(names[(int) (Math.random() * names.length)]);
     }
 }

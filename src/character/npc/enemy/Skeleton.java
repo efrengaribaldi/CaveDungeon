@@ -21,12 +21,12 @@ public class Skeleton extends Enemy {
     @Override
     public Weapon dropWeapon(Player player) {
         switch (ThreadLocalRandom.current().nextInt(1, 2)) {
-            case 1:
-                return (player instanceof Melee) ? new Sword(17, 6) : new MagicBook(17, 6);
-            case 2:
-                return (player instanceof Melee) ? new Bow(17, 6) : new MagicStaff(17, 6);
-            default:
-                return null;
+        case 1:
+            return (player instanceof Melee) ? new Sword(17, 6) : new EnchantedBook(17, 6);
+        case 2:
+            return (player instanceof Melee) ? new Bow(17, 6) : new Wand(17, 6);
+        default:
+            return null;
         }
     }
 }

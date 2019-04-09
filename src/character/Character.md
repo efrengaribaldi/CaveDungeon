@@ -31,8 +31,8 @@ Has methods:
   - Can use counter (return the attack)
 
 - Weapon
- - sword
- - bow
+ - Sword
+ - Bow
 
 When created, it has:
  - sword : Sword (Stored inside items)
@@ -44,11 +44,8 @@ When created, it has:
   - Can create a magic shield
 
  - Weapon
-  - book
-  - staff
-
-When created, it has:
- - book : MagicBook (Stored inside items)
+  - EnchantedBook
+  - Wand
 
 ### NPC's class abstract (extends Character)
 Has attributes:
