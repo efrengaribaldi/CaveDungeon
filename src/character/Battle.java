@@ -38,21 +38,25 @@ public class Battle {
     }
 
     private void selectionSystem() {
-        System.out.println("\nWhat do you want to do?");
-        System.out.println("Attack(1) | Use potion(2) | Pass turn(3)");
-        switch (sc.nextInt()) {
-        case 1:
-            attackSystem();
-            break;
-        case 2:
-            potionSystem();
-            break;
-        case 3:
-            enemyAttack();
-            break;
-        default:
-            break;
-        }
+        boolean hasDoneSomething = false;
+        do {
+            System.out.println("\nWhat do you want to do?");
+            System.out.println("Attack(1) | Use potion(2) | Pass turn(3)");
+            switch (sc.nextInt()) {
+            case 1:
+                hasDoneSomething = attackSystem();
+                break;
+            case 2:
+                hasDoneSomething = potionSystem();
+                break;
+            case 3:
+                enemyAttack();
+                hasDoneSomething = true;
+                break;
+            default:
+                break;
+            }
+        } while (!hasDoneSomething);
         upgradeStamina();
     }
 
@@ -73,26 +77,25 @@ public class Battle {
         }
     }
 
-    private void attackSystem() {
+    private boolean attackSystem() {
         int indexAttack;
-        boolean hasAttacked = false;
-        do {
-            System.out.println("Select your ability to attack: ");
-            System.out.println(player.printPlayerAbilities());
-            indexAttack = sc.nextInt();
-            try {
-                if (player.getStamina() < player.getInventory().getEquippedWeapon().getAbility(indexAttack)
-                        .getStaminaCost()) {
-                    System.out.println("You don't have enough stamina to use this ability");
-                } else {
-                    player.attack(enemy, indexAttack);
-                    hasAttacked = true;
-                    enemyAttack();
-                }
-            } catch (ArrayIndexOutOfBoundsException exception) {
-                System.out.println("Ability not found");
+        System.out.println("Select your ability to attack: ");
+        System.out.println(player.printPlayerAbilities());
+        indexAttack = sc.nextInt();
+        try {
+            if (player.getStamina() < player.getInventory().getEquippedWeapon().getAbility(indexAttack)
+                    .getStaminaCost()) {
+                System.out.println("You don't have enough stamina to use this ability");
+                return false;
+            } else {
+                player.attack(enemy, indexAttack);
+                enemyAttack();
+                return true;
             }
-        } while (!hasAttacked);
+        } catch (ArrayIndexOutOfBoundsException exception) {
+            System.out.println("Ability not found");
+            return false;
+        }
     }
 
     private void enemyAttack() {
@@ -103,19 +106,22 @@ public class Battle {
         System.out.println("The " + enemy.getName() + " attacks you and does " + totalAttack + " damage!");
     }
 
-    private void potionSystem() {
-        boolean hasUsedPotion = false;
-        do {
-            System.out.println(player.getInventory().printPotions());
-            System.out.println("Which potion do you want to use?");
-            int index = sc.nextInt();
+    private boolean potionSystem() {
+        System.out.println(player.getInventory().printPotions());
+        System.out.println("Which potion do you want to use?");
+        int index = sc.nextInt();
+        try {
             if (player.getInventory().getPotion(index) != null) {
                 player.usePotion(index);
-                hasUsedPotion = true;
+                return true;
             } else {
                 System.out.println("You don't have anything in this position\n");
+                return false;
             }
-        } while (!hasUsedPotion);
+        } catch (ArrayIndexOutOfBoundsException exception) {
+            System.out.println("Potion not found");
+            return false;
+        }
     }
 
     private void upgradeStamina() {
