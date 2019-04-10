@@ -44,15 +44,15 @@ public class Inventory {
         weapons[index] = null;
     }
 
-    public Potion getPotionIndex(int index) {
+    public Potion getPotion(int index) {
         return potions[index];
     }
 
-    public void setPotionIndex(Potion potion, int index) {
+    public void setPotion(Potion potion, int index) {
         potions[index] = potion;
     }
 
-    public void removePotionIndex(int index) {
+    public void removePotion(int index) {
         potions[index] = null;
     }
 

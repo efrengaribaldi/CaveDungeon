@@ -1,74 +1,62 @@
 package src.character;
 
 import src.character.npc.*;
-import src.item.potion.*;
 import src.item.Weapon;
 
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Battle {
-    // Battle system between player and normal enemy
-    static int previousHealth;
-    static int indexAttack;
-    static int indexPotion;
-    static int selection;
-    static int previousExperience;
+    private Scanner sc;
+    private Player player;
+    private Enemy enemy;
 
-    public static void startBattle(Player player, Enemy enemy) {
-        Scanner sc = new Scanner(System.in);
+    public Battle(Player player, Enemy enemy) {
+        sc = new Scanner(System.in);
+        this.player = player;
+        this.enemy = enemy;
         System.out.println("-=x=-=x=-=x=-=x=-=x=-=x=-=x=-=BATTLE START=-=x=-=x=-=x=-=x=-=x=-=x=-=x=-");
-        previousExperience = player.getExperience();
         System.out.println("Which weapon do you want to equip?");
         System.out.println(player.getInventory().printWeapons());
         player.getInventory().equipWeapon(sc.nextInt());
         do {
-            System.out.println("v^v^v^v^v^v^v^v^-YOUR TURN-v^v^v^v^v^v^v^v^");
-            System.out.println();
-            previousHealth = player.getHealthPoints();
+            System.out.println("v^v^v^v^v^v^v^v^-YOUR TURN-v^v^v^v^v^v^v^v^\n");
             System.out.println("--STATS--");
             System.out.println("Player HP: " + player.getHealthPoints() + " | Player Stamina: " + player.getStamina());
-            System.out.println();
             System.out.println("Enemy  HP: " + enemy.getHealthPoints());
             System.out.println("----------");
-            selectionSystem(player, enemy);
+            selectionSystem();
         } while (player.getHealthPoints() > 0 && enemy.getHealthPoints() > 0);
-
         if (player.getHealthPoints() > 0) {
             // Add drop items
-            upgradeStats(player, enemy);
-            dropItemsSystem(player, enemy);
+            upgradeStats();
+            dropItemsSystem();
         } else {
             System.out.println("GAME OVER");
             System.exit(0);
         }
     }
 
-    static void selectionSystem(Player player, Enemy enemy) {
-        Scanner sc = new Scanner(System.in);
-
-        System.out.println("\nWhat do you want to do?\nAttack(1) | Use potion(2) | Pass turn(3)");
-        selection = sc.nextInt();
-        switch (selection) {
+    private void selectionSystem() {
+        System.out.println("\nWhat do you want to do?");
+        System.out.println("Attack(1) | Use potion(2) | Pass turn(3)");
+        switch (sc.nextInt()) {
         case 1:
-            attackSystem(player, enemy);
-            upgradeStamina(player);
+            attackSystem();
             break;
         case 2:
-            potionSystem(player, enemy);
-            upgradeStamina(player);
+            potionSystem();
             break;
         case 3:
-            enemyAttack(player, enemy);
-            upgradeStamina(player);
+            enemyAttack();
             break;
         default:
             break;
         }
+        upgradeStamina();
     }
 
-    static void dropItemsSystem(Player player, Enemy enemy) {
-        Scanner sc = new Scanner(System.in);
+    private void dropItemsSystem() {
         Weapon weaponDropped;
         int index;
         // Drop item ? (50%)
@@ -85,76 +73,61 @@ public class Battle {
         }
     }
 
-    static void attackSystem(Player player, Enemy enemy) {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Select your ability to attack: ");
-        System.out.println(player.printPlayerAbilities());
-        indexAttack = sc.nextInt();
-        try {
-            if (player.getStamina() < player.getInventory().getEquippedWeapon().getAbility(indexAttack)
-                    .getStaminaCost()) {
-                System.out.println("You don't have enough stamina to use this ability");
-                selectionSystem(player, enemy);
+    private void attackSystem() {
+        int indexAttack;
+        boolean hasAttacked = false;
+        do {
+            System.out.println("Select your ability to attack: ");
+            System.out.println(player.printPlayerAbilities());
+            indexAttack = sc.nextInt();
+            try {
+                if (player.getStamina() < player.getInventory().getEquippedWeapon().getAbility(indexAttack)
+                        .getStaminaCost()) {
+                    System.out.println("You don't have enough stamina to use this ability");
+                } else {
+                    player.attack(enemy, indexAttack);
+                    hasAttacked = true;
+                    enemyAttack();
+                }
+            } catch (ArrayIndexOutOfBoundsException exception) {
+                System.out.println("Ability not found");
+            }
+        } while (!hasAttacked);
+    }
+
+    private void enemyAttack() {
+        if (enemy.getHealthPoints() <= 0)
+            return;
+        System.out.println("v^v^v^v^v^v^v^v^-ENEMY TURN-v^v^v^v^v^v^v^v^\n");
+        int totalAttack = enemy.attack(player);
+        System.out.println("The " + enemy.getName() + " attacks you and does " + totalAttack + " damage!");
+    }
+
+    private void potionSystem() {
+        boolean hasUsedPotion = false;
+        do {
+            System.out.println(player.getInventory().printPotions());
+            System.out.println("Which potion do you want to use?");
+            int index = sc.nextInt();
+            if (player.getInventory().getPotion(index) != null) {
+                player.usePotion(index);
+                hasUsedPotion = true;
             } else {
-                player.attack(enemy, indexAttack);
-                enemyAttack(player, enemy);
+                System.out.println("You don't have anything in this position\n");
             }
-        } catch (ArrayIndexOutOfBoundsException exception) {
-            System.out.println("Ability not found");
-            selectionSystem(player, enemy);
-        }
+        } while (!hasUsedPotion);
     }
 
-    static void enemyAttack(Player player, Enemy enemy) {
-        if (enemy.getHealthPoints() > 0) {
-            System.out.println("v^v^v^v^v^v^v^v^-ENEMY TURN-v^v^v^v^v^v^v^v^");
-            System.out.println();
-            enemy.attack(player);
-            System.out.println("The " + enemy.getName() + " attacks you and does "
-                    + (previousHealth - player.getHealthPoints()) + " damage!");
-        }
-    }
-
-    static void potionSystem(Player player, Enemy enemy) {
-        Scanner sc = new Scanner(System.in);
-        System.out.println(player.getInventory().printPotions());
-        System.out.println("Which potion do you want to use?");
-        indexPotion = sc.nextInt();
-        if (player.getInventory().getPotionIndex(indexPotion) != null) {
-            if (player.getInventory().getPotionIndex(indexPotion) instanceof HealthPotion) {
-                if (player.getHealthPoints()
-                        + player.getInventory().getPotionIndex(indexPotion).getRecoveryPoints() > player.getLimitHp())
-                    player.setHealthPoints(player.getLimitHp());
-                else
-                    player.setHealthPoints(player.getHealthPoints()
-                            + player.getInventory().getPotionIndex(indexPotion).getRecoveryPoints());
-            } else if (player.getInventory().getPotionIndex(indexPotion) instanceof StaminaPotion) {
-                if (player.getStamina() + player.getInventory().getPotionIndex(indexPotion).getRecoveryPoints() > player
-                        .getLimitStamina())
-                    player.setStamina(player.getLimitStamina());
-                else
-                    player.setStamina(player.getStamina()
-                            + player.getInventory().getPotionIndex(indexPotion).getRecoveryPoints());
-            }
-            player.getInventory().removePotionIndex(indexPotion);
-        } else {
-            System.out.println("You don't have anything in this position");
-            selectionSystem(player, enemy);
-        }
-    }
-
-    static void upgradeStamina(Player player) {
-        if (player.getStamina() + 5 > player.getLimitStamina())
+    private void upgradeStamina() {
+        player.setStamina(player.getStamina() + 5);
+        if (player.getStamina() > player.getLimitStamina())
             player.setStamina(player.getLimitStamina());
-        else
-            player.setStamina(player.getStamina() + 5);
         System.out.println();
     }
 
-    static void upgradeStats(Player player, Enemy enemy) {
+    private void upgradeStats() {
         System.out.println("<*><*><*>-You won!-<*><*><*>");
         player.checkLevelUp(enemy.getExperience());
     }
     // Battle system between player and boss
-
 }

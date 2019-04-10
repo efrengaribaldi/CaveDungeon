@@ -21,8 +21,6 @@ public class Game extends Application {
 
     public static void main(String[] args) {
         Application.launch(args);
-        // Print the name without errors
-        // System.out.println(newPlayer.getName());
     }
 
     @Override
@@ -30,68 +28,67 @@ public class Game extends Application {
         gameStage = stage;
         Scene createPlayer = new CreatePlayer(this);
         gameStage.setScene(createPlayer);
-        gameStage.setTitle("CaveDungeon 0.1.190324 OMEGA");
+        gameStage.setTitle("CaveDungeon 0.1.290324 OMEGA");
         gameStage.show();
-        // ERROR
-        // System.out.println(newPlayer.getName());
     }
 
     public Game() {
         long gameSeed = System.currentTimeMillis();
-        // long gameSeed = 1550961460665L;
         System.out.println("Seed: " + gameSeed);
         levels = new Map[1];
         for (int i = 0; i < levels.length; ++i)
             levels[i] = new Map(gameSeed + i);
-        mapsrc();
+        mapTests();
     }
 
-    void mapsrc() {
+    void mapTests() {
         for (int i = 0; i < levels.length; ++i)
             System.out.println(levels[i].mapToString());
     }
 
-    public void playersrc() {
+    public void playerTests() {
         System.out.println(newPlayer.playerToString());
     }
 
-    public void battlesrc() {
-        char startBattle;
-        Enemy newEnemie;
+    public void battleTests() {
+        char battleAgain;
+        Enemy newEnemy;
+        Battle battle;
         do {
-            System.out.println("-----------");
+            System.out.println("------------------------------------------------------------------------------------");
             System.out.println("Select your enemy: (1) Zombie, (2) Skeleton, (3) Chort, (4) Swampy, (5) Necromancer");
-            System.out.println("-----------");
             switch (sc.nextInt()) {
             case 1:
-                newEnemie = new Zombie();
+                newEnemy = new Zombie();
                 break;
             case 2:
-                newEnemie = new Skeleton();
+                newEnemy = new Skeleton();
                 break;
             case 3:
-                newEnemie = new Chort();
+                newEnemy = new Chort();
                 break;
             case 4:
-                newEnemie = new Swampy();
+                newEnemy = new Swampy();
                 break;
             case 5:
-                newEnemie = new Necromancer();
+                newEnemy = new Necromancer();
                 break;
             default:
-                newEnemie = null;
+                newEnemy = null;
                 break;
             }
-
-            Battle.startBattle(newPlayer, newEnemie);
+            System.out.println("------------------------------------------------------------------------------------");
+            battle = new Battle(newPlayer, newEnemy);
             System.out.println("\nStart new battle? (Y or N)");
-            startBattle = sc.next().charAt(0);
-        } while (startBattle == 'Y' || startBattle == 'y');
-
+            battleAgain = sc.next().charAt(0);
+        } while (battleAgain == 'Y' || battleAgain == 'y');
     }
 
-    public void setNewPlayer(Player newPlayer) {
+    public void setNewPlayerAndContinue(Player newPlayer) {
         this.newPlayer = newPlayer;
+        playerTests();
+        battleTests();
+        setRoomScene();
     }
 
     public Player getNewPlayer() {

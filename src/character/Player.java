@@ -13,11 +13,11 @@ public abstract class Player extends Character {
     private int experience;
     private int level;
     private char gender;
-    private int limitHp;
+    private int baseLimitHp;
     private int stamina;
-    private int limitStamina;
-    private double attack;
-    private double defense;
+    private int baseLimitStamina;
+    private double baseAttack;
+    private double baseDefense;
 
     public Player(String name, int healthPoints, char gender, Inventory inventory, double attack, double defense) {
         super(name, healthPoints);
@@ -25,12 +25,14 @@ public abstract class Player extends Character {
         this.experience = 0;
         this.level = 1;
         this.gender = gender;
-        this.limitHp = healthPoints;
+        this.baseLimitHp = healthPoints;
         this.stamina = 10;
-        this.limitStamina = stamina;
-        this.attack = attack;
-        this.defense = defense;
+        this.baseLimitStamina = stamina;
+        this.baseAttack = attack;
+        this.baseDefense = defense;
     }
+
+    public abstract char getType();
 
     public Inventory getInventory() {
         return inventory;
@@ -41,19 +43,11 @@ public abstract class Player extends Character {
     }
 
     public double getAttack() {
-        return attack;
-    }
-
-    public void setAttack(double attack) {
-        this.attack = attack;
+        return baseAttack * Math.pow(1.07, level);
     }
 
     public double getDefense() {
-        return defense;
-    }
-
-    public void setDefense(double defense) {
-        this.defense = defense;
+        return baseDefense * Math.pow(1.03, level);
     }
 
     public int getExperience() {
@@ -73,11 +67,7 @@ public abstract class Player extends Character {
     }
 
     public int getLimitHp() {
-        return limitHp;
-    }
-
-    public void setLimitHp(int limitHp) {
-        this.limitHp = limitHp;
+        return baseLimitHp + (int) (4 * Math.pow(1.07, level));
     }
 
     public int getStamina() {
@@ -89,19 +79,15 @@ public abstract class Player extends Character {
     }
 
     public int getLimitStamina() {
-        return limitStamina;
+        return baseLimitStamina + (int) (3 * Math.pow(1.07, level));
     }
 
-    public void setLimitStamina(int limitStamina) {
-        this.limitStamina = limitStamina;
-    }
-
-    public void attack(NPC Npc, int index) {
-
-        Npc.setHealthPoints((int) (Npc.getHealthPoints()
-                - (getInventory().getEquippedWeapon().getAbility(index).getBaseDamage() * attack)));
-
-        stamina = stamina - getInventory().getEquippedWeapon().getAbility(index).getStaminaCost();
+    public void attack(NPC npc, int index) {
+        // Update enemy healthpoints
+        npc.setHealthPoints((int) (npc.getHealthPoints()
+                - (getInventory().getEquippedWeapon().getAbility(index).getBaseDamage() * getAttack())));
+        // Update player's stamina
+        stamina -= getInventory().getEquippedWeapon().getAbility(index).getStaminaCost();
     }
 
     public String printPlayerAbilities() {
@@ -121,25 +107,21 @@ public abstract class Player extends Character {
 
     public void checkLevelUp(int newExp) {
         int expRequiredForNextLevel = (int) (15 * Math.pow(1.07, level));
-
         System.out.println("You got " + newExp + " new experience.");
         experience += newExp;
         if (experience >= expRequiredForNextLevel) {
             // Advance level
             setLevel(++level);
-            setLimitHp(limitHp + (int) (4 * Math.pow(1.07, level)));
-            setHealthPoints(limitHp);
-            setLimitStamina(limitStamina + (int) (3 * Math.pow(1.07, level)));
-            setStamina(limitStamina);
-            setAttack(attack * 1.07);
-            setDefense(defense * 1.03);
+            // Reset health and stamina
+            setHealthPoints(getLimitHp());
+            setStamina(getLimitStamina());
             setExperience(experience - expRequiredForNextLevel);
             System.out.println("<*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*>");
             System.out.println("Congratulations!!! You are now level " + level);
-            System.out.println("Your attack damage has increased to: " + attack);
-            System.out.println("Your defense has increased to: " + defense);
+            System.out.println("Your attack damage has increased to: " + getAttack());
+            System.out.println("Your defense has increased to: " + getDefense());
             System.out.println("Your HP limit has increased to: " + getHealthPoints());
-            System.out.println("Your Stamina limit has increased to: " + stamina);
+            System.out.println("Your Stamina limit has increased to: " + getLimitStamina());
         } else {
             int expNeeded = expRequiredForNextLevel - experience;
             System.out.println("You need " + expNeeded + " experience to advance to next level.");
@@ -151,8 +133,7 @@ public abstract class Player extends Character {
         try {
             if (inventory.getWeaponByIndex(index) == null) {
                 inventory.addItemToInventory(newWeapon, index);
-            }
-            else {
+            } else {
                 System.out.println("You already have a weapon in this position. Do you want to remove it (Y / N)?");
                 if (sc.next().charAt(0) == 'Y') {
                     inventory.removeWeapon(index);
@@ -163,6 +144,23 @@ public abstract class Player extends Character {
         } catch (ArrayIndexOutOfBoundsException exception) {
             System.out.println("Index weapon not found!");
         }
+    }
 
+    public void usePotion(int index) {
+        switch (inventory.getPotion(index).getType()) {
+        case 'h':
+            setHealthPoints(getHealthPoints() + inventory.getPotion(index).getRecoveryPoints());
+            if (getHealthPoints() > getLimitHp())
+                setHealthPoints(getLimitHp());
+            break;
+        case 's':
+            setStamina(getStamina() + inventory.getPotion(index).getRecoveryPoints());
+            if (getStamina() > getLimitStamina())
+                setStamina(getLimitStamina());
+            break;
+        default:
+            break;
+        }
+        inventory.removePotion(index);
     }
 }

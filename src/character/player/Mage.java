@@ -14,4 +14,9 @@ public class Mage extends Player {
         this.inventory.addItemToInventory(new HealthPotion(15), 0);
         this.inventory.addItemToInventory(new StaminaPotion(10), 1);
     }
+
+    @Override
+    public char getType() {
+        return 'a';
+    }
 }
