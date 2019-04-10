@@ -53,6 +53,7 @@ public class Game extends Application {
 
     public void playersrc() {
         System.out.println(newPlayer.playerToString());
+        newPlayer.selectWeapon();
     }
 
     public void battlesrc() {

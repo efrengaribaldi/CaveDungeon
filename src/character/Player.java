@@ -115,8 +115,13 @@ public abstract class Player extends Character {
         res += "| Inventory: | \n" + inventory.inventoryToString();
         res += "| Experience: " + experience + " | \n";
         res += "| Gender: " + gender + " | \n";
-        res += printPlayerAbilities();
         return res;
+    }
+
+    public void selectWeapon() {
+        System.out.println("Which weapon do you want to equip?\n");
+        System.out.println(getInventory().printWeapons());
+        getInventory().equipWeapon(sc.nextInt());
     }
 
     public void checkLevelUp(int newExp) {
@@ -151,10 +156,9 @@ public abstract class Player extends Character {
         try {
             if (inventory.getWeaponByIndex(index) == null) {
                 inventory.addItemToInventory(newWeapon, index);
-            }
-            else {
+            } else {
                 System.out.println("You already have a weapon in this position. Do you want to remove it (Y / N)?");
-                if (sc.next().charAt(0) == 'Y') {
+                if (sc.next().charAt(0) == 'Y' || sc.next().charAt(0) == 'y') {
                     inventory.removeWeapon(index);
                     inventory.addItemToInventory(newWeapon, index);
                     inventory.equipWeapon(index);

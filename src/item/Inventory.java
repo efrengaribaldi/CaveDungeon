@@ -60,7 +60,7 @@ public class Inventory {
         String res = "Weapons:\n";
         for (int i = 0; i < weapons.length; ++i) {
             res += "i[" + i + "]: ";
-            res += (weapons[i] != null) ? weapons[i].getName() + " | EQUIP: " + weapons[i].getWeaponState() : "null";
+            res += (weapons[i] != null) ? weapons[i].getName() + weapons[i].getType; : "*Empty*";
             res += "\n";
         }
         res += "\n";
@@ -72,7 +72,7 @@ public class Inventory {
         for (int i = 0; i < potions.length; ++i) {
             res += "i[" + i + "]: ";
             res += (potions[i] != null) ? potions[i].getName() + " | Recovery points: " + potions[i].getRecoveryPoints()
-                    : "null";
+                    : "*Empty*";
             res += "\n";
         }
         res += "\n";
@@ -85,21 +85,21 @@ public class Inventory {
         int i;
         for (i = 0; i < armor.length; ++i) {
             res += "i[" + i + "]: ";
-            res += (armor[i] != null) ? armor[i].getName() : "null";
+            res += (armor[i] != null) ? armor[i].getName() : "*Empty*";
             res += "\n";
         }
         res += "\n";
         res += "Potions:\n";
         for (i = 0; i < potions.length; ++i) {
             res += "i[" + i + "]: ";
-            res += (potions[i] != null) ? potions[i].getName() : "null";
+            res += (potions[i] != null) ? potions[i].getName() : "*Empty*";
             res += "\n";
         }
         res += "\n";
         res += "Weapons:\n";
         for (i = 0; i < weapons.length; ++i) {
             res += "i[" + i + "]: ";
-            res += (weapons[i] != null) ? weapons[i].getName() : "null";
+            res += (weapons[i] != null) ? weapons[i].getName() : "*Empty*";
             res += "\n";
         }
         res += "\n";

@@ -19,9 +19,7 @@ public class Battle {
         Scanner sc = new Scanner(System.in);
         System.out.println("-=x=-=x=-=x=-=x=-=x=-=x=-=x=-=BATTLE START=-=x=-=x=-=x=-=x=-=x=-=x=-=x=-");
         previousExperience = player.getExperience();
-        System.out.println("Which weapon do you want to equip?");
-        System.out.println(player.getInventory().printWeapons());
-        player.getInventory().equipWeapon(sc.nextInt());
+
         do {
             System.out.println("v^v^v^v^v^v^v^v^-YOUR TURN-v^v^v^v^v^v^v^v^");
             System.out.println();
@@ -47,7 +45,7 @@ public class Battle {
     static void selectionSystem(Player player, Enemy enemy) {
         Scanner sc = new Scanner(System.in);
 
-        System.out.println("\nWhat do you want to do?\nAttack(1) | Use potion(2) | Pass turn(3)");
+        System.out.println("\nWhat do you want to do?\nAttack(1) | Use potion(2) | Change weapon(3)");
         selection = sc.nextInt();
         switch (selection) {
         case 1:
@@ -59,6 +57,7 @@ public class Battle {
             upgradeStamina(player);
             break;
         case 3:
+            player.selectWeapon();
             enemyAttack(player, enemy);
             upgradeStamina(player);
             break;
@@ -74,10 +73,10 @@ public class Battle {
         // Drop item ? (50%)
         if (ThreadLocalRandom.current().nextInt(1, 3) == 1) {
             weaponDropped = enemy.dropWeapon(player);
-            System.out.println("\n| Enemy has dropped a weapon (!) |");
+            System.out.println("\n| Enemy has dropped a weapon! |");
             System.out.println("Weapon Name: " + weaponDropped.getName() + "\n" + weaponDropped.printAbilities());
             System.out.println("Do you want to get this weapon (Y / N)?");
-            if (sc.next().charAt(0) == 'Y') {
+            if (sc.next().charAt(0) == 'Y' || sc.next().charAt(0) == 'y') {
                 System.out.println("Which position do you want to save (0 or 1)?");
                 index = sc.nextInt();
                 player.getNewWeapon(weaponDropped, index);
@@ -110,7 +109,7 @@ public class Battle {
             System.out.println("v^v^v^v^v^v^v^v^-ENEMY TURN-v^v^v^v^v^v^v^v^");
             System.out.println();
             enemy.attack(player);
-            System.out.println("The " + enemy.getName() + " attacks you and does "
+            System.out.println("\nThe " + enemy.getName() + " attacks you and does "
                     + (previousHealth - player.getHealthPoints()) + " damage!");
         }
     }
@@ -120,7 +119,7 @@ public class Battle {
         System.out.println(player.getInventory().printPotions());
         System.out.println("Which potion do you want to use?");
         indexPotion = sc.nextInt();
-        if (player.getInventory().getPotionIndex(indexPotion) != null) {
+        try {
             if (player.getInventory().getPotionIndex(indexPotion) instanceof HealthPotion) {
                 if (player.getHealthPoints()
                         + player.getInventory().getPotionIndex(indexPotion).getRecoveryPoints() > player.getLimitHp())
@@ -137,8 +136,8 @@ public class Battle {
                             + player.getInventory().getPotionIndex(indexPotion).getRecoveryPoints());
             }
             player.getInventory().removePotionIndex(indexPotion);
-        } else {
-            System.out.println("You don't have anything in this position");
+        } catch (ArrayIndexOutOfBoundsException exception) {
+            System.out.println("You don't have a potion there!");
             selectionSystem(player, enemy);
         }
     }
@@ -155,6 +154,7 @@ public class Battle {
         System.out.println("<*><*><*>-You won!-<*><*><*>");
         player.checkLevelUp(enemy.getExperience());
     }
+
     // Battle system between player and boss
 
 }
