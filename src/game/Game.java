@@ -7,50 +7,38 @@ import src.character.npc.enemy.*;
 import src.character.gui.*;
 
 import java.util.Scanner;
-import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.layout.Pane;
 
-public class Game extends Application {
+public class Game {
     Scanner sc = new Scanner(System.in);
-
     private Map[] levels;
-    public Player newPlayer;
-    public static Stage gameStage;
+    private Player newPlayer;
+    private Stage stage;
 
-    public static void main(String[] args) {
-        Application.launch(args);
-    }
-
-    @Override
-    public void start(Stage stage) throws Exception {
-        gameStage = stage;
-        Scene createPlayer = new CreatePlayer(this);
-        gameStage.setScene(createPlayer);
-        gameStage.setTitle("CaveDungeon 0.1.290324 OMEGA");
-        gameStage.show();
-    }
-
-    public Game() {
+    public Game(Stage stage) throws Exception {
+        this.stage = stage;
         long gameSeed = System.currentTimeMillis();
         System.out.println("Seed: " + gameSeed);
         levels = new Map[1];
         for (int i = 0; i < levels.length; ++i)
             levels[i] = new Map(gameSeed + i);
         mapTests();
+        Scene createPlayer = new CreatePlayer(this);
+        stage.setScene(createPlayer);
     }
 
-    void mapTests() {
+    private void mapTests() {
         for (int i = 0; i < levels.length; ++i)
             System.out.println(levels[i].mapToString());
     }
 
-    public void playerTests() {
+    private void playerTests() {
         System.out.println(newPlayer.playerToString());
     }
 
-    public void battleTests() {
+    private void battleTests() {
         char battleAgain;
         Enemy newEnemy;
         Battle battle;
@@ -95,13 +83,9 @@ public class Game extends Application {
         return newPlayer;
     }
 
-    public static Stage getGameStage() {
-        return gameStage;
-    }
-
-    public void setRoomScene() {
+    private void setRoomScene() {
         Pane p = levels[0].getRoom(levels[0].startX, levels[0].startY).render();
         Scene scene = new Scene(p);
-        gameStage.setScene(scene);
+        stage.setScene(scene);
     }
 }

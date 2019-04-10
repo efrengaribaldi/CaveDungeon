@@ -8,8 +8,6 @@
 	</description>
 
 	<property name="src" location="src" />
-	<property name="old" location="old" />
-	<property name="tests" location="tests" />
 	<property name="build" location="build" />
 
 	<target name="init">
@@ -36,7 +34,7 @@
 	</target>
 
 	<target name="run" depends="compile,copyAssets" description="Executes the program.">
-		<java classname="src.game.Game" dir="${build}" fork="true" jvm="java" />
+		<java classname="src.game.Main" dir="${build}" fork="true" jvm="java" />
 	</target>
 
 	<target name="clean" description="Removes all generated files.">
