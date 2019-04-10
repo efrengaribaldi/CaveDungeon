@@ -9,4 +9,8 @@ public class Armor extends Item {
         super(name);
         this.baseDefense = baseDefense;
     }
+
+    public int getBaseDefense() {
+        return baseDefense;
+    }
 }

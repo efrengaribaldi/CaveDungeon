@@ -2,7 +2,7 @@ package src.item;
 
 import src.item.Item;
 
-public class Potion extends Item {
+public abstract class Potion extends Item {
     private int recoveryPoints;
 
     public Potion(String name, int recoveryPoints) {
@@ -13,4 +13,6 @@ public class Potion extends Item {
     public int getRecoveryPoints() {
         return recoveryPoints;
     }
+
+    public abstract char getType();
 }

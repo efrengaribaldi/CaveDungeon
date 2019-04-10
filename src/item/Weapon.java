@@ -46,7 +46,7 @@ public abstract class Weapon extends Item {
         for (int i = 0; i < abilities.length; ++i) {
             res += "Ability[" + i + "] ";
             res += (abilities[i] != null)
-                    ? "Name: " + abilities[i].getName() + " | HP Cost: " + abilities[i].getBaseDamage()
+                    ? "Name: " + abilities[i].getName() + " | Damage: " + abilities[i].getBaseDamage()
                             + " | Stamina cost: " + abilities[i].getStaminaCost()
                     : "null";
             res += "\n";
