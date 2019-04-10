@@ -116,11 +116,6 @@ public abstract class Player extends Character {
         return res;
     }
 
-    public void selectWeapon() {
-        System.out.println("Which weapon do you want to equip?\n");
-        System.out.println(getInventory().printWeapons());
-    }
-
     public void checkLevelUp(int newExp) {
         int expRequiredForNextLevel = (int) (15 * Math.pow(1.07, level));
         System.out.println("You got " + newExp + " new experience.");

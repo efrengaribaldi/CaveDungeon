@@ -55,11 +55,10 @@ public class Battle {
     }
 
     private void dropItemsSystem() {
-        Weapon weaponDropped;
         int index;
         // Drop item ? (50%)
         if (ThreadLocalRandom.current().nextInt(1, 3) == 1) {
-            weaponDropped = enemy.dropWeapon(player);
+            Weapon weaponDropped = enemy.dropWeapon(player);
             System.out.println("\n| Enemy has dropped a weapon! |");
             System.out.println("Weapon Name: " + weaponDropped.getName() + "\n" + weaponDropped.printAbilities());
             System.out.println("Do you want to get this weapon (Y / N)?");
@@ -111,7 +110,6 @@ public class Battle {
     private boolean potionSystem() {
         System.out.println(player.getInventory().printPotions());
         System.out.println("Which potion do you want to use?");
-
         int index = sc.nextInt();
         try {
             if (player.getInventory().getPotion(index) != null) {

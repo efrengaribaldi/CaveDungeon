@@ -2,14 +2,12 @@ package src.character.npc.enemy;
 
 import src.character.npc.Enemy;
 import src.character.Player;
-import src.item.Weapon;
-import src.item.weapon.*;
 
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Necromancer extends Enemy {
     public Necromancer() {
-        super("Necromancer", 200, 55);
+        super("Necromancer", 80, 20);
     }
 
     @Override
@@ -18,14 +16,10 @@ public class Necromancer extends Enemy {
     }
 
     @Override
-    public Weapon dropWeapon(Player player) {
-        switch (ThreadLocalRandom.current().nextInt(1, 2)) {
-        case 1:
-            return (player.getType() == 'e') ? new Sword(39, 10) : new EnchantedBook(39, 10);
-        case 2:
-            return (player.getType() == 'e') ? new Bow(39, 10) : new Wand(39, 10);
-        default:
-            return null;
-        }
+    protected int[] getArgsForWeapon(Player player) {
+        int baseAttack = ThreadLocalRandom.current().nextInt(30, 36);
+        int baseStamina = ThreadLocalRandom.current().nextInt(10, 14);
+        int[] res = { baseAttack, baseStamina };
+        return res;
     }
 }

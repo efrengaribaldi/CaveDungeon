@@ -2,14 +2,12 @@ package src.character.npc.enemy;
 
 import src.character.npc.Enemy;
 import src.character.Player;
-import src.item.Weapon;
-import src.item.weapon.*;
 
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Chort extends Enemy {
     public Chort() {
-        super("Chort", 50, 15);
+        super("Chort", 40, 12);
     }
 
     @Override
@@ -18,14 +16,10 @@ public class Chort extends Enemy {
     }
 
     @Override
-    public Weapon dropWeapon(Player player) {
-        switch (ThreadLocalRandom.current().nextInt(1, 2)) {
-        case 1:
-            return (player.getType() == 'e') ? new Sword(21, 8) : new EnchantedBook(21, 8);
-        case 2:
-            return (player.getType() == 'e') ? new Bow(21, 8) : new Wand(21, 8);
-        default:
-            return null;
-        }
+    protected int[] getArgsForWeapon(Player player) {
+        int baseAttack = ThreadLocalRandom.current().nextInt(20, 26);
+        int baseStamina = ThreadLocalRandom.current().nextInt(6, 10);
+        int[] res = { baseAttack, baseStamina };
+        return res;
     }
 }

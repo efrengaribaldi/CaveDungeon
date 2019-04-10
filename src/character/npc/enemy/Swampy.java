@@ -2,14 +2,12 @@ package src.character.npc.enemy;
 
 import src.character.npc.Enemy;
 import src.character.Player;
-import src.item.Weapon;
-import src.item.weapon.*;
 
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Swampy extends Enemy {
     public Swampy() {
-        super("Swampy", 100, 30);
+        super("Swampy", 50, 16);
     }
 
     @Override
@@ -18,14 +16,10 @@ public class Swampy extends Enemy {
     }
 
     @Override
-    public Weapon dropWeapon(Player player) {
-        switch (ThreadLocalRandom.current().nextInt(1, 2)) {
-        case 1:
-            return (player.getType() == 'e') ? new Sword(28, 9) : new EnchantedBook(28, 9);
-        case 2:
-            return (player.getType() == 'e') ? new Bow(28, 9) : new Wand(28, 9);
-        default:
-            return null;
-        }
+    protected int[] getArgsForWeapon(Player player) {
+        int baseAttack = ThreadLocalRandom.current().nextInt(24, 30);
+        int baseStamina = ThreadLocalRandom.current().nextInt(8, 12);
+        int[] res = { baseAttack, baseStamina };
+        return res;
     }
 }
