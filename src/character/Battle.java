@@ -97,7 +97,8 @@ public class Battle {
             System.out.println("You don't have enough stamina to use this ability");
             return false;
         } else {
-            player.attack(enemy, weaponIndex, abilityIndex);
+            int totalAttack = player.attack(enemy, weaponIndex, abilityIndex);
+            System.out.println("You did " + totalAttack + " damage!");
             enemyAttack();
             return true;
         }

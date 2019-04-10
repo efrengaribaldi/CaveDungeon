@@ -43,6 +43,18 @@ public class Inventory {
         potions[index] = null;
     }
 
+    public Armor getArmor(int index) {
+        return armor[index];
+    }
+
+    public void setArmor(Armor armor, int index) {
+        this.armor[index] = armor;
+    }
+
+    public void removeArmor(int index) {
+        armor[index] = null;
+    }
+
     public String printWeapons() {
         String res = "Weapons:\n";
         for (int i = 0; i < weapons.length; ++i) {

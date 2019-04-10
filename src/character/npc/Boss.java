@@ -1,14 +1,14 @@
 package src.character.npc;
 
 import src.character.NPC;
-import src.character.Player;
 
 public class Boss extends NPC {
     public Boss(String name) {
-        super(name, 1000);
+        super(name, 1000, 20);
     }
 
-    public void attack(Player player) {
-        //
+    @Override
+    public double getDefense() {
+        return 15;
     }
 }

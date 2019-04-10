@@ -47,7 +47,12 @@ public abstract class Player extends Character {
     }
 
     public double getDefense() {
-        return baseDefense * Math.pow(1.03, level);
+        double playersDef = baseDefense * Math.pow(1.03, level);
+        double itemsDef = 0;
+        for (int i = 0; i < 4; i++)
+            if (inventory.getArmor(i) != null)
+                itemsDef += inventory.getArmor(i).getBaseDefense();
+        return playersDef + itemsDef;
     }
 
     public int getExperience() {
@@ -82,20 +87,21 @@ public abstract class Player extends Character {
         return baseLimitStamina + (int) (3 * Math.pow(1.07, level));
     }
 
-    public void attack(NPC npc, int weaponIndex, int abilityIndex) {
+    public int attack(NPC npc, int weaponIndex, int abilityIndex) {
+        double damage = inventory.getWeapon(weaponIndex).getAbility(abilityIndex).getBaseDamage() * getAttack();
+        double defense = npc.getDefense();
+        int totalAttack = (int) (damage * damage / (damage + defense));
         // Update enemy healthpoints
-        npc.setHealthPoints((int) (npc.getHealthPoints()
-                - (inventory.getWeapon(weaponIndex).getAbility(abilityIndex).getBaseDamage() * getAttack())));
+        npc.setHealthPoints((int) (npc.getHealthPoints() - totalAttack));
         // Update player's stamina
         stamina -= inventory.getWeapon(weaponIndex).getAbility(abilityIndex).getStaminaCost();
+        return totalAttack;
     }
 
     public String printPlayerAbilities() {
         String res = "";
-        for (int i = 0; i < 2; i++) {
-            res += "Weapon " + i + ":\n";
-            res += inventory.getWeapon(i).printAbilities();
-        }
+        for (int i = 0; i < 2; i++)
+            res += "Weapon " + i + ":\n" + inventory.getWeapon(i).printAbilities();
         return res;
     }
 

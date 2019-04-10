@@ -6,8 +6,8 @@ import src.item.weapon.*;
 import src.item.potion.*;
 
 public class Melee extends Player {
-    public Melee(String name, int healthPoints, char gender, Inventory inventory, double attack, double defense) {
-        super(name, healthPoints, gender, inventory, attack, defense);
+    public Melee(String name, char gender) {
+        super(name, 20, gender, new Inventory(), 1.2, 1.0);
         this.inventory.addItemToInventory(new Sword(15, 5), 0);
         this.inventory.addItemToInventory(new Bow(15, 5), 1);
         this.inventory.addItemToInventory(new HealthPotion(15), 0);
