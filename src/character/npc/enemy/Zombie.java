@@ -19,19 +19,13 @@ public class Zombie extends Enemy {
 
     @Override
     public Weapon dropWeapon(Player player) {
+        int bStamina = ThreadLocalRandom.current().nextInt(3, 7);
+        int bAttack = ThreadLocalRandom.current().nextInt(12, 18);
         switch (ThreadLocalRandom.current().nextInt(1, 2)) {
         case 1:
-
-            return (player.getType() == 'e')
-                    ? new Sword(ThreadLocalRandom.current().nextInt(12, 18), ThreadLocalRandom.current().nextInt(3, 7))
-
-                    : new EnchantedBook(ThreadLocalRandom.current().nextInt(12, 18),
-                            ThreadLocalRandom.current().nextInt(3, 7));
+            return (player.getType() == 'e') ? new Sword(bAttack, bStamina) : new EnchantedBook(bAttack, bStamina);
         case 2:
-            return (player.getType() == 'e')
-                    ? new Bow(ThreadLocalRandom.current().nextInt(12, 18), ThreadLocalRandom.current().nextInt(3, 7))
-                    : new Wand(ThreadLocalRandom.current().nextInt(12, 18), ThreadLocalRandom.current().nextInt(3, 7));
-
+            return (player.getType() == 'e') ? new Bow(bAttack, bStamina) : new Wand(bAttack, bStamina);
         default:
             return null;
         }

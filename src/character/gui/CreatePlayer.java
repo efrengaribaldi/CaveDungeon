@@ -12,11 +12,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 
 public class CreatePlayer extends Scene {
-    private Game game;
 
     public CreatePlayer(Game game) throws Exception {
         super(new HBox());
-        this.game = game;
         FXMLLoader loader = new FXMLLoader();
         // Path to the FXML File
         URI fxmlDocPath = getClass().getResource("./createPlayer.fxml").toURI();

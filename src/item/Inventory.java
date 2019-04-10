@@ -59,9 +59,10 @@ public class Inventory {
         String res = "Weapons:\n";
         for (int i = 0; i < weapons.length; ++i) {
             res += "i[" + i + "]: ";
-
-            res += (weapons[i] != null) ? weapons[i].getName() + weapons[i].getType; : "*Empty*";
-
+            if (weapons[i] != null)
+                res += weapons[i].getName() + " (" + weapons[i].getType() + ")";
+            else
+                res += "*Empty*";
             res += "\n";
         }
         return res;
@@ -87,7 +88,6 @@ public class Inventory {
             res += (armor[i] != null) ? armor[i].getName() : "*Empty*";
             res += "\n";
         }
-
         return res;
     }
 

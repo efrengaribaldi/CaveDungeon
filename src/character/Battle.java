@@ -17,7 +17,6 @@ public class Battle {
         this.player = player;
         this.enemy = enemy;
         System.out.println("-=x=-=x=-=x=-=x=-=x=-=x=-=x=-=BATTLE START=-=x=-=x=-=x=-=x=-=x=-=x=-=x=-");
-
         do {
             System.out.println("v^v^v^v^v^v^v^v^-YOUR TURN-v^v^v^v^v^v^v^v^\n");
             System.out.println("--STATS--");
@@ -36,12 +35,11 @@ public class Battle {
         }
     }
 
-
     private void selectionSystem() {
         boolean hasDoneSomething = false;
         do {
             System.out.println("\nWhat do you want to do?");
-            System.out.println("Attack(1) | Use potion(2) | Change weapon(3)");
+            System.out.println("Attack(1) | Use potion(2)");
             switch (sc.nextInt()) {
             case 1:
                 hasDoneSomething = attackSystem();
@@ -49,17 +47,11 @@ public class Battle {
             case 2:
                 hasDoneSomething = potionSystem();
                 break;
-            case 3:
-                player.selectWeapon();
-                enemyAttack();
-                hasDoneSomething = true;
-                break;
             default:
                 break;
             }
         } while (!hasDoneSomething);
         upgradeStamina();
-
     }
 
     private void dropItemsSystem() {
@@ -108,14 +100,12 @@ public class Battle {
         }
     }
 
-
     private void enemyAttack() {
         if (enemy.getHealthPoints() <= 0)
             return;
         System.out.println("v^v^v^v^v^v^v^v^-ENEMY TURN-v^v^v^v^v^v^v^v^\n");
         int totalAttack = enemy.attack(player);
         System.out.println("The " + enemy.getName() + " attacks you and does " + totalAttack + " damage!");
-
     }
 
     private boolean potionSystem() {
@@ -134,7 +124,6 @@ public class Battle {
         } catch (ArrayIndexOutOfBoundsException exception) {
             System.out.println("Potion not found");
             return false;
-
         }
     }
 
@@ -149,6 +138,5 @@ public class Battle {
         System.out.println("<*><*><*>-You won!-<*><*><*>");
         player.checkLevelUp(enemy.getExperience());
     }
-
     // Battle system between player and boss
 }

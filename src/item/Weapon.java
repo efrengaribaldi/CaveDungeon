@@ -55,5 +55,5 @@ public abstract class Weapon extends Item {
         return res;
     }
 
-    public abstract void getType();
+    public abstract String getType();
 }
