@@ -82,26 +82,31 @@ public abstract class Player extends Character {
         return baseLimitStamina + (int) (3 * Math.pow(1.07, level));
     }
 
-    public void attack(NPC npc, int index) {
+    public void attack(NPC npc, int weaponIndex, int abilityIndex) {
         // Update enemy healthpoints
         npc.setHealthPoints((int) (npc.getHealthPoints()
-                - (getInventory().getEquippedWeapon().getAbility(index).getBaseDamage() * getAttack())));
+                - (inventory.getWeapon(weaponIndex).getAbility(abilityIndex).getBaseDamage() * getAttack())));
         // Update player's stamina
-        stamina -= getInventory().getEquippedWeapon().getAbility(index).getStaminaCost();
+        stamina -= inventory.getWeapon(weaponIndex).getAbility(abilityIndex).getStaminaCost();
     }
 
     public String printPlayerAbilities() {
-        return inventory.getEquippedWeapon().printAbilities();
+        String res = "";
+        for (int i = 0; i < 2; i++) {
+            res += "Weapon " + i + ":\n";
+            res += inventory.getWeapon(i).printAbilities();
+        }
+        return res;
     }
 
     public String playerToString() {
         String res = "";
-        res += "| Player Name: " + getName() + " | \n";
-        res += "| Health Points: " + getHealthPoints() + " | \n";
-        res += "| Inventory: | \n" + inventory.inventoryToString();
-        res += "| Experience: " + experience + " | \n";
-        res += "| Gender: " + gender + " | \n";
-        res += printPlayerAbilities();
+        res += "\n| Player Name: " + getName() + " |";
+        res += "\n| Health Points: " + getHealthPoints() + " |";
+        res += "\n| Inventory: |\n\t" + inventory.inventoryToString().replaceAll("\n", "\n\t");
+        res += "\n| Experience: " + experience + " |";
+        res += "\n| Gender: " + gender + " |";
+        res += "\n| Abilities: |\n\t" + printPlayerAbilities().replaceAll("\n", "\n\t");
         return res;
     }
 
@@ -131,14 +136,13 @@ public abstract class Player extends Character {
 
     public void getNewWeapon(Weapon newWeapon, int index) {
         try {
-            if (inventory.getWeaponByIndex(index) == null) {
+            if (inventory.getWeapon(index) == null) {
                 inventory.addItemToInventory(newWeapon, index);
             } else {
                 System.out.println("You already have a weapon in this position. Do you want to remove it (Y / N)?");
                 if (sc.next().charAt(0) == 'Y') {
                     inventory.removeWeapon(index);
                     inventory.addItemToInventory(newWeapon, index);
-                    inventory.equipWeapon(index);
                 }
             }
         } catch (ArrayIndexOutOfBoundsException exception) {

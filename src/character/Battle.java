@@ -2,6 +2,7 @@ package src.character;
 
 import src.character.npc.*;
 import src.item.Weapon;
+import src.item.weapon.Ability;
 
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
@@ -16,9 +17,6 @@ public class Battle {
         this.player = player;
         this.enemy = enemy;
         System.out.println("-=x=-=x=-=x=-=x=-=x=-=x=-=x=-=BATTLE START=-=x=-=x=-=x=-=x=-=x=-=x=-=x=-");
-        System.out.println("Which weapon do you want to equip?");
-        System.out.println(player.getInventory().printWeapons());
-        player.getInventory().equipWeapon(sc.nextInt());
         do {
             System.out.println("v^v^v^v^v^v^v^v^-YOUR TURN-v^v^v^v^v^v^v^v^\n");
             System.out.println("--STATS--");
@@ -78,23 +76,30 @@ public class Battle {
     }
 
     private boolean attackSystem() {
-        int indexAttack;
-        System.out.println("Select your ability to attack: ");
+        System.out.println("How do you want to attack?");
         System.out.println(player.printPlayerAbilities());
-        indexAttack = sc.nextInt();
+        System.out.println("Select your weapon: ");
+        int weaponIndex = sc.nextInt();
+        if (weaponIndex != 0 && weaponIndex != 1) {
+            System.out.println("Weapon not found");
+            return false;
+        }
+        System.out.println("Select your ability: ");
+        int abilityIndex = sc.nextInt();
+        Ability ability;
         try {
-            if (player.getStamina() < player.getInventory().getEquippedWeapon().getAbility(indexAttack)
-                    .getStaminaCost()) {
-                System.out.println("You don't have enough stamina to use this ability");
-                return false;
-            } else {
-                player.attack(enemy, indexAttack);
-                enemyAttack();
-                return true;
-            }
+            ability = player.getInventory().getWeapon(weaponIndex).getAbility(abilityIndex);
         } catch (ArrayIndexOutOfBoundsException exception) {
             System.out.println("Ability not found");
             return false;
+        }
+        if (player.getStamina() < ability.getStaminaCost()) {
+            System.out.println("You don't have enough stamina to use this ability");
+            return false;
+        } else {
+            player.attack(enemy, weaponIndex, abilityIndex);
+            enemyAttack();
+            return true;
         }
     }
 
