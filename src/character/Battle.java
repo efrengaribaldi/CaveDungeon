@@ -17,6 +17,7 @@ public class Battle {
         this.player = player;
         this.enemy = enemy;
         System.out.println("-=x=-=x=-=x=-=x=-=x=-=x=-=x=-=BATTLE START=-=x=-=x=-=x=-=x=-=x=-=x=-=x=-");
+
         do {
             System.out.println("v^v^v^v^v^v^v^v^-YOUR TURN-v^v^v^v^v^v^v^v^\n");
             System.out.println("--STATS--");
@@ -35,11 +36,12 @@ public class Battle {
         }
     }
 
+
     private void selectionSystem() {
         boolean hasDoneSomething = false;
         do {
             System.out.println("\nWhat do you want to do?");
-            System.out.println("Attack(1) | Use potion(2) | Pass turn(3)");
+            System.out.println("Attack(1) | Use potion(2) | Change weapon(3)");
             switch (sc.nextInt()) {
             case 1:
                 hasDoneSomething = attackSystem();
@@ -48,6 +50,7 @@ public class Battle {
                 hasDoneSomething = potionSystem();
                 break;
             case 3:
+                player.selectWeapon();
                 enemyAttack();
                 hasDoneSomething = true;
                 break;
@@ -56,6 +59,7 @@ public class Battle {
             }
         } while (!hasDoneSomething);
         upgradeStamina();
+
     }
 
     private void dropItemsSystem() {
@@ -64,10 +68,10 @@ public class Battle {
         // Drop item ? (50%)
         if (ThreadLocalRandom.current().nextInt(1, 3) == 1) {
             weaponDropped = enemy.dropWeapon(player);
-            System.out.println("\n| Enemy has dropped a weapon (!) |");
+            System.out.println("\n| Enemy has dropped a weapon! |");
             System.out.println("Weapon Name: " + weaponDropped.getName() + "\n" + weaponDropped.printAbilities());
             System.out.println("Do you want to get this weapon (Y / N)?");
-            if (sc.next().charAt(0) == 'Y') {
+            if (sc.next().charAt(0) == 'Y' || sc.next().charAt(0) == 'y') {
                 System.out.println("Which position do you want to save (0 or 1)?");
                 index = sc.nextInt();
                 player.getNewWeapon(weaponDropped, index);
@@ -104,17 +108,20 @@ public class Battle {
         }
     }
 
+
     private void enemyAttack() {
         if (enemy.getHealthPoints() <= 0)
             return;
         System.out.println("v^v^v^v^v^v^v^v^-ENEMY TURN-v^v^v^v^v^v^v^v^\n");
         int totalAttack = enemy.attack(player);
         System.out.println("The " + enemy.getName() + " attacks you and does " + totalAttack + " damage!");
+
     }
 
     private boolean potionSystem() {
         System.out.println(player.getInventory().printPotions());
         System.out.println("Which potion do you want to use?");
+
         int index = sc.nextInt();
         try {
             if (player.getInventory().getPotion(index) != null) {
@@ -127,6 +134,7 @@ public class Battle {
         } catch (ArrayIndexOutOfBoundsException exception) {
             System.out.println("Potion not found");
             return false;
+
         }
     }
 
@@ -141,5 +149,6 @@ public class Battle {
         System.out.println("<*><*><*>-You won!-<*><*><*>");
         player.checkLevelUp(enemy.getExperience());
     }
+
     // Battle system between player and boss
 }

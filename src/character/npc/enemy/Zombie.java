@@ -21,11 +21,17 @@ public class Zombie extends Enemy {
     public Weapon dropWeapon(Player player) {
         switch (ThreadLocalRandom.current().nextInt(1, 2)) {
         case 1:
-            return (player.getType() == 'e') ? new Sword(ThreadLocalRandom.current().nextInt(12, 18), 5)
-                    : new EnchantedBook(ThreadLocalRandom.current().nextInt(12, 18), 5);
+
+            return (player.getType() == 'e')
+                    ? new Sword(ThreadLocalRandom.current().nextInt(12, 18), ThreadLocalRandom.current().nextInt(3, 7))
+
+                    : new EnchantedBook(ThreadLocalRandom.current().nextInt(12, 18),
+                            ThreadLocalRandom.current().nextInt(3, 7));
         case 2:
-            return (player.getType() == 'e') ? new Bow(ThreadLocalRandom.current().nextInt(12, 18), 5)
-                    : new Wand(ThreadLocalRandom.current().nextInt(12, 18), 5);
+            return (player.getType() == 'e')
+                    ? new Bow(ThreadLocalRandom.current().nextInt(12, 18), ThreadLocalRandom.current().nextInt(3, 7))
+                    : new Wand(ThreadLocalRandom.current().nextInt(12, 18), ThreadLocalRandom.current().nextInt(3, 7));
+
         default:
             return null;
         }

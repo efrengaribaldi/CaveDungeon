@@ -36,6 +36,7 @@ public class Game {
 
     private void playerTests() {
         System.out.println(newPlayer.playerToString());
+        newPlayer.selectWeapon();
     }
 
     private void battleTests() {
