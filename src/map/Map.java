@@ -17,8 +17,8 @@ public class Map {
     public Map(long seed) {
         random.setSeed(seed);
         minNumRooms = 10;
-        sizeX = 7;
-        sizeY = 9;
+        sizeX = 5;
+        sizeY = 7;
         // Generate map layout
         generateMap();
         // Generate every room

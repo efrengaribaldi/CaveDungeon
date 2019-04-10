@@ -53,31 +53,23 @@ public class CreatePlayerController {
             System.out.println("Choose a type of player");
             return;
         }
-
         switch (playerSelected) {
         case 1:
-            newPlayer = new Melee(name.getText(), 20, genderSelected(), new Inventory(), 1.50, 1.0);
+            newPlayer = new Melee(name.getText(), genderSelected());
             break;
         case 2:
-            newPlayer = new Mage(name.getText(), 25, genderSelected(), new Inventory(), 1.0, 1.20);
+            newPlayer = new Mage(name.getText(), genderSelected());
             break;
         default:
             newPlayer = null;
             System.out.println("Player not found!");
         }
         // Set the newPlayer to game
-        game.setNewPlayer(newPlayer);
-        game.playersrc();
-        game.battlesrc();
-        game.setRoomScene();
+        game.setNewPlayerAndContinue(newPlayer);
     }
 
     private char genderSelected() {
-        return (((String) (gender.getValue())).equals("Male")) ? 'M' : 'F';
-    }
-
-    public Player getPlayerCreated() {
-        return newPlayer;
+        return (((String) gender.getValue()).equals("Male")) ? 'M' : 'F';
     }
 
     public void setGame(Game game) {

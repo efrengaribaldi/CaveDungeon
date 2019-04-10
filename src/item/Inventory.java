@@ -1,9 +1,9 @@
 package src.item;
 
 public class Inventory {
-    public Armor[] armor;
-    public Potion[] potions;
-    public Weapon[] weapons;
+    private Armor[] armor;
+    private Potion[] potions;
+    private Weapon[] weapons;
 
     public Inventory() {
         armor = new Armor[4];
@@ -23,20 +23,7 @@ public class Inventory {
         this.weapons[index] = weapon;
     }
 
-    public void equipWeapon(int index) {
-        weapons[0].setWeaponState((index == 0));
-        weapons[1].setWeaponState((index == 1));
-    }
-
-    public String showEquippedWeapon() {
-        return (weapons[0].getWeaponState()) ? weapons[0].getName() : weapons[1].getName();
-    }
-
-    public Weapon getEquippedWeapon() {
-        return (weapons[0].getWeaponState()) ? weapons[0] : weapons[1];
-    }
-
-    public Weapon getWeaponByIndex(int index) {
+    public Weapon getWeapon(int index) {
         return weapons[index];
     }
 
@@ -44,26 +31,37 @@ public class Inventory {
         weapons[index] = null;
     }
 
-    public Potion getPotionIndex(int index) {
+    public Potion getPotion(int index) {
         return potions[index];
     }
 
-    public void setPotionIndex(Potion potion, int index) {
+    public void setPotion(Potion potion, int index) {
         potions[index] = potion;
     }
 
-    public void removePotionIndex(int index) {
+    public void removePotion(int index) {
         potions[index] = null;
+    }
+
+    public Armor getArmor(int index) {
+        return armor[index];
+    }
+
+    public void setArmor(Armor armor, int index) {
+        this.armor[index] = armor;
+    }
+
+    public void removeArmor(int index) {
+        armor[index] = null;
     }
 
     public String printWeapons() {
         String res = "Weapons:\n";
         for (int i = 0; i < weapons.length; ++i) {
             res += "i[" + i + "]: ";
-            res += (weapons[i] != null) ? weapons[i].getName() + " | EQUIP: " + weapons[i].getWeaponState() : "null";
+            res += (weapons[i] != null) ? weapons[i].getName() : "null";
             res += "\n";
         }
-        res += "\n";
         return res;
     }
 
@@ -75,11 +73,10 @@ public class Inventory {
                     : "null";
             res += "\n";
         }
-        res += "\n";
         return res;
     }
 
-    public String inventoryToString() {
+    public String printArmor() {
         String res = "";
         res += "Armor:\n";
         int i;
@@ -88,21 +85,10 @@ public class Inventory {
             res += (armor[i] != null) ? armor[i].getName() : "null";
             res += "\n";
         }
-        res += "\n";
-        res += "Potions:\n";
-        for (i = 0; i < potions.length; ++i) {
-            res += "i[" + i + "]: ";
-            res += (potions[i] != null) ? potions[i].getName() : "null";
-            res += "\n";
-        }
-        res += "\n";
-        res += "Weapons:\n";
-        for (i = 0; i < weapons.length; ++i) {
-            res += "i[" + i + "]: ";
-            res += (weapons[i] != null) ? weapons[i].getName() : "null";
-            res += "\n";
-        }
-        res += "\n";
         return res;
+    }
+
+    public String inventoryToString() {
+        return printArmor() + "\n" + printPotions() + "\n" + printWeapons();
     }
 }
