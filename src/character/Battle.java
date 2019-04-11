@@ -1,6 +1,5 @@
 package src.character;
 
-import src.character.npc.*;
 import src.item.Weapon;
 import src.item.weapon.Ability;
 
@@ -10,21 +9,21 @@ import java.util.concurrent.ThreadLocalRandom;
 public class Battle {
     private Scanner sc;
     private Player player;
-    private Enemy enemy;
+    private NPC npc;
 
-    public Battle(Player player, Enemy enemy) {
+    public Battle(Player player, NPC npc) {
         sc = new Scanner(System.in);
         this.player = player;
-        this.enemy = enemy;
+        this.npc = npc;
         System.out.println("-=x=-=x=-=x=-=x=-=x=-=x=-=x=-=BATTLE START=-=x=-=x=-=x=-=x=-=x=-=x=-=x=-");
         do {
             System.out.println("v^v^v^v^v^v^v^v^-YOUR TURN-v^v^v^v^v^v^v^v^\n");
             System.out.println("--STATS--");
             System.out.println("Player HP: " + player.getHealthPoints() + " | Player Stamina: " + player.getStamina());
-            System.out.println("Enemy  HP: " + enemy.getHealthPoints());
+            System.out.println("NPC  HP: " + npc.getHealthPoints());
             System.out.println("----------");
             selectionSystem();
-        } while (player.getHealthPoints() > 0 && enemy.getHealthPoints() > 0);
+        } while (player.getHealthPoints() > 0 && npc.getHealthPoints() > 0);
         if (player.getHealthPoints() > 0) {
             // Add drop items
             upgradeStats();
@@ -58,8 +57,8 @@ public class Battle {
         int index;
         // Drop item ? (50%)
         if (ThreadLocalRandom.current().nextInt(1, 3) == 1) {
-            Weapon weaponDropped = enemy.dropWeapon(player);
-            System.out.println("\n| Enemy has dropped a weapon! |");
+            Weapon weaponDropped = npc.dropWeapon(player);
+            System.out.println("\n| NPC has dropped a weapon! |");
             System.out.println("Weapon Name: " + weaponDropped.getName() + "\n" + weaponDropped.printAbilities());
             System.out.println("Do you want to get this weapon (Y / N)?");
             if (sc.next().charAt(0) == 'Y' || sc.next().charAt(0) == 'y') {
@@ -92,19 +91,19 @@ public class Battle {
             System.out.println("You don't have enough stamina to use this ability");
             return false;
         } else {
-            int totalAttack = player.attack(enemy, weaponIndex, abilityIndex);
+            int totalAttack = player.attack(npc, weaponIndex, abilityIndex);
             System.out.println("You did " + totalAttack + " damage!");
-            enemyAttack();
+            npcAttack();
             return true;
         }
     }
 
-    private void enemyAttack() {
-        if (enemy.getHealthPoints() <= 0)
+    private void npcAttack() {
+        if (npc.getHealthPoints() <= 0)
             return;
         System.out.println("v^v^v^v^v^v^v^v^-ENEMY TURN-v^v^v^v^v^v^v^v^\n");
-        int totalAttack = enemy.attack(player);
-        System.out.println("The " + enemy.getName() + " attacks you and does " + totalAttack + " damage!");
+        int totalAttack = npc.attack(player);
+        System.out.println("The " + npc.getName() + " attacks you and does " + totalAttack + " damage!");
     }
 
     private boolean potionSystem() {
@@ -134,7 +133,7 @@ public class Battle {
 
     private void upgradeStats() {
         System.out.println("<*><*><*>-You won!-<*><*><*>");
-        player.checkLevelUp(enemy.getExperience());
+        player.checkLevelUp(npc.getExperience());
     }
     // Battle system between player and boss
 }

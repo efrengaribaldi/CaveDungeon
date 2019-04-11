@@ -7,7 +7,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class Necromancer extends Enemy {
     public Necromancer() {
-        super("Necromancer", 80, 20);
+        super("Necromancer", 80, 20, 10);
     }
 
     @Override

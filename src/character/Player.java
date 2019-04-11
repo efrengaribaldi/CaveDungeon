@@ -47,7 +47,7 @@ public abstract class Player extends Character {
     }
 
     public double getDefense() {
-        double playersDef = baseDefense * Math.pow(1.03, level);
+        double playersDef = baseDefense * Math.pow(1.25, level);
         double itemsDef = 0;
         for (int i = 0; i < 4; i++)
             if (inventory.getArmor(i) != null)
@@ -72,7 +72,7 @@ public abstract class Player extends Character {
     }
 
     public int getLimitHp() {
-        return baseLimitHp + (int) (4 * Math.pow(1.07, level));
+        return 15 + (int) (22 * Math.pow(1.12, level - 1));
     }
 
     public int getStamina() {
@@ -84,7 +84,7 @@ public abstract class Player extends Character {
     }
 
     public int getLimitStamina() {
-        return baseLimitStamina + (int) (3 * Math.pow(1.07, level));
+        return baseLimitStamina * 0 + (int) (14 * Math.pow(1.08, level - 1));
     }
 
     public int attack(NPC npc, int weaponIndex, int abilityIndex) {
@@ -118,7 +118,8 @@ public abstract class Player extends Character {
 
     public void checkLevelUp(int newExp) {
         int expRequiredForNextLevel = (int) (15 * Math.pow(1.07, level));
-        System.out.println("You got " + newExp + " new experience.");
+        if (newExp > 0)
+            System.out.println("You got " + newExp + " new experience.");
         experience += newExp;
         if (experience >= expRequiredForNextLevel) {
             // Advance level
@@ -138,6 +139,8 @@ public abstract class Player extends Character {
             System.out.println("You need " + expNeeded + " experience to advance to next level.");
         }
         System.out.println("<*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*>");
+        if (experience >= (int) (15 * Math.pow(1.07, level)))
+            checkLevelUp(0);
     }
 
     public void getNewWeapon(Weapon newWeapon, int index) {

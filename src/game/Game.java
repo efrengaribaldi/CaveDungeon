@@ -75,6 +75,7 @@ public class Game {
     public void setNewPlayerAndContinue(Player newPlayer) {
         this.newPlayer = newPlayer;
         playerTests();
+        // newPlayer.checkLevelUp(200);
         battleTests();
         setRoomScene();
     }

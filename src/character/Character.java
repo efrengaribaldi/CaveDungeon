@@ -10,8 +10,6 @@ public abstract class Character {
     }
 
     public Character() {
-        // Set random name, hp and experience
-        // For boss and enemy npc
     }
 
     public String getName() {

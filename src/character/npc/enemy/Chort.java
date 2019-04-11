@@ -7,7 +7,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class Chort extends Enemy {
     public Chort() {
-        super("Chort", 40, 12);
+        super("Chort", 40, 12, 6);
     }
 
     @Override
