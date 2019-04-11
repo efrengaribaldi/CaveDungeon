@@ -71,7 +71,7 @@ public class Room {
         }
         // Add enemies for every chosen tile
         for (int i = 0; i < numEnemies; i++)
-            tiles[chosenTiles.get(i).x][chosenTiles.get(i).y].addEnemy();
+            tiles[chosenTiles.get(i).x][chosenTiles.get(i).y].addEnemy(state);
     }
 
     String roomToString() {

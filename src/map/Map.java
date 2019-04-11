@@ -108,6 +108,10 @@ public class Map {
             roomsToCreate.add(new Vector2D(x, y - 1));
         // Create a room, set type and doors, and add the new room to map
         state = (state == 0) ? getRandomType() : state;
+        // If it is adjacent to the initial room, and its state is 3, make it 2
+        if ((y == startY && (x == startX + 1 || x == startX - 1))
+                || (x == startX && (y == startY - 1 || y == startY + 1)))
+            state = (state == 3) ? 2 : state;
         Room r = new Room(state, doors);
         rooms[x][y] = r;
     }

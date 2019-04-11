@@ -19,23 +19,22 @@ public class Tile {
         spriteNum = (rand < 1) ? 1 : rand;
     }
 
-    public void addEnemy() {
-        int randomEnemy = (int) (Math.random() * 5);
-        switch (randomEnemy) {
-        case 0:
-            enemy = new Chort();
-            break;
-        case 1:
-            enemy = new Necromancer();
-            break;
+    public void addEnemy(int state) {
+        switch (state) {
         case 2:
-            enemy = new Skeleton();
+            if (Math.random() < 0.5)
+                enemy = new Zombie();
+            else
+                enemy = new Skeleton();
             break;
         case 3:
-            enemy = new Swampy();
-            break;
-        case 4:
-            enemy = new Zombie();
+            int randomEnemy = (int) (Math.random() * 9);
+            if (randomEnemy < 5)
+                enemy = new Chort();
+            else if (randomEnemy < 8)
+                enemy = new Swampy();
+            else
+                enemy = new Necromancer();
             break;
         }
     }
