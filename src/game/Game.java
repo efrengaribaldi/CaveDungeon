@@ -36,6 +36,8 @@ public class Game {
 
     private void playerTests() {
         System.out.println(newPlayer.playerToString());
+        newPlayer.equipWeapon();
+
     }
 
     private void battleTests() {

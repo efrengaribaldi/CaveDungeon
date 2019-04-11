@@ -38,13 +38,17 @@ public class Battle {
         boolean hasDoneSomething = false;
         do {
             System.out.println("\nWhat do you want to do?");
-            System.out.println("Attack(1) | Use potion(2)");
+            System.out.println("Attack(1) | Use potion(2) | Change weapon(3)");
             switch (sc.nextInt()) {
             case 1:
                 hasDoneSomething = attackSystem();
                 break;
             case 2:
                 hasDoneSomething = potionSystem();
+                break;
+
+            case 3:
+                hasDoneSomething = weaponSystem();
                 break;
             default:
                 break;
@@ -70,19 +74,13 @@ public class Battle {
     }
 
     private boolean attackSystem() {
-        System.out.println("How do you want to attack?");
-        System.out.println(player.printPlayerAbilities());
-        System.out.println("Select your weapon: ");
-        int weaponIndex = sc.nextInt();
-        if (weaponIndex != 0 && weaponIndex != 1) {
-            System.out.println("Weapon not found");
-            return false;
-        }
+
         System.out.println("Select your ability: ");
+        System.out.println(player.printWeaponAbilities());
         int abilityIndex = sc.nextInt();
         Ability ability;
         try {
-            ability = player.getInventory().getWeapon(weaponIndex).getAbility(abilityIndex);
+            ability = player.getInventory().getEquippedWeapon().getAbility(abilityIndex);
         } catch (ArrayIndexOutOfBoundsException exception) {
             System.out.println("Ability not found");
             return false;
@@ -91,11 +89,27 @@ public class Battle {
             System.out.println("You don't have enough stamina to use this ability");
             return false;
         } else {
-            int totalAttack = player.attack(npc, weaponIndex, abilityIndex);
+            int totalAttack = player.attack(npc, abilityIndex);
             System.out.println("You did " + totalAttack + " damage!");
             npcAttack();
             return true;
         }
+    }
+
+    private boolean weaponSystem() {
+
+        System.out.println("Which weapon do you want to equip?");
+        System.out.println(player.getInventory().printWeapons());
+        int weaponIndex = sc.nextInt();
+        player.getInventory().equipWeapon(weaponIndex);
+
+        if (weaponIndex != 0 && weaponIndex != 1) {
+            System.out.println("Weapon not found");
+            return false;
+        }
+        npcAttack();
+        return true;
+
     }
 
     private void npcAttack() {

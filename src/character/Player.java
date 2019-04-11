@@ -87,14 +87,14 @@ public abstract class Player extends Character {
         return baseLimitStamina * 0 + (int) (14 * Math.pow(1.08, level - 1));
     }
 
-    public int attack(NPC npc, int weaponIndex, int abilityIndex) {
-        double damage = inventory.getWeapon(weaponIndex).getAbility(abilityIndex).getBaseDamage() * getAttack();
+    public int attack(NPC npc, int abilityIndex) {
+        double damage = inventory.getEquippedWeapon().getAbility(abilityIndex).getBaseDamage() * getAttack();
         double defense = npc.getDefense();
         int totalAttack = (int) (damage * damage / (damage + defense));
         // Update enemy healthpoints
         npc.setHealthPoints((int) (npc.getHealthPoints() - totalAttack));
         // Update player's stamina
-        stamina -= inventory.getWeapon(weaponIndex).getAbility(abilityIndex).getStaminaCost();
+        stamina -= inventory.getEquippedWeapon().getAbility(abilityIndex).getStaminaCost();
         return totalAttack;
     }
 
@@ -103,6 +103,24 @@ public abstract class Player extends Character {
         for (int i = 0; i < 2; i++)
             res += "Weapon " + i + ":\n" + inventory.getWeapon(i).printAbilities();
         return res;
+    }
+
+    public String printWeaponAbilities() {
+        return inventory.getEquippedWeapon().printAbilities();
+    }
+
+    public void equipWeapon() {
+
+        System.out.println("Which weapon do you want to equip?");
+        System.out.println(getInventory().printWeapons());
+        int weaponIndex = sc.nextInt();
+        getInventory().equipWeapon(weaponIndex);
+
+        if (weaponIndex != 0 && weaponIndex != 1) {
+            System.out.println("Weapon not found");
+            equipWeapon();
+
+        }
     }
 
     public String playerToString() {

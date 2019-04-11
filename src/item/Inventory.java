@@ -23,6 +23,10 @@ public class Inventory {
         this.weapons[index] = weapon;
     }
 
+    public Weapon selectedWeapon(int index) {
+        return weapons[index];
+    }
+
     public Weapon getWeapon(int index) {
         return weapons[index];
     }
@@ -53,6 +57,20 @@ public class Inventory {
 
     public void removeArmor(int index) {
         armor[index] = null;
+    }
+
+    public void equipWeapon(int index) {
+        weapons[0].setWeaponState((index == 0));
+        weapons[1].setWeaponState((index == 1));
+
+    }
+
+    public String showEquippedWeapon() {
+        return (weapons[0].getWeaponState()) ? weapons[0].getName() : weapons[1].getName();
+    }
+
+    public Weapon getEquippedWeapon() {
+        return (weapons[0].getWeaponState()) ? weapons[0] : weapons[1];
     }
 
     public String printWeapons() {
