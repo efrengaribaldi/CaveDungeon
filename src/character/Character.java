@@ -1,5 +1,7 @@
 package src.character;
 
+import javafx.scene.image.ImageView;
+
 public abstract class Character {
     private String name;
     private int healthPoints;
@@ -27,4 +29,8 @@ public abstract class Character {
     public void setHealthPoints(int healthPoints) {
         this.healthPoints = healthPoints;
     }
+
+    public abstract String getType();
+
+    public abstract ImageView render();
 }

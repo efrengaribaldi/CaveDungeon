@@ -1,16 +1,15 @@
 package src.map;
 
 import src.map.Tile;
-import src.character.npc.Enemy;
+import src.character.Character;
+import src.character.Player;
 import src.character.npc.enemy.*;
-import src.character.npc.Boss;
 import src.character.npc.boss.*;
 import src.item.misc.Chest;
 
 public class Tile {
     private int spriteNum;
-    private Enemy enemy;
-    private Boss boss;
+    private Character character;
     private Chest chest;
 
     public Tile() {
@@ -22,43 +21,52 @@ public class Tile {
     public void addEnemy(int state) {
         switch (state) {
         case 2:
-            if (Math.random() < 0.5)
-                enemy = new Zombie();
-            else
-                enemy = new Skeleton();
+            character = (Math.random() < 0.5) ? new Zombie() : new Skeleton();
             break;
         case 3:
             int randomEnemy = (int) (Math.random() * 9);
             if (randomEnemy < 5)
-                enemy = new Chort();
+                character = new Chort();
             else if (randomEnemy < 8)
-                enemy = new Swampy();
+                character = new Swampy();
             else
-                enemy = new Necromancer();
+                character = new Necromancer();
             break;
         }
     }
 
-    public boolean hasEnemy() {
-        return enemy != null || boss != null;
+    public boolean hasCharacter() {
+        return character != null;
     }
 
     public void addBoss() {
         int randomBoss = (int) (Math.random() * 4);
         switch (randomBoss) {
         case 0:
-            boss = new BigDemon();
+            character = new BigDemon();
             break;
         case 1:
-            boss = new BigZombie();
+            character = new BigZombie();
             break;
         case 2:
-            boss = new Ogre();
+            character = new Ogre();
             break;
         case 3:
-            boss = new Wizzard();
+            character = new Wizzard();
             break;
         }
+    }
+
+    public void setPlayer(Player player) {
+        this.character = player;
+    }
+
+    public Character getCharacter() {
+        return character;
+    }
+
+    public void clearCharacter() {
+        character = null;
     }
 
     public void addChest() {
@@ -71,6 +79,6 @@ public class Tile {
     }
 
     public String getSpritePath() {
-        return "./../map/img/floor/" + spriteNum + ".png";
+        return "./img/floor/" + spriteNum + ".png";
     }
 }

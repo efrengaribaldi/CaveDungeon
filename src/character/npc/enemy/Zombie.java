@@ -4,6 +4,7 @@ import src.character.npc.Enemy;
 import src.character.Player;
 
 import java.util.concurrent.ThreadLocalRandom;
+import javafx.scene.image.ImageView;
 
 public class Zombie extends Enemy {
     public Zombie() {
@@ -21,5 +22,16 @@ public class Zombie extends Enemy {
         int baseStamina = ThreadLocalRandom.current().nextInt(2, 6);
         int[] res = { baseAttack, baseStamina };
         return res;
+    }
+
+    @Override
+    public String getType() {
+        return "Zombie";
+    }
+
+    @Override
+    public ImageView render() {
+        String path = "./img/zombie1.png";
+        return new ImageView(getClass().getResource(path).toString());
     }
 }

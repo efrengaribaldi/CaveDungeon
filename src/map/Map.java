@@ -1,5 +1,6 @@
 package src.map;
 
+import src.character.Player;
 import src.utils.*;
 
 import java.util.ArrayList;
@@ -162,6 +163,10 @@ public class Map {
 
     public Room getRoom(int x, int y) {
         return rooms[x][y];
+    }
+
+    public void setPlayer(Player player) {
+        rooms[startX][startY].setPlayer(player);
     }
 
     public String mapToString() {

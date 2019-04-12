@@ -5,6 +5,8 @@ import src.item.Inventory;
 import src.item.weapon.*;
 import src.item.potion.*;
 
+import javafx.scene.image.ImageView;
+
 public class Mage extends Player {
     public Mage(String name, char gender) {
         super(name, 25, gender, new Inventory(), 1.0, 1.2);
@@ -15,7 +17,13 @@ public class Mage extends Player {
     }
 
     @Override
-    public char getType() {
-        return 'a';
+    public String getType() {
+        return "Mage";
+    }
+
+    @Override
+    public ImageView render() {
+        String path = "./img/mage_" + getGender() + "1.png";
+        return new ImageView(getClass().getResource(path).toString());
     }
 }

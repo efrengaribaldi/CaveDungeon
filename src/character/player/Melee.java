@@ -5,6 +5,8 @@ import src.item.Inventory;
 import src.item.weapon.*;
 import src.item.potion.*;
 
+import javafx.scene.image.ImageView;
+
 public class Melee extends Player {
     public Melee(String name, char gender) {
         super(name, 20, gender, new Inventory(), 1.2, 1.0);
@@ -15,7 +17,13 @@ public class Melee extends Player {
     }
 
     @Override
-    public char getType() {
-        return 'e';
+    public String getType() {
+        return "Melee";
+    }
+
+    @Override
+    public ImageView render() {
+        String path = "./img/melee_" + getGender() + "1.png";
+        return new ImageView(getClass().getResource(path).toString());
     }
 }

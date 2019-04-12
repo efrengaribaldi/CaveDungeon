@@ -69,7 +69,7 @@ public class CreatePlayerController {
     }
 
     private char genderSelected() {
-        return (((String) gender.getValue()).equals("Male")) ? 'M' : 'F';
+        return (((String) gender.getValue()).equals("Male")) ? 'm' : 'f';
     }
 
     public void setGame(Game game) {

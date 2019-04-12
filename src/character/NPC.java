@@ -36,9 +36,10 @@ public abstract class NPC extends Character {
         int[] args = getArgsForWeapon(player);
         switch (ThreadLocalRandom.current().nextInt(1, 2)) {
         case 1:
-            return (player.getType() == 'e') ? new Sword(args[0], args[1]) : new EnchantedBook(args[0], args[1]);
+            return (player.getType().equals("Melee")) ? new Sword(args[0], args[1])
+                    : new EnchantedBook(args[0], args[1]);
         case 2:
-            return (player.getType() == 'e') ? new Bow(args[0], args[1]) : new Wand(args[0], args[1]);
+            return (player.getType().equals("Melee")) ? new Bow(args[0], args[1]) : new Wand(args[0], args[1]);
         default:
             return null;
         }

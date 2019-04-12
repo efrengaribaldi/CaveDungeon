@@ -32,14 +32,16 @@ public abstract class Player extends Character {
         this.baseDefense = defense;
     }
 
-    public abstract char getType();
-
     public Inventory getInventory() {
         return inventory;
     }
 
     public void setInventory(Inventory inventory) {
         this.inventory = inventory;
+    }
+
+    public char getGender() {
+        return gender;
     }
 
     public double getAttack() {
@@ -110,16 +112,13 @@ public abstract class Player extends Character {
     }
 
     public void equipWeapon() {
-
         System.out.println("Which weapon do you want to equip?");
         System.out.println(getInventory().printWeapons());
         int weaponIndex = sc.nextInt();
         getInventory().equipWeapon(weaponIndex);
-
         if (weaponIndex != 0 && weaponIndex != 1) {
             System.out.println("Weapon not found");
             equipWeapon();
-
         }
     }
 

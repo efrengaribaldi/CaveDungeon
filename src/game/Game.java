@@ -1,20 +1,19 @@
 package src.game;
 
 import src.map.*;
+import src.map.gui.MapRender;
 import src.character.*;
+import src.character.gui.CreatePlayer;
 import src.character.npc.Enemy;
 import src.character.npc.enemy.*;
-import src.character.gui.*;
 
 import java.util.Scanner;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.scene.layout.Pane;
 
 public class Game {
     Scanner sc = new Scanner(System.in);
     private Map[] levels;
-    private Player newPlayer;
+    private Player player;
     private Stage stage;
 
     public Game(Stage stage) throws Exception {
@@ -25,8 +24,8 @@ public class Game {
         for (int i = 0; i < levels.length; ++i)
             levels[i] = new Map(gameSeed + i);
         mapTests();
-        Scene createPlayer = new CreatePlayer(this);
-        stage.setScene(createPlayer);
+        stage.setScene(new CreatePlayer(this));
+        // setRoomScene();
     }
 
     private void mapTests() {
@@ -35,9 +34,8 @@ public class Game {
     }
 
     private void playerTests() {
-        System.out.println(newPlayer.playerToString());
-        newPlayer.equipWeapon();
-
+        System.out.println(player.playerToString());
+        player.equipWeapon();
     }
 
     private void battleTests() {
@@ -68,27 +66,26 @@ public class Game {
                 break;
             }
             System.out.println("------------------------------------------------------------------------------------");
-            battle = new Battle(newPlayer, newEnemy);
+            battle = new Battle(player, newEnemy);
             System.out.println("\nStart new battle? (Y or N)");
             battleAgain = sc.next().charAt(0);
         } while (battleAgain == 'Y' || battleAgain == 'y');
     }
 
-    public void setNewPlayerAndContinue(Player newPlayer) {
-        this.newPlayer = newPlayer;
+    public void setNewPlayerAndContinue(Player player) {
+        this.player = player;
+        levels[0].setPlayer(player);
         playerTests();
-        // newPlayer.checkLevelUp(200);
+        // player.checkLevelUp(200);
         battleTests();
         setRoomScene();
     }
 
     public Player getNewPlayer() {
-        return newPlayer;
+        return player;
     }
 
     private void setRoomScene() {
-        Pane p = levels[0].getRoom(levels[0].startX, levels[0].startY).render();
-        Scene scene = new Scene(p);
-        stage.setScene(scene);
+        stage.setScene(new MapRender(this, levels[0]));
     }
 }
