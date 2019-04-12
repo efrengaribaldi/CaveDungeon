@@ -2,6 +2,7 @@ package src.item.weapon;
 
 import src.item.Weapon;
 import src.item.weapon.Ability;
+import javafx.scene.image.Image;
 
 public class Bow extends Weapon {
     // Names from https://torchlight.fandom.com/wiki/Bows_(T2)
@@ -16,7 +17,13 @@ public class Bow extends Weapon {
         setName(names[(int) (Math.random() * names.length)]);
     }
 
+    @Override
     public String getType() {
         return "Bow";
+    }
+
+    @Override
+    public Image render() {
+        return new Image(getClass().getResource("./img/bow1.png").toString());
     }
 }

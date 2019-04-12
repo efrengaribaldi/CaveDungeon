@@ -6,15 +6,18 @@ import src.character.*;
 import src.character.gui.CreatePlayer;
 import src.character.npc.Enemy;
 import src.character.npc.enemy.*;
+import src.item.gui.*;
 
 import java.util.Scanner;
 import javafx.stage.Stage;
+import javafx.scene.Scene;
 
 public class Game {
     Scanner sc = new Scanner(System.in);
     private Map[] levels;
     private Player player;
     private Stage stage;
+    private Scene inventoryGui;
 
     public Game(Stage stage) throws Exception {
         this.stage = stage;
@@ -72,20 +75,30 @@ public class Game {
         } while (battleAgain == 'Y' || battleAgain == 'y');
     }
 
-    public void setNewPlayerAndContinue(Player player) {
+    public void setNewPlayerAndContinue(Player player) throws Exception {
         this.player = player;
+        inventoryGui = new InventoryGUI(this);
         levels[0].setPlayer(player);
         playerTests();
         // player.checkLevelUp(200);
-        battleTests();
+        //battleTests();
         setRoomScene();
+        //setInventoryScene();
     }
 
-    public Player getNewPlayer() {
+    public void setInventoryAndContinue() throws Exception {
+;
+    }
+
+    public Player getPlayer() {
         return player;
     }
 
     private void setRoomScene() {
         stage.setScene(new MapRender(this, levels[0]));
+    }
+
+    private void setInventoryScene() {
+        stage.setScene(inventoryGui);
     }
 }

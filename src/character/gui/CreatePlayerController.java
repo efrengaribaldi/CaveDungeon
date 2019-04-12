@@ -42,7 +42,7 @@ public class CreatePlayerController {
     }
 
     @FXML
-    private void createPlayer(ActionEvent event) {
+    private void createPlayer(ActionEvent event) throws Exception {
         if (name.getText().equals("")) {
             System.out.println("Enter a name");
             return;

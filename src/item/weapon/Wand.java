@@ -2,6 +2,7 @@ package src.item.weapon;
 
 import src.item.Weapon;
 import src.item.weapon.Ability;
+import javafx.scene.image.Image;
 
 public class Wand extends Weapon {
     // Names from https://torchlight.fandom.com/wiki/Wands_(T2)
@@ -16,7 +17,13 @@ public class Wand extends Weapon {
         setName(names[(int) (Math.random() * names.length)]);
     }
 
+    @Override
     public String getType() {
         return "Wand";
+    }
+
+    @Override
+    public Image render() {
+        return new Image(getClass().getResource("./img/wand1.png").toString());
     }
 }

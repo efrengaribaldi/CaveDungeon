@@ -2,7 +2,7 @@ package src.item;
 
 import src.item.Item;
 
-public class Armor extends Item {
+public abstract class Armor extends Item {
     private int baseDefense;
 
     public Armor(String name, int baseDefense) {

@@ -1,6 +1,7 @@
 package src.item.armor;
 
 import src.item.Armor;
+import javafx.scene.image.Image;
 
 public class Shield extends Armor {
     // Names from https://torchlight.fandom.com/wiki/Shields_(T2)
@@ -10,5 +11,10 @@ public class Shield extends Armor {
     public Shield(int baseDefense) {
         super("", baseDefense);
         setName(names[(int) (Math.random() * names.length)]);
+    }
+
+    @Override
+    public Image render() {
+        return new Image(getClass().getResource("./img/shield1.png").toString());
     }
 }

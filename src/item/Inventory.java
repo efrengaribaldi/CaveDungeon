@@ -62,7 +62,6 @@ public class Inventory {
     public void equipWeapon(int index) {
         weapons[0].setWeaponState((index == 0));
         weapons[1].setWeaponState((index == 1));
-
     }
 
     public String showEquippedWeapon() {

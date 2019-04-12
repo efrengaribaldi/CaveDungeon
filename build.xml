@@ -22,8 +22,9 @@
 		<copy todir="${build}/src/character/npc/enemy/img"><fileset dir="${src}/character/npc/enemy/img" /></copy>
 		<copy todir="${build}/src/character/player/img"><fileset dir="${src}/character/player/img" /></copy>
 		<copy todir="${build}/src/game/gui/img"><fileset dir="${src}/game/gui/img" /></copy>
+		<copy file="${src}/item/gui/inventory.fxml" tofile="${build}/src/item/gui/inventory.fxml" overwrite="true" />
 		<copy todir="${build}/src/item/armor/img"><fileset dir="${src}/item/armor/img" /></copy>
-		<copy todir="${build}/src/item/misc/img"><fileset dir="${src}/item/misc/img" /></copy>
+		<!--<copy todir="${build}/src/item/misc/img"><fileset dir="${src}/item/misc/img" /></copy>-->
 		<copy todir="${build}/src/item/potion/img"><fileset dir="${src}/item/potion/img" /></copy>
 		<copy todir="${build}/src/item/weapon/img"><fileset dir="${src}/item/weapon/img" /></copy>
 		<copy todir="${build}/src/map/img"><fileset dir="${src}/map/img" /></copy>

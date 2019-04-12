@@ -2,6 +2,7 @@ package src.item.weapon;
 
 import src.item.Weapon;
 import src.item.weapon.Ability;
+import javafx.scene.image.Image;
 
 public class EnchantedBook extends Weapon {
     private final String[] names = { "Lycka Himlen", "Order of Bloodshed", "Oath of Harm",
@@ -15,7 +16,13 @@ public class EnchantedBook extends Weapon {
         setName(names[(int) (Math.random() * names.length)]);
     }
 
+    @Override
     public String getType() {
         return "EnchantedBook";
+    }
+
+    @Override
+    public Image render() {
+        return new Image(getClass().getResource("./img/enchantedbook1.png").toString());
     }
 }

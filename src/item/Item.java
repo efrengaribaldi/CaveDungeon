@@ -1,5 +1,7 @@
 package src.item;
 
+import javafx.scene.image.Image;
+
 public abstract class Item {
     private String name;
 
@@ -14,4 +16,6 @@ public abstract class Item {
     public void setName(String name) {
         this.name = name;
     }
+
+    public abstract Image render();
 }

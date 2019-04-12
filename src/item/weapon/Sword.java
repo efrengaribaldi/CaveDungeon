@@ -2,6 +2,7 @@ package src.item.weapon;
 
 import src.item.Weapon;
 import src.item.weapon.Ability;
+import javafx.scene.image.Image;
 
 public class Sword extends Weapon {
     // Names from https://torchlight.fandom.com/wiki/Swords_(T2)
@@ -16,7 +17,15 @@ public class Sword extends Weapon {
         setName(names[(int) (Math.random() * names.length)]);
     }
 
+    @Override
     public String getType() {
         return "Sword";
+    }
+
+    //"sword" + (Integer.toString((int)(Math.random() * 5) + 1)) + ".png"
+
+    @Override
+    public Image render() {
+        return new Image(getClass().getResource("./img/sword1.png").toString());
     }
 }
