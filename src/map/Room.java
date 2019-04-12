@@ -1,12 +1,13 @@
 package src.map;
 
-import src.character.Character;
 import src.character.Player;
 import src.utils.Vector2D;
 
 import java.util.ArrayList;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+import javafx.geometry.HPos;
+import javafx.geometry.VPos;
 import javafx.scene.image.ImageView;
 
 public class Room {
@@ -80,7 +81,6 @@ public class Room {
         if (x < 0 || y < 0 || x >= sizeX || y >= sizeY)
             throw new ArrayIndexOutOfBoundsException();
         playerPos = new int[] { x, y };
-        System.out.println("player in " + playerPos[0] + ", " + playerPos[1]);
         tiles[x][y].setPlayer(player);
     }
 
@@ -90,7 +90,6 @@ public class Room {
 
     public boolean movePlayer(int x, int y) {
         Player p = (Player) tiles[playerPos[0]][playerPos[1]].getCharacter();
-        System.out.println("trying to move to " + (playerPos[0] + x) + ", " + (playerPos[1] + y));
         try {
             int[] lastPlayerPos = playerPos;
             setPlayer(p, playerPos[0] + x, playerPos[1] + y);
@@ -110,8 +109,6 @@ public class Room {
             res += (doors[3] && x == centerX) ? "d" : "|";
             for (int y = 0; y < sizeY; y++) {
                 if (tiles[x][y].hasCharacter())
-                    res += "e";
-                else if (tiles[x][y].hasChest())
                     res += "c";
                 else
                     res += " ";
@@ -163,6 +160,8 @@ public class Room {
                 iv.setFitHeight(64);
                 iv.setPreserveRatio(true);
                 characters.add(iv, j, i);
+                GridPane.setHalignment(iv, HPos.CENTER);
+                GridPane.setValignment(iv, VPos.CENTER);
             }
         }
         return characters;
@@ -172,7 +171,6 @@ public class Room {
         GridPane floor = renderFloor();
         GridPane characters = renderCharacters();
         StackPane stack = new StackPane(floor, characters);
-        System.out.println("Center rendered");
         return stack;
     }
 }

@@ -4,8 +4,6 @@ import src.character.Character;
 import src.item.Weapon;
 import src.item.weapon.*;
 
-import java.util.concurrent.ThreadLocalRandom;
-
 public abstract class NPC extends Character {
     private double baseDamage;
     private double baseDefense;
@@ -34,14 +32,16 @@ public abstract class NPC extends Character {
 
     public Weapon dropWeapon(Player player) {
         int[] args = getArgsForWeapon(player);
-        switch (ThreadLocalRandom.current().nextInt(1, 2)) {
-        case 1:
-            return (player.getType().equals("Melee")) ? new Sword(args[0], args[1])
-                    : new EnchantedBook(args[0], args[1]);
-        case 2:
-            return (player.getType().equals("Melee")) ? new Bow(args[0], args[1]) : new Wand(args[0], args[1]);
-        default:
-            return null;
+        if (Math.random() < 0.5) {
+            if (player.getType().equals("Melee"))
+                return new Sword(args[0], args[1]);
+            else
+                return new EnchantedBook(args[0], args[1]);
+        } else {
+            if (player.getType().equals("Melee"))
+                return new Bow(args[0], args[1]);
+            else
+                return new Wand(args[0], args[1]);
         }
     }
 }

@@ -4,13 +4,12 @@ import src.map.Tile;
 import src.character.Character;
 import src.character.Player;
 import src.character.npc.enemy.*;
+import src.character.npc.Chest;
 import src.character.npc.boss.*;
-import src.item.misc.Chest;
 
 public class Tile {
     private int spriteNum;
     private Character character;
-    private Chest chest;
 
     public Tile() {
         super();
@@ -70,12 +69,7 @@ public class Tile {
     }
 
     public void addChest() {
-        // Add random items when generating the chest
-        chest = new Chest();
-    }
-
-    public boolean hasChest() {
-        return chest != null;
+        character = new Chest();
     }
 
     public String getSpritePath() {
