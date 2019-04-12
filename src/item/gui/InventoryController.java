@@ -1,7 +1,6 @@
 package src.item.gui;
 
 import src.character.Player;
-import src.character.player.*;
 import src.item.Inventory;
 import src.game.Game;
 
@@ -11,8 +10,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.event.ActionEvent;
 import javafx.scene.image.ImageView;
-import javafx.scene.image.Image;
-import java.io.File;
 
 public class InventoryController {
     private Game game;
@@ -29,7 +26,6 @@ public class InventoryController {
     private ImageView imgArmorOne, imgArmorTwo, imgArmorThree;
     @FXML
     private ImageView imgHPotionOne, imgHPotionTwo, imgSPotionOne, imgSPotionTwo;
-    //Mejor hacerlo array
 
     @FXML
     private URL location;
@@ -41,14 +37,7 @@ public class InventoryController {
 
     @FXML
     public void initialize(URL location, ResourceBundle resources) {
-        /*File file = new File("/src/item/weapon/img/bow1.png");
-        Image image = new Image(file.toURI().toString());
-        imgWeaponOne.setImage(image);*/
     }
-    /*@FXML
-    public void initialize(URL location, ResourceBundle resources) {
-        imgWeaponOne.setImage(new Image("src/item/weapon/img/arrow1.png"));
-    }*/
 
     @FXML
     private void selectWeaponOne(ActionEvent event) {
@@ -162,7 +151,7 @@ public class InventoryController {
 
     @FXML
     private void exitInventory(ActionEvent event) throws Exception {
-        game.setInventoryAndContinue();
+        game.setRoomScene();
     }
 
     public Label getPlayerName() {
@@ -217,7 +206,8 @@ public class InventoryController {
         return imgSPotionTwo;
     }
 
-    //To get the img create a indeximg and use getImgName(), for potion null set emptypotion
+    // To get the img create a indeximg and use getImgName(), for potion null set
+    // emptypotion
     public void setGame(Game game) {
         System.out.println("Oh no");
         this.game = game;
@@ -227,12 +217,17 @@ public class InventoryController {
         playerLevel.setText("Level: " + Integer.toString(player.getLevel()));
         playerType.setText("Type: " + player.getClass().getSimpleName());
         playerGender.setText("Gender: " + Character.toString(player.getGender()).toUpperCase());
-        //System.out.println(player.getInventory().getWeapon(0).getImgName());
-        //imgWeaponOne.setImage(new Image(getClass().getResource("src/item/weapon/img/arrow1.png").toExternalForm()));
-        //getClass().getResource("/images/mpgafor_logo_16x16.png").toExternalForm()
+        // System.out.println(player.getInventory().getWeapon(0).getImgName());
+        // imgWeaponOne.setImage(new
+        // Image(getClass().getResource("src/item/weapon/img/arrow1.png").toExternalForm()));
+        // getClass().getResource("/images/mpgafor_logo_16x16.png").toExternalForm()
         imgWeaponOne.setImage(inventory.getWeapon(0).render());
-        /*imgWeaponTwo.setImage(new Image(getClass().getResource()));
-        imgHPotionOne.setImage(new Image("src/item/potion/img/" + player.getInventory().getPotion(0).getImgName()));
-        imgSPotionOne.setImage(new Image("src/item/potion/img/" + player.getInventory().getPotion(1).getImgName()));*/
+        /*
+         * imgWeaponTwo.setImage(new Image(getClass().getResource()));
+         * imgHPotionOne.setImage(new Image("src/item/potion/img/" +
+         * player.getInventory().getPotion(0).getImgName())); imgSPotionOne.setImage(new
+         * Image("src/item/potion/img/" +
+         * player.getInventory().getPotion(1).getImgName()));
+         */
     }
 }

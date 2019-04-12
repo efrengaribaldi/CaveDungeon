@@ -6,8 +6,11 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.net.URI;
 
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 
 public class InventoryGUI extends Scene {
@@ -23,6 +26,13 @@ public class InventoryGUI extends Scene {
         Pane root = (Pane) loader.load(fxmlStream);
         inventoryController = loader.<InventoryController>getController();
         inventoryController.setGame(game);
+        setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                if (event.getCode() == KeyCode.E)
+                    game.setRoomScene();
+            }
+        });
         this.setRoot(root);
     }
 

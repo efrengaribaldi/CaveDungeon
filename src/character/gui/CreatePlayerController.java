@@ -2,7 +2,6 @@ package src.character.gui;
 
 import src.character.Player;
 import src.character.player.*;
-import src.item.Inventory;
 import src.game.Game;
 
 import java.net.URL;

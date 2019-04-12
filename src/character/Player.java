@@ -19,13 +19,14 @@ public abstract class Player extends Character {
     private double baseAttack;
     private double baseDefense;
 
-    public Player(String name, int healthPoints, char gender, Inventory inventory, double attack, double defense) {
-        super(name, healthPoints);
+    public Player(String name, int baseLimitHp, char gender, Inventory inventory, double attack, double defense) {
+        super(name, 0);
+        this.baseLimitHp = baseLimitHp;
+        super.setHealthPoints(this.getLimitHp());
         this.inventory = inventory;
         this.experience = 0;
         this.level = 1;
         this.gender = gender;
-        this.baseLimitHp = healthPoints;
         this.stamina = 10;
         this.baseLimitStamina = stamina;
         this.baseAttack = attack;
@@ -74,7 +75,7 @@ public abstract class Player extends Character {
     }
 
     public int getLimitHp() {
-        return 15 + (int) (22 * Math.pow(1.12, level - 1));
+        return baseLimitHp + (int) (22 * Math.pow(1.12, level - 1));
     }
 
     public int getStamina() {

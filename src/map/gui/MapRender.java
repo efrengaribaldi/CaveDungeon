@@ -55,6 +55,9 @@ public class MapRender extends Scene {
                 case LEFT:
                     couldMove = m.getRoom(x, y).movePlayer(0, -1);
                     break;
+                case E:
+                    game.setInventoryScene();
+                    break;
                 default:
                 }
                 BorderPane root = (BorderPane) getRoot();

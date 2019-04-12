@@ -18,6 +18,7 @@ public class Game {
     private Player player;
     private Stage stage;
     private Scene inventoryGui;
+    private Scene mapRender;
 
     public Game(Stage stage) throws Exception {
         this.stage = stage;
@@ -27,8 +28,8 @@ public class Game {
         for (int i = 0; i < levels.length; ++i)
             levels[i] = new Map(gameSeed + i);
         mapTests();
+        mapRender = new MapRender(this, levels[0]);
         stage.setScene(new CreatePlayer(this));
-        // setRoomScene();
     }
 
     private void mapTests() {
@@ -80,25 +81,18 @@ public class Game {
         inventoryGui = new InventoryGUI(this);
         levels[0].setPlayer(player);
         playerTests();
-        // player.checkLevelUp(200);
-        //battleTests();
         setRoomScene();
-        //setInventoryScene();
-    }
-
-    public void setInventoryAndContinue() throws Exception {
-;
     }
 
     public Player getPlayer() {
         return player;
     }
 
-    private void setRoomScene() {
-        stage.setScene(new MapRender(this, levels[0]));
+    public void setRoomScene() {
+        stage.setScene(mapRender);
     }
 
-    private void setInventoryScene() {
+    public void setInventoryScene() {
         stage.setScene(inventoryGui);
     }
 }

@@ -9,7 +9,7 @@ import javafx.scene.image.ImageView;
 
 public class Melee extends Player {
     public Melee(String name, char gender) {
-        super(name, 20, gender, new Inventory(), 1.2, 1.0);
+        super(name, 15, gender, new Inventory(), 1.2, 1.0);
         this.inventory.addItemToInventory(new Sword(15, 5), 0);
         this.inventory.addItemToInventory(new Bow(15, 5), 1);
         this.inventory.addItemToInventory(new HealthPotion(15), 0);
