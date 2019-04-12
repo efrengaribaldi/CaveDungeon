@@ -24,6 +24,6 @@ public class Wand extends Weapon {
 
     @Override
     public Image render() {
-        return new Image(getClass().getResource("./img/wand1.png").toString());
+        return new Image(getClass().getResource("./img/wand" + (Integer.toString((int)(Math.random() * 4) + 1)) + ".png").toString());
     }
 }

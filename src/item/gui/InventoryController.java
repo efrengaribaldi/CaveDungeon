@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.event.ActionEvent;
 import javafx.scene.image.ImageView;
+import javafx.scene.control.ProgressBar;
 
 public class InventoryController {
     private Game game;
@@ -17,7 +18,7 @@ public class InventoryController {
     private Inventory inventory;
 
     @FXML
-    private Label playerName, playerLevel, playerType, playerGender;
+    private Label playerName, playerLevel, playerType, playerGender, playerHealth, playerStamina;
     @FXML
     private Label itemName, itemText;
     @FXML
@@ -26,7 +27,8 @@ public class InventoryController {
     private ImageView imgArmorOne, imgArmorTwo, imgArmorThree;
     @FXML
     private ImageView imgHPotionOne, imgHPotionTwo, imgSPotionOne, imgSPotionTwo;
-
+    @FXML
+    private ProgressBar healthBar, staminaBar, expBar;
     @FXML
     private URL location;
     @FXML
@@ -36,7 +38,24 @@ public class InventoryController {
     }
 
     @FXML
-    public void initialize(URL location, ResourceBundle resources) {
+    public void initialize(Game game) {
+        this.game = game;
+        player = this.game.getPlayer();
+        inventory = player.getInventory();
+        System.out.println((double)(player.getHealthPoints()/player.getLimitHp()));
+        playerName.setText(player.getName());
+        playerLevel.setText("Level: " + Integer.toString(player.getLevel()));
+        playerType.setText("Type: " + player.getClass().getSimpleName());
+        playerGender.setText("Gender: " + Character.toString(player.getGender()).toUpperCase());
+        imgWeaponOne.setImage(inventory.getWeapon(0).render());
+        imgWeaponTwo.setImage(inventory.getWeapon(1).render());
+        imgHPotionOne.setImage(inventory.getPotion(0).render());
+        imgSPotionOne.setImage(inventory.getPotion(2).render());
+        healthBar.setProgress((double)(player.getHealthPoints())/(double)(player.getLimitHp()));
+        staminaBar.setProgress((double)(player.getStamina())/(double)(player.getLimitStamina()));
+        expBar.setProgress((double)(player.getExperience())/(double)(player.getExpRequiredForNextLevel()));
+        playerHealth.setText("Health [" + (int)((double)(player.getHealthPoints())/(double)(player.getLimitHp())) * 100 + "%]");
+        playerStamina.setText("Stamina [" + (int)((double)(player.getStamina())/(double)(player.getLimitStamina())) * 100 + "%]");
     }
 
     @FXML
@@ -170,6 +189,14 @@ public class InventoryController {
         return playerGender;
     }
 
+    public Label getPlayerHealth() {
+        return playerHealth;
+    }
+
+    public Label getPlayerStamina() {
+        return playerStamina;
+    }
+
     public ImageView getImgWeaponOne() {
         return imgWeaponOne;
     }
@@ -204,29 +231,5 @@ public class InventoryController {
 
     public ImageView getImgSPotionTwo() {
         return imgSPotionTwo;
-    }
-
-    // To get the img create a indeximg and use getImgName(), for potion null set
-    // emptypotion
-    public void setGame(Game game) {
-        this.game = game;
-        player = this.game.getPlayer();
-        inventory = player.getInventory();
-        playerName.setText(player.getName());
-        playerLevel.setText("Level: " + Integer.toString(player.getLevel()));
-        playerType.setText("Type: " + player.getClass().getSimpleName());
-        playerGender.setText("Gender: " + Character.toString(player.getGender()).toUpperCase());
-        // System.out.println(player.getInventory().getWeapon(0).getImgName());
-        // imgWeaponOne.setImage(new
-        // Image(getClass().getResource("src/item/weapon/img/arrow1.png").toExternalForm()));
-        // getClass().getResource("/images/mpgafor_logo_16x16.png").toExternalForm()
-        imgWeaponOne.setImage(inventory.getWeapon(0).render());
-        /*
-         * imgWeaponTwo.setImage(new Image(getClass().getResource()));
-         * imgHPotionOne.setImage(new Image("src/item/potion/img/" +
-         * player.getInventory().getPotion(0).getImgName())); imgSPotionOne.setImage(new
-         * Image("src/item/potion/img/" +
-         * player.getInventory().getPotion(1).getImgName()));
-         */
     }
 }

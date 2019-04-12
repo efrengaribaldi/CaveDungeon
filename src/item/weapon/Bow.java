@@ -24,6 +24,6 @@ public class Bow extends Weapon {
 
     @Override
     public Image render() {
-        return new Image(getClass().getResource("./img/bow1.png").toString());
+        return new Image(getClass().getResource("./img/bow" + (Integer.toString((int)(Math.random() * 5) + 1)) + ".png").toString());
     }
 }

@@ -15,6 +15,6 @@ public class Ring extends Armor {
 
     @Override
     public Image render() {
-        return new Image(getClass().getResource("./img/ring1.png").toString());
+        return new Image(getClass().getResource("./img/ring" + (Integer.toString((int)(Math.random() * 5) + 1)) + ".png").toString());
     }
 }

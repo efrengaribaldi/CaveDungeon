@@ -23,7 +23,7 @@ public class InventoryGUI extends Scene {
         FileInputStream fxmlStream = new FileInputStream(new File(fxmlDocPath));
         Pane root = (Pane) loader.load(fxmlStream);
         inventoryController = loader.<InventoryController>getController();
-        inventoryController.setGame(game);
+        inventoryController.initialize(game);
         setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {

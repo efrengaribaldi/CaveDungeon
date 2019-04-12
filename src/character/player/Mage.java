@@ -13,7 +13,7 @@ public class Mage extends Player {
         this.inventory.addItemToInventory(new EnchantedBook(15, 5), 0);
         this.inventory.addItemToInventory(new Wand(15, 5), 1);
         this.inventory.addItemToInventory(new HealthPotion(15), 0);
-        this.inventory.addItemToInventory(new StaminaPotion(10), 1);
+        this.inventory.addItemToInventory(new StaminaPotion(10), 2);
     }
 
     @Override

@@ -18,6 +18,7 @@ public abstract class Player extends Character {
     private int baseLimitStamina;
     private double baseAttack;
     private double baseDefense;
+    private int expRequiredForNextLevel;
 
     public Player(String name, int baseLimitHp, char gender, Inventory inventory, double attack, double defense) {
         super(name, 0);
@@ -31,6 +32,9 @@ public abstract class Player extends Character {
         this.baseLimitStamina = stamina;
         this.baseAttack = attack;
         this.baseDefense = defense;
+        setHealthPoints(getLimitHp());
+        setStamina(getLimitStamina());
+        expRequiredForNextLevel = (int) (15 * Math.pow(1.07, level));
     }
 
     public Inventory getInventory() {
@@ -90,6 +94,10 @@ public abstract class Player extends Character {
         return baseLimitStamina * 0 + (int) (14 * Math.pow(1.08, level - 1));
     }
 
+    public int getExpRequiredForNextLevel() {
+        return expRequiredForNextLevel;
+    }
+
     public int attack(NPC npc, int abilityIndex) {
         double damage = inventory.getEquippedWeapon().getAbility(abilityIndex).getBaseDamage() * getAttack();
         double defense = npc.getDefense();
@@ -135,7 +143,6 @@ public abstract class Player extends Character {
     }
 
     public void checkLevelUp(int newExp) {
-        int expRequiredForNextLevel = (int) (15 * Math.pow(1.07, level));
         if (newExp > 0)
             System.out.println("You got " + newExp + " new experience.");
         experience += newExp;

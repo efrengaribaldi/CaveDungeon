@@ -23,6 +23,6 @@ public class EnchantedBook extends Weapon {
 
     @Override
     public Image render() {
-        return new Image(getClass().getResource("./img/enchantedbook1.png").toString());
+        return new Image(getClass().getResource("./img/enchantedbook" + (Integer.toString((int)(Math.random() * 5) + 1)) + ".png").toString());
     }
 }

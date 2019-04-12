@@ -38,6 +38,9 @@ public class Game {
     private void playerTests() {
         System.out.println(player.playerToString());
         player.equipWeapon();
+        System.out.println("Limit HP: " + player.getLimitHp() + " Current HP: " + player.getHealthPoints());
+        System.out.println("Limit Stamina: " + player.getLimitStamina() + " Current Stamina: " + player.getStamina());
+        System.out.println("Next Level EXP: " + player.getExpRequiredForNextLevel() + " Current EXP: " + player.getExperience());
     }
 
     private void battleTests() {

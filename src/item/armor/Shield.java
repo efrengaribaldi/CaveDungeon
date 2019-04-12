@@ -15,6 +15,6 @@ public class Shield extends Armor {
 
     @Override
     public Image render() {
-        return new Image(getClass().getResource("./img/shield1.png").toString());
+        return new Image(getClass().getResource("./img/shield" + (Integer.toString((int)(Math.random() * 5) + 1)) + ".png").toString());
     }
 }

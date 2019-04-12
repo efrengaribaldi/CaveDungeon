@@ -26,6 +26,6 @@ public class Sword extends Weapon {
 
     @Override
     public Image render() {
-        return new Image(getClass().getResource("./img/sword1.png").toString());
+        return new Image(getClass().getResource("./img/sword" + (Integer.toString((int)(Math.random() * 5) + 1)) + ".png").toString());
     }
 }
