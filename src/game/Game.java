@@ -27,8 +27,6 @@ public class Game {
         levels = new Map[1];
         for (int i = 0; i < levels.length; ++i)
             levels[i] = new Map(gameSeed + i);
-        mapTests();
-        mapRender = new MapRender(this, levels[0]);
         stage.setScene(new CreatePlayer(this));
     }
 
@@ -45,7 +43,6 @@ public class Game {
     private void battleTests() {
         char battleAgain;
         Enemy newEnemy;
-        Battle battle;
         do {
             System.out.println("------------------------------------------------------------------------------------");
             System.out.println("Select your enemy: (1) Zombie, (2) Skeleton, (3) Chort, (4) Swampy, (5) Necromancer");
@@ -70,7 +67,7 @@ public class Game {
                 break;
             }
             System.out.println("------------------------------------------------------------------------------------");
-            battle = new Battle(player, newEnemy);
+            Battle battle = new Battle(player, newEnemy);
             System.out.println("\nStart new battle? (Y or N)");
             battleAgain = sc.next().charAt(0);
         } while (battleAgain == 'Y' || battleAgain == 'y');
@@ -78,8 +75,10 @@ public class Game {
 
     public void setNewPlayerAndContinue(Player player) throws Exception {
         this.player = player;
-        inventoryGui = new InventoryGUI(this);
         levels[0].setPlayer(player);
+        mapTests();
+        mapRender = new MapRender(this, levels[0]);
+        inventoryGui = new InventoryGUI(this);
         playerTests();
         setRoomScene();
     }

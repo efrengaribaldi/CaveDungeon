@@ -209,7 +209,6 @@ public class InventoryController {
     // To get the img create a indeximg and use getImgName(), for potion null set
     // emptypotion
     public void setGame(Game game) {
-        System.out.println("Oh no");
         this.game = game;
         player = this.game.getPlayer();
         inventory = player.getInventory();

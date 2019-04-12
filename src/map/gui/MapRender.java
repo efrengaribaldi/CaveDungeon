@@ -26,6 +26,7 @@ public class MapRender extends Scene {
         this.x = x;
         this.y = y;
         setupKeyboardControls();
+        m.getRoom(x, y).checkIfDoorsShouldOpen();
         ImageView[] walls = m.getRoom(x, y).renderWalls();
         StackPane center = m.getRoom(x, y).renderCenter();
         BorderPane root = new BorderPane(center, walls[0], walls[1], walls[2], walls[3]);
@@ -37,23 +38,22 @@ public class MapRender extends Scene {
         setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
-                boolean couldMove;
                 switch (event.getCode()) {
                 case W:
                 case UP:
-                    couldMove = m.getRoom(x, y).movePlayer(-1, 0);
+                    m.getRoom(x, y).movePlayer(-1, 0);
                     break;
                 case D:
                 case RIGHT:
-                    couldMove = m.getRoom(x, y).movePlayer(0, 1);
+                    m.getRoom(x, y).movePlayer(0, 1);
                     break;
                 case S:
                 case DOWN:
-                    couldMove = m.getRoom(x, y).movePlayer(1, 0);
+                    m.getRoom(x, y).movePlayer(1, 0);
                     break;
                 case A:
                 case LEFT:
-                    couldMove = m.getRoom(x, y).movePlayer(0, -1);
+                    m.getRoom(x, y).movePlayer(0, -1);
                     break;
                 case E:
                     game.setInventoryScene();
@@ -64,5 +64,15 @@ public class MapRender extends Scene {
                 root.setCenter(m.getRoom(x, y).renderCenter());
             }
         });
+    }
+
+    public void moveToRoom(int x, int y) {
+        this.x += x;
+        this.y += y;
+        ImageView[] walls = m.getRoom(x, y).renderWalls();
+        StackPane center = m.getRoom(x, y).renderCenter();
+        BorderPane root = new BorderPane(center, walls[0], walls[1], walls[2], walls[3]);
+        root.setStyle("-fx-background-color: #1C1117;");
+        setRoot(root);
     }
 }

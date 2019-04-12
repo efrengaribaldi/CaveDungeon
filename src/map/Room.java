@@ -15,6 +15,7 @@ public class Room {
     private int state;
     // 0 top, 1 right, 2 bottom, 3 left
     private boolean doors[];
+    private boolean areDoorsOpen;
     private Tile tiles[][];
     private int[] playerPos;
     static final int sizeX = 7, sizeY = 11;
@@ -24,6 +25,7 @@ public class Room {
     protected Room(int state, boolean[] doors) {
         this.state = state;
         this.doors = doors;
+        this.areDoorsOpen = false;
         tiles = new Tile[sizeX][sizeY];
     }
 
@@ -45,6 +47,16 @@ public class Room {
 
     boolean isNotConnected() {
         return !doors[0] && !doors[1] && !doors[2] && !doors[3];
+    }
+
+    public void checkIfDoorsShouldOpen() {
+        for (int x = 0; x < sizeX; x++)
+            for (int y = 0; y < sizeY; y++)
+                if (tiles[x][y].hasCharacter() == 'b' || tiles[x][y].hasCharacter() == 'e') {
+                    this.areDoorsOpen = false;
+                    return;
+                }
+        this.areDoorsOpen = true;
     }
 
     void generateRoom() {
@@ -96,6 +108,11 @@ public class Room {
             tiles[lastPlayerPos[0]][lastPlayerPos[1]].clearCharacter();
             return true;
         } catch (ArrayIndexOutOfBoundsException e) {
+            // To check if Player should move to another room
+            if (playerPos[0] == centerX) {
+                if (playerPos[1] == 0) {
+                }
+            }
             return false;
         }
     }
@@ -107,12 +124,8 @@ public class Room {
         res += "\n";
         for (int x = 0; x < sizeX; x++) {
             res += (doors[3] && x == centerX) ? "d" : "|";
-            for (int y = 0; y < sizeY; y++) {
-                if (tiles[x][y].hasCharacter())
-                    res += "c";
-                else
-                    res += " ";
-            }
+            for (int y = 0; y < sizeY; y++)
+                res += tiles[x][y].hasCharacter();
             res += (doors[1] && x == centerX) ? "d" : "|";
             res += "\n";
         }
@@ -124,52 +137,41 @@ public class Room {
 
     public ImageView[] renderWalls() {
         ImageView[] walls = new ImageView[4];
-        for (int i = 0; i < 4; i++) {
-            String p1 = "./img/wall/" + i + "_" + (doors[i] ? "cl" : "no") + ".png";
+        for (int i = 0; i < walls.length; i++) {
+            String doorState = doors[i] ? (areDoorsOpen ? "op" : "cl") : "no";
+            String p1 = "./img/wall/" + i + "_" + doorState + ".png";
             walls[i] = new ImageView(getClass().getResource(p1).toString());
         }
         return walls;
     }
 
-    public GridPane renderFloor() {
+    public StackPane renderCenter() {
         GridPane floor = new GridPane();
-        for (int i = 0; i < sizeX; i++) {
-            for (int j = 0; j < sizeY; j++) {
-                ImageView iv = new ImageView(getClass().getResource(tiles[i][j].getSpritePath()).toString());
-                iv.setSmooth(false);
-                iv.setFitWidth(64);
-                iv.setFitHeight(64);
-                iv.setPreserveRatio(true);
-                floor.add(iv, j, i);
-            }
-        }
-        return floor;
-    }
-
-    public GridPane renderCharacters() {
         GridPane characters = new GridPane();
         for (int i = 0; i < sizeX; i++) {
             for (int j = 0; j < sizeY; j++) {
-                ImageView iv;
+                ImageView ivFloor = new ImageView(tiles[i][j].getSpritePath());
+                ivFloor.setSmooth(false);
+                ivFloor.setFitWidth(64);
+                ivFloor.setFitHeight(64);
+                ivFloor.setPreserveRatio(true);
+                floor.add(ivFloor, j, i);
+
+                ImageView ivChar;
                 if (tiles[i][j].getCharacter() != null)
-                    iv = tiles[i][j].getCharacter().render();
+                    ivChar = tiles[i][j].getCharacter().render();
                 else
-                    iv = new ImageView(getClass().getResource("./img/emptyTile.png").toString());
-                iv.setSmooth(false);
-                iv.setFitWidth(64);
-                iv.setFitHeight(64);
-                iv.setPreserveRatio(true);
-                characters.add(iv, j, i);
-                GridPane.setHalignment(iv, HPos.CENTER);
-                GridPane.setValignment(iv, VPos.CENTER);
+                    ivChar = new ImageView(getClass().getResource("./img/emptyTile.png").toString());
+
+                ivChar.setSmooth(false);
+                ivChar.setFitWidth(64);
+                ivChar.setFitHeight(64);
+                ivChar.setPreserveRatio(true);
+                characters.add(ivChar, j, i);
+                GridPane.setHalignment(ivChar, HPos.CENTER);
+                GridPane.setValignment(ivChar, VPos.CENTER);
             }
         }
-        return characters;
-    }
-
-    public StackPane renderCenter() {
-        GridPane floor = renderFloor();
-        GridPane characters = renderCharacters();
         StackPane stack = new StackPane(floor, characters);
         return stack;
     }

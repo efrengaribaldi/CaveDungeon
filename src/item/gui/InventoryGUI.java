@@ -14,12 +14,10 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 
 public class InventoryGUI extends Scene {
-    private Game game;
     private InventoryController inventoryController;
 
     public InventoryGUI(Game game) throws Exception {
         super(new Pane());
-        this.game = game;
         FXMLLoader loader = new FXMLLoader();
         URI fxmlDocPath = getClass().getResource("./inventory.fxml").toURI();
         FileInputStream fxmlStream = new FileInputStream(new File(fxmlDocPath));

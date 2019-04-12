@@ -3,8 +3,9 @@ package src.map;
 import src.map.Tile;
 import src.character.Character;
 import src.character.Player;
-import src.character.npc.enemy.*;
 import src.character.npc.Chest;
+import src.character.npc.Enemy;
+import src.character.npc.enemy.*;
 import src.character.npc.boss.*;
 
 public class Tile {
@@ -34,8 +35,19 @@ public class Tile {
         }
     }
 
-    public boolean hasCharacter() {
-        return character != null;
+    public char hasCharacter() {
+        if (character == null)
+            return ' ';
+        else {
+            if (character instanceof Player)
+                return 'p';
+            else if (character instanceof Chest)
+                return 'c';
+            else if (character instanceof Enemy)
+                return 'e';
+            else // character instanceof Boss
+                return 'b';
+        }
     }
 
     public void addBoss() {
@@ -73,6 +85,7 @@ public class Tile {
     }
 
     public String getSpritePath() {
-        return "./img/floor/" + spriteNum + ".png";
+        String path = "./img/floor/" + spriteNum + ".png";
+        return getClass().getResource(path).toString();
     }
 }
