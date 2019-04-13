@@ -5,6 +5,7 @@ import src.utils.Vector2D;
 
 import java.util.ArrayList;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.StackPane;
 import javafx.geometry.HPos;
 import javafx.geometry.VPos;
@@ -149,6 +150,7 @@ public class Room {
         GridPane floor = new GridPane();
         GridPane characters = new GridPane();
         for (int i = 0; i < sizeX; i++) {
+            characters.getRowConstraints().add(new RowConstraints(64));
             for (int j = 0; j < sizeY; j++) {
                 ImageView ivFloor = new ImageView(tiles[i][j].getSpritePath());
                 ivFloor.setSmooth(false);
@@ -164,12 +166,14 @@ public class Room {
                     ivChar = new ImageView(getClass().getResource("./img/emptyTile.png").toString());
 
                 ivChar.setSmooth(false);
-                ivChar.setFitWidth(64);
-                ivChar.setFitHeight(64);
+                if (tiles[i][j].hasCharacter() == 'b')
+                    ivChar.setFitWidth(128);
+                else
+                    ivChar.setFitWidth(64);
                 ivChar.setPreserveRatio(true);
                 characters.add(ivChar, j, i);
                 GridPane.setHalignment(ivChar, HPos.CENTER);
-                GridPane.setValignment(ivChar, VPos.CENTER);
+                GridPane.setValignment(ivChar, VPos.BOTTOM);
             }
         }
         StackPane stack = new StackPane(floor, characters);
