@@ -1,8 +1,12 @@
 package src.map;
 
+import src.character.NPC;
 import src.character.Player;
+import src.map.gui.MapRender;
 
 import java.util.ArrayList;
+
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.StackPane;
@@ -18,9 +22,9 @@ public class Room {
     private boolean areDoorsOpen;
     private Tile tiles[][];
     private int[] playerPos;
-    static final int sizeX = 7, sizeY = 11;
-    private final int centerX = (int) Math.floor((sizeX - 1) / 2.0);
-    private final int centerY = (int) Math.floor((sizeY - 1) / 2.0);
+    public static final int sizeX = 7, sizeY = 11;
+    public static final int centerX = (int) Math.floor((sizeX - 1) / 2.0);
+    public static final int centerY = (int) Math.floor((sizeY - 1) / 2.0);
 
     protected Room(int state, boolean[] doors) {
         this.state = state;
@@ -50,12 +54,13 @@ public class Room {
     }
 
     public void checkIfDoorsShouldOpen() {
-        for (int x = 0; x < sizeX; x++)
-            for (int y = 0; y < sizeY; y++)
-                if (tiles[x][y].hasCharacter() == 'b' || tiles[x][y].hasCharacter() == 'e') {
-                    this.areDoorsOpen = false;
-                    return;
-                }
+        // Commented for testing purposes
+        // for (int x = 0; x < sizeX; x++)
+        // for (int y = 0; y < sizeY; y++)
+        // if (tiles[x][y].hasCharacter() == 'b' || tiles[x][y].hasCharacter() == 'e') {
+        // this.areDoorsOpen = false;
+        // return;
+        // }
         this.areDoorsOpen = true;
     }
 
@@ -67,16 +72,17 @@ public class Room {
         if (state == 2 || state == 3)
             spawnEnemies();
         if (state == 4)
-            tiles[centerX - 1][centerY - 1].addChest();
+            tiles[centerX][centerY].addChest();
         if (state == 5)
-            tiles[centerX - 1][centerY - 1].addBoss();
+            tiles[centerX][centerY].addBoss();
     }
 
     private void spawnEnemies() {
         ArrayList<int[]> possibleTiles = new ArrayList<>();
-        for (int x = 0; x < sizeX - 2; x++)
-            for (int y = 0; y < sizeY - 2; y++)
-                possibleTiles.add(new int[] { x, y });
+        for (int x = 0; x < sizeX; x++)
+            for (int y = 0; y < sizeY; y++)
+                if (x != centerX && y != centerY)
+                    possibleTiles.add(new int[] { x, y });
         int numEnemies = state + (int) (Math.random() * 3);
         // Choose numEnemies random tiles from possibleTiles
         ArrayList<int[]> chosenTiles = new ArrayList<>();
@@ -89,18 +95,23 @@ public class Room {
             tiles[chosenTiles.get(i)[0]][chosenTiles.get(i)[1]].addEnemy(state);
     }
 
-    protected void setPlayer(Player player, int x, int y) throws ArrayIndexOutOfBoundsException {
+    public void setPlayer(Player player, int x, int y)
+            throws ArrayIndexOutOfBoundsException, TileAlreadyOccupiedException {
         if (x < 0 || y < 0 || x >= sizeX || y >= sizeY)
             throw new ArrayIndexOutOfBoundsException();
-        playerPos = new int[] { x, y };
         tiles[x][y].setPlayer(player);
+        playerPos = new int[] { x, y };
     }
 
     protected void setPlayer(Player player) {
-        setPlayer(player, centerX, centerY);
+        try {
+            setPlayer(player, centerX, centerY);
+        } catch (TileAlreadyOccupiedException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
-    public boolean movePlayer(int x, int y) {
+    public boolean movePlayer(int x, int y, MapRender mR) {
         Player p = (Player) tiles[playerPos[0]][playerPos[1]].getCharacter();
         try {
             int[] lastPlayerPos = playerPos;
@@ -109,10 +120,32 @@ public class Room {
             return true;
         } catch (ArrayIndexOutOfBoundsException e) {
             // To check if Player should move to another room
-            if (playerPos[0] == centerX) {
-                if (playerPos[1] == 0) {
+            if (areDoorsOpen) {
+                if (playerPos[0] == centerX) {
+                    if (playerPos[1] == 0 && doors[3]) {
+                        tiles[playerPos[0]][playerPos[1]].clearCharacter();
+                        mR.moveToRoom("LEFT", p);
+                    } else if (playerPos[1] == sizeY - 1 && doors[1]) {
+                        tiles[playerPos[0]][playerPos[1]].clearCharacter();
+                        mR.moveToRoom("RIGHT", p);
+                    }
+                } else if (playerPos[1] == centerY) {
+                    if (playerPos[0] == 0 && doors[0]) {
+                        tiles[playerPos[0]][playerPos[1]].clearCharacter();
+                        mR.moveToRoom("UP", p);
+                    } else if (playerPos[0] == sizeX - 1 && doors[2]) {
+                        tiles[playerPos[0]][playerPos[1]].clearCharacter();
+                        mR.moveToRoom("DOWN", p);
+                    }
                 }
             }
+            return false;
+        } catch (TileAlreadyOccupiedException e) {
+            NPC npc = (NPC) tiles[playerPos[0] + x][playerPos[1] + y].getCharacter();
+            System.out.println("I want to battle against a " + npc.getType());
+
+            // @Alex bro
+            // Start new battle against character in tile playerPos[0] + x, playerPos[1] + y
             return false;
         }
     }
@@ -171,6 +204,8 @@ public class Room {
                     ivChar.setFitWidth(64);
                 ivChar.setPreserveRatio(true);
                 characters.add(ivChar, j, i);
+                if (j == 0)
+                    characters.getColumnConstraints().add(new ColumnConstraints(64));
                 GridPane.setHalignment(ivChar, HPos.CENTER);
                 GridPane.setValignment(ivChar, VPos.BOTTOM);
             }

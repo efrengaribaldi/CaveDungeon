@@ -1,6 +1,7 @@
 package src.map.gui;
 
 import src.map.*;
+import src.character.Player;
 import src.game.Game;
 
 import javafx.event.EventHandler;
@@ -25,7 +26,7 @@ public class MapRender extends Scene {
         this.m = map;
         this.x = x;
         this.y = y;
-        setupKeyboardControls();
+        setupKeyboardControls(this);
         m.getRoom(x, y).checkIfDoorsShouldOpen();
         ImageView[] walls = m.getRoom(x, y).renderWalls();
         StackPane center = m.getRoom(x, y).renderCenter();
@@ -34,26 +35,26 @@ public class MapRender extends Scene {
         setRoot(root);
     }
 
-    private void setupKeyboardControls() {
+    private void setupKeyboardControls(MapRender mapRender) {
         setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
                 switch (event.getCode()) {
                 case W:
                 case UP:
-                    m.getRoom(x, y).movePlayer(-1, 0);
+                    m.getRoom(x, y).movePlayer(-1, 0, mapRender);
                     break;
                 case D:
                 case RIGHT:
-                    m.getRoom(x, y).movePlayer(0, 1);
+                    m.getRoom(x, y).movePlayer(0, 1, mapRender);
                     break;
                 case S:
                 case DOWN:
-                    m.getRoom(x, y).movePlayer(1, 0);
+                    m.getRoom(x, y).movePlayer(1, 0, mapRender);
                     break;
                 case A:
                 case LEFT:
-                    m.getRoom(x, y).movePlayer(0, -1);
+                    m.getRoom(x, y).movePlayer(0, -1, mapRender);
                     break;
                 case E:
                     game.setInventoryScene();
@@ -66,13 +67,34 @@ public class MapRender extends Scene {
         });
     }
 
-    public void moveToRoom(int x, int y) {
-        this.x += x;
-        this.y += y;
-        ImageView[] walls = m.getRoom(x, y).renderWalls();
-        StackPane center = m.getRoom(x, y).renderCenter();
-        BorderPane root = new BorderPane(center, walls[0], walls[1], walls[2], walls[3]);
-        root.setStyle("-fx-background-color: #1C1117;");
-        setRoot(root);
+    public void moveToRoom(String direction, Player player) {
+        try {
+            switch (direction) {
+            case "UP":
+                this.x--;
+                m.getRoom(x, y).setPlayer(player, Room.sizeX - 1, Room.centerY);
+                break;
+            case "RIGHT":
+                this.y++;
+                m.getRoom(x, y).setPlayer(player, Room.centerX, 0);
+                break;
+            case "DOWN":
+                this.x++;
+                m.getRoom(x, y).setPlayer(player, 0, Room.centerY);
+                break;
+            case "LEFT":
+                this.y--;
+                m.getRoom(x, y).setPlayer(player, Room.centerX, Room.sizeY - 1);
+                break;
+            }
+            m.getRoom(x, y).checkIfDoorsShouldOpen();
+            ImageView[] walls = m.getRoom(x, y).renderWalls();
+            StackPane center = m.getRoom(x, y).renderCenter();
+            BorderPane root = new BorderPane(center, walls[0], walls[1], walls[2], walls[3]);
+            root.setStyle("-fx-background-color: #1C1117;");
+            setRoot(root);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

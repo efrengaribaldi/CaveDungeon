@@ -14,7 +14,7 @@ public class Tile {
 
     public Tile() {
         super();
-        int rand = (int) (Math.random() * 20) - 13;
+        int rand = (int) (Math.random() * 30) - 21;
         spriteNum = (rand < 1) ? 1 : rand;
     }
 
@@ -68,7 +68,9 @@ public class Tile {
         }
     }
 
-    public void setPlayer(Player player) {
+    public void setPlayer(Player player) throws TileAlreadyOccupiedException {
+        if (this.character != null)
+            throw new TileAlreadyOccupiedException();
         this.character = player;
     }
 
