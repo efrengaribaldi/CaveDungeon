@@ -1,7 +1,6 @@
 package src.map;
 
 import src.character.Player;
-import src.utils.Vector2D;
 
 import java.util.ArrayList;
 import javafx.scene.layout.GridPane;
@@ -74,20 +73,20 @@ public class Room {
     }
 
     private void spawnEnemies() {
-        ArrayList<Vector2D> possibleTiles = new ArrayList<>();
+        ArrayList<int[]> possibleTiles = new ArrayList<>();
         for (int x = 0; x < sizeX - 2; x++)
             for (int y = 0; y < sizeY - 2; y++)
-                possibleTiles.add(new Vector2D(x, y));
+                possibleTiles.add(new int[] { x, y });
         int numEnemies = state + (int) (Math.random() * 3);
         // Choose numEnemies random tiles from possibleTiles
-        ArrayList<Vector2D> chosenTiles = new ArrayList<>();
+        ArrayList<int[]> chosenTiles = new ArrayList<>();
         for (int i = 0; i < numEnemies; i++) {
             int index = (int) (Math.random() * possibleTiles.size());
             chosenTiles.add(possibleTiles.get(index));
         }
         // Add enemies for every chosen tile
         for (int i = 0; i < numEnemies; i++)
-            tiles[chosenTiles.get(i).x][chosenTiles.get(i).y].addEnemy(state);
+            tiles[chosenTiles.get(i)[0]][chosenTiles.get(i)[1]].addEnemy(state);
     }
 
     protected void setPlayer(Player player, int x, int y) throws ArrayIndexOutOfBoundsException {

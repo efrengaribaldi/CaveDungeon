@@ -1,7 +1,6 @@
 package src.map;
 
 import src.character.Player;
-import src.utils.*;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -39,7 +38,7 @@ public class Map {
             // Declare array of rooms
             rooms = new Room[sizeX][sizeY];
             // Declare an arraylist to store coordinates of rooms to create
-            ArrayList<Vector2D> roomsToCreate = new ArrayList<Vector2D>();
+            ArrayList<int[]> roomsToCreate = new ArrayList<int[]>();
             // Set center room as initial positions
             startX = (int) Math.floor((sizeX - 1) / 2.0);
             startY = (int) Math.floor((sizeY - 1) / 2.0);
@@ -49,26 +48,26 @@ public class Map {
             // Generate rooms with random probabilities
             int i = 0;
             for (; i < roomsToCreate.size() - 2; i++) {
-                declareRoom(roomsToCreate.get(i).x, roomsToCreate.get(i).y, 0, roomsToCreate);
+                declareRoom(roomsToCreate.get(i)[0], roomsToCreate.get(i)[1], 0, roomsToCreate);
                 roomCount++;
             }
             lastTwoVectorsAreDifferent = true;
             if (roomsToCreate.size() > 2) {
-                if ((roomsToCreate.get(i).x == roomsToCreate.get(i + 1).x)
-                        && (roomsToCreate.get(i).y == roomsToCreate.get(i + 1).y))
+                if ((roomsToCreate.get(i)[0] == roomsToCreate.get(i + 1)[0])
+                        && (roomsToCreate.get(i)[1] == roomsToCreate.get(i + 1)[1]))
                     lastTwoVectorsAreDifferent = false;
                 // Generate boss room
-                declareRoom(roomsToCreate.get(i).x, roomsToCreate.get(i).y, 5, roomsToCreate);
+                declareRoom(roomsToCreate.get(i)[0], roomsToCreate.get(i)[1], 5, roomsToCreate);
                 i++;
                 // Generate store
-                declareRoom(roomsToCreate.get(i).x, roomsToCreate.get(i).y, 6, roomsToCreate);
+                declareRoom(roomsToCreate.get(i)[0], roomsToCreate.get(i)[1], 6, roomsToCreate);
             }
             closeUnusedDoors();
             hasBossRoom = deleteUnconnectedRooms();
         } while (roomCount < minNumRooms || !hasBossRoom || !lastTwoVectorsAreDifferent);
     }
 
-    private void declareRoom(int x, int y, int state, ArrayList<Vector2D> roomsToCreate) {
+    private void declareRoom(int x, int y, int state, ArrayList<int[]> roomsToCreate) {
         // Protect room array against overwrites
         if (rooms[x][y] != null) {
             // Only overwrite if it already has a state
@@ -100,13 +99,13 @@ public class Map {
         // If there isn't a room in a direction, and there is a door
         // from this room to that direction, add a room there
         if (rooms[x - 1][y] == null && doors[0])
-            roomsToCreate.add(new Vector2D(x - 1, y));
+            roomsToCreate.add(new int[] { x - 1, y });
         if (rooms[x][y + 1] == null && doors[1])
-            roomsToCreate.add(new Vector2D(x, y + 1));
+            roomsToCreate.add(new int[] { x, y + 1 });
         if (rooms[x + 1][y] == null && doors[2])
-            roomsToCreate.add(new Vector2D(x + 1, y));
+            roomsToCreate.add(new int[] { x + 1, y });
         if (rooms[x][y - 1] == null && doors[3])
-            roomsToCreate.add(new Vector2D(x, y - 1));
+            roomsToCreate.add(new int[] { x, y - 1 });
         // Create a room, set type and doors, and add the new room to map
         state = (state == 0) ? getRandomType() : state;
         // If it is adjacent to the initial room, and its state is 3, make it 2
