@@ -8,18 +8,17 @@ import src.item.weapon.Ability;
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
+import javafx.fxml.FXML;
+import javafx.scene.control.TextField;
+import javafx.event.ActionEvent;
+import javafx.scene.control.ChoiceBox;
 
-public class BattleGUI extends Scene {
+public class BattleController {
     private Scanner sc;
     private Player player;
     private NPC npc;
 
-    public BattleGUI(Player player, NPC npc) {
-        super(new HBox());
+    public BattleController(Player player, NPC npc) {
         sc = new Scanner(System.in);
         this.player = player;
         this.npc = npc;
