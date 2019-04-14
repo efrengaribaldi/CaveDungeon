@@ -23,7 +23,7 @@ public class Mage extends Player {
 
     @Override
     public ImageView render() {
-        String path = "./img/mage_" + getGender() + "1.png";
+        String path = "./img/mage_" + getGender() + ".gif";
         return new ImageView(getClass().getResource(path).toString());
     }
 }

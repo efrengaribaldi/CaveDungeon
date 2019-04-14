@@ -31,7 +31,7 @@ public class Zombie extends Enemy {
 
     @Override
     public ImageView render() {
-        String path = "./img/zombie1.png";
+        String path = "./img/zombie.gif";
         return new ImageView(getClass().getResource(path).toString());
     }
 }

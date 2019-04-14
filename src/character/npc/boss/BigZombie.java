@@ -16,7 +16,7 @@ public class BigZombie extends Boss {
 
     @Override
     public ImageView render() {
-        String path = "./img/bigZombie1.png";
+        String path = "./img/bigZombie.gif";
         return new ImageView(getClass().getResource(path).toString());
     }
 }

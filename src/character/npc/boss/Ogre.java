@@ -16,7 +16,7 @@ public class Ogre extends Boss {
 
     @Override
     public ImageView render() {
-        String path = "./img/ogre1.png";
+        String path = "./img/ogre.gif";
         return new ImageView(getClass().getResource(path).toString());
     }
 }

@@ -31,7 +31,7 @@ public class Swampy extends Enemy {
 
     @Override
     public ImageView render() {
-        String path = "./img/swampy1.png";
+        String path = "./img/swampy.gif";
         return new ImageView(getClass().getResource(path).toString());
     }
 }

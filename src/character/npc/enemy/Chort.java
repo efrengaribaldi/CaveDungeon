@@ -31,7 +31,7 @@ public class Chort extends Enemy {
 
     @Override
     public ImageView render() {
-        String path = "./img/chort1.png";
+        String path = "./img/chort.gif";
         return new ImageView(getClass().getResource(path).toString());
     }
 }

@@ -16,7 +16,7 @@ public class BigDemon extends Boss {
 
     @Override
     public ImageView render() {
-        String path = "./img/bigDemon1.png";
+        String path = "./img/bigDemon.gif";
         return new ImageView(getClass().getResource(path).toString());
     }
 }

@@ -31,7 +31,7 @@ public class Necromancer extends Enemy {
 
     @Override
     public ImageView render() {
-        String path = "./img/necromancer1.png";
+        String path = "./img/necromancer.gif";
         return new ImageView(getClass().getResource(path).toString());
     }
 }

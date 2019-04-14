@@ -13,7 +13,7 @@ public class Chest extends NPC {
 
     @Override
     public ImageView render() {
-        return new ImageView(getClass().getResource("./chest/img/chest0.png").toString());
+        return new ImageView(getClass().getResource("./chest/img/chest.gif").toString());
     }
 
     @Override

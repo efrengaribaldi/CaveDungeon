@@ -31,7 +31,7 @@ public class Skeleton extends Enemy {
 
     @Override
     public ImageView render() {
-        String path = "./img/skeleton1.png";
+        String path = "./img/skeleton.gif";
         return new ImageView(getClass().getResource(path).toString());
     }
 }

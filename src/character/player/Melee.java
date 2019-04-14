@@ -23,7 +23,7 @@ public class Melee extends Player {
 
     @Override
     public ImageView render() {
-        String path = "./img/melee_" + getGender() + "1.png";
+        String path = "./img/melee_" + getGender() + ".gif";
         return new ImageView(getClass().getResource(path).toString());
     }
 }

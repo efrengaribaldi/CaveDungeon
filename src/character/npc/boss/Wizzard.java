@@ -16,7 +16,7 @@ public class Wizzard extends Boss {
 
     @Override
     public ImageView render() {
-        String path = "./img/wizzard1.png";
+        String path = "./img/wizzard.gif";
         return new ImageView(getClass().getResource(path).toString());
     }
 }
