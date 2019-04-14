@@ -24,10 +24,10 @@ public class Tile {
             character = (Math.random() < 0.5) ? new Zombie() : new Skeleton();
             break;
         case 3:
-            int randomEnemy = (int) (Math.random() * 9);
-            if (randomEnemy < 5)
+            int randomEnemy = (int) (Math.random() * 8);
+            if (randomEnemy < 4)
                 character = new Chort();
-            else if (randomEnemy < 8)
+            else if (randomEnemy < 7)
                 character = new Swampy();
             else
                 character = new Necromancer();

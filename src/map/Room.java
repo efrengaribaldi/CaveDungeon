@@ -15,7 +15,7 @@ import javafx.geometry.VPos;
 import javafx.scene.image.ImageView;
 
 public class Room {
-    // 0 to be defined, 1 initial, 2 easy, 3 hard, 4 treasure, 5 boss, 6 store
+    // 0 to be defined, 1 initial, 2 easy, 3 hard, 4 treasure, 5 boss
     private int state;
     // 0 top, 1 right, 2 bottom, 3 left
     private boolean doors[];
@@ -69,12 +69,18 @@ public class Room {
         for (int x = 0; x < sizeX; x++)
             for (int y = 0; y < sizeY; y++)
                 tiles[x][y] = new Tile();
-        if (state == 2 || state == 3)
+        switch (state) {
+        case 2:
+        case 3:
             spawnEnemies();
-        if (state == 4)
+            break;
+        case 4:
             tiles[centerX][centerY].addChest();
-        if (state == 5)
+            break;
+        case 5:
             tiles[centerX][centerY].addBoss();
+            break;
+        }
     }
 
     private void spawnEnemies() {
@@ -83,7 +89,7 @@ public class Room {
             for (int y = 0; y < sizeY; y++)
                 if (x != centerX && y != centerY)
                     possibleTiles.add(new int[] { x, y });
-        int numEnemies = state + (int) (Math.random() * 3);
+        int numEnemies = 2 + (int) (Math.random() * 3);
         // Choose numEnemies random tiles from possibleTiles
         ArrayList<int[]> chosenTiles = new ArrayList<>();
         for (int i = 0; i < numEnemies; i++) {

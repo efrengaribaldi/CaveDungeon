@@ -10,15 +10,15 @@ public class Map {
     private Room rooms[][];
     private int minNumRooms, sizeX, sizeY;
     public int startX, startY;
-    // 0 to be defined, 1 initial, 2 easy, 3 hard, 4 treasure, 5 boss, 6 store
-    private final int[] probabilities = { 0, 0, 70, 90, 100, 100, 100 };
+    // 0 to be defined, 1 initial, 2 easy, 3 hard, 4 treasure, 5 boss
+    private final int[] probabilities = { 0, 0, 45, 90, 100, 100 };
     private final int doorChance = 30;
 
     public Map(long seed) {
         random.setSeed(seed);
-        minNumRooms = 7;
+        minNumRooms = 9;
         sizeX = 7;
-        sizeY = 7;
+        sizeY = 9;
         // Generate map layout
         generateMap();
         // Generate every room
@@ -32,8 +32,7 @@ public class Map {
         // Declare a counter of rooms created
         int roomCount;
         // Boolean to check if boss room has been deleted / not connected
-        // Boolean to check if the boss room and the store will be in different spots
-        boolean hasBossRoom, lastTwoVectorsAreDifferent;
+        boolean hasBossRoom;
         do {
             // Declare array of rooms
             rooms = new Room[sizeX][sizeY];
@@ -51,20 +50,18 @@ public class Map {
                 declareRoom(roomsToCreate.get(i)[0], roomsToCreate.get(i)[1], 0, roomsToCreate);
                 roomCount++;
             }
-            lastTwoVectorsAreDifferent = true;
-            if (roomsToCreate.size() > 2) {
-                if ((roomsToCreate.get(i)[0] == roomsToCreate.get(i + 1)[0])
-                        && (roomsToCreate.get(i)[1] == roomsToCreate.get(i + 1)[1]))
-                    lastTwoVectorsAreDifferent = false;
+            if (roomsToCreate.size() > 1) {
                 // Generate boss room
                 declareRoom(roomsToCreate.get(i)[0], roomsToCreate.get(i)[1], 5, roomsToCreate);
-                i++;
-                // Generate store
-                declareRoom(roomsToCreate.get(i)[0], roomsToCreate.get(i)[1], 6, roomsToCreate);
             }
             closeUnusedDoors();
-            hasBossRoom = deleteUnconnectedRooms();
-        } while (roomCount < minNumRooms || !hasBossRoom || !lastTwoVectorsAreDifferent);
+            hasBossRoom = true;
+            try {
+                deleteUnconnectedRooms();
+            } catch (BossRoomDeletedException e) {
+                hasBossRoom = false;
+            }
+        } while (roomCount < minNumRooms || !hasBossRoom);
     }
 
     private void declareRoom(int x, int y, int state, ArrayList<int[]> roomsToCreate) {
@@ -116,17 +113,16 @@ public class Map {
         rooms[x][y] = r;
     }
 
-    private boolean deleteUnconnectedRooms() {
+    private void deleteUnconnectedRooms() throws BossRoomDeletedException {
         for (int x = 0; x < sizeX; x++)
             for (int y = 0; y < sizeY; y++)
                 if (rooms[x][y] != null)
                     if (rooms[x][y].isNotConnected()) {
                         if (rooms[x][y].getState() == 5)
-                            return false;
+                            throw new BossRoomDeletedException();
                         else
                             rooms[x][y] = null;
                     }
-        return true;
     }
 
     private void closeUnusedDoors() {

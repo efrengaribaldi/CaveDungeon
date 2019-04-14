@@ -44,9 +44,6 @@ state = 4
 #### Boss Fight
 state = 5
 
-#### Store
-state = 6
-
 ## Tile class
 When created, chooses a random sprite with the first one having the most probability.
 Stores either the enemy, boss or enemy.
