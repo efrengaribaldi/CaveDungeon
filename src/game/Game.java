@@ -40,7 +40,8 @@ public class Game {
         player.equipWeapon();
         System.out.println("Limit HP: " + player.getLimitHp() + " Current HP: " + player.getHealthPoints());
         System.out.println("Limit Stamina: " + player.getLimitStamina() + " Current Stamina: " + player.getStamina());
-        System.out.println("Next Level EXP: " + player.getExpRequiredForNextLevel() + " Current EXP: " + player.getExperience());
+        System.out.println(
+                "Next Level EXP: " + player.getExpRequiredForNextLevel() + " Current EXP: " + player.getExperience());
     }
 
     private void battleTests() {
@@ -74,6 +75,10 @@ public class Game {
             System.out.println("\nStart new battle? (Y or N)");
             battleAgain = sc.next().charAt(0);
         } while (battleAgain == 'Y' || battleAgain == 'y');
+    }
+
+    public void startBattle(Player player, NPC npc) {
+        // Set battle scene
     }
 
     public void setNewPlayerAndContinue(Player player) throws Exception {

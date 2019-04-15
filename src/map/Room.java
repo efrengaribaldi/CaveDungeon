@@ -149,9 +149,7 @@ public class Room {
         } catch (TileAlreadyOccupiedException e) {
             NPC npc = (NPC) tiles[playerPos[0] + x][playerPos[1] + y].getCharacter();
             System.out.println("I want to battle against a " + npc.getType());
-
-            // @Alex bro
-            // Start new battle against character in tile playerPos[0] + x, playerPos[1] + y
+            mR.getGame().startBattle(p, npc);
             return false;
         }
     }

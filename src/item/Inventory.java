@@ -6,8 +6,8 @@ public class Inventory {
     private Weapon[] weapons;
 
     public Inventory() {
-        armor = new Armor[4];
-        potions = new Potion[4];
+        armor = new Armor[3];
+        potions = new Potion[3];
         weapons = new Weapon[2];
     }
 

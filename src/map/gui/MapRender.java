@@ -97,4 +97,8 @@ public class MapRender extends Scene {
             e.printStackTrace();
         }
     }
+
+    public Game getGame() {
+        return game;
+    }
 }
