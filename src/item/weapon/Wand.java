@@ -15,6 +15,7 @@ public class Wand extends Weapon {
                         new Ability("Shattering Strike", 2 * baseAttack, 2 * baseStamina),
                         new Ability("Apocalypse", (int) (3.5 * baseAttack), (int) (3.5 * baseStamina)) });
         setName(names[(int) (Math.random() * names.length)]);
+        sprite = (int) (Math.random() * 4);
     }
 
     @Override
@@ -24,6 +25,6 @@ public class Wand extends Weapon {
 
     @Override
     public Image render() {
-        return new Image(getClass().getResource("./img/wand" + (Integer.toString((int)(Math.random() * 4) + 1)) + ".png").toString());
+        return new Image(getClass().getResource("./img/wand" + sprite + ".png").toString());
     }
 }

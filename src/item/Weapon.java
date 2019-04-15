@@ -4,21 +4,22 @@ import src.item.Item;
 import src.item.weapon.Ability;
 
 public abstract class Weapon extends Item {
-    public boolean weaponState;
+    public boolean isEquipped;
     private Ability[] abilities;
+    protected int sprite;
 
     public Weapon(String name, Ability[] abilities) {
         super(name);
         this.abilities = abilities;
-        this.weaponState = false;
+        this.isEquipped = false;
     }
 
-    public boolean getWeaponState() {
-        return weaponState;
+    public boolean getIsEquipped() {
+        return isEquipped;
     }
 
-    public void setWeaponState(boolean weaponState) {
-        this.weaponState = weaponState;
+    public void setIsEquipped(boolean isEquipped) {
+        this.isEquipped = isEquipped;
     }
 
     public Ability[] getAbilities() {
@@ -43,15 +44,9 @@ public abstract class Weapon extends Item {
 
     public String printAbilities() {
         String res = "";
-        for (int i = 0; i < abilities.length; ++i) {
-            res += "Ability[" + i + "] ";
-            res += (abilities[i] != null)
-                    ? "Name: " + abilities[i].getName() + " | Damage: " + abilities[i].getBaseDamage()
-                            + " | Stamina cost: " + abilities[i].getStaminaCost()
-                    : "null";
-            res += "\n";
-        }
-        res += "\n";
+        for (int i = 0; i < abilities.length; ++i)
+            res += abilities[i].getName() + ":\n  " + abilities[i].getBaseDamage() + " dmg, "
+                    + abilities[i].getStaminaCost() + " sta\n";
         return res;
     }
 

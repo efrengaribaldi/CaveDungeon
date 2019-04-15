@@ -14,15 +14,18 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 
 public class InventoryGUI extends Scene {
-    private InventoryController inventoryController;
-
-    public InventoryGUI(Game game) throws Exception {
+    public InventoryGUI(Game game) {
         super(new Pane());
+        Pane root = new Pane();
         FXMLLoader loader = new FXMLLoader();
-        URI fxmlDocPath = getClass().getResource("./inventory.fxml").toURI();
-        FileInputStream fxmlStream = new FileInputStream(new File(fxmlDocPath));
-        Pane root = (Pane) loader.load(fxmlStream);
-        inventoryController = loader.<InventoryController>getController();
+        try {
+            URI fxmlDocPath = getClass().getResource("./inventory.fxml").toURI();
+            FileInputStream fxmlStream = new FileInputStream(new File(fxmlDocPath));
+            root = (Pane) loader.load(fxmlStream);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        InventoryController inventoryController = loader.<InventoryController>getController();
         inventoryController.initialize(game);
         setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
@@ -32,9 +35,5 @@ public class InventoryGUI extends Scene {
             }
         });
         this.setRoot(root);
-    }
-
-    public InventoryController getInventoryController() {
-        return inventoryController;
     }
 }

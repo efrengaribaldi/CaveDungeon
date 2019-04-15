@@ -15,6 +15,7 @@ public class Sword extends Weapon {
                         new Ability("Sword Storm", 2 * baseAttack, 2 * baseStamina),
                         new Ability("Lightning Blade", (int) (3.5 * baseAttack), (int) (3.5 * baseStamina)) });
         setName(names[(int) (Math.random() * names.length)]);
+        sprite = (int) (Math.random() * 5);
     }
 
     @Override
@@ -22,10 +23,8 @@ public class Sword extends Weapon {
         return "Sword";
     }
 
-    //"sword" + (Integer.toString((int)(Math.random() * 5) + 1)) + ".png"
-
     @Override
     public Image render() {
-        return new Image(getClass().getResource("./img/sword" + (Integer.toString((int)(Math.random() * 5) + 1)) + ".png").toString());
+        return new Image(getClass().getResource("./img/sword" + sprite + ".png").toString());
     }
 }

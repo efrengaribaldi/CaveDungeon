@@ -14,6 +14,7 @@ public class EnchantedBook extends Weapon {
                         new Ability("Dark Bane", 2 * baseAttack, 2 * baseStamina),
                         new Ability("Life Drain", (int) (3.5 * baseAttack), (int) (3.5 * baseStamina)) });
         setName(names[(int) (Math.random() * names.length)]);
+        sprite = (int) (Math.random() * 5);
     }
 
     @Override
@@ -23,6 +24,6 @@ public class EnchantedBook extends Weapon {
 
     @Override
     public Image render() {
-        return new Image(getClass().getResource("./img/enchantedbook" + (Integer.toString((int)(Math.random() * 5) + 1)) + ".png").toString());
+        return new Image(getClass().getResource("./img/enchantedbook" + sprite + ".png").toString());
     }
 }

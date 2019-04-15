@@ -60,16 +60,22 @@ public class Inventory {
     }
 
     public void equipWeapon(int index) {
-        weapons[0].setWeaponState((index == 0));
-        weapons[1].setWeaponState((index == 1));
+        weapons[0].setIsEquipped((index == 0));
+        weapons[1].setIsEquipped((index == 1));
     }
 
-    public String showEquippedWeapon() {
-        return (weapons[0].getWeaponState()) ? weapons[0].getName() : weapons[1].getName();
+    public void switchEquippedWeapons() {
+        if (weapons[0].getIsEquipped()) {
+            weapons[0].setIsEquipped(false);
+            weapons[1].setIsEquipped(true);
+        } else {
+            weapons[0].setIsEquipped(true);
+            weapons[1].setIsEquipped(false);
+        }
     }
 
     public Weapon getEquippedWeapon() {
-        return (weapons[0].getWeaponState()) ? weapons[0] : weapons[1];
+        return (weapons[0].getIsEquipped()) ? weapons[0] : weapons[1];
     }
 
     public String printWeapons() {

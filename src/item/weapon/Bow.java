@@ -15,6 +15,7 @@ public class Bow extends Weapon {
                         new Ability("Triple Shot", 2 * baseAttack, 2 * baseStamina),
                         new Ability("Critical Shot", (int) (3.5 * baseAttack), (int) (3.5 * baseStamina)) });
         setName(names[(int) (Math.random() * names.length)]);
+        sprite = (int) (Math.random() * 5);
     }
 
     @Override
@@ -24,6 +25,6 @@ public class Bow extends Weapon {
 
     @Override
     public Image render() {
-        return new Image(getClass().getResource("./img/bow" + (Integer.toString((int)(Math.random() * 5) + 1)) + ".png").toString());
+        return new Image(getClass().getResource("./img/bow" + sprite + ".png").toString());
     }
 }

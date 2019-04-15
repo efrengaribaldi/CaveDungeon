@@ -18,7 +18,6 @@ public class Game {
     private Map[] levels;
     private Player player;
     private Stage stage;
-    private Scene inventoryGui;
     private Scene mapRender;
     private Scene battle;
 
@@ -45,7 +44,7 @@ public class Game {
         System.out.println(
                 "Next Level EXP: " + player.getExpRequiredForNextLevel() + " Current EXP: " + player.getExperience());
     }
-    
+
     private void battleTests() {
         char battleAgain;
         Enemy newEnemy;
@@ -73,23 +72,23 @@ public class Game {
                 break;
             }
             System.out.println("------------------------------------------------------------------------------------");
-            //Battle battle = new Battle(player, newEnemy);
+            // Battle battle = new Battle(player, newEnemy);
             System.out.println("\nStart new battle? (Y or N)");
             battleAgain = sc.next().charAt(0);
         } while (battleAgain == 'Y' || battleAgain == 'y');
-    }    
+    }
 
     public void setNewPlayerAndContinue(Player player) throws Exception {
         this.player = player;
         levels[0].setPlayer(player);
+        player.checkLevelUp(200); // for testing purposes
         mapTests();
         mapRender = new MapRender(this, levels[0]);
-        inventoryGui = new InventoryGUI(this);
         playerTests();
         setRoomScene();
-        //Battle instantiated for tests
+        // Battle instantiated for tests
         battle = new Battle(player, new Zombie());
-        //setBattleScene();
+        // setBattleScene();
     }
 
     public Player getPlayer() {
@@ -101,10 +100,10 @@ public class Game {
     }
 
     public void setInventoryScene() {
-        stage.setScene(inventoryGui);
+        stage.setScene(new InventoryGUI(this));
     }
 
-    //Battle Scene tests
+    // Battle Scene tests
     public void setBattleScene() {
         stage.setScene(battle);
     }
