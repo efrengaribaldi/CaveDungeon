@@ -9,7 +9,7 @@ public class Main extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) {
         Game game = new Game(primaryStage);
         primaryStage.setTitle("CaveDungeon 0.1.290324 OMEGA");
         primaryStage.show();

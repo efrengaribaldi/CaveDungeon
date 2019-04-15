@@ -11,15 +11,18 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;
 
 public class Battle extends Scene {
-    private BattleController battleController;
-    
-    public Battle(Player player, NPC npc) throws Exception {
+    public Battle(Player player, NPC npc) {
         super(new Pane());
+        Pane root = new Pane();
         FXMLLoader loader = new FXMLLoader();
-        URI fxmlDocPath = getClass().getResource("./battle.fxml").toURI();
-        FileInputStream fxmlStream = new FileInputStream(new File(fxmlDocPath));
-        Pane root = (Pane) loader.load(fxmlStream);
-        battleController = loader.<BattleController>getController();
+        try {
+            URI fxmlDocPath = getClass().getResource("./battle.fxml").toURI();
+            FileInputStream fxmlStream = new FileInputStream(new File(fxmlDocPath));
+            root = (Pane) loader.load(fxmlStream);
+        } catch (Exception e) {
+            System.out.println("ERROR: Battle couldn't be started");
+        }
+        BattleController battleController = loader.<BattleController>getController();
         battleController.initialize();
         this.setRoot(root);
     }

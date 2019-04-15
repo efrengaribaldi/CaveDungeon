@@ -19,9 +19,8 @@ public class Game {
     private Player player;
     private Stage stage;
     private Scene mapRender;
-    private Scene battle;
 
-    public Game(Stage stage) throws Exception {
+    public Game(Stage stage) {
         this.stage = stage;
         long gameSeed = System.currentTimeMillis();
         System.out.println("Seed: " + gameSeed);
@@ -78,7 +77,7 @@ public class Game {
         } while (battleAgain == 'Y' || battleAgain == 'y');
     }
 
-    public void setNewPlayerAndContinue(Player player) throws Exception {
+    public void setNewPlayerAndContinue(Player player) {
         this.player = player;
         levels[0].setPlayer(player);
         player.checkLevelUp(200); // for testing purposes
@@ -86,9 +85,6 @@ public class Game {
         mapRender = new MapRender(this, levels[0]);
         playerTests();
         setRoomScene();
-        // Battle instantiated for tests
-        battle = new Battle(player, new Zombie());
-        // setBattleScene();
     }
 
     public Player getPlayer() {
@@ -103,12 +99,7 @@ public class Game {
         stage.setScene(new InventoryGUI(this));
     }
 
-    // Battle Scene tests
-    public void setBattleScene() {
-        stage.setScene(battle);
-    }
-
     public void startBattle(Player player, NPC npc) {
-        stage.setScene(battle);
+        stage.setScene(new Battle(player, npc));
     }
 }
