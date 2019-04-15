@@ -1,4 +1,4 @@
-package src.character.gui;
+package src.character.gui.createplayer;
 
 import src.game.Game;
 

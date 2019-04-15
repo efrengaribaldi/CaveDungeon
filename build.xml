@@ -1,6 +1,6 @@
 <?xml version = "1.0" encoding="UTF-8"?>
 
-<project name="CaveDungeon" default="run" basedir=".">
+<project name="CaveDungeon" default="run" basedir="." xmlns:fx="javafx:com.sun.javafx.tools.ant">
 
 	<description>
 		As the final project in Orient Objected Programming, we will create an
@@ -15,9 +15,14 @@
 	</target>
 
 	<target name="copyAssets" depends="init" description="Copies assets from source code to build folder.">
-		<copy file="${src}/character/gui/createPlayer.fxml" tofile="${build}/src/character/gui/createPlayer.fxml" overwrite="true" />
-		<copy file="${src}/character/gui/mage.png" tofile="${build}/src/character/gui/mage.png" />
-		<copy file="${src}/character/gui/melee.png" tofile="${build}/src/character/gui/melee.png" />
+		<copy file="${src}/character/gui/createplayer/createPlayer.fxml" tofile="${build}/src/character/gui/createplayer/createPlayer.fxml" overwrite="true" />
+		<copy file="${src}/character/gui/createplayer/mage.png" tofile="${build}/src/character/gui/createplayer/mage.png" />
+		<copy file="${src}/character/gui/createplayer/melee.png" tofile="${build}/src/character/gui/createplayer/melee.png" />
+		<copy file="${src}/character/gui/battle/battle.fxml" tofile="${build}/src/character/gui/battle/battle.fxml" overwrite="true" />
+		<copy file="${src}/character/gui/battle/selectAttack.fxml" tofile="${build}/src/character/gui/battle/selectAttack.fxml" overwrite="true" />
+		<copy file="${src}/character/gui/battle/selectPotion.fxml" tofile="${build}/src/character/gui/battle/selectPotion.fxml" overwrite="true" />
+		<copy file="${src}/character/gui/battle/playerAttack.fxml" tofile="${build}/src/character/gui/battle/playerAttack.fxml" overwrite="true" />
+		<copy file="${src}/character/gui/battle/enemyAttack.fxml" tofile="${build}/src/character/gui/battle/enemyAttack.fxml" overwrite="true" />
 		<copy todir="${build}/src/character/npc/boss/img"><fileset dir="${src}/character/npc/boss/img" /></copy>
 		<copy todir="${build}/src/character/npc/chest/img"><fileset dir="${src}/character/npc/chest/img" /></copy>
 		<copy todir="${build}/src/character/npc/enemy/img"><fileset dir="${src}/character/npc/enemy/img" /></copy>

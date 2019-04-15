@@ -5,8 +5,6 @@ import src.map.gui.MapRender;
 import src.character.*;
 import src.character.gui.createplayer.CreatePlayer;
 import src.character.gui.battle.Battle;
-import src.character.npc.Enemy;
-import src.character.npc.enemy.*;
 import src.item.gui.*;
 
 import java.util.Scanner;
@@ -42,10 +40,38 @@ public class Game {
         player.equipWeapon();
         System.out.println("Limit HP: " + player.getLimitHp() + " Current HP: " + player.getHealthPoints());
         System.out.println("Limit Stamina: " + player.getLimitStamina() + " Current Stamina: " + player.getStamina());
-        System.out.println(
-                "Next Level EXP: " + player.getExpRequiredForNextLevel() + " Current EXP: " + player.getExperience());
+        System.out.println("Next Level EXP: " + player.getExpRequiredForNextLevel() + " Current EXP: " + player.getExperience());
     }
-    
+
+    public void setNewPlayerAndContinue(Player player) throws Exception {
+        this.player = player;
+        levels[0].setPlayer(player);
+        mapTests();
+        mapRender = new MapRender(this, levels[0]);
+        inventoryGui = new InventoryGUI(this);
+        battle = new Battle(this);
+        playerTests();
+        //setRoomScene();
+        setBattleScene();
+    }
+
+    public Player getPlayer() {
+        return player;
+    }
+
+    public void setRoomScene() {
+        stage.setScene(mapRender);
+    }
+
+    public void setInventoryScene() {
+        stage.setScene(inventoryGui);
+    }
+
+    public void setBattleScene() {
+        stage.setScene(battle);
+    }
+
+    /*
     private void battleTests() {
         char battleAgain;
         Enemy newEnemy;
@@ -73,43 +99,10 @@ public class Game {
                 break;
             }
             System.out.println("------------------------------------------------------------------------------------");
-            //Battle battle = new Battle(player, newEnemy);
+            Battle battle = new Battle(player, newEnemy);
             System.out.println("\nStart new battle? (Y or N)");
             battleAgain = sc.next().charAt(0);
         } while (battleAgain == 'Y' || battleAgain == 'y');
-    }    
-
-    public void setNewPlayerAndContinue(Player player) throws Exception {
-        this.player = player;
-        levels[0].setPlayer(player);
-        mapTests();
-        mapRender = new MapRender(this, levels[0]);
-        inventoryGui = new InventoryGUI(this);
-        playerTests();
-        setRoomScene();
-        //Battle instantiated for tests
-        battle = new Battle(player, new Zombie());
-        //setBattleScene();
-    }
-
-    public Player getPlayer() {
-        return player;
-    }
-
-    public void setRoomScene() {
-        stage.setScene(mapRender);
-    }
-
-    public void setInventoryScene() {
-        stage.setScene(inventoryGui);
-    }
-
-    //Battle Scene tests
-    public void setBattleScene() {
-        stage.setScene(battle);
-    }
-
-    public void startBattle(Player player, NPC npc) {
-        stage.setScene(battle);
-    }
+    } 
+    */
 }

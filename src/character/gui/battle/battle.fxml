@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="src.character.gui.battle.BattleController">
+   <children>
+      <Pane fx:id="battleView" prefHeight="518.0" prefWidth="1024.0">
+         <children>
+            <AnchorPane layoutX="573.0" layoutY="398.0" prefHeight="100.0" prefWidth="410.0" style="-fx-background-color: brown;">
+               <children>
+                  <ProgressBar fx:id="healthPBar" layoutX="28.0" layoutY="30.0" prefHeight="25.0" prefWidth="376.0" progress="1.0" />
+                  <Label fx:id="playerHealth" layoutX="315.0" layoutY="60.0" text="42/42" textFill="WHITE">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <Label layoutX="620.0" layoutY="354.0" text="Player">
+               <font>
+                  <Font size="28.0" />
+               </font>
+            </Label>
+            <Label layoutX="880.0" layoutY="354.0" text="Level">
+               <font>
+                  <Font size="28.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="imgPlayer" fitHeight="240.0" fitWidth="192.0" layoutX="100.0" layoutY="252.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="imgNpc" fitHeight="240.0" fitWidth="192.0" layoutX="691.0" layoutY="47.0" pickOnBounds="true" preserveRatio="true" />
+            <Label layoutX="100.0" layoutY="72.0" text="Enemy">
+               <font>
+                  <Font size="28.0" />
+               </font>
+            </Label>
+            <AnchorPane layoutX="50.0" layoutY="119.0" prefHeight="100.0" prefWidth="410.0" style="-fx-background-color: brown;">
+               <children>
+                  <ProgressBar fx:id="healthEBar" layoutX="28.0" layoutY="30.0" prefHeight="25.0" prefWidth="376.0" progress="1.0" />
+                  <Label fx:id="enemyHealth" layoutX="315.0" layoutY="60.0" text="42/42" textFill="WHITE">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+         </children></Pane>
+      <Pane fx:id="wrapperPane" layoutY="518.0" prefHeight="250.0" prefWidth="1024.0" style="-fx-background-color: #1C1117;">
+         <children>
+            <Pane fx:id="selectOption" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="1024.0" style="-fx-background-color: #1C1117;">
+               <children>
+                  <Button fx:id="attack" layoutX="106.0" layoutY="100.0" mnemonicParsing="false" onAction="#attack" prefHeight="50.0" prefWidth="200.0" text="Attack" />
+                  <Button fx:id="usePotion" layoutX="412.0" layoutY="100.0" mnemonicParsing="false" onAction="#usePotion" prefHeight="50.0" prefWidth="200.0" text="Use potion" />
+                  <Button fx:id="equipWeapon" layoutX="718.0" layoutY="100.0" mnemonicParsing="false" onAction="#equipWeapon" prefHeight="50.0" prefWidth="200.0" text="Equip Weapon" />
+               </children>
+            </Pane>
+         </children></Pane>
+   </children>
+</Pane>

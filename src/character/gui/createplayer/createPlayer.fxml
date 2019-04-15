@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="mainscreen" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: #1C1117;" xmlns="http://javafx.com/javafx/8.0.202-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="src.character.gui.CreatePlayerController">
+<AnchorPane fx:id="mainscreen" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: #1C1117;" xmlns="http://javafx.com/javafx/8.0.202-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="src.character.gui.createplayer.CreatePlayerController">
    <children>
       <AnchorPane layoutX="50.0" layoutY="50.0" prefHeight="200.7" prefWidth="938.6" style="-fx-background-color: brown;">
          <children>
@@ -39,7 +39,7 @@
                <children>
                   <ImageView fx:id="imgMelee" fitHeight="248.7" fitWidth="204.8" pickOnBounds="true" preserveRatio="true">
                      <VBox.margin><Insets bottom="20.0" /></VBox.margin>
-                     <image><Image url="@/src/character/gui/melee.png" /></image>
+                     <image><Image url="@/src/character/gui/createplayer/melee.png" /></image>
                   </ImageView>
                   <Label text="Melee"><font><Font size="26.0" /></font></Label>
                </children>
@@ -52,7 +52,7 @@
                <children>
                   <ImageView fx:id="imgMage" fitHeight="248.7" fitWidth="204.8" pickOnBounds="true" preserveRatio="true">
                      <VBox.margin><Insets bottom="20.0" /></VBox.margin>
-                     <image><Image url="@/src/character/gui/mage.png" /></image>
+                     <image><Image url="@/src/character/gui/createplayer/mage.png" /></image>
                   </ImageView>
                   <Label text="Mage"><font><Font size="26.0" /></font></Label>
                </children>
