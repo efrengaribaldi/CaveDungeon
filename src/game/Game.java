@@ -1,13 +1,12 @@
 package src.game;
 
-import src.map.*;
-import src.map.gui.MapRender;
-import src.character.*;
-import src.character.gui.createplayer.CreatePlayer;
 import src.character.gui.battle.Battle;
-import src.character.npc.Enemy;
-import src.character.npc.enemy.*;
-import src.item.gui.*;
+import src.character.gui.createplayer.CreatePlayer;
+import src.character.NPC;
+import src.character.Player;
+import src.item.gui.InventoryGUI;
+import src.map.gui.MapRender;
+import src.map.Map;
 
 import java.util.Scanner;
 import javafx.stage.Stage;
@@ -42,39 +41,6 @@ public class Game {
         System.out.println("Limit Stamina: " + player.getLimitStamina() + " Current Stamina: " + player.getStamina());
         System.out.println(
                 "Next Level EXP: " + player.getExpRequiredForNextLevel() + " Current EXP: " + player.getExperience());
-    }
-
-    private void battleTests() {
-        char battleAgain;
-        Enemy newEnemy;
-        do {
-            System.out.println("------------------------------------------------------------------------------------");
-            System.out.println("Select your enemy: (1) Zombie, (2) Skeleton, (3) Chort, (4) Swampy, (5) Necromancer");
-            switch (sc.nextInt()) {
-            case 1:
-                newEnemy = new Zombie();
-                break;
-            case 2:
-                newEnemy = new Skeleton();
-                break;
-            case 3:
-                newEnemy = new Chort();
-                break;
-            case 4:
-                newEnemy = new Swampy();
-                break;
-            case 5:
-                newEnemy = new Necromancer();
-                break;
-            default:
-                newEnemy = null;
-                break;
-            }
-            System.out.println("------------------------------------------------------------------------------------");
-            // Battle battle = new Battle(player, newEnemy);
-            System.out.println("\nStart new battle? (Y or N)");
-            battleAgain = sc.next().charAt(0);
-        } while (battleAgain == 'Y' || battleAgain == 'y');
     }
 
     public void setNewPlayerAndContinue(Player player) {

@@ -1,6 +1,7 @@
 package src.map.gui;
 
-import src.map.*;
+import src.map.Map;
+import src.map.Room;
 import src.character.Player;
 import src.game.Game;
 

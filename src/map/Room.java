@@ -65,7 +65,6 @@ public class Room {
     }
 
     void generateRoom() {
-        // state = 5; // <-- to test different room layouts
         for (int x = 0; x < sizeX; x++)
             for (int y = 0; y < sizeY; y++)
                 tiles[x][y] = new Tile();
