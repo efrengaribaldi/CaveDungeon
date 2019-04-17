@@ -4,22 +4,12 @@ import src.item.Item;
 import src.item.weapon.Ability;
 
 public abstract class Weapon extends Item {
-    public boolean isEquipped;
     private Ability[] abilities;
     protected int sprite;
 
     public Weapon(String name, Ability[] abilities) {
         super(name);
         this.abilities = abilities;
-        this.isEquipped = false;
-    }
-
-    public boolean getIsEquipped() {
-        return isEquipped;
-    }
-
-    public void setIsEquipped(boolean isEquipped) {
-        this.isEquipped = isEquipped;
     }
 
     public Ability[] getAbilities() {

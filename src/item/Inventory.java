@@ -1,6 +1,7 @@
 package src.item;
 
 public class Inventory {
+    private int indexEquippedWeapon;
     private Armor[] armor;
     private Potion[] potions;
     private Weapon[] weapons;
@@ -60,22 +61,15 @@ public class Inventory {
     }
 
     public void equipWeapon(int index) {
-        weapons[0].setIsEquipped((index == 0));
-        weapons[1].setIsEquipped((index == 1));
+        indexEquippedWeapon = index;
     }
 
     public void switchEquippedWeapons() {
-        if (weapons[0].getIsEquipped()) {
-            weapons[0].setIsEquipped(false);
-            weapons[1].setIsEquipped(true);
-        } else {
-            weapons[0].setIsEquipped(true);
-            weapons[1].setIsEquipped(false);
-        }
+        indexEquippedWeapon = (indexEquippedWeapon == 0) ? 1 : 0;
     }
 
     public Weapon getEquippedWeapon() {
-        return (weapons[0].getIsEquipped()) ? weapons[0] : weapons[1];
+        return weapons[indexEquippedWeapon];
     }
 
     public String printWeapons() {
