@@ -1,6 +1,81 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 
-<Pane fx:id="selectPotion" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.202-ea" xmlns:fx="http://javafx.com/fxml/1" />
+<Pane fx:id="selectPotion" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="1024.0" style="-fx-background-color: #1C1117;" xmlns="http://javafx.com/javafx/8.0.202-ea" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label alignment="CENTER" prefHeight="50.0" prefWidth="1024.0" text="Potions" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font size="32.0" />
+         </font>
+      </Label>
+      <HBox fx:id="potionsHBox" alignment="CENTER" layoutY="50.0" prefHeight="150.0" prefWidth="1024.0">
+         <children>
+            <HBox fx:id="boxPOne" alignment="CENTER" prefHeight="150.0" prefWidth="341.33">
+               <children>
+                  <ImageView fx:id="imgPOne" fitHeight="112.0" fitWidth="112.0" pickOnBounds="true" preserveRatio="true" />
+                  <VBox alignment="TOP_CENTER" prefHeight="150.0" prefWidth="160.0">
+                     <children>
+                        <Label fx:id="namePOne" text="Health Points: 12&#10;&#10;&#10;&#10;&#10;" textFill="WHITE">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="usePOne" mnemonicParsing="false" style="-fx-background-color: brown;" text="Drink Potion" textFill="WHITE">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox fx:id="boxPTwo" alignment="CENTER" prefHeight="150.0" prefWidth="341.33">
+               <children>
+                  <ImageView fx:id="imgPTwo" fitHeight="112.0" fitWidth="112.0" pickOnBounds="true" preserveRatio="true" />
+                  <VBox alignment="TOP_CENTER" prefHeight="150.0" prefWidth="160.0">
+                     <children>
+                        <Label fx:id="namePTwo" text="Health Points: 12&#10;&#10;&#10;&#10;&#10;" textFill="WHITE">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="usePTwo" mnemonicParsing="false" style="-fx-background-color: brown;" text="Drink Potion" textFill="WHITE">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox fx:id="boxPThree" alignment="CENTER" prefHeight="150.0" prefWidth="341.33">
+               <children>
+                  <ImageView fx:id="imgPThree" fitHeight="112.0" fitWidth="112.0" pickOnBounds="true" preserveRatio="true" />
+                  <VBox alignment="TOP_CENTER" prefHeight="150.0" prefWidth="160.0">
+                     <children>
+                        <Label fx:id="namePThree" text="Health Points: 12&#10;&#10;&#10;&#10;&#10;" textFill="WHITE">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="usePThree" mnemonicParsing="false" style="-fx-background-color: brown;" text="Drink Potion" textFill="WHITE">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+         </children>
+      </HBox>
+   </children>
+</Pane>

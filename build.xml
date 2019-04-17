@@ -23,6 +23,7 @@
 		<copy file="${src}/character/gui/battle/selectPotion.fxml" tofile="${build}/src/character/gui/battle/selectPotion.fxml" overwrite="true" />
 		<copy file="${src}/character/gui/battle/playerAttack.fxml" tofile="${build}/src/character/gui/battle/playerAttack.fxml" overwrite="true" />
 		<copy file="${src}/character/gui/battle/enemyAttack.fxml" tofile="${build}/src/character/gui/battle/enemyAttack.fxml" overwrite="true" />
+		<copy file="${src}/character/gui/battle/battleResult.fxml" tofile="${build}/src/character/gui/battle/battleResult.fxml" overwrite="true" />
 		<copy todir="${build}/src/character/npc/boss/img"><fileset dir="${src}/character/npc/boss/img" /></copy>
 		<copy todir="${build}/src/character/npc/chest/img"><fileset dir="${src}/character/npc/chest/img" /></copy>
 		<copy todir="${build}/src/character/npc/enemy/img"><fileset dir="${src}/character/npc/enemy/img" /></copy>

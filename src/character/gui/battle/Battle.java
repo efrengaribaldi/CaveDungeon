@@ -2,6 +2,7 @@ package src.character.gui.battle;
 
 import src.character.Player;
 import src.character.NPC;
+import src.game.Game;
 
 import javafx.scene.Scene;
 import java.io.File;
@@ -11,7 +12,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;
 
 public class Battle extends Scene {
-    public Battle(Player player, NPC npc) {
+    public Battle(Player player, NPC npc, Game game) {
         super(new Pane());
         Pane root = new Pane();
         FXMLLoader loader = new FXMLLoader();
@@ -23,7 +24,7 @@ public class Battle extends Scene {
             System.out.println("ERROR: Battle couldn't be started");
         }
         BattleController battleController = loader.<BattleController>getController();
-        battleController.initialize(player, npc);
+        battleController.initialize(player, npc, game);
         this.setRoot(root);
     }
 }

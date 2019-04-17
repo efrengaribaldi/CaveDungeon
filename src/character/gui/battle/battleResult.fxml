@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane fx:id="battleResult" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="1024.0" style="-fx-background-color: #1C1117;" xmlns="http://javafx.com/javafx/8.0.202-ea" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label fx:id="finishText" alignment="CENTER" prefHeight="50.0" prefWidth="1024.0" text="Result" textFill="WHITE">
+         <font>
+            <Font size="32.0" />
+         </font>
+      </Label>
+      <Label fx:id="finalInfo" alignment="TOP_CENTER" layoutY="50.0" prefHeight="150.0" prefWidth="1024.0" text="Exp:" textFill="WHITE">
+         <font>
+            <Font size="16.0" />
+         </font></Label>
+   </children>
+</Pane>

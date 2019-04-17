@@ -2,14 +2,17 @@ package src.character.gui.battle;
 
 import src.character.Player;
 import src.character.NPC;
+import src.game.Game;
+import src.item.Inventory;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import javafx.animation.PauseTransition;
 
+import javafx.animation.PauseTransition;
+import javafx.animation.SequentialTransition;
 import javafx.fxml.FXML;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -20,32 +23,42 @@ import javafx.util.Duration;
 import javafx.scene.control.Label;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.paint.Color;
+import javafx.geometry.Pos;
+
 
 public class BattleController {
+    private Game game;
     private Player player;
+    private Inventory inventory;
     private NPC npc;
     private int initNpcHealth;
 
     @FXML
     private Pane wrapperPane;
     @FXML
-    private Pane selectOption, selectAttack, battleView, selectPotion, playerAttack, enemyAttack;
+    private Pane selectAttack, battleView, selectPotion, playerAttack, enemyAttack, battleResult;
     @FXML
-    private GridPane abilityGrid;
+    private GridPane selectOption, abilityGrid;
+    @FXML
+    private HBox potionsHBox;
     @FXML
     private ProgressBar healthPBar, healthEBar;
     @FXML 
     private Label playerName, playerLevel, playerStats, enemyName, enemyHealth;
     @FXML
-    private Label weaponEquipped, attackMessage, pAttackInfo, nAttackInfo;
+    private Label weaponEquipped, attackMessage, pAttackInfo, nAttackInfo, finishText, finalInfo;
     @FXML
-    private Button basicAttack, abilityOne, abilityTwo, abilityThree;
+    private Label namePOne, namePTwo, namePThree;
     @FXML
-    private ImageView imgPlayer, imgNpc, imgWeapon;
+    private Button basicAttack, abilityOne, abilityTwo, abilityThree, usePOne, usePTwo, usePThree;
+    @FXML
+    private ImageView imgPlayer, imgNpc, imgWeapon, imgPOne, imgPTwo, imgPThree;
 
     public BattleController() {
-        FXMLLoader[] loader = new FXMLLoader[4];
+        FXMLLoader[] loader = new FXMLLoader[5];
         for (int i = 0; i < loader.length; ++i) {
             loader[i] = new FXMLLoader();
             loader[i].setBuilderFactory(new JavaFXBuilderFactory());
@@ -56,6 +69,7 @@ public class BattleController {
             selectPotion = (Pane) loader[1].load(loadFXML("./selectPotion.fxml"));
             playerAttack = (Pane) loader[2].load(loadFXML("./playerAttack.fxml"));
             enemyAttack = (Pane) loader[3].load(loadFXML("./enemyAttack.fxml"));
+            battleResult = (Pane) loader[4].load(loadFXML("./battleResult.fxml"));
         } catch (Exception e) {
             System.out.println("ERROR: Battle Controller couldn't start");
         }
@@ -68,12 +82,15 @@ public class BattleController {
     }
 
     @FXML
-    public void initialize(Player player, NPC npc) {
+    public void initialize(Player player, NPC npc, Game game) {
         this.player = player;
         this.npc = npc;
+        this.game = game;
+        inventory = player.getInventory();
         initNpcHealth = npc.getHealthPoints();
         renderBattleView();
         renderSelectAttack();
+        renderSelectPotion();
     }
 
     @FXML
@@ -83,7 +100,7 @@ public class BattleController {
 
     @FXML
     private void usePotion(ActionEvent event) {
-
+        changePane(selectOption, selectPotion);
     }
 
     @FXML
@@ -112,7 +129,7 @@ public class BattleController {
     }
 
     private void attackSystem(int index) {
-        if (player.getStamina() < player.getInventory().getEquippedWeapon().getAbility(index).getStaminaCost())
+        if (player.getStamina() < inventory.getEquippedWeapon().getAbility(index).getStaminaCost())
             attackMessage.setText("You don't have enought stamina");
         else {
             pAttackInfo.setText("You did an attack: -" + Integer.toString(player.attack(npc, index)));
@@ -128,13 +145,35 @@ public class BattleController {
     private void transitionAttack() {
         upgradeStats();
         changePane(selectAttack, playerAttack);
-        PauseTransition delay = new PauseTransition(Duration.seconds(4));
-        delay.setOnFinished(event -> { 
-            nAttackInfo.setText(npc.getName() + " has made an attack and has damaged you: -" + Integer.toString(npc.attack(player)));
-            upgradeStats();
-            changePane(playerAttack, enemyAttack);
+        boolean enemyDefeated = (npc.getHealthPoints() <= 0) ? true : false;
+        PauseTransition enemyT = new PauseTransition(Duration.seconds(4));
+        enemyT.setOnFinished(event -> { 
+            if(enemyDefeated == false) {
+                nAttackInfo.setText(npc.getName() + " has made an attack and has damaged you: -" + Integer.toString(npc.attack(player)));
+                upgradeStats();
+                changePane(playerAttack, enemyAttack);
+            }
+            else {
+                finishText.setText("You has defeated to " + npc.getName());
+                finalInfo.setText(player.checkLevelUp(npc.getExperience()));
+                changePane(playerAttack, battleResult);
+            }
         });
-        delay.play();
+
+        PauseTransition continueT = new PauseTransition(Duration.seconds(4));
+        continueT.setOnFinished(event -> {
+            if (player.getHealthPoints() > 0 && enemyDefeated == false)
+                changePane(enemyAttack, selectOption);
+            else if (player.getHealthPoints() > 0 && enemyDefeated == true) {
+                game.setRoomScene();
+            }
+            else {
+                System.exit(0);
+            }
+        });
+
+        SequentialTransition seqT = new SequentialTransition(enemyT, continueT);
+        seqT.play();
     }
 
     private void renderSelectAttack() {
@@ -142,16 +181,16 @@ public class BattleController {
         int[] damage = new int[3];
         int[] stamina = new int[3];
         for (int i = 0; i < damage.length; ++i) {
-            abilityName[i] = player.getInventory().getEquippedWeapon().getAbility(i).getName();
-            damage[i] = (int)(player.getInventory().getEquippedWeapon().getAbility(i).getBaseDamage()
+            abilityName[i] = inventory.getEquippedWeapon().getAbility(i).getName();
+            damage[i] = (int)(inventory.getEquippedWeapon().getAbility(i).getBaseDamage()
                     * player.getAttack());
-            stamina[i] = (int)(player.getInventory().getEquippedWeapon().getAbility(i).getStaminaCost());
+            stamina[i] = (int)(inventory.getEquippedWeapon().getAbility(i).getStaminaCost());
         }
         basicAttack.setText("Basic Attack\nDamage: " + (int)(player.getAttack()) + "  Stamina: 0");
         abilityOne.setText(abilityName[0] + "\nDamage: " + damage[0] + "  Stamina: " + stamina[0]);
         abilityTwo.setText(abilityName[1] + "\nDamage: " + damage[1] + "  Stamina: " + stamina[1]);
         abilityThree.setText(abilityName[2] + "\nDamage: " + damage[2] + "  Stamina: " + stamina[2]);
-        imgWeapon.setImage(player.getInventory().getEquippedWeapon().render());
+        imgWeapon.setImage(inventory.getEquippedWeapon().render());
     }
 
     public void renderBattleView() {
@@ -163,12 +202,36 @@ public class BattleController {
         upgradeStats();
     }
 
+    private void renderSelectPotion() {
+        potionsHBox.getChildren().clear();
+        for (int i = 0; i < 3; i++) {
+            if (inventory.getPotion(i) != null) {
+                ImageView iv = new ImageView(inventory.getPotion(i).render());
+                Label lbl = new Label(inventory.getPotion(i).getName());
+                lbl.setTextFill(Color.WHITE);
+                HBox hBox = new HBox(iv, lbl);
+                hBox.setAlignment(Pos.CENTER);
+                potionsHBox.getChildren().add(hBox);
+            }
+        }
+        if (potionsHBox.getChildren().size() == 0)
+            potionsHBox.getChildren().add(emptyLabel());
+    }
+
+    private Label emptyLabel() {
+        Label lbl = new Label("* Empty *");
+        lbl.setTextFill(Color.WHITE);
+        return lbl;
+    }
+
     private void upgradeStats() {
-        playerStats.setText("HP: " + Integer.toString(player.getHealthPoints()) + "/" + Integer.toString(player.getLimitHp())
-                + "  Stamina: " + Integer.toString(player.getStamina()) + "/" + Integer.toString(player.getLimitStamina()));
-        enemyHealth.setText("HP: " + Integer.toString(npc.getHealthPoints()) + "/" + Integer.toString(initNpcHealth));
-        healthPBar.setProgress((double) player.getHealthPoints() / player.getLimitHp());
-        healthEBar.setProgress((double) npc.getHealthPoints() / initNpcHealth);
+        int currentPHp = (player.getHealthPoints() > 0) ? player.getHealthPoints() : 0;
+        int currentEHp = (npc.getHealthPoints() > 0) ? npc.getHealthPoints() : 0;
+        playerStats.setText("HP: " + Integer.toString(currentPHp) + "/" + Integer.toString(player.getLimitHp())
+            + "  Stamina: " + Integer.toString(player.getStamina()) + "/" + Integer.toString(player.getLimitStamina()));
+        enemyHealth.setText("HP: " + Integer.toString(currentEHp) + "/" + Integer.toString(initNpcHealth));
+        healthPBar.setProgress((double) currentPHp / player.getLimitHp());
+        healthEBar.setProgress((double) currentEHp / initNpcHealth);
     }
 
     private void changePane(Pane paneRemoved, Pane paneAdded) {

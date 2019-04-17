@@ -147,31 +147,35 @@ public abstract class Player extends Character {
         return res;
     }
 
-    public void checkLevelUp(int newExp) {
+    public String checkLevelUp(int newExp) {
+        String res = "";
         int expRequiredForNextLevel = (int) (15 * Math.pow(1.07, level));
+        System.out.println("ok");
         if (newExp > 0)
-            System.out.println("You got " + newExp + " new experience.");
+            res = "You got " + newExp + " new experience.\n";
         experience += newExp;
         if (experience >= expRequiredForNextLevel) {
+            System.out.println("aqui");
             // Advance level
             setLevel(++level);
             // Reset health and stamina
             setHealthPoints(getLimitHp());
             setStamina(getLimitStamina());
             setExperience(experience - expRequiredForNextLevel);
+            res += "Congratulations!!! You are now level " + level 
+                    + "\nYour attack damage has increased to: " + getAttack() 
+                    + "\nYour defense has increased to: " + getDefense()
+                    + "\nYour HP limit has increased to: " + getHealthPoints() 
+                    + "\nYour Stamina limit has increased to: " + getLimitStamina();
             System.out.println("<*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*>");
-            System.out.println("Congratulations!!! You are now level " + level);
-            System.out.println("Your attack damage has increased to: " + getAttack());
-            System.out.println("Your defense has increased to: " + getDefense());
-            System.out.println("Your HP limit has increased to: " + getHealthPoints());
-            System.out.println("Your Stamina limit has increased to: " + getLimitStamina());
+            if (experience >= (int) (15 * Math.pow(1.07, level)))
+                checkLevelUp(0);
+            return res;
         } else {
             int expNeeded = expRequiredForNextLevel - experience;
-            System.out.println("You need " + expNeeded + " experience to advance to next level.");
+            res += "You need " + expNeeded + " experience to advance to next level.";
+            return res;
         }
-        System.out.println("<*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*>");
-        if (experience >= (int) (15 * Math.pow(1.07, level)))
-            checkLevelUp(0);
     }
 
     public void getNewWeapon(Weapon newWeapon, int index) {

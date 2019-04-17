@@ -67,6 +67,6 @@ public class Game {
     }
 
     public void startBattle(Player player, NPC npc) {
-        stage.setScene(new Battle(player, npc));
+        stage.setScene(new Battle(player, npc, this));
     }
 }
