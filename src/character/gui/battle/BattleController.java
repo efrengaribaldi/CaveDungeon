@@ -3,18 +3,20 @@ package src.character.gui.battle;
 import src.character.Player;
 import src.character.NPC;
 
-import javafx.fxml.FXML;
-import javafx.event.ActionEvent;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import javafx.animation.PauseTransition;
 
+import javafx.fxml.FXML;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.util.Duration;
 import javafx.scene.control.Label;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
@@ -23,7 +25,6 @@ import javafx.scene.control.ProgressBar;
 public class BattleController {
     private Player player;
     private NPC npc;
-    private int totalAttack;
     private int initNpcHealth;
 
     @FXML
@@ -37,7 +38,7 @@ public class BattleController {
     @FXML 
     private Label playerName, playerLevel, playerStats, enemyName, enemyHealth;
     @FXML
-    private Label weaponEquipped, attackMessage;
+    private Label weaponEquipped, attackMessage, pAttackInfo, nAttackInfo;
     @FXML
     private Button basicAttack, abilityOne, abilityTwo, abilityThree;
     @FXML
@@ -92,8 +93,7 @@ public class BattleController {
 
     @FXML
     private void useBasicAttack(ActionEvent event) {
-        totalAttack = player.attack(npc);
-        changePane(selectAttack, playerAttack);
+        attackSystem();
     }
 
     @FXML
@@ -115,9 +115,26 @@ public class BattleController {
         if (player.getStamina() < player.getInventory().getEquippedWeapon().getAbility(index).getStaminaCost())
             attackMessage.setText("You don't have enought stamina");
         else {
-            totalAttack = player.attack(npc, index);
-            changePane(selectAttack, playerAttack);
+            pAttackInfo.setText("You did an attack: -" + Integer.toString(player.attack(npc, index)));
+            transitionAttack();
         }
+    }
+
+    private void attackSystem() {
+        pAttackInfo.setText("You did an attack: -" + Integer.toString(player.attack(npc)));
+        transitionAttack();
+    }
+    
+    private void transitionAttack() {
+        upgradeStats();
+        changePane(selectAttack, playerAttack);
+        PauseTransition delay = new PauseTransition(Duration.seconds(4));
+        delay.setOnFinished(event -> { 
+            nAttackInfo.setText(npc.getName() + " has made an attack and has damaged you: -" + Integer.toString(npc.attack(player)));
+            upgradeStats();
+            changePane(playerAttack, enemyAttack);
+        });
+        delay.play();
     }
 
     private void renderSelectAttack() {

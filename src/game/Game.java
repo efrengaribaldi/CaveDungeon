@@ -36,7 +36,8 @@ public class Game {
 
     private void playerTests() {
         System.out.println(player.playerToString());
-        player.equipWeapon();
+        player.getInventory().equipWeapon(0);
+        System.out.println("You weapon equipped is: " + player.getInventory().getEquippedWeapon().getName());
         System.out.println("Limit HP: " + player.getLimitHp() + " Current HP: " + player.getHealthPoints());
         System.out.println("Limit Stamina: " + player.getLimitStamina() + " Current Stamina: " + player.getStamina());
         System.out.println(
