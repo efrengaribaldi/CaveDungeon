@@ -23,7 +23,7 @@ public class Battle extends Scene {
             System.out.println("ERROR: Battle couldn't be started");
         }
         BattleController battleController = loader.<BattleController>getController();
-        battleController.initialize();
+        battleController.initialize(player, npc);
         this.setRoot(root);
     }
 }

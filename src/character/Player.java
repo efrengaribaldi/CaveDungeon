@@ -107,6 +107,13 @@ public abstract class Player extends Character {
         return totalAttack;
     }
 
+    public int attack(NPC npc) {
+        double defense = npc.getDefense();
+        int totalAttack = (int)(getAttack() * getAttack() / (getAttack() + defense));
+        npc.setHealthPoints((int) (npc.getHealthPoints() - totalAttack));
+        return totalAttack;
+    }
+
     public String printPlayerAbilities() {
         String res = "";
         for (int i = 0; i < 2; i++)
