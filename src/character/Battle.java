@@ -74,7 +74,6 @@ public class Battle {
     }
 
     private boolean attackSystem() {
-
         System.out.println("Select your ability: ");
         System.out.println(player.printWeaponAbilities());
         int abilityIndex = sc.nextInt();

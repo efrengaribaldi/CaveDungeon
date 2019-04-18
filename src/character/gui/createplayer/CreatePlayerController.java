@@ -31,13 +31,11 @@ public class CreatePlayerController {
     @FXML
     private void selectMelee(ActionEvent event) {
         playerSelected = 1;
-        System.out.println("Player selected: Melee");
     }
 
     @FXML
     private void selectMage(ActionEvent event) {
         playerSelected = 2;
-        System.out.println("Player selected: Mage");
     }
 
     @FXML
@@ -59,9 +57,6 @@ public class CreatePlayerController {
         case 2:
             newPlayer = new Mage(name.getText(), genderSelected());
             break;
-        default:
-            newPlayer = null;
-            System.out.println("Player not found!");
         }
         // Set the newPlayer to game
         game.setNewPlayerAndContinue(newPlayer);

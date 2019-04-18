@@ -39,10 +39,6 @@ public abstract class Player extends Character {
         return inventory;
     }
 
-    public void setInventory(Inventory inventory) {
-        this.inventory = inventory;
-    }
-
     public char getGender() {
         return gender;
     }
@@ -64,16 +60,8 @@ public abstract class Player extends Character {
         return experience;
     }
 
-    public void setExperience(int experience) {
-        this.experience = experience;
-    }
-
     public int getLevel() {
         return level;
-    }
-
-    public void setLevel(int level) {
-        this.level = level;
     }
 
     public int getLimitHp() {
@@ -101,16 +89,17 @@ public abstract class Player extends Character {
         double defense = npc.getDefense();
         int totalAttack = (int) (damage * damage / (damage + defense));
         // Update enemy healthpoints
-        npc.setHealthPoints((int) (npc.getHealthPoints() - totalAttack));
+        npc.setHealthPoints(npc.getHealthPoints() - totalAttack);
         // Update player's stamina
         stamina -= inventory.getEquippedWeapon().getAbility(abilityIndex).getStaminaCost();
         return totalAttack;
     }
 
     public int attack(NPC npc) {
+        double damage = 5 * getAttack();
         double defense = npc.getDefense();
-        int totalAttack = (int)(getAttack() * getAttack() / (getAttack() + defense));
-        npc.setHealthPoints((int) (npc.getHealthPoints() - totalAttack));
+        int totalAttack = (int) (damage * damage / (damage + defense));
+        npc.setHealthPoints(npc.getHealthPoints() - totalAttack);
         return totalAttack;
     }
 
@@ -123,17 +112,6 @@ public abstract class Player extends Character {
 
     public String printWeaponAbilities() {
         return inventory.getEquippedWeapon().printAbilities();
-    }
-
-    public void equipWeapon() {
-        System.out.println("Which weapon do you want to equip?");
-        System.out.println(getInventory().printWeapons());
-        int weaponIndex = sc.nextInt();
-        getInventory().equipWeapon(weaponIndex);
-        if (weaponIndex != 0 && weaponIndex != 1) {
-            System.out.println("Weapon not found");
-            equipWeapon();
-        }
     }
 
     public String playerToString() {
@@ -150,24 +128,20 @@ public abstract class Player extends Character {
     public String checkLevelUp(int newExp) {
         String res = "";
         int expRequiredForNextLevel = (int) (15 * Math.pow(1.07, level));
-        System.out.println("ok");
         if (newExp > 0)
             res = "You got " + newExp + " new experience.\n";
         experience += newExp;
         if (experience >= expRequiredForNextLevel) {
-            System.out.println("aqui");
             // Advance level
-            setLevel(++level);
+            ++level;
             // Reset health and stamina
             setHealthPoints(getLimitHp());
             setStamina(getLimitStamina());
-            setExperience(experience - expRequiredForNextLevel);
-            res += "Congratulations!!! You are now level " + level 
-                    + "\nYour attack damage has increased to: " + getAttack() 
-                    + "\nYour defense has increased to: " + getDefense()
-                    + "\nYour HP limit has increased to: " + getHealthPoints() 
+            experience -= expRequiredForNextLevel;
+            res += "Congratulations!!! You are now level " + level + "\nYour attack damage has increased to: "
+                    + getAttack() + "\nYour defense has increased to: " + getDefense()
+                    + "\nYour HP limit has increased to: " + getHealthPoints()
                     + "\nYour Stamina limit has increased to: " + getLimitStamina();
-            System.out.println("<*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*>");
             if (experience >= (int) (15 * Math.pow(1.07, level)))
                 checkLevelUp(0);
             return res;

@@ -5,7 +5,6 @@ import src.character.Player;
 import src.map.gui.MapRender;
 
 import java.util.ArrayList;
-
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
@@ -147,7 +146,6 @@ public class Room {
             return false;
         } catch (TileAlreadyOccupiedException e) {
             NPC npc = (NPC) tiles[playerPos[0] + x][playerPos[1] + y].getCharacter();
-            System.out.println("I want to battle against a " + npc.getType());
             mR.getGame().startBattle(p, npc);
             return false;
         }
