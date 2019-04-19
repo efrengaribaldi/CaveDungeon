@@ -195,8 +195,9 @@ public class BattleController {
         playerLevel.setText("Level: " + Integer.toString(player.getLevel()));
         enemyName.setText(npc.getName());
         imgPlayer.setImage(player.render());
+        if (npc.getParent().equals("Boss"))
+            imgNpc.setFitWidth(256);
         imgNpc.setImage(npc.render());
-        ;
         upgradeStats();
     }
 

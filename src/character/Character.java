@@ -32,5 +32,7 @@ public abstract class Character {
 
     public abstract String getType();
 
+    public abstract String getParent();
+
     public abstract Image render();
 }

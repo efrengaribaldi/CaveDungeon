@@ -7,6 +7,11 @@ public abstract class Enemy extends NPC {
         super(name, healthPoints, baseDamage, baseDefense);
     }
 
+    @Override
+    public String getParent() {
+        return "Enemy";
+    }
+
     public abstract int getExperience();
     // public abstract Potion dropPotion(Player player);
 }

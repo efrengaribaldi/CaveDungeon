@@ -35,6 +35,11 @@ public abstract class Player extends Character {
         setStamina(getLimitStamina());
     }
 
+    @Override
+    public String getParent() {
+        return "Player";
+    }
+
     public Inventory getInventory() {
         return inventory;
     }

@@ -17,6 +17,11 @@ public abstract class Boss extends NPC {
     }
 
     @Override
+    public String getParent() {
+        return "Boss";
+    }
+
+    @Override
     public int getExperience() {
         return 1000;
     }

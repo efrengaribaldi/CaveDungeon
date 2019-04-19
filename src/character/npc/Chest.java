@@ -33,4 +33,9 @@ public class Chest extends NPC {
     public String getType() {
         return "Chest";
     }
+
+    @Override
+    public String getParent() {
+        return "Chest";
+    }
 }
