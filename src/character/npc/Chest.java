@@ -3,7 +3,7 @@ package src.character.npc;
 import src.character.NPC;
 import src.character.Player;
 
-import javafx.scene.image.ImageView;
+import javafx.scene.image.Image;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Chest extends NPC {
@@ -12,8 +12,8 @@ public class Chest extends NPC {
     }
 
     @Override
-    public ImageView render() {
-        return new ImageView(getClass().getResource("./chest/img/chest.gif").toString());
+    public Image render() {
+        return new Image(getClass().getResource("./chest/img/chest.gif").toString());
     }
 
     @Override

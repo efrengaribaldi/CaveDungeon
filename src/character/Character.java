@@ -1,6 +1,6 @@
 package src.character;
 
-import javafx.scene.image.ImageView;
+import javafx.scene.image.Image;
 
 public abstract class Character {
     private String name;
@@ -32,5 +32,5 @@ public abstract class Character {
 
     public abstract String getType();
 
-    public abstract ImageView render();
+    public abstract Image render();
 }

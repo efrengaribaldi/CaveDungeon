@@ -194,7 +194,7 @@ public class Room {
 
                 ImageView ivChar;
                 if (tiles[i][j].getCharacter() != null)
-                    ivChar = tiles[i][j].getCharacter().render();
+                    ivChar = new ImageView(tiles[i][j].getCharacter().render());
                 else
                     ivChar = new ImageView(getClass().getResource("./img/emptyTile.png").toString());
 

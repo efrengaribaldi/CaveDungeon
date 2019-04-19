@@ -4,7 +4,7 @@ import src.character.npc.Enemy;
 import src.character.Player;
 
 import java.util.concurrent.ThreadLocalRandom;
-import javafx.scene.image.ImageView;
+import javafx.scene.image.Image;
 
 public class Necromancer extends Enemy {
     public Necromancer() {
@@ -30,8 +30,8 @@ public class Necromancer extends Enemy {
     }
 
     @Override
-    public ImageView render() {
+    public Image render() {
         String path = "./img/necromancer.gif";
-        return new ImageView(getClass().getResource(path).toString());
+        return new Image(getClass().getResource(path).toString());
     }
 }

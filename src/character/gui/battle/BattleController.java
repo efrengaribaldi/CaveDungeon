@@ -28,7 +28,6 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.paint.Color;
 import javafx.geometry.Pos;
 
-
 public class BattleController {
     private Game game;
     private Player player;
@@ -46,7 +45,7 @@ public class BattleController {
     private HBox potionsHBox;
     @FXML
     private ProgressBar healthPBar, healthEBar;
-    @FXML 
+    @FXML
     private Label playerName, playerLevel, playerStats, enemyName, enemyHealth;
     @FXML
     private Label weaponEquipped, attackMessage, pAttackInfo, nAttackInfo, finishText, finalInfo;
@@ -141,19 +140,19 @@ public class BattleController {
         pAttackInfo.setText("You did an attack: -" + Integer.toString(player.attack(npc)));
         transitionAttack();
     }
-    
+
     private void transitionAttack() {
         upgradeStats();
         changePane(selectAttack, playerAttack);
         boolean enemyDefeated = (npc.getHealthPoints() <= 0) ? true : false;
         PauseTransition enemyT = new PauseTransition(Duration.seconds(4));
-        enemyT.setOnFinished(event -> { 
-            if(enemyDefeated == false) {
-                nAttackInfo.setText(npc.getName() + " has made an attack and has damaged you: -" + Integer.toString(npc.attack(player)));
+        enemyT.setOnFinished(event -> {
+            if (enemyDefeated == false) {
+                nAttackInfo.setText(npc.getName() + " has made an attack and has damaged you: -"
+                        + Integer.toString(npc.attack(player)));
                 upgradeStats();
                 changePane(playerAttack, enemyAttack);
-            }
-            else {
+            } else {
                 finishText.setText("You has defeated to " + npc.getName());
                 finalInfo.setText(player.checkLevelUp(npc.getExperience()));
                 changePane(playerAttack, battleResult);
@@ -166,8 +165,7 @@ public class BattleController {
                 changePane(enemyAttack, selectOption);
             else if (player.getHealthPoints() > 0 && enemyDefeated == true) {
                 game.setRoomScene();
-            }
-            else {
+            } else {
                 System.exit(0);
             }
         });
@@ -182,11 +180,10 @@ public class BattleController {
         int[] stamina = new int[3];
         for (int i = 0; i < damage.length; ++i) {
             abilityName[i] = inventory.getEquippedWeapon().getAbility(i).getName();
-            damage[i] = (int)(inventory.getEquippedWeapon().getAbility(i).getBaseDamage()
-                    * player.getAttack());
-            stamina[i] = (int)(inventory.getEquippedWeapon().getAbility(i).getStaminaCost());
+            damage[i] = (int) (inventory.getEquippedWeapon().getAbility(i).getBaseDamage() * player.getAttack());
+            stamina[i] = (int) (inventory.getEquippedWeapon().getAbility(i).getStaminaCost());
         }
-        basicAttack.setText("Basic Attack\nDamage: " + (int)(player.getAttack()) + "  Stamina: 0");
+        basicAttack.setText("Basic Attack\nDamage: " + (int) (player.getAttack()) + "  Stamina: 0");
         abilityOne.setText(abilityName[0] + "\nDamage: " + damage[0] + "  Stamina: " + stamina[0]);
         abilityTwo.setText(abilityName[1] + "\nDamage: " + damage[1] + "  Stamina: " + stamina[1]);
         abilityThree.setText(abilityName[2] + "\nDamage: " + damage[2] + "  Stamina: " + stamina[2]);
@@ -197,8 +194,9 @@ public class BattleController {
         playerName.setText(player.getName());
         playerLevel.setText("Level: " + Integer.toString(player.getLevel()));
         enemyName.setText(npc.getName());
-        imgPlayer = player.render();
-        imgNpc = npc.render();
+        imgPlayer.setImage(player.render());
+        imgNpc.setImage(npc.render());
+        ;
         upgradeStats();
     }
 
@@ -227,8 +225,9 @@ public class BattleController {
     private void upgradeStats() {
         int currentPHp = (player.getHealthPoints() > 0) ? player.getHealthPoints() : 0;
         int currentEHp = (npc.getHealthPoints() > 0) ? npc.getHealthPoints() : 0;
-        playerStats.setText("HP: " + Integer.toString(currentPHp) + "/" + Integer.toString(player.getLimitHp())
-            + "  Stamina: " + Integer.toString(player.getStamina()) + "/" + Integer.toString(player.getLimitStamina()));
+        playerStats.setText(
+                "HP: " + Integer.toString(currentPHp) + "/" + Integer.toString(player.getLimitHp()) + "  Stamina: "
+                        + Integer.toString(player.getStamina()) + "/" + Integer.toString(player.getLimitStamina()));
         enemyHealth.setText("HP: " + Integer.toString(currentEHp) + "/" + Integer.toString(initNpcHealth));
         healthPBar.setProgress((double) currentPHp / player.getLimitHp());
         healthEBar.setProgress((double) currentEHp / initNpcHealth);

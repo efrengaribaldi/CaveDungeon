@@ -2,7 +2,7 @@ package src.character.npc.boss;
 
 import src.character.npc.Boss;
 
-import javafx.scene.image.ImageView;
+import javafx.scene.image.Image;
 
 public class Wizzard extends Boss {
     public Wizzard() {
@@ -15,8 +15,8 @@ public class Wizzard extends Boss {
     }
 
     @Override
-    public ImageView render() {
+    public Image render() {
         String path = "./img/wizzard.gif";
-        return new ImageView(getClass().getResource(path).toString());
+        return new Image(getClass().getResource(path).toString());
     }
 }
