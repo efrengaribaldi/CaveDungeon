@@ -21,7 +21,7 @@ public class Battle extends Scene {
             FileInputStream fxmlStream = new FileInputStream(new File(fxmlDocPath));
             root = (Pane) loader.load(fxmlStream);
         } catch (Exception e) {
-            System.out.println("ERROR: Battle couldn't be started");
+            e.printStackTrace(); 
         }
         BattleController battleController = loader.<BattleController>getController();
         battleController.initialize(player, npc, game);

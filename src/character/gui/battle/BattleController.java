@@ -8,6 +8,7 @@ import src.item.Inventory;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -25,8 +26,6 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.control.ProgressBar;
-import javafx.scene.paint.Color;
-import javafx.geometry.Pos;
 
 public class BattleController {
     private Game game;
@@ -38,7 +37,7 @@ public class BattleController {
     @FXML
     private Pane wrapperPane;
     @FXML
-    private Pane selectAttack, battleView, selectPotion, playerAttack, enemyAttack, battleResult;
+    private Pane selectAttack, battleView, selectPotion, playerAttack, enemyAttack, battleResult, equipPWeapon;
     @FXML
     private GridPane selectOption, abilityGrid;
     @FXML
@@ -50,28 +49,25 @@ public class BattleController {
     @FXML
     private Label weaponEquipped, attackMessage, pAttackInfo, nAttackInfo, finishText, finalInfo;
     @FXML
-    private Label namePOne, namePTwo, namePThree;
+    private Label namePOne, namePTwo, namePThree, infoWOne, infoWTwo;
     @FXML
     private Button basicAttack, abilityOne, abilityTwo, abilityThree, usePOne, usePTwo, usePThree;
     @FXML
-    private ImageView imgPlayer, imgNpc, imgWeapon, imgPOne, imgPTwo, imgPThree;
+    private ImageView imgPlayer, imgNpc, imgWeapon, imgPOne, imgPTwo, imgPThree, imgWOne, imgWTwo;
 
-    public BattleController() {
-        FXMLLoader[] loader = new FXMLLoader[5];
+    public BattleController() throws FileNotFoundException, IOException, URISyntaxException {
+        FXMLLoader[] loader = new FXMLLoader[6];
         for (int i = 0; i < loader.length; ++i) {
             loader[i] = new FXMLLoader();
             loader[i].setBuilderFactory(new JavaFXBuilderFactory());
             loader[i].setController(this);
         }
-        try {
             selectAttack = (Pane) loader[0].load(loadFXML("./selectAttack.fxml"));
             selectPotion = (Pane) loader[1].load(loadFXML("./selectPotion.fxml"));
             playerAttack = (Pane) loader[2].load(loadFXML("./playerAttack.fxml"));
             enemyAttack = (Pane) loader[3].load(loadFXML("./enemyAttack.fxml"));
             battleResult = (Pane) loader[4].load(loadFXML("./battleResult.fxml"));
-        } catch (Exception e) {
-            System.out.println("ERROR: Battle Controller couldn't start");
-        }
+            equipPWeapon = (Pane) loader[5].load(loadFXML("./equipWeapon.fxml"));
     }
 
     public FileInputStream loadFXML(String path) throws URISyntaxException, FileNotFoundException {
@@ -90,6 +86,7 @@ public class BattleController {
         renderBattleView();
         renderSelectAttack();
         renderSelectPotion();
+        renderEquipWeapon();
     }
 
     @FXML
@@ -99,12 +96,8 @@ public class BattleController {
 
     @FXML
     private void usePotion(ActionEvent event) {
-        changePane(selectOption, selectPotion);
-    }
-
-    @FXML
-    private void equipWeapon(ActionEvent event) {
-
+        if (checkPotions() == true) 
+            changePane(selectOption, selectPotion);
     }
 
     @FXML
@@ -118,6 +111,16 @@ public class BattleController {
     }
 
     @FXML
+    private void equipWeapon(ActionEvent event) {
+        changePane(selectOption, equipPWeapon);
+    }
+
+    @FXML
+    private void switchWeapon(ActionEvent event) {
+        switchSystem();
+    }
+
+    @FXML
     private void useAbilityTwo(ActionEvent event) {
         attackSystem(1);
     }
@@ -125,6 +128,21 @@ public class BattleController {
     @FXML
     private void useAbilityThree(ActionEvent event) {
         attackSystem(2);
+    }
+
+    @FXML
+    private void usePOne(ActionEvent event) {
+        potionSystem(0);
+    }
+
+    @FXML
+    private void usePTwo(ActionEvent event) {
+        potionSystem(1);
+    }
+
+    @FXML
+    private void usePThree(ActionEvent event) {
+        potionSystem(2);
     }
 
     private void attackSystem(int index) {
@@ -145,33 +163,64 @@ public class BattleController {
         upgradeStats();
         changePane(selectAttack, playerAttack);
         boolean enemyDefeated = (npc.getHealthPoints() <= 0) ? true : false;
-        PauseTransition enemyT = new PauseTransition(Duration.seconds(4));
+        PauseTransition enemyT = new PauseTransition(Duration.seconds(3));
         enemyT.setOnFinished(event -> {
             if (enemyDefeated == false) {
                 nAttackInfo.setText(npc.getName() + " has made an attack and has damaged you: -"
                         + Integer.toString(npc.attack(player)));
                 upgradeStats();
                 changePane(playerAttack, enemyAttack);
-            } else {
+            } 
+            else {
                 finishText.setText("You has defeated to " + npc.getName());
                 finalInfo.setText(player.checkLevelUp(npc.getExperience()));
                 changePane(playerAttack, battleResult);
             }
         });
 
-        PauseTransition continueT = new PauseTransition(Duration.seconds(4));
+        PauseTransition continueT = new PauseTransition(Duration.seconds(3));
         continueT.setOnFinished(event -> {
             if (player.getHealthPoints() > 0 && enemyDefeated == false)
                 changePane(enemyAttack, selectOption);
-            else if (player.getHealthPoints() > 0 && enemyDefeated == true) {
+            else if (player.getHealthPoints() > 0 && enemyDefeated == true)
                 game.setRoomScene();
-            } else {
+            else 
                 System.exit(0);
-            }
         });
 
         SequentialTransition seqT = new SequentialTransition(enemyT, continueT);
         seqT.play();
+    }
+
+    private void potionSystem(int index) {
+        try {
+            player.usePotion(index);
+            changePane(selectPotion, selectOption);
+            upgradeStats();
+            renderSelectPotion();
+        }
+        catch (NullPointerException exception) {
+
+        }
+    }
+
+    private void switchSystem() {
+        inventory.switchEquippedWeapons();
+        nAttackInfo.setText(npc.getName() + " has made an attack and has damaged you: -"
+                + Integer.toString(npc.attack(player)));
+        upgradeStats();
+        changePane(equipPWeapon, enemyAttack);
+
+        PauseTransition continueT = new PauseTransition(Duration.seconds(3));
+        continueT.setOnFinished(event -> {
+            if (player.getHealthPoints() > 0)
+                changePane(enemyAttack, selectOption);
+            else 
+                System.exit(0);
+        });
+        renderSelectAttack();
+        renderEquipWeapon();
+        continueT.play();
     }
 
     private void renderSelectAttack() {
@@ -202,26 +251,51 @@ public class BattleController {
     }
 
     private void renderSelectPotion() {
-        potionsHBox.getChildren().clear();
-        for (int i = 0; i < 3; i++) {
-            if (inventory.getPotion(i) != null) {
-                ImageView iv = new ImageView(inventory.getPotion(i).render());
-                Label lbl = new Label(inventory.getPotion(i).getName());
-                lbl.setTextFill(Color.WHITE);
-                HBox hBox = new HBox(iv, lbl);
-                hBox.setAlignment(Pos.CENTER);
-                potionsHBox.getChildren().add(hBox);
-            }
+        if (inventory.getPotion(0) != null) {
+            imgPOne.setImage(inventory.getPotion(0).render());
+            namePOne.setText(inventory.getPotion(0).getName() + ": " + inventory.getPotion(0).getRecoveryPoints());
         }
-        if (potionsHBox.getChildren().size() == 0)
-            potionsHBox.getChildren().add(emptyLabel());
+        else {
+            imgPOne.setImage(null);
+            namePOne.setText("EMPTY");
+        }
+        if (inventory.getPotion(1) != null) {
+            imgPTwo.setImage(inventory.getPotion(1).render());
+            namePTwo.setText(inventory.getPotion(1).getName() + ": " + inventory.getPotion(1).getRecoveryPoints());
+        }
+        else {
+            imgPTwo.setImage(null);
+            namePTwo.setText("EMPTY");
+        }
+        if (inventory.getPotion(2) != null) {
+            imgPThree.setImage(inventory.getPotion(2).render());
+            namePThree.setText(inventory.getPotion(2).getName() + ": " + inventory.getPotion(2).getRecoveryPoints());
+        }     
+        else {
+            imgPThree.setImage(null);
+            namePThree.setText("EMPTY");
+        }   
     }
 
-    private Label emptyLabel() {
-        Label lbl = new Label("* Empty *");
-        lbl.setTextFill(Color.WHITE);
-        return lbl;
-    }
+    private void renderEquipWeapon() {
+        weaponEquipped.setText(inventory.getEquippedWeapon().getName());
+        if(inventory.getWeapon(0) != null) {
+            imgWOne.setImage(inventory.getWeapon(0).render());
+            infoWOne.setText(inventory.getWeapon(0).getName() + "\n" + inventory.getWeapon(0).printAbilities());
+        }
+        else {
+            imgWOne.setImage(null);
+            infoWOne.setText("EMPTY");
+        }
+        if (inventory.getWeapon(1) != null) {
+            imgWTwo.setImage(inventory.getWeapon(1).render());
+            infoWTwo.setText(inventory.getWeapon(1).getName() + "\n" + inventory.getWeapon(1).printAbilities());
+        }
+        else {
+            imgWTwo.setImage(null);
+            infoWTwo.setText("EMPTY");
+        } 
+    } 
 
     private void upgradeStats() {
         int currentPHp = (player.getHealthPoints() > 0) ? player.getHealthPoints() : 0;
@@ -232,6 +306,14 @@ public class BattleController {
         enemyHealth.setText("HP: " + Integer.toString(currentEHp) + "/" + Integer.toString(initNpcHealth));
         healthPBar.setProgress((double) currentPHp / player.getLimitHp());
         healthEBar.setProgress((double) currentEHp / initNpcHealth);
+    }
+
+    private boolean checkPotions() {
+        for(int i = 0; i < 3; ++i) {
+            if(inventory.getPotion(i) != null)
+                return true;
+        }
+        return false;
     }
 
     private void changePane(Pane paneRemoved, Pane paneAdded) {

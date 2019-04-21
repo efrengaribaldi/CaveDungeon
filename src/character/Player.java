@@ -175,18 +175,18 @@ public abstract class Player extends Character {
 
     public void usePotion(int index) {
         switch (inventory.getPotion(index).getType()) {
-        case 'h':
-            setHealthPoints(getHealthPoints() + inventory.getPotion(index).getRecoveryPoints());
-            if (getHealthPoints() > getLimitHp())
-                setHealthPoints(getLimitHp());
-            break;
-        case 's':
-            setStamina(getStamina() + inventory.getPotion(index).getRecoveryPoints());
-            if (getStamina() > getLimitStamina())
-                setStamina(getLimitStamina());
-            break;
-        default:
-            break;
+            case 'h':
+                setHealthPoints(getHealthPoints() + inventory.getPotion(index).getRecoveryPoints());
+                if (getHealthPoints() > getLimitHp())
+                    setHealthPoints(getLimitHp());
+                break;
+            case 's':
+                setStamina(getStamina() + inventory.getPotion(index).getRecoveryPoints());
+                if (getStamina() > getLimitStamina())
+                    setStamina(getLimitStamina());
+                break;
+            default:
+                break;
         }
         inventory.removePotion(index);
     }

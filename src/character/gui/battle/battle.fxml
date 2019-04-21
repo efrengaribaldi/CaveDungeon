@@ -73,7 +73,7 @@
                      <font>
                         <Font size="18.0" />
                      </font></Button>
-                  <Button fx:id="equipWeapon" mnemonicParsing="false" onAction="#equipWeapon" prefHeight="65.0" prefWidth="300.0" style="-fx-background-color: brown;" text="Equip Weapon" textFill="WHITE" GridPane.columnIndex="2">
+                  <Button fx:id="equipWeapon" mnemonicParsing="false" onAction="#equipWeapon" prefHeight="65.0" prefWidth="300.0" style="-fx-background-color: brown;" text="Change Weapon" textFill="WHITE" GridPane.columnIndex="2">
                      <font>
                         <Font size="18.0" />
                      </font></Button>

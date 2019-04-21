@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<Pane fx:id="equipPWeapon" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="1024.0" style="-fx-background-color: #1C1117;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <GridPane fx:id="switchWeap" layoutY="50.0" prefHeight="150.0" prefWidth="1024.0">
+        <columnConstraints>
+          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Button fx:id="switchWeapon" mnemonicParsing="false" onAction="#switchWeapon" prefHeight="80.0" prefWidth="150.0" style="-fx-background-color: brown;" text="Switch&#10;Weapon" textAlignment="CENTER" textFill="WHITE" />
+                  <Label fx:id="weaponEquipped" alignment="CENTER" prefHeight="50.0" prefWidth="300.0" text="Label" textFill="WHITE">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
+               <children>
+                  <ImageView fx:id="imgWOne" fitHeight="112.0" fitWidth="112.0" pickOnBounds="true" preserveRatio="true" />
+                  <Label fx:id="infoWOne" alignment="CENTER" prefHeight="130.0" prefWidth="200.0" text="Label" textFill="WHITE">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2">
+               <children>
+                  <ImageView fx:id="imgWTwo" fitHeight="112.0" fitWidth="112.0" pickOnBounds="true" preserveRatio="true" />
+                  <Label fx:id="infoWTwo" alignment="CENTER" prefHeight="130.0" prefWidth="200.0" text="Label" textFill="WHITE">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+         </children>
+      </GridPane>
+      <Label fx:id="weaponsLabel" alignment="CENTER" prefHeight="50.0" prefWidth="1024.0" text="Weapons" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font size="32.0" />
+         </font>
+      </Label>
+   </children>
+</Pane>
