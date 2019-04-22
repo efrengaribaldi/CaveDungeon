@@ -13,7 +13,7 @@ public class Necromancer extends Enemy {
 
     @Override
     public int getExperience() {
-        return ThreadLocalRandom.current().nextInt(15, 20 + 1);
+        return ThreadLocalRandom.current().nextInt(15, 20);
     }
 
     @Override

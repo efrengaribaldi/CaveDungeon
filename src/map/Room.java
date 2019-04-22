@@ -2,6 +2,7 @@ package src.map;
 
 import src.character.NPC;
 import src.character.Player;
+import src.character.npc.enemy.MimicChest;
 import src.map.gui.MapRender;
 
 import java.util.ArrayList;
@@ -146,7 +147,15 @@ public class Room {
             return false;
         } catch (TileAlreadyOccupiedException e) {
             NPC npc = (NPC) tiles[playerPos[0] + x][playerPos[1] + y].getCharacter();
-            mR.getGame().startBattle(p, npc);
+            if (npc.getType().equals("Chest")) {
+                if (Math.random() < 0.25)
+                    mR.getGame().startBattle(p, new MimicChest());
+                else {
+                    // Drop weapon chest
+                }
+            } else {
+                mR.getGame().startBattle(p, npc);
+            }
             tiles[playerPos[0] + x][playerPos[1] + y].clearCharacter();
             return false;
         }

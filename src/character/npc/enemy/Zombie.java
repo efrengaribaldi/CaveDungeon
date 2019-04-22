@@ -13,7 +13,7 @@ public class Zombie extends Enemy {
 
     @Override
     public int getExperience() {
-        return ThreadLocalRandom.current().nextInt(3, 4 + 1);
+        return ThreadLocalRandom.current().nextInt(3, 4);
     }
 
     @Override

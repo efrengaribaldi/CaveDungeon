@@ -13,7 +13,7 @@ public class Skeleton extends Enemy {
 
     @Override
     public int getExperience() {
-        return ThreadLocalRandom.current().nextInt(5, 7 + 1);
+        return ThreadLocalRandom.current().nextInt(5, 7);
     }
 
     @Override

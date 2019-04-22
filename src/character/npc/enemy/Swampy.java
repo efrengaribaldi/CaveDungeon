@@ -13,7 +13,7 @@ public class Swampy extends Enemy {
 
     @Override
     public int getExperience() {
-        return ThreadLocalRandom.current().nextInt(10, 15 + 1);
+        return ThreadLocalRandom.current().nextInt(10, 15);
     }
 
     @Override
