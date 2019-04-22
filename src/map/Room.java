@@ -147,6 +147,7 @@ public class Room {
         } catch (TileAlreadyOccupiedException e) {
             NPC npc = (NPC) tiles[playerPos[0] + x][playerPos[1] + y].getCharacter();
             mR.getGame().startBattle(p, npc);
+            tiles[playerPos[0] + x][playerPos[1] + y].clearCharacter();
             return false;
         }
     }
