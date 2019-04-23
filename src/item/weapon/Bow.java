@@ -6,8 +6,8 @@ import javafx.scene.image.Image;
 
 public class Bow extends Weapon {
     // Names from https://torchlight.fandom.com/wiki/Bows_(T2)
-    private final String[] names = { "Killseeker", "Knight's Bow", "Spinepiercer", "Beastbane", "The Hunting God's Bow",
-            "Stormbow", "The Thunderbow", "Skysplitter" };
+    private final String[] names = { "Killseeker", "Knight's Bow", "Spinepiercer", "Beastbane", "Hunter's Bow",
+            "Stormbow", "Thunderbow", "Skysplitter" };
 
     public Bow(int baseAttack, int baseStamina) {
         super("",

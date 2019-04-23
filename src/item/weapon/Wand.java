@@ -7,7 +7,7 @@ import javafx.scene.image.Image;
 public class Wand extends Weapon {
     // Names from https://torchlight.fandom.com/wiki/Wands_(T2)
     private final String[] names = { "Goat Head Wand", "Timefork", "Fraxl's Star", "Blizzard", "The Banewand",
-            "Netherrealm Wand", "The Wyrdwand" };
+            "Nether Wand", "The Wyrdwand" };
 
     public Wand(int baseAttack, int baseStamina) {
         super("",

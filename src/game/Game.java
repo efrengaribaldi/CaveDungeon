@@ -4,7 +4,7 @@ import src.character.gui.battle.Battle;
 import src.character.gui.createplayer.CreatePlayer;
 import src.character.NPC;
 import src.character.Player;
-import src.item.gui.InventoryGUI;
+import src.item.gui.inventory.InventoryGUI;
 import src.map.gui.MapRender;
 import src.map.Map;
 

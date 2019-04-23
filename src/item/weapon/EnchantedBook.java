@@ -5,8 +5,8 @@ import src.item.weapon.Ability;
 import javafx.scene.image.Image;
 
 public class EnchantedBook extends Weapon {
-    private final String[] names = { "Lycka Himlen", "Order of Bloodshed", "Oath of Harm",
-            "Enhanced Secrets of the Moon", "Mythic Curse of Doom", "Breath of Torment", "Infusion of Spirits" };
+    private final String[] names = { "Lycka Himlen", "Order of Blood", "Oath of Harm", "Moon's Secrets",
+            "Curse of Doom", "Breath of Torment", "Spirits' Infusion" };
 
     public EnchantedBook(int baseAttack, int baseStamina) {
         super("",

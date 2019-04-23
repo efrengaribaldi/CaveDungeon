@@ -1,4 +1,4 @@
-package src.item.gui;
+package src.item.gui.inventory;
 
 import src.game.Game;
 

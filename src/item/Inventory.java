@@ -24,10 +24,6 @@ public class Inventory {
         this.weapons[index] = weapon;
     }
 
-    public Weapon selectedWeapon(int index) {
-        return weapons[index];
-    }
-
     public Weapon getWeapon(int index) {
         return weapons[index];
     }
@@ -70,6 +66,10 @@ public class Inventory {
 
     public Weapon getEquippedWeapon() {
         return weapons[indexEquippedWeapon];
+    }
+
+    public int getIndexEquippedWeapon() {
+        return indexEquippedWeapon;
     }
 
     public String printWeapons() {
