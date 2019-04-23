@@ -5,7 +5,7 @@ import src.character.gui.createplayer.CreatePlayer;
 import src.character.NPC;
 import src.character.Player;
 import src.item.Weapon;
-import src.item.gui.droppedWeapon.DroppedWeaponGUI;
+import src.item.gui.droppedItem.DroppedItemGUI;
 import src.item.gui.inventory.InventoryGUI;
 import src.map.gui.MapRender;
 import src.map.Map;
@@ -73,6 +73,6 @@ public class Game {
     }
 
     public void weaponDropped(Weapon newWeapon) {
-        stage.setScene(new DroppedWeaponGUI(this, newWeapon));
+        stage.setScene(new DroppedItemGUI(this, newWeapon));
     }
 }

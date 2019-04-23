@@ -1,4 +1,4 @@
-package src.item.gui.droppedWeapon;
+package src.item.gui.droppedItem;
 
 import src.game.Game;
 import src.item.Inventory;

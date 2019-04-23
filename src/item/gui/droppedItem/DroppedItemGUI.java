@@ -1,4 +1,4 @@
-package src.item.gui.droppedWeapon;
+package src.item.gui.droppedItem;
 
 import src.game.Game;
 import src.item.Weapon;
@@ -10,8 +10,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 
-public class DroppedWeaponGUI extends Scene {
-    public DroppedWeaponGUI(Game game, Weapon newWeapon) {
+public class DroppedItemGUI extends Scene {
+    public DroppedItemGUI(Game game, Weapon newWeapon) {
         super(new Pane());
         Pane root = new Pane();
         FXMLLoader loader = new FXMLLoader();
