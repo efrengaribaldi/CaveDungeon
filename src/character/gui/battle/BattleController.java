@@ -43,7 +43,7 @@ public class BattleController {
     @FXML
     private HBox potionsHBox;
     @FXML
-    private ProgressBar healthPBar, healthEBar;
+    private ProgressBar healthPBar, healthEBar, staminaBar;
     @FXML
     private Label playerName, playerLevel, playerStats, enemyName, enemyHealth;
     @FXML
@@ -298,14 +298,16 @@ public class BattleController {
     } 
 
     private void upgradeStats() {
-        int currentPHp = (player.getHealthPoints() > 0) ? player.getHealthPoints() : 0;
-        int currentEHp = (npc.getHealthPoints() > 0) ? npc.getHealthPoints() : 0;
+        int PHp = (player.getHealthPoints() > 0) ? player.getHealthPoints() : 0;
+        int PSt = (player.getStamina() > 0) ? player.getStamina() : 0;
+        int EHp = (npc.getHealthPoints() > 0) ? npc.getHealthPoints() : 0;
         playerStats.setText(
-                "HP: " + Integer.toString(currentPHp) + "/" + Integer.toString(player.getLimitHp()) + "  Stamina: "
+                "HP: " + Integer.toString(PHp) + "/" + Integer.toString(player.getLimitHp()) + "  Stamina: "
                         + Integer.toString(player.getStamina()) + "/" + Integer.toString(player.getLimitStamina()));
-        enemyHealth.setText("HP: " + Integer.toString(currentEHp) + "/" + Integer.toString(initNpcHealth));
-        healthPBar.setProgress((double) currentPHp / player.getLimitHp());
-        healthEBar.setProgress((double) currentEHp / initNpcHealth);
+        enemyHealth.setText("HP: " + Integer.toString(EHp) + "/" + Integer.toString(initNpcHealth));
+        healthPBar.setProgress((double) PHp / player.getLimitHp());
+        staminaBar.setProgress((double) PSt / player.getLimitStamina());
+        healthEBar.setProgress((double) EHp / initNpcHealth);
     }
 
     private boolean checkPotions() {

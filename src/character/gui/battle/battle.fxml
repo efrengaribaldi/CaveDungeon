@@ -11,18 +11,19 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.202-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="src.character.gui.battle.BattleController">
+<Pane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="src.character.gui.battle.BattleController">
    <children>
       <Pane fx:id="battleView" prefHeight="568.0" prefWidth="1024.0" style="-fx-background-color: #17202A;">
          <children>
-            <AnchorPane layoutX="573.0" layoutY="398.0" prefHeight="100.0" prefWidth="410.0" style="-fx-background-color: brown;">
+            <AnchorPane layoutX="573.0" layoutY="398.0" prefHeight="120.0" prefWidth="410.0" style="-fx-background-color: brown;">
                <children>
-                  <ProgressBar fx:id="healthPBar" layoutX="28.0" layoutY="30.0" prefHeight="25.0" prefWidth="376.0" progress="1.0" />
-                  <Label fx:id="playerStats" layoutX="97.0" layoutY="60.0" prefHeight="25.0" prefWidth="276.0" text="HP: 00/00  Stamina: 00/00" textFill="WHITE">
+                  <ProgressBar fx:id="healthPBar" layoutX="28.0" layoutY="30.0" prefHeight="25.0" prefWidth="376.0" progress="1.0" style="-fx-accent: red;" />
+                  <Label fx:id="playerStats" alignment="CENTER_RIGHT" layoutX="31.0" layoutY="80.0" prefHeight="25.0" prefWidth="342.0" text="HP: 00/00  Stamina: 00/00" textFill="WHITE">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Label>
+                  <ProgressBar fx:id="staminaBar" layoutX="104.0" layoutY="55.0" prefHeight="18.0" prefWidth="300.0" progress="1.0" style="-fx-accent: green;" />
                </children>
             </AnchorPane>
             <Label fx:id="playerName" layoutX="620.0" layoutY="355.0" text="Player" textFill="WHITE">
@@ -44,8 +45,8 @@
             </Label>
             <AnchorPane layoutX="50.0" layoutY="119.0" prefHeight="100.0" prefWidth="410.0" style="-fx-background-color: brown;">
                <children>
-                  <ProgressBar fx:id="healthEBar" layoutX="28.0" layoutY="30.0" prefHeight="25.0" prefWidth="376.0" progress="1.0" />
-                  <Label fx:id="enemyHealth" layoutX="260.0" layoutY="60.0" prefHeight="25.0" prefWidth="100.0" text="HP: 00/00" textFill="WHITE">
+                  <ProgressBar fx:id="healthEBar" layoutX="28.0" layoutY="30.0" prefHeight="25.0" prefWidth="376.0" progress="1.0" style="-fx-accent: red;" />
+                  <Label fx:id="enemyHealth" alignment="CENTER_RIGHT" layoutX="30.0" layoutY="60.0" prefHeight="25.0" prefWidth="330.0" text="HP: 00/00" textFill="WHITE">
                      <font>
                         <Font size="20.0" />
                      </font>

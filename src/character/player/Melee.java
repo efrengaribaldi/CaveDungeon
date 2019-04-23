@@ -14,6 +14,7 @@ public class Melee extends Player {
         this.inventory.addItemToInventory(new Bow(15, 5), 1);
         this.inventory.addItemToInventory(new HealthPotion(15), 0);
         this.inventory.addItemToInventory(new StaminaPotion(10), 1);
+        this.inventory.addItemToInventory(new StaminaPotion(10), 2);
     }
 
     @Override

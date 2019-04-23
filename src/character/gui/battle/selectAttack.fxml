@@ -23,7 +23,7 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Label fx:id="attackMessage" text="Broooooooo corrige esto" textFill="RED" />
+                  <Label fx:id="attackMessage" text="" textFill="RED" />
                </children>
             </VBox>
             <GridPane fx:id="abilityGrid" alignment="CENTER" prefWidth="768.0">

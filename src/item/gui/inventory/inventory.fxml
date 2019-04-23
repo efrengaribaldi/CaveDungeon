@@ -10,18 +10,18 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.202-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="src.item.gui.inventory.InventoryController">
+<VBox prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="src.item.gui.inventory.InventoryController">
    <children>
       <HBox alignment="CENTER" prefHeight="142.0" prefWidth="1024.0" style="-fx-background-color: #4c2e3e;">
          <children>
             <Pane prefHeight="132.0" prefWidth="740.0">
                <children>
-                  <ProgressBar fx:id="healthBar" layoutY="30.0" prefHeight="32.0" prefWidth="480.0" progress="0.0" />
-                  <Label fx:id="health" layoutX="500.0" layoutY="30.0" text="Health [00/00]" textFill="WHITE">
+                  <ProgressBar fx:id="healthBar" layoutY="30.0" prefHeight="32.0" prefWidth="480.0" progress="0.0" style="-fx-accent: red;" />
+                  <Label fx:id="health" layoutX="500.0" layoutY="30.0" prefHeight="30.0" prefWidth="230.0" text="Health [00/00]" textFill="WHITE">
                      <font><Font size="24.0" /></font>
                   </Label>
-                  <ProgressBar fx:id="staminaBar" layoutY="80.0" prefHeight="32.0" prefWidth="480.0" progress="0.0" />
-                  <Label fx:id="stamina" layoutX="500.0" layoutY="80.0" text="Stamina [00/00]" textFill="WHITE">
+                  <ProgressBar fx:id="staminaBar" layoutY="80.0" prefHeight="32.0" prefWidth="480.0" progress="0.0" style="-fx-accent: green;" />
+                  <Label fx:id="stamina" layoutX="500.0" layoutY="80.0" prefHeight="30.0" prefWidth="230.0" text="Stamina [00/00]" textFill="WHITE">
                      <font><Font size="24.0" /></font>
                   </Label>
                </children>

@@ -47,7 +47,7 @@ public class Game {
     public void setNewPlayerAndContinue(Player player) {
         this.player = player;
         levels[0].setPlayer(player);
-        player.checkLevelUp(2000); // for testing purposes
+        player.checkLevelUp(200); // for testing purposes
         mapTests();
         mapRender = new MapRender(this, levels[0]);
         playerTests();
