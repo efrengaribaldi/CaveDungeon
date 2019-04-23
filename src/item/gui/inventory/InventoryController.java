@@ -67,6 +67,8 @@ public class InventoryController {
         weaponsHB.getChildren().add(switchWeaponsBtn);
         for (int i = 0; i < 2; i++) {
             ImageView iv = new ImageView(inventory.getWeapon(i).render());
+            iv.setFitWidth(112);
+            iv.setFitHeight(112);
             HBox.setMargin(iv, new Insets(10));
             String str = inventory.getWeapon(i).getName() + "\n" + inventory.getWeapon(i).printAbilities();
             Label lbl = new Label(str);
@@ -86,6 +88,8 @@ public class InventoryController {
             if (inventory.getArmor(i) == null)
                 continue;
             ImageView iv = new ImageView(inventory.getArmor(i).render());
+            iv.setFitWidth(112);
+            iv.setFitHeight(112);
             Label lbl = new Label(inventory.getArmor(i).getName());
             lbl.setTextFill(Color.WHITE);
             HBox hBox = new HBox(iv, lbl);
@@ -102,6 +106,8 @@ public class InventoryController {
             if (inventory.getPotion(i) == null)
                 continue;
             ImageView iv = new ImageView(inventory.getPotion(i).render());
+            iv.setFitWidth(112);
+            iv.setFitHeight(112);
             Label lbl = new Label(inventory.getPotion(i).getName());
             lbl.setTextFill(Color.WHITE);
             HBox hBox = new HBox(iv, lbl);
