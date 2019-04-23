@@ -11,7 +11,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         Game game = new Game(primaryStage);
-        primaryStage.setTitle("CaveDungeon 0.1.99999999 ALPHA");
+        primaryStage.setTitle("CaveDungeon 0.3.99999999 ALPHA");
         primaryStage.show();
     }
 }

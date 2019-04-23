@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox style="-fx-background-color: #17202A;" xmlns="http://javafx.com/javafx/8.0.202-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="src.item.gui.droppedWeapon.DroppedWeaponController">
+   <children>
+      <Label alignment="CENTER" prefHeight="128.0" prefWidth="1024.0" text="You got a new weapon!" textFill="WHITE">
+         <font>
+            <Font size="40.0" />
+         </font>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </Label>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
+         <children>
+            <StackPane prefHeight="400.0" prefWidth="200.0">
+               <children>
+                  <ImageView fitHeight="400.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@/src/item/gui/droppedWeapon/bgItem.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="newWeaponIV" fitHeight="224.0" fitWidth="224.0" pickOnBounds="true" preserveRatio="true">
+                  </ImageView>
+               </children>
+            </StackPane>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="220.0" spacing="40.0">
+               <children>
+                  <Label fx:id="newWeaponStats" text="  15 dmg, 5 sta" textFill="WHITE">
+                     <font><Font size="22.0" /></font>
+                  </Label>
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#dropNewWeapon" prefHeight="72.0" prefWidth="160.0" text="Drop new weapon" textAlignment="CENTER" wrapText="true">
+                     <font><Font size="22.0" /></font>
+                  </Button>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" prefHeight="240.0" prefWidth="200.0" spacing="40.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#changeForWeapon1">
+               <graphic>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="400.0" spacing="20.0">
+                     <children>
+                        <Label prefWidth="100.0" text="Change for this weapon" textAlignment="CENTER" wrapText="true">
+                           <font><Font size="22.0" /></font>
+                        </Label>
+                        <ImageView fx:id="weapon1IV" fitHeight="112.0" fitWidth="112.0" pickOnBounds="true" preserveRatio="true">
+                        </ImageView>
+                        <Label fx:id="weapon1Stats" text="  15 dmg, 5 sta" />
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="12.0" />
+                     </padding>
+                  </HBox>
+               </graphic>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#changeForWeapon2">
+               <graphic>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="400.0" spacing="20.0">
+                     <children>
+                        <Label prefWidth="100.0" text="Change for this weapon" textAlignment="CENTER" wrapText="true">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Label>
+                        <ImageView fx:id="weapon2IV" fitHeight="112.0" fitWidth="112.0" pickOnBounds="true" preserveRatio="true">
+                        </ImageView>
+                        <Label fx:id="weapon2Stats" text="  15 dmg, 5 sta" />
+                     </children>
+                     <padding>
+                        <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                     </padding>
+                  </HBox>
+               </graphic>
+            </Button>
+         </children>
+      </HBox>
+   </children>
+</VBox>

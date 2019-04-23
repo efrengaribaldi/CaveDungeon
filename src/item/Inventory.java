@@ -36,20 +36,12 @@ public class Inventory {
         return potions[index];
     }
 
-    public void setPotion(Potion potion, int index) {
-        potions[index] = potion;
-    }
-
     public void removePotion(int index) {
         potions[index] = null;
     }
 
     public Armor getArmor(int index) {
         return armor[index];
-    }
-
-    public void setArmor(Armor armor, int index) {
-        this.armor[index] = armor;
     }
 
     public void removeArmor(int index) {

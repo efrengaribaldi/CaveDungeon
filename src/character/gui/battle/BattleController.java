@@ -8,7 +8,6 @@ import src.item.Inventory;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -55,19 +54,23 @@ public class BattleController {
     @FXML
     private ImageView imgPlayer, imgNpc, imgWeapon, imgPOne, imgPTwo, imgPThree, imgWOne, imgWTwo;
 
-    public BattleController() throws FileNotFoundException, IOException, URISyntaxException {
+    public BattleController() {
         FXMLLoader[] loader = new FXMLLoader[6];
         for (int i = 0; i < loader.length; ++i) {
             loader[i] = new FXMLLoader();
             loader[i].setBuilderFactory(new JavaFXBuilderFactory());
             loader[i].setController(this);
         }
+        try {
             selectAttack = (Pane) loader[0].load(loadFXML("./selectAttack.fxml"));
             selectPotion = (Pane) loader[1].load(loadFXML("./selectPotion.fxml"));
             playerAttack = (Pane) loader[2].load(loadFXML("./playerAttack.fxml"));
             enemyAttack = (Pane) loader[3].load(loadFXML("./enemyAttack.fxml"));
             battleResult = (Pane) loader[4].load(loadFXML("./battleResult.fxml"));
             equipPWeapon = (Pane) loader[5].load(loadFXML("./equipWeapon.fxml"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public FileInputStream loadFXML(String path) throws URISyntaxException, FileNotFoundException {
@@ -96,7 +99,7 @@ public class BattleController {
 
     @FXML
     private void usePotion(ActionEvent event) {
-        if (checkPotions() == true) 
+        if (checkPotions() == true)
             changePane(selectOption, selectPotion);
     }
 
@@ -170,8 +173,7 @@ public class BattleController {
                         + Integer.toString(npc.attack(player)));
                 upgradeStats();
                 changePane(playerAttack, enemyAttack);
-            } 
-            else {
+            } else {
                 finishText.setText("You has defeated to " + npc.getName());
                 finalInfo.setText(player.checkLevelUp(npc.getExperience()));
                 changePane(playerAttack, battleResult);
@@ -180,11 +182,12 @@ public class BattleController {
 
         PauseTransition continueT = new PauseTransition(Duration.seconds(3));
         continueT.setOnFinished(event -> {
-            if (player.getHealthPoints() > 0 && enemyDefeated == false)
-                changePane(enemyAttack, selectOption);
-            else if (player.getHealthPoints() > 0 && enemyDefeated == true)
-                game.setRoomScene();
-            else 
+            if (player.getHealthPoints() > 0) {
+                if (enemyDefeated)
+                    game.weaponDropped(npc.dropWeapon(player));
+                else
+                    changePane(enemyAttack, selectOption);
+            } else
                 System.exit(0);
         });
 
@@ -193,21 +196,16 @@ public class BattleController {
     }
 
     private void potionSystem(int index) {
-        try {
-            player.usePotion(index);
-            changePane(selectPotion, selectOption);
-            upgradeStats();
-            renderSelectPotion();
-        }
-        catch (NullPointerException exception) {
-
-        }
+        player.usePotion(index);
+        changePane(selectPotion, selectOption);
+        upgradeStats();
+        renderSelectPotion();
     }
 
     private void switchSystem() {
         inventory.switchEquippedWeapons();
-        nAttackInfo.setText(npc.getName() + " has made an attack and has damaged you: -"
-                + Integer.toString(npc.attack(player)));
+        nAttackInfo.setText(
+                npc.getName() + " has made an attack and has damaged you: -" + Integer.toString(npc.attack(player)));
         upgradeStats();
         changePane(equipPWeapon, enemyAttack);
 
@@ -215,7 +213,7 @@ public class BattleController {
         continueT.setOnFinished(event -> {
             if (player.getHealthPoints() > 0)
                 changePane(enemyAttack, selectOption);
-            else 
+            else
                 System.exit(0);
         });
         renderSelectAttack();
@@ -254,56 +252,50 @@ public class BattleController {
         if (inventory.getPotion(0) != null) {
             imgPOne.setImage(inventory.getPotion(0).render());
             namePOne.setText(inventory.getPotion(0).getName() + ": " + inventory.getPotion(0).getRecoveryPoints());
-        }
-        else {
+        } else {
             imgPOne.setImage(null);
             namePOne.setText("EMPTY");
         }
         if (inventory.getPotion(1) != null) {
             imgPTwo.setImage(inventory.getPotion(1).render());
             namePTwo.setText(inventory.getPotion(1).getName() + ": " + inventory.getPotion(1).getRecoveryPoints());
-        }
-        else {
+        } else {
             imgPTwo.setImage(null);
             namePTwo.setText("EMPTY");
         }
         if (inventory.getPotion(2) != null) {
             imgPThree.setImage(inventory.getPotion(2).render());
             namePThree.setText(inventory.getPotion(2).getName() + ": " + inventory.getPotion(2).getRecoveryPoints());
-        }     
-        else {
+        } else {
             imgPThree.setImage(null);
             namePThree.setText("EMPTY");
-        }   
+        }
     }
 
     private void renderEquipWeapon() {
         weaponEquipped.setText(inventory.getEquippedWeapon().getName());
-        if(inventory.getWeapon(0) != null) {
+        if (inventory.getWeapon(0) != null) {
             imgWOne.setImage(inventory.getWeapon(0).render());
             infoWOne.setText(inventory.getWeapon(0).getName() + "\n" + inventory.getWeapon(0).printAbilities());
-        }
-        else {
+        } else {
             imgWOne.setImage(null);
             infoWOne.setText("EMPTY");
         }
         if (inventory.getWeapon(1) != null) {
             imgWTwo.setImage(inventory.getWeapon(1).render());
             infoWTwo.setText(inventory.getWeapon(1).getName() + "\n" + inventory.getWeapon(1).printAbilities());
-        }
-        else {
+        } else {
             imgWTwo.setImage(null);
             infoWTwo.setText("EMPTY");
-        } 
-    } 
+        }
+    }
 
     private void upgradeStats() {
         int PHp = (player.getHealthPoints() > 0) ? player.getHealthPoints() : 0;
         int PSt = (player.getStamina() > 0) ? player.getStamina() : 0;
         int EHp = (npc.getHealthPoints() > 0) ? npc.getHealthPoints() : 0;
-        playerStats.setText(
-                "HP: " + Integer.toString(PHp) + "/" + Integer.toString(player.getLimitHp()) + "  Stamina: "
-                        + Integer.toString(player.getStamina()) + "/" + Integer.toString(player.getLimitStamina()));
+        playerStats.setText("HP: " + Integer.toString(PHp) + "/" + Integer.toString(player.getLimitHp()) + "  Stamina: "
+                + Integer.toString(player.getStamina()) + "/" + Integer.toString(player.getLimitStamina()));
         enemyHealth.setText("HP: " + Integer.toString(EHp) + "/" + Integer.toString(initNpcHealth));
         healthPBar.setProgress((double) PHp / player.getLimitHp());
         staminaBar.setProgress((double) PSt / player.getLimitStamina());
@@ -311,8 +303,8 @@ public class BattleController {
     }
 
     private boolean checkPotions() {
-        for(int i = 0; i < 3; ++i) {
-            if(inventory.getPotion(i) != null)
+        for (int i = 0; i < 3; ++i) {
+            if (inventory.getPotion(i) != null)
                 return true;
         }
         return false;

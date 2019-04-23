@@ -68,8 +68,7 @@ public class InventoryController {
         for (int i = 0; i < 2; i++) {
             ImageView iv = new ImageView(inventory.getWeapon(i).render());
             HBox.setMargin(iv, new Insets(10));
-            String str = inventory.getWeapon(i).getName() + "\n";
-            str += inventory.getWeapon(i).printAbilities();
+            String str = inventory.getWeapon(i).getName() + "\n" + inventory.getWeapon(i).printAbilities();
             Label lbl = new Label(str);
             lbl.setTextFill(Color.WHITE);
             HBox.setMargin(lbl, new Insets(10));
