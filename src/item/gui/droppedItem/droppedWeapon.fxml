@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox style="-fx-background-color: #17202A;" xmlns="http://javafx.com/javafx/8.0.202-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="src.item.gui.droppedWeapon.DroppedWeaponController">
+<VBox style="-fx-background-color: #17202A;" xmlns="http://javafx.com/javafx/8.0.202-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="src.item.gui.droppedItem.DroppedWeaponController">
    <children>
       <Label alignment="CENTER" prefHeight="128.0" prefWidth="1024.0" text="You got a new weapon!" textFill="WHITE">
          <font>
@@ -26,7 +26,7 @@
                <children>
                   <ImageView fitHeight="400.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@/src/item/gui/droppedWeapon/bgItem.png" />
+                        <Image url="@/src/item/gui/droppedItem/bgItem.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="newWeaponIV" fitHeight="224.0" fitWidth="224.0" pickOnBounds="true" preserveRatio="true">

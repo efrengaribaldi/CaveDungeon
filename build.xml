@@ -30,8 +30,8 @@
 		<copy todir="${build}/src/character/npc/enemy/img"><fileset dir="${src}/character/npc/enemy/img" /></copy>
 		<copy todir="${build}/src/character/player/img"><fileset dir="${src}/character/player/img" /></copy>
 		<copy todir="${build}/src/game/gui/img"><fileset dir="${src}/game/gui/img" /></copy>
-		<copy file="${src}/item/gui/droppedWeapon/bgItem.png" tofile="${build}/src/item/gui/droppedWeapon/bgItem.png" />
-		<copy file="${src}/item/gui/droppedWeapon/droppedWeapon.fxml" tofile="${build}/src/item/gui/droppedWeapon/droppedWeapon.fxml" overwrite="true" />
+		<copy file="${src}/item/gui/droppedItem/bgItem.png" tofile="${build}/src/item/gui/droppedItem/bgItem.png" />
+		<copy file="${src}/item/gui/droppedItem/droppedWeapon.fxml" tofile="${build}/src/item/gui/droppedItem/droppedWeapon.fxml" overwrite="true" />
 		<copy file="${src}/item/gui/inventory/inventory.fxml" tofile="${build}/src/item/gui/inventory/inventory.fxml" overwrite="true" />
 		<copy todir="${build}/src/item/armor/img"><fileset dir="${src}/item/armor/img" /></copy>
 		<copy todir="${build}/src/item/potion/img"><fileset dir="${src}/item/potion/img" /></copy>
