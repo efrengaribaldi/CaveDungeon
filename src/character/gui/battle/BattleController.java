@@ -174,7 +174,7 @@ public class BattleController {
                 upgradeStats();
                 changePane(playerAttack, enemyAttack);
             } else {
-                finishText.setText("You has defeated to " + npc.getName());
+                finishText.setText("You have defeated " + npc.getName());
                 finalInfo.setText(player.checkLevelUp(npc.getExperience()));
                 changePane(playerAttack, battleResult);
             }
@@ -230,7 +230,7 @@ public class BattleController {
             damage[i] = (int) (inventory.getEquippedWeapon().getAbility(i).getBaseDamage() * player.getAttack());
             stamina[i] = (int) (inventory.getEquippedWeapon().getAbility(i).getStaminaCost());
         }
-        basicAttack.setText("Basic Attack\nDamage: " + (int) (player.getAttack()) + "  Stamina: 0");
+        basicAttack.setText("Basic Attack\nDamage: " + (int) (player.getAttack() * 5) + "  Stamina: 0");
         abilityOne.setText(abilityName[0] + "\nDamage: " + damage[0] + "  Stamina: " + stamina[0]);
         abilityTwo.setText(abilityName[1] + "\nDamage: " + damage[1] + "  Stamina: " + stamina[1]);
         abilityThree.setText(abilityName[2] + "\nDamage: " + damage[2] + "  Stamina: " + stamina[2]);
