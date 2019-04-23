@@ -18,4 +18,6 @@ public abstract class Item {
     }
 
     public abstract Image render();
+
+    public abstract String getParent();
 }

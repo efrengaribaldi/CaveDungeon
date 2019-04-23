@@ -25,6 +25,11 @@ public class MimicChest extends Enemy {
     }
 
     @Override
+    protected int getDefenseForArmor(Player player) {
+        return ThreadLocalRandom.current().nextInt(10, 12);
+    }
+
+    @Override
     public String getType() {
         return "MimicChest";
     }

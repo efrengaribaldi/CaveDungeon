@@ -25,6 +25,11 @@ public class Zombie extends Enemy {
     }
 
     @Override
+    protected int getDefenseForArmor(Player player) {
+        return ThreadLocalRandom.current().nextInt(4, 7);
+    }
+
+    @Override
     public String getType() {
         return "Zombie";
     }

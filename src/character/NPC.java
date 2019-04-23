@@ -1,6 +1,8 @@
 package src.character;
 
 import src.character.Character;
+import src.item.Armor;
+import src.item.armor.*;
 import src.item.Weapon;
 import src.item.weapon.*;
 
@@ -43,5 +45,18 @@ public abstract class NPC extends Character {
             else
                 return new Wand(args[0], args[1]);
         }
+    }
+
+    protected abstract int getDefenseForArmor(Player player);
+
+    public Armor dropArmor(Player player) {
+        int def = getDefenseForArmor(player);
+        int randomType = (int) (Math.random() * 3);
+        if (randomType == 1)
+            return new Necklace(def);
+        else if (randomType == 2)
+            return new Shield(def);
+        else
+            return new Ring(def);
     }
 }

@@ -11,10 +11,11 @@ public class Ring extends Armor {
     public Ring(int baseDefense) {
         super("", baseDefense);
         setName(names[(int) (Math.random() * names.length)]);
+        sprite = (int) (Math.random() * 5);
     }
 
     @Override
     public Image render() {
-        return new Image(getClass().getResource("./img/ring" + (Integer.toString((int)(Math.random() * 5) + 1)) + ".png").toString());
+        return new Image(getClass().getResource("./img/ring" + sprite + ".png").toString());
     }
 }

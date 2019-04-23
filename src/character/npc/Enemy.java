@@ -13,5 +13,4 @@ public abstract class Enemy extends NPC {
     }
 
     public abstract int getExperience();
-    // public abstract Potion dropPotion(Player player);
 }

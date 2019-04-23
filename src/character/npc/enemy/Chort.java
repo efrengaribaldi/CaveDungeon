@@ -25,6 +25,11 @@ public class Chort extends Enemy {
     }
 
     @Override
+    protected int getDefenseForArmor(Player player) {
+        return ThreadLocalRandom.current().nextInt(7, 9);
+    }
+
+    @Override
     public String getType() {
         return "Chort";
     }

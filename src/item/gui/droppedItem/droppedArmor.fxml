@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: #17202A;" xmlns="http://javafx.com/javafx/8.0.202-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="src.item.gui.droppedItem.DroppedArmorController">
+   <children>
+      <Label alignment="CENTER" prefHeight="94.0" prefWidth="1024.0" text="You got new armor!" textFill="WHITE">
+         <font>
+            <Font size="40.0" />
+         </font>
+      </Label>
+      <HBox alignment="CENTER" spacing="50.0">
+         <children>
+            <StackPane>
+               <children>
+                  <ImageView fitHeight="400.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@/src/item/gui/droppedItem/bgItem.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="newArmorIV" fitHeight="224.0" fitWidth="224.0" pickOnBounds="true" preserveRatio="true">
+                  </ImageView>
+               </children>
+            </StackPane>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="240.0" spacing="40.0">
+               <children>
+                  <Label fx:id="newArmorStats" wrapText="true" textFill="WHITE">
+                     <font><Font size="22.0" /></font>
+                  </Label>
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#dropNewArmor" prefHeight="72.0" prefWidth="160.0" text="Drop new armor" textAlignment="CENTER" wrapText="true">
+                     <font><Font size="22.0" /></font>
+                  </Button>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <HBox fx:id="armorDisplays" alignment="CENTER" prefHeight="120.0" prefWidth="200.0" spacing="20.0">
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+      </HBox>
+      <HBox fx:id="armorButtons" alignment="TOP_CENTER" prefWidth="200.0" spacing="80.0">
+      </HBox>
+   </children>
+</VBox>

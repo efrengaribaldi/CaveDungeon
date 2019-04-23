@@ -10,6 +10,11 @@ public abstract class Potion extends Item {
         this.recoveryPoints = recoveryPoints;
     }
 
+    @Override
+    public String getParent() {
+        return "Potion";
+    }
+
     public int getRecoveryPoints() {
         return recoveryPoints;
     }

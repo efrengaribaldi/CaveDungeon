@@ -150,9 +150,10 @@ public class Room {
             if (npc.getType().equals("Chest")) {
                 if (Math.random() < 0.25)
                     mR.getGame().startBattle(p, new MimicChest());
-                else {
-                    mR.getGame().weaponDropped(npc.dropWeapon(p));
-                }
+                else if (Math.random() > 0.5)
+                    mR.getGame().itemDropped(npc.dropWeapon(p));
+                else
+                    mR.getGame().itemDropped(npc.dropArmor(p));
             } else {
                 mR.getGame().startBattle(p, npc);
             }

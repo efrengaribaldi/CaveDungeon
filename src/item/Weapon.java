@@ -12,6 +12,11 @@ public abstract class Weapon extends Item {
         this.abilities = abilities;
     }
 
+    @Override
+    public String getParent() {
+        return "Weapon";
+    }
+
     public Ability[] getAbilities() {
         return abilities;
     }

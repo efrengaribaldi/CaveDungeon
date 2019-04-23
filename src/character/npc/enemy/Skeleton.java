@@ -25,6 +25,11 @@ public class Skeleton extends Enemy {
     }
 
     @Override
+    protected int getDefenseForArmor(Player player) {
+        return ThreadLocalRandom.current().nextInt(5, 8);
+    }
+
+    @Override
     public String getType() {
         return "Skeleton";
     }

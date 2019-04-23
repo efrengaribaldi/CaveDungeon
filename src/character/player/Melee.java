@@ -2,6 +2,7 @@ package src.character.player;
 
 import src.character.Player;
 import src.item.Inventory;
+import src.item.armor.*;
 import src.item.weapon.*;
 import src.item.potion.*;
 
@@ -12,6 +13,9 @@ public class Melee extends Player {
         super(name, 15, gender, new Inventory(), 1.2, 1.0);
         this.inventory.addItemToInventory(new Sword(15, 5), 0);
         this.inventory.addItemToInventory(new Bow(15, 5), 1);
+        this.inventory.addItemToInventory(new Shield(2), 0);
+        this.inventory.addItemToInventory(new Shield(2), 1);
+        this.inventory.addItemToInventory(new Shield(2), 2);
         this.inventory.addItemToInventory(new HealthPotion(15), 0);
         this.inventory.addItemToInventory(new StaminaPotion(10), 1);
         this.inventory.addItemToInventory(new StaminaPotion(10), 2);

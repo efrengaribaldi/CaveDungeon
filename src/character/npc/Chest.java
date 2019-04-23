@@ -30,6 +30,11 @@ public class Chest extends NPC {
     }
 
     @Override
+    protected int getDefenseForArmor(Player player) {
+        return ThreadLocalRandom.current().nextInt(8, 12);
+    }
+
+    @Override
     public String getType() {
         return "Chest";
     }

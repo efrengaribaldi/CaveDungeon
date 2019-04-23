@@ -184,7 +184,10 @@ public class BattleController {
         continueT.setOnFinished(event -> {
             if (player.getHealthPoints() > 0) {
                 if (enemyDefeated)
-                    game.weaponDropped(npc.dropWeapon(player));
+                    if (Math.random() > 0.5)
+                        game.itemDropped(npc.dropWeapon(player));
+                    else
+                        game.itemDropped(npc.dropArmor(player));
                 else
                     changePane(enemyAttack, selectOption);
             } else

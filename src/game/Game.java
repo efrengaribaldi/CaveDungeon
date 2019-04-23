@@ -4,6 +4,8 @@ import src.character.gui.battle.Battle;
 import src.character.gui.createplayer.CreatePlayer;
 import src.character.NPC;
 import src.character.Player;
+import src.item.Armor;
+import src.item.Potion;
 import src.item.Weapon;
 import src.item.gui.droppedItem.DroppedItemGUI;
 import src.item.gui.inventory.InventoryGUI;
@@ -71,7 +73,15 @@ public class Game {
         stage.setScene(new Battle(player, npc, this));
     }
 
-    public void weaponDropped(Weapon newWeapon) {
+    public void itemDropped(Weapon newWeapon) {
         stage.setScene(new DroppedItemGUI(this, newWeapon));
+    }
+
+    public void itemDropped(Potion newPotion) {
+        stage.setScene(new DroppedItemGUI(this, newPotion));
+    }
+
+    public void itemDropped(Armor newArmor) {
+        stage.setScene(new DroppedItemGUI(this, newArmor));
     }
 }

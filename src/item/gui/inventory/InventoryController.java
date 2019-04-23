@@ -83,14 +83,13 @@ public class InventoryController {
     }
 
     private void renderArmor() {
-        armorHB.getChildren().clear();
         for (int i = 0; i < 3; i++) {
             if (inventory.getArmor(i) == null)
                 continue;
             ImageView iv = new ImageView(inventory.getArmor(i).render());
             iv.setFitWidth(112);
             iv.setFitHeight(112);
-            Label lbl = new Label(inventory.getArmor(i).getName());
+            Label lbl = new Label(inventory.getArmor(i).getName() + "\n  " + inventory.getArmor(i).printDefense());
             lbl.setTextFill(Color.WHITE);
             HBox hBox = new HBox(iv, lbl);
             hBox.setAlignment(Pos.CENTER);
@@ -101,7 +100,6 @@ public class InventoryController {
     }
 
     private void renderPotions() {
-        potionsHB.getChildren().clear();
         for (int i = 0; i < 3; i++) {
             if (inventory.getPotion(i) == null)
                 continue;

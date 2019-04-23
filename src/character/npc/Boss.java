@@ -5,7 +5,7 @@ import src.character.Player;
 
 public abstract class Boss extends NPC {
     public Boss(String name) {
-        super(name, 1000, 20, 15);
+        super(name, 250, 20, 15);
     }
 
     @Override
@@ -14,6 +14,11 @@ public abstract class Boss extends NPC {
         // TO DO
         // Make per boss, and random
         return res;
+    }
+
+    @Override
+    protected int getDefenseForArmor(Player player) {
+        return 16;
     }
 
     @Override

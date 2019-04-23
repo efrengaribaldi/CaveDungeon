@@ -25,6 +25,11 @@ public class Swampy extends Enemy {
     }
 
     @Override
+    protected int getDefenseForArmor(Player player) {
+        return ThreadLocalRandom.current().nextInt(8, 11);
+    }
+
+    @Override
     public String getType() {
         return "Swampy";
     }
