@@ -35,10 +35,10 @@
             </StackPane>
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="220.0" spacing="40.0">
                <children>
-                  <Label fx:id="newWeaponStats" text="  15 dmg, 5 sta" textFill="WHITE">
+                  <Label fx:id="newWeaponStats" textFill="WHITE">
                      <font><Font size="22.0" /></font>
                   </Label>
-                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#dropNewWeapon" prefHeight="72.0" prefWidth="160.0" text="Drop new weapon" textAlignment="CENTER" wrapText="true">
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#dropNewWeapon" prefHeight="80.0" prefWidth="160.0" text="Drop new weapon" textAlignment="CENTER" wrapText="true">
                      <font><Font size="22.0" /></font>
                   </Button>
                </children>
@@ -49,24 +49,24 @@
          <children>
             <Button mnemonicParsing="false" onAction="#changeForWeapon1">
                <graphic>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="400.0" spacing="20.0">
+                  <HBox alignment="CENTER" prefHeight="150.0" prefWidth="400.0" spacing="20.0">
                      <children>
                         <Label prefWidth="100.0" text="Change for this weapon" textAlignment="CENTER" wrapText="true">
                            <font><Font size="22.0" /></font>
                         </Label>
                         <ImageView fx:id="weapon1IV" fitHeight="112.0" fitWidth="112.0" pickOnBounds="true" preserveRatio="true">
                         </ImageView>
-                        <Label fx:id="weapon1Stats" text="  15 dmg, 5 sta" />
+                        <Label fx:id="weapon1Stats" />
                      </children>
                      <padding>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="12.0" />
+                        <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
                      </padding>
                   </HBox>
                </graphic>
             </Button>
             <Button mnemonicParsing="false" onAction="#changeForWeapon2">
                <graphic>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="400.0" spacing="20.0">
+                  <HBox alignment="CENTER" prefHeight="150.0" prefWidth="400.0" spacing="20.0">
                      <children>
                         <Label prefWidth="100.0" text="Change for this weapon" textAlignment="CENTER" wrapText="true">
                            <font>
@@ -75,7 +75,7 @@
                         </Label>
                         <ImageView fx:id="weapon2IV" fitHeight="112.0" fitWidth="112.0" pickOnBounds="true" preserveRatio="true">
                         </ImageView>
-                        <Label fx:id="weapon2Stats" text="  15 dmg, 5 sta" />
+                        <Label fx:id="weapon2Stats" />
                      </children>
                      <padding>
                         <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />

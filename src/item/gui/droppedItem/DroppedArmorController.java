@@ -33,7 +33,7 @@ public class DroppedArmorController {
         this.game = game;
         inventory = game.getPlayer().getInventory();
         this.newArmor = newArmor;
-        newArmorStats.setText(newArmor.getName() + "\n" + newArmor.printDefense());
+        newArmorStats.setText(newArmor.getName() + "\n  " + newArmor.printDefense());
         newArmorIV.setImage(newArmor.render());
 
         boolean playerHasAnEmptySpace = false;
@@ -87,7 +87,7 @@ public class DroppedArmorController {
             armorDisplays.getChildren().add(hBox);
             Button changeForThisArmor = new Button("Change for this armor");
             changeForThisArmor.setPrefWidth(240);
-            changeForThisArmor.setPrefHeight(72);
+            changeForThisArmor.setPrefHeight(80);
             changeForThisArmor.setFont(new Font(22));
             changeForThisArmor.setTextAlignment(TextAlignment.CENTER);
             changeForThisArmor.setWrapText(true);
