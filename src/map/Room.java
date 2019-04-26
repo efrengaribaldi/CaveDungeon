@@ -5,6 +5,7 @@ import src.character.Player;
 import src.character.npc.enemy.MimicChest;
 import src.map.gui.MapRender;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -14,7 +15,7 @@ import javafx.geometry.HPos;
 import javafx.geometry.VPos;
 import javafx.scene.image.ImageView;
 
-public class Room {
+public class Room implements Serializable {
     // 0 to be defined, 1 initial, 2 easy, 3 hard, 4 treasure, 5 boss
     private int state;
     // 0 top, 1 right, 2 bottom, 3 left

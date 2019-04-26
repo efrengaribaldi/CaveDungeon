@@ -12,19 +12,22 @@ import src.item.gui.inventory.InventoryGUI;
 import src.map.gui.MapRender;
 import src.map.Map;
 
-import java.util.Scanner;
+import java.io.IOException;
+import java.io.Serializable;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 
-public class Game {
-    Scanner sc = new Scanner(System.in);
+public class Game implements Serializable {
+    private static final long serialVersionUID = 1L;
+    private Main main;
     private Map[] levels;
     private Player player;
-    private Stage stage;
+    transient private Stage stage;
     private Scene mapRender;
 
-    public Game(Stage stage) {
+    public Game(Main main, Stage stage) {
         this.stage = stage;
+        this.main = main;
         long gameSeed = System.currentTimeMillis();
         System.out.println("Seed: " + gameSeed);
         levels = new Map[1];
@@ -48,13 +51,14 @@ public class Game {
                 "Next Level EXP: " + player.getExpRequiredForNextLevel() + " Current EXP: " + player.getExperience());
     }
 
-    public void setNewPlayerAndContinue(Player player) {
+    public void setNewPlayerAndContinue(Player player) throws IOException {
         this.player = player;
         levels[0].setPlayer(player);
         mapTests();
         mapRender = new MapRender(this, levels[0]);
         playerTests();
         setRoomScene();
+        saveGame(player);
     }
 
     public Player getPlayer() {
@@ -83,5 +87,9 @@ public class Game {
 
     public void itemDropped(Armor newArmor) {
         stage.setScene(new DroppedItemGUI(this, newArmor));
+    }
+
+    public void saveGame(Player player) throws IOException {
+        main.saveFile(player);
     }
 }

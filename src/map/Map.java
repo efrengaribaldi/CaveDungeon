@@ -2,10 +2,12 @@ package src.map;
 
 import src.character.Player;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Map {
+public class Map implements Serializable {
+    private static final long serialVersionUID = 1L;
     private static Random random = new Random();
     private Room rooms[][];
     private int minNumRooms, sizeX, sizeY;

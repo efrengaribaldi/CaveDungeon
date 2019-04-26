@@ -38,6 +38,7 @@
 		<copy todir="${build}/src/item/potion/img"><fileset dir="${src}/item/potion/img" /></copy>
 		<copy todir="${build}/src/item/weapon/img"><fileset dir="${src}/item/weapon/img" /></copy>
 		<copy todir="${build}/src/map/img"><fileset dir="${src}/map/img" /></copy>
+		<copy todir="${build}/src/game/saves"><fileset dir="${src}/game/saves" /></copy>
 	</target>
 
 	<target name="compile" depends="init" description="Compiles all source code.">

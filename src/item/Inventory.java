@@ -1,6 +1,8 @@
 package src.item;
 
-public class Inventory {
+import java.io.Serializable;
+
+public class Inventory implements Serializable {
     private int indexEquippedWeapon;
     private Armor[] armor;
     private Potion[] potions;

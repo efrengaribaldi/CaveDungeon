@@ -4,6 +4,8 @@ import src.character.Player;
 import src.character.player.*;
 import src.game.Game;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -39,7 +41,7 @@ public class CreatePlayerController {
     }
 
     @FXML
-    private void createPlayer(ActionEvent event) {
+    private void createPlayer(ActionEvent event) throws IOException {
         if (name.getText().equals("")) {
             System.out.println("Enter a name");
             return;

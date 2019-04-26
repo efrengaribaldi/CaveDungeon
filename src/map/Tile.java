@@ -1,6 +1,9 @@
 package src.map;
 
 import src.map.Tile;
+
+import java.io.Serializable;
+
 import src.character.Character;
 import src.character.Player;
 import src.character.npc.Chest;
@@ -8,7 +11,7 @@ import src.character.npc.Enemy;
 import src.character.npc.enemy.*;
 import src.character.npc.boss.*;
 
-public class Tile {
+public class Tile implements Serializable {
     private int spriteNum;
     private Character character;
 

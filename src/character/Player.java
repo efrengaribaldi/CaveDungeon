@@ -5,10 +5,7 @@ import src.character.NPC;
 import src.item.Inventory;
 import src.item.Weapon;
 
-import java.util.Scanner;
-
 public abstract class Player extends Character {
-    Scanner sc = new Scanner(System.in);
     public Inventory inventory;
     private int experience;
     private int level;
@@ -154,22 +151,6 @@ public abstract class Player extends Character {
             int expNeeded = expRequiredForNextLevel - experience;
             res += "You need " + expNeeded + " experience to advance to next level.";
             return res;
-        }
-    }
-
-    public void getNewWeapon(Weapon newWeapon, int index) {
-        try {
-            if (inventory.getWeapon(index) == null) {
-                inventory.addItemToInventory(newWeapon, index);
-            } else {
-                System.out.println("You already have a weapon in this position. Do you want to remove it (Y / N)?");
-                if (sc.next().charAt(0) == 'Y' || sc.next().charAt(0) == 'y') {
-                    inventory.removeWeapon(index);
-                    inventory.addItemToInventory(newWeapon, index);
-                }
-            }
-        } catch (ArrayIndexOutOfBoundsException exception) {
-            System.out.println("Index weapon not found!");
         }
     }
 
