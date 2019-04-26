@@ -254,21 +254,21 @@ public class BattleController {
     private void renderSelectPotion() {
         if (inventory.getPotion(0) != null) {
             imgPOne.setImage(inventory.getPotion(0).render());
-            namePOne.setText(inventory.getPotion(0).getName() + ": " + inventory.getPotion(0).getRecoveryPoints());
+            namePOne.setText(inventory.getPotion(0).getName());
         } else {
             imgPOne.setImage(null);
             namePOne.setText("EMPTY");
         }
         if (inventory.getPotion(1) != null) {
             imgPTwo.setImage(inventory.getPotion(1).render());
-            namePTwo.setText(inventory.getPotion(1).getName() + ": " + inventory.getPotion(1).getRecoveryPoints());
+            namePTwo.setText(inventory.getPotion(1).getName());
         } else {
             imgPTwo.setImage(null);
             namePTwo.setText("EMPTY");
         }
         if (inventory.getPotion(2) != null) {
             imgPThree.setImage(inventory.getPotion(2).render());
-            namePThree.setText(inventory.getPotion(2).getName() + ": " + inventory.getPotion(2).getRecoveryPoints());
+            namePThree.setText(inventory.getPotion(2).getName());
         } else {
             imgPThree.setImage(null);
             namePThree.setText("EMPTY");

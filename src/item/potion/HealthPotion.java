@@ -4,8 +4,8 @@ import src.item.Potion;
 import javafx.scene.image.Image;
 
 public class HealthPotion extends Potion {
-    public HealthPotion(int recoveryPoints) {
-        super("Health Potion", recoveryPoints);
+    public HealthPotion() {
+        super("Health Potion");
     }
 
     @Override

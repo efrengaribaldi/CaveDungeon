@@ -83,8 +83,7 @@ public class Inventory implements Serializable {
         String res = "Potions:\n";
         for (int i = 0; i < potions.length; ++i) {
             res += "i[" + i + "]: ";
-            res += (potions[i] != null) ? potions[i].getName() + " | Recovery points: " + potions[i].getRecoveryPoints()
-                    : "*Empty*";
+            res += (potions[i] != null) ? potions[i].getName() : "*Empty*";
             res += "\n";
         }
         return res;
