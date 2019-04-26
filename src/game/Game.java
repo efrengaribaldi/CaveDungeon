@@ -12,28 +12,44 @@ import src.item.gui.inventory.InventoryGUI;
 import src.map.gui.MapRender;
 import src.map.Map;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.Serializable;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+
 import javafx.stage.Stage;
+import javafx.application.Application;
 import javafx.scene.Scene;
 
-public class Game implements Serializable {
-    private static final long serialVersionUID = 1L;
-    private Main main;
+public class Game extends Application {
     private Map[] levels;
     private Player player;
-    transient private Stage stage;
+    private Stage stage;
     private Scene mapRender;
 
-    public Game(Main main, Stage stage) {
+    @Override
+    public void start(Stage stage) {
         this.stage = stage;
-        this.main = main;
         long gameSeed = System.currentTimeMillis();
         System.out.println("Seed: " + gameSeed);
         levels = new Map[1];
         for (int i = 0; i < levels.length; ++i)
             levels[i] = new Map(gameSeed + i);
         stage.setScene(new CreatePlayer(this));
+        //Player is saved at the close of Game
+        stage.setOnCloseRequest(event -> {
+            try {
+                if(findPlayer(player.getName()).delete()) 
+                    System.out.println("File deleted successfully"); 
+                saveGame();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+        stage.setTitle("CaveDungeon 0.4.99999999 ALPHA");
+        stage.show();
     }
 
     private void mapTests() {
@@ -43,22 +59,21 @@ public class Game implements Serializable {
 
     private void playerTests() {
         System.out.println(player.playerToString());
-        player.getInventory().equipWeapon(0);
-        System.out.println("You equipped weapon is: " + player.getInventory().getEquippedWeapon().getName());
+        System.out.println("Your equipped weapon is: " + player.getInventory().getEquippedWeapon().getName());
         System.out.println("Limit HP: " + player.getLimitHp() + " Current HP: " + player.getHealthPoints());
         System.out.println("Limit Stamina: " + player.getLimitStamina() + " Current Stamina: " + player.getStamina());
         System.out.println(
                 "Next Level EXP: " + player.getExpRequiredForNextLevel() + " Current EXP: " + player.getExperience());
     }
 
-    public void setNewPlayerAndContinue(Player player) throws IOException {
+    public void setNewPlayerAndContinue(Player player) throws IOException, ClassNotFoundException {
         this.player = player;
+        checkAccount();
         levels[0].setPlayer(player);
         mapTests();
         mapRender = new MapRender(this, levels[0]);
         playerTests();
         setRoomScene();
-        saveGame(player);
     }
 
     public Player getPlayer() {
@@ -73,8 +88,8 @@ public class Game implements Serializable {
         stage.setScene(new InventoryGUI(this));
     }
 
-    public void startBattle(Player player, NPC npc) {
-        stage.setScene(new Battle(player, npc, this));
+    public void startBattle(NPC npc) {
+        stage.setScene(new Battle(this.player, npc, this));
     }
 
     public void itemDropped(Weapon newWeapon) {
@@ -89,7 +104,35 @@ public class Game implements Serializable {
         stage.setScene(new DroppedItemGUI(this, newArmor));
     }
 
-    public void saveGame(Player player) throws IOException {
-        main.saveFile(player);
+    //Create class to save Map and Player
+    public void checkAccount() throws IOException, ClassNotFoundException {
+        if(findPlayer(player.getName()).exists())
+            loadGame();
+        else {
+            player.getInventory().equipWeapon(0);
+            saveGame();
+        }
+    }
+    
+    public void saveGame() throws IOException {
+        FileOutputStream fileOut = new FileOutputStream(findPlayer(player.getName()));
+        ObjectOutputStream saveGame = new ObjectOutputStream(fileOut);
+        saveGame.writeObject(player);
+        saveGame.close();
+    }
+
+    public void loadGame() throws IOException, ClassNotFoundException {
+        FileInputStream fileIn = new FileInputStream(findPlayer(player.getName()));
+        ObjectInputStream in = new ObjectInputStream(fileIn);
+        player = (Player) in.readObject();
+        System.out.println("Player loaded: " + player.getName());
+        in.close();
+        fileIn.close();
+    }
+
+    public File findPlayer(String playerName) throws IOException {
+        String classpath = System.getProperty("java.class.path");
+        File file = new File(classpath + "/src/game/saves", playerName + ".atm");
+        return file;
     }
 }

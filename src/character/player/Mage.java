@@ -9,6 +9,8 @@ import src.item.potion.*;
 import javafx.scene.image.Image;
 
 public class Mage extends Player {
+    private static final long serialVersionUID = 1L;
+
     public Mage(String name, char gender) {
         super(name, 20, gender, new Inventory(), 1.0, 1.2);
         this.inventory.addItemToInventory(new EnchantedBook(15, 5), 0);
@@ -17,6 +19,9 @@ public class Mage extends Player {
         this.inventory.addItemToInventory(new HealthPotion(15), 0);
         this.inventory.addItemToInventory(new StaminaPotion(10), 1);
         this.inventory.addItemToInventory(new StaminaPotion(10), 2);
+    }
+
+    public Mage() {
     }
 
     @Override

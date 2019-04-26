@@ -5,9 +5,7 @@ import src.character.player.*;
 import src.game.Game;
 
 import java.io.IOException;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.util.ResourceBundle;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.event.ActionEvent;
@@ -22,10 +20,6 @@ public class CreatePlayerController {
     private TextField name;
     @FXML
     private ChoiceBox<String> gender;
-    @FXML
-    private URL location;
-    @FXML
-    private ResourceBundle resources;
 
     public CreatePlayerController() {
     }
@@ -41,7 +35,7 @@ public class CreatePlayerController {
     }
 
     @FXML
-    private void createPlayer(ActionEvent event) throws IOException {
+    private void createPlayer(ActionEvent event) throws ClassNotFoundException, IOException {
         if (name.getText().equals("")) {
             System.out.println("Enter a name");
             return;

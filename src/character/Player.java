@@ -3,9 +3,9 @@ package src.character;
 import src.character.Character;
 import src.character.NPC;
 import src.item.Inventory;
-import src.item.Weapon;
 
 public abstract class Player extends Character {
+    private static final long serialVersionUID = 1L;
     public Inventory inventory;
     private int experience;
     private int level;
@@ -30,6 +30,9 @@ public abstract class Player extends Character {
         this.baseDefense = defense;
         setHealthPoints(getLimitHp());
         setStamina(getLimitStamina());
+    }
+
+    public Player() {
     }
 
     @Override

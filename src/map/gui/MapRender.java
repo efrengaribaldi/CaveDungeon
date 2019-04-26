@@ -5,8 +5,6 @@ import src.map.Room;
 import src.character.Player;
 import src.game.Game;
 
-import java.io.Serializable;
-
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
@@ -14,7 +12,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 
-public class MapRender extends Scene implements Serializable {
+public class MapRender extends Scene {
     private Game game;
     private Map m;
     private int x, y;

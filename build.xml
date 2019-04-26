@@ -46,7 +46,7 @@
 	</target>
 
 	<target name="run" depends="compile,copyAssets" description="Executes the program.">
-		<java classname="src.game.Main" dir="${build}" fork="true" jvm="java" />
+		<java classname="src.game.Game" dir="${build}" fork="true" jvm="java" />
 	</target>
 
 	<target name="clean" description="Removes all generated files.">

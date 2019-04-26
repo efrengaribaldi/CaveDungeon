@@ -150,13 +150,13 @@ public class Room implements Serializable {
             NPC npc = (NPC) tiles[playerPos[0] + x][playerPos[1] + y].getCharacter();
             if (npc.getType().equals("Chest")) {
                 if (Math.random() < 0.25)
-                    mR.getGame().startBattle(p, new MimicChest());
+                    mR.getGame().startBattle(new MimicChest());
                 else if (Math.random() > 0.5)
                     mR.getGame().itemDropped(npc.dropWeapon(p));
                 else
                     mR.getGame().itemDropped(npc.dropArmor(p));
             } else {
-                mR.getGame().startBattle(p, npc);
+                mR.getGame().startBattle(npc);
             }
             tiles[playerPos[0] + x][playerPos[1] + y].clearCharacter();
             return false;
