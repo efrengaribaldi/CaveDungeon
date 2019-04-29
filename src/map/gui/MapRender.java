@@ -102,4 +102,12 @@ public class MapRender extends Scene {
     public Game getGame() {
         return game;
     }
+
+    public int getXPos() {
+        return x;
+    }
+
+    public int getYPos() {
+        return y;
+    }
 }

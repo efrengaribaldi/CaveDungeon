@@ -122,6 +122,10 @@ public class Room implements Serializable {
         }
     }
 
+    public void removePlayer() {
+        tiles[playerPos[0]][playerPos[1]].clearCharacter();
+    }
+
     public boolean movePlayer(int x, int y, MapRender mR) {
         Player p = (Player) tiles[playerPos[0]][playerPos[1]].getCharacter();
         try {

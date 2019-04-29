@@ -138,7 +138,14 @@ public class Game extends Application {
     }
 
     public void saveMap() throws IOException {
-        levels[0].setPlayer(null);
+        try {
+            int x = ((MapRender) mapRender).getXPos();
+            int y = ((MapRender) mapRender).getYPos();
+            levels[0].getRoom(x, y).removePlayer();
+        }
+        catch(NullPointerException exception) {
+            System.out.println("Map created and saved");
+        }
         FileOutputStream fileOut = new FileOutputStream(findFile(player.getName(), 'M'));
         ObjectOutputStream saveMap = new ObjectOutputStream(fileOut);
         saveMap.writeObject(levels);
