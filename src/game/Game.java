@@ -41,9 +41,11 @@ public class Game extends Application {
         //Player is saved at the close of Game
         stage.setOnCloseRequest(event -> {
             try {
-                if(findPlayer(player.getName()).delete()) 
-                    System.out.println("File deleted successfully"); 
-                saveGame();
+                if(findFile(player.getName(), 'P').delete() && findFile(player.getName(), 'M').delete()) {
+                    System.out.println("Game saved successfully"); 
+                    savePlayer();
+                    saveMap();
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -106,23 +108,28 @@ public class Game extends Application {
 
     //Create class to save Map and Player
     public void checkAccount() throws IOException, ClassNotFoundException {
-        if(findPlayer(player.getName()).exists())
-            loadGame();
+        if(findFile(player.getName(), 'P').exists()) {
+            loadPlayer();
+            loadMap();
+        }
         else {
             player.getInventory().equipWeapon(0);
-            saveGame();
+            String classpath = System.getProperty("java.class.path");
+            new File(classpath + "/src/game/saves/" + player.getName()).mkdir();
+            savePlayer();
+            saveMap();
         }
     }
     
-    public void saveGame() throws IOException {
-        FileOutputStream fileOut = new FileOutputStream(findPlayer(player.getName()));
-        ObjectOutputStream saveGame = new ObjectOutputStream(fileOut);
-        saveGame.writeObject(player);
-        saveGame.close();
+    public void savePlayer() throws IOException {
+        FileOutputStream fileOut = new FileOutputStream(findFile(player.getName(), 'P'));
+        ObjectOutputStream savePlayer = new ObjectOutputStream(fileOut);
+        savePlayer.writeObject(player);
+        savePlayer.close();
     }
 
-    public void loadGame() throws IOException, ClassNotFoundException {
-        FileInputStream fileIn = new FileInputStream(findPlayer(player.getName()));
+    public void loadPlayer() throws IOException, ClassNotFoundException {
+        FileInputStream fileIn = new FileInputStream(findFile(player.getName(), 'P'));
         ObjectInputStream in = new ObjectInputStream(fileIn);
         player = (Player) in.readObject();
         System.out.println("Player loaded: " + player.getName());
@@ -130,9 +137,26 @@ public class Game extends Application {
         fileIn.close();
     }
 
-    public File findPlayer(String playerName) throws IOException {
+    public void saveMap() throws IOException {
+        levels[0].setPlayer(null);
+        FileOutputStream fileOut = new FileOutputStream(findFile(player.getName(), 'M'));
+        ObjectOutputStream saveMap = new ObjectOutputStream(fileOut);
+        saveMap.writeObject(levels);
+        saveMap.close();
+    }
+
+    public void loadMap() throws IOException, ClassNotFoundException {
+        FileInputStream fileIn = new FileInputStream(findFile(player.getName(), 'M'));
+        ObjectInputStream in = new ObjectInputStream(fileIn);
+        levels = (Map[]) in.readObject();
+        System.out.println("Map loaded");
+        in.close();
+        fileIn.close();
+    }
+
+    public File findFile(String name, char type) throws IOException {
         String classpath = System.getProperty("java.class.path");
-        File file = new File(classpath + "/src/game/saves", playerName + ".atm");
-        return file;
+        return (type == 'P') ? new File(classpath + "/src/game/saves/" + name + "/", "player.atm") : 
+                new File(classpath + "/src/game/saves/" + name + "/", "map.atm");
     }
 }

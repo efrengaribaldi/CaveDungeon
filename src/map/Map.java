@@ -30,6 +30,10 @@ public class Map implements Serializable {
                     r.generateRoom();
     }
 
+    public Map() {
+        
+    }
+
     private void generateMap() {
         // Declare a counter of rooms created
         int roomCount;

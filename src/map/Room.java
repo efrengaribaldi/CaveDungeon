@@ -16,6 +16,7 @@ import javafx.geometry.VPos;
 import javafx.scene.image.ImageView;
 
 public class Room implements Serializable {
+    private static final long serialVersionUID = 1L;
     // 0 to be defined, 1 initial, 2 easy, 3 hard, 4 treasure, 5 boss
     private int state;
     // 0 top, 1 right, 2 bottom, 3 left
@@ -32,6 +33,10 @@ public class Room implements Serializable {
         this.doors = doors;
         this.areDoorsOpen = false;
         tiles = new Tile[sizeX][sizeY];
+    }
+
+    public Room() {
+
     }
 
     void setState(int state) {
@@ -162,7 +167,7 @@ public class Room implements Serializable {
             return false;
         }
     }
-
+    
     String roomToString() {
         String res = "";
         for (int y = -1; y < sizeY + 1; y++)

@@ -12,6 +12,7 @@ import src.character.npc.enemy.*;
 import src.character.npc.boss.*;
 
 public class Tile implements Serializable {
+    private static final long serialVersionUID = 1L;
     private int spriteNum;
     private Character character;
 
