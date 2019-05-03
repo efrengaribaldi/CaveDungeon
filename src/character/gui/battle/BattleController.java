@@ -1,6 +1,7 @@
 package src.character.gui.battle;
 
 import src.character.Player;
+import src.character.npc.Boss;
 import src.character.NPC;
 import src.game.Game;
 import src.item.Inventory;
@@ -184,14 +185,20 @@ public class BattleController {
         continueT.setOnFinished(event -> {
             if (player.getHealthPoints() > 0) {
                 if (enemyDefeated)
-                    if (Math.random() > 0.5)
-                        game.itemDropped(npc.dropWeapon(player));
-                    else
-                        game.itemDropped(npc.dropArmor(player));
+                    if(npc instanceof Boss) {
+                        System.out.println("YOU WON!"); 
+                        endGame();
+                    }
+                    else {
+                        if (Math.random() > 0.5)
+                            game.itemDropped(npc.dropWeapon(player));
+                        else
+                            game.itemDropped(npc.dropArmor(player));
+                    }
                 else
                     changePane(enemyAttack, selectOption);
-            } else
-                System.exit(0);
+            } 
+            else endGame();
         });
 
         SequentialTransition seqT = new SequentialTransition(enemyT, continueT);
@@ -316,5 +323,23 @@ public class BattleController {
     private void changePane(Pane paneRemoved, Pane paneAdded) {
         wrapperPane.getChildren().remove(paneRemoved);
         wrapperPane.getChildren().add(paneAdded);
+    }
+
+    private void endGame() {
+        String classpath = System.getProperty("java.class.path");
+        File directory = new File(classpath + "/src/game/saves/" + player.getName());
+        if(deleteDirectory(directory))
+            System.out.println("GAME OVER");
+        System.exit(0);
+    }
+
+    private boolean deleteDirectory(File directoryToBeDeleted) {
+        File[] allContents = directoryToBeDeleted.listFiles();
+        if (allContents != null) {
+            for (File file : allContents) {
+                deleteDirectory(file);
+            }
+        }
+        return directoryToBeDeleted.delete();
     }
 }

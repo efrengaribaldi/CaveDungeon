@@ -79,6 +79,7 @@ public class Game extends Application {
         new File(classpath + "/src/game/saves/" + player.getName()).mkdir();
         savePlayer();
         saveMap();
+        player.checkLevelUp(400);
         levels[0].setPlayer(player);
         mapTests();
         mapRender = new MapRender(this, levels[0]);
