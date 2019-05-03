@@ -53,7 +53,7 @@ public class Game extends Application {
                 System.out.println("Game not saved | Player not loaded or created");
             }
         });
-        stage.setTitle("CaveDungeon 0.9.9999999 ALPHA");
+        stage.setTitle("CaveDungeon 1.O BETA");
         stage.show();
     }
 
