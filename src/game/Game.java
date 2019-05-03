@@ -48,10 +48,12 @@ public class Game extends Application {
                     saveMap();
                 }
             } catch (IOException e) {
-                e.printStackTrace();
+                System.out.println("File not found");
+            } catch (NullPointerException e) {
+                System.out.println("Game not saved | Player not loaded or created");
             }
         });
-        stage.setTitle("CaveDungeon 0.4.99999999 ALPHA");
+        stage.setTitle("CaveDungeon 0.9.9999999 ALPHA");
         stage.show();
     }
 
