@@ -12,6 +12,7 @@
 
 	<target name="init">
 		<mkdir dir="${build}" />
+		<mkdir dir="${src}/game/saves" />
 	</target>
 
 	<target name="copyAssets" depends="init" description="Copies assets from source code to build folder.">
