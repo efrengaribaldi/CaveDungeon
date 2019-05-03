@@ -11,6 +11,7 @@ import src.item.gui.droppedItem.DroppedItemGUI;
 import src.item.gui.inventory.InventoryGUI;
 import src.map.gui.MapRender;
 import src.map.Map;
+import src.game.gui.Start;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -37,7 +38,7 @@ public class Game extends Application {
         levels = new Map[1];
         for (int i = 0; i < levels.length; ++i)
             levels[i] = new Map(gameSeed + i);
-        stage.setScene(new CreatePlayer(this));
+        stage.setScene(new Start(this));
         //Player is saved at the close of Game
         stage.setOnCloseRequest(event -> {
             try {
@@ -68,9 +69,23 @@ public class Game extends Application {
                 "Next Level EXP: " + player.getExpRequiredForNextLevel() + " Current EXP: " + player.getExperience());
     }
 
+    //This method runs only when a new user is created
     public void setNewPlayerAndContinue(Player player) throws IOException, ClassNotFoundException {
         this.player = player;
-        checkAccount();
+        player.getInventory().equipWeapon(0);
+        String classpath = System.getProperty("java.class.path");
+        new File(classpath + "/src/game/saves/" + player.getName()).mkdir();
+        savePlayer();
+        saveMap();
+        levels[0].setPlayer(player);
+        mapTests();
+        mapRender = new MapRender(this, levels[0]);
+        playerTests();
+        setRoomScene();
+    }
+
+    //This method runs only when an user is loaded
+    public void setNewPlayerAndContinue() throws IOException, ClassNotFoundException {
         levels[0].setPlayer(player);
         mapTests();
         mapRender = new MapRender(this, levels[0]);
@@ -80,6 +95,10 @@ public class Game extends Application {
 
     public Player getPlayer() {
         return player;
+    }
+
+    public void setCreatePlayerScene() {
+        stage.setScene(new CreatePlayer(this));
     }
 
     public void setRoomScene() {
@@ -105,21 +124,6 @@ public class Game extends Application {
     public void itemDropped(Armor newArmor) {
         stage.setScene(new DroppedItemGUI(this, newArmor));
     }
-
-    //Create class to save Map and Player
-    public void checkAccount() throws IOException, ClassNotFoundException {
-        if(findFile(player.getName(), 'P').exists()) {
-            loadPlayer();
-            loadMap();
-        }
-        else {
-            player.getInventory().equipWeapon(0);
-            String classpath = System.getProperty("java.class.path");
-            new File(classpath + "/src/game/saves/" + player.getName()).mkdir();
-            savePlayer();
-            saveMap();
-        }
-    }
     
     public void savePlayer() throws IOException {
         FileOutputStream fileOut = new FileOutputStream(findFile(player.getName(), 'P'));
@@ -128,8 +132,8 @@ public class Game extends Application {
         savePlayer.close();
     }
 
-    public void loadPlayer() throws IOException, ClassNotFoundException {
-        FileInputStream fileIn = new FileInputStream(findFile(player.getName(), 'P'));
+    public void loadPlayer(String name) throws IOException, ClassNotFoundException {
+        FileInputStream fileIn = new FileInputStream(findFile(name, 'P'));
         ObjectInputStream in = new ObjectInputStream(fileIn);
         player = (Player) in.readObject();
         System.out.println("Player loaded: " + player.getName());
@@ -152,8 +156,8 @@ public class Game extends Application {
         saveMap.close();
     }
 
-    public void loadMap() throws IOException, ClassNotFoundException {
-        FileInputStream fileIn = new FileInputStream(findFile(player.getName(), 'M'));
+    public void loadMap(String name) throws IOException, ClassNotFoundException {
+        FileInputStream fileIn = new FileInputStream(findFile(name, 'M'));
         ObjectInputStream in = new ObjectInputStream(fileIn);
         levels = (Map[]) in.readObject();
         System.out.println("Map loaded");
